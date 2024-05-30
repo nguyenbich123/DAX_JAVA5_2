@@ -1,0 +1,24 @@
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+.quantity-container button {
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+    padding: 0;
+}
+.quantity-container input {
+    text-align: center;
+    max-width: 50px;
+}
+
+.cart .img-cart{
+    width: 100px;
+    height: 100px;
+}
+
+.img-cart img{
+    width: 100%;
+    height: 100%;
+}
