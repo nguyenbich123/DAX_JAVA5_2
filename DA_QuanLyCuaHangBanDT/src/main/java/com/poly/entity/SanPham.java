@@ -25,7 +25,7 @@ public class SanPham {
     private Hang maHang;
     
     @ManyToOne
-    @JoinColumn(name = "MaHDH")
+    @JoinColumn(name = "Mahdh")
     private HeDieuHanh maHDH;
     
     private String chip;

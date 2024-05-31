@@ -15,7 +15,9 @@ import lombok.Data;
 public class Account {
 
     @Id
+    @Column(name="Tendn")
     String tenDN;
+    
     @Column(name="Matkhau")
     String matKhau;
     
@@ -27,11 +29,11 @@ public class Account {
     String img;
 
     @ManyToOne
-    @JoinColumn(name = "IDROLE")
+    @JoinColumn(name = "Idrole")
     Role role;
 
     @ManyToOne
-    @JoinColumn(name = "IdTTHD")
+    @JoinColumn(name = "Idtthd")
     TrangThaiHD tthd;
     
 //    @OneToMany

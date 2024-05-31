@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,6 @@ public class GioHang {
     private Integer maGH;
     
     @ManyToOne
-    @JoinColumn(name = "TenDN")
+    @JoinColumn(name = "Tendn")
     private Account maKH;
 }

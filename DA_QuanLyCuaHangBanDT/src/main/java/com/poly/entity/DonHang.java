@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,21 +22,22 @@ public class DonHang {
     private Integer maDH;
     
     @ManyToOne
-    @JoinColumn(name = "TenDN")
+    @JoinColumn(name = "Tendn")
     private Account maKH;
     
     @ManyToOne
-    @JoinColumn(name = "MaPT")
+    @JoinColumn(name = "Mapt")
     private PTTT maPT;
     
     @ManyToOne
-    @JoinColumn(name = "IdTTDH")
+    @JoinColumn(name = "Idttdh")
     private TTDH ttdh;
     
     @ManyToOne
-    @JoinColumn(name = "IdTTTT")
+    @JoinColumn(name = "Idtttt")
     private TTDH tttt;
     
+    @Column(name="Ngaytt")
     private Date ngayTT;
     private Double tongTien;
     private String ghiChu;

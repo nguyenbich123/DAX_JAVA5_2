@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/template/Admin/common/taglib.jsp" %>
-    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,20 +11,19 @@
   <title>Quản lý Acccount </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-   <%@ include file="/template/Admin/common/head.jsp" %>
+	<%@ include file="/template/Admin/common/head.jsp"%>
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
-    <%@ include file="/template/Admin/common/header.jsp" %>
+	<%@ include file="/template/Admin/common/header.jsp"%>
+
+	<!-- ======= Sidebar ======= -->
+	<%@ include file="/template/Admin/common/sidebar.jsp"%>
   
-  <!-- ======= Sidebar ======= -->
-  <%@ include file="/template/Admin/common/sidebar.jsp" %>
   
   <main id="main" class="main">
-
+	
     <div class="pagetitle">
       <h1>Account</h1>
       <nav>
@@ -62,21 +60,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>MenNg123</td>
-                    <td>Lương Nguyễn Mến</td>
-                    <td>033 6543 897</td>
-                    <td>0men0ngu0@gmail.com</td>
-                    <td><img src="/template/Admin/assets/img/profile-img.jpg" alt=""></td>
-                    <td>Admin</td>
-                    <td> <button class="btn btn-success" style="border-radius: 50%; padding: 5px 7px"></button> Hoạt Động</td>
-                    <td>
-                      <div class="icon">
-                        <a href=""><i class="bi bi-pencil-fill"></i></a>
-                        <a><i class="ri-delete-bin-5-fill"></i></a>
-                      </div>
-                    </td>
-                  </tr>
                   <c:forEach var="item" items="${items}">
 				<tr>
 				<td>${item.tenDN}</td>
@@ -84,11 +67,11 @@
                     <td>${item.sdt}</td>
                     <td>${item.email}</td>
                     <td><img src="/template/Admin/assets/img/${item.img}" alt=""></td>
-                    <td>${item.role.role}</td>
-                    <td> <button class="btn btn-success" style="border-radius: 50%; padding: 5px 7px"></button> ${item.tthd.trangThai}</td>
+                    <td>${item.role.roles}</td>
+                    <td>${item.tthd.trangThai}</td>
                     <td>
                       <div class="icon">
-                        <a href="/admin/formAccount/edit/${item.tenDN}"><i class="bi bi-pencil-fill"></i></a>
+                        <a href="/admin/account/edit/${item.tenDN}"><i class="bi bi-pencil-fill"></i></a>
                         <a href="/admin/account/delete/${item.tenDN}"><i class="ri-delete-bin-5-fill"></i></a>
                       </div>
                     </td>
@@ -106,12 +89,6 @@
     </section>
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-   <%@ include file="/template/Admin/common/footer.jsp" %>
-
-    <!-- JS Files -->
-    <%@ include file="/template/Admin/common/jsfile.jsp" %>
   
 
 </body>

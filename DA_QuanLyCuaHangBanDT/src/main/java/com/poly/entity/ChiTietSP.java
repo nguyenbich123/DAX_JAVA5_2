@@ -35,6 +35,7 @@ public class ChiTietSP {
     @JoinColumn(name = "Maram")
     private Ram maRam;
     
+    @Column(name="Soluong")
     private Integer soluong;
     private Double gia;
 }

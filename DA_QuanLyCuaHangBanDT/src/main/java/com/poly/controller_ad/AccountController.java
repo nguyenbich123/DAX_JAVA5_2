@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.Account;
+import com.poly.entity.Role;
+import com.poly.entity.TrangThaiHD;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.RoleDAO;
 import com.poly.repository.TrangThaiHoatDongDAO;
@@ -24,7 +26,7 @@ import com.poly.repository.TrangThaiHoatDongDAO;
 import jakarta.servlet.ServletContext;
 
 @Controller
-@RequestMapping("admin/account")
+@RequestMapping("admin")
 public class AccountController {
 	@Autowired
 	AccountDAO accDao; 
@@ -35,20 +37,20 @@ public class AccountController {
 	@Autowired
 	ServletContext app;
 
-	@RequestMapping("view")
+	@RequestMapping("account/view")
 	public String getAccount(Model model,@ModelAttribute("item") Account ac) {
 		List<Account> items = accDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/account";
 	}
 
-	@RequestMapping("edit/{tenDN}")
+	@RequestMapping("account/edit/{tenDN}")
 	public String edit(Model model, @PathVariable("tenDN") String tenDN) {
 		Account item = accDao.findById(tenDN).get();
 		model.addAttribute("item", item);
 		List<Account> items = accDao.findAll();
 		model.addAttribute("items", items);
-		return "/template/Admin/account";
+		return "/template/Admin/formAccount";
 	}
 
 	@RequestMapping("create")
@@ -97,14 +99,25 @@ public class AccountController {
 		return "redirect:/account/index";
 	}
 
-//	@ModelAttribute("list_category")
-//	public Map<String, String> getCategory() {
-//		Map<String, String> map = new HashMap<>();
-//
-//		List<Category> categorys = categoryDao.findAll();
-//		for (Category c : categorys) {
-//			map.put(c.getId(), c.getName());
-//		}
-//		return map;
-//	}
+	@ModelAttribute("list_role")
+	public Map<Integer, String> getRoles() {
+		Map<Integer, String> map = new HashMap<>();
+
+		List<Role> roles = roleDao.findAll();
+		for (Role c : roles) {
+			map.put(c.getIdrole(), c.getRoles());
+		}
+		return map;
+	}
+	
+	@ModelAttribute("list_tthd")
+	public Map<Integer, String> gettthd() {
+		Map<Integer, String> map = new HashMap<>();
+
+		List<TrangThaiHD> tthds = ttDao.findAll();
+		for (TrangThaiHD c : tthds) {
+			map.put(c.getId_THHD(), c.getTrangThai());
+		}
+		return map;
+	}
 }
