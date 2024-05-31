@@ -14,6 +14,6 @@ public class TrangThaiTT {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    Integer id_TTTT;
     String trangThai;
 }

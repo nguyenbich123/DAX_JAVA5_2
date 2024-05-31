@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -311,7 +312,7 @@
                   </div>
               </div>
               <div class="row">
-                  <div class="col-md-3">
+                  <!-- <div class="col-md-3">
                       <div class="card mb-4 product-wap rounded-0">
                           <div class="card rounded-1">
                               <img class="card-img  rounded-0 img-fluid" src="/template/user/images/dt1.jpg" height="400px">
@@ -718,8 +719,9 @@
                               </ul>
                           </div>
                       </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> -->
+                    <c:forEach var="sp" items="${dsSanPham}">
+                    	<div class="col-md-3">
                       <div class="card mb-4 product-wap rounded-0">
                           <div class="card rounded-0">
                               <img class="card-img rounded-0 img-fluid" src="/template/user/images/dt20.jpg"/>
@@ -732,7 +734,7 @@
                               </div>
                           </div>
                           <div class="card-body">
-                              <a href="details_product.html" class="h3 text-decoration-none">Oupidatat non</a>
+                              <a href="details_product.html" class="h3 text-decoration-none">${sp.tenSP}</a>
                               <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                   <li></li>
                                   <li class="pt-2">
@@ -756,6 +758,7 @@
                           </div>
                       </div>
                     </div>
+                    </c:forEach>
               </div>
               <div div="row">
                   <ul class="pagination pagination-lg justify-content-end">

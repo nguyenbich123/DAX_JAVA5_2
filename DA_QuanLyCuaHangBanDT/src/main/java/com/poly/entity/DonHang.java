@@ -6,12 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "DONHANG")
 public class DonHang {
     
     @Id
@@ -30,8 +32,12 @@ public class DonHang {
     @JoinColumn(name = "ID_TTDH")
     private TTDH ttdh;
     
+    @ManyToOne
+    @JoinColumn(name = "ID_TTTT")
+    private TTDH tttt;
+    
     private Date ngayTT;
-    private Float tongTien;
+    private Double tongTien;
     private String ghiChu;
     
     @ManyToOne
