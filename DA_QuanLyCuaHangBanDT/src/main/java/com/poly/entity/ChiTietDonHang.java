@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,9 +20,9 @@ public class ChiTietDonHang {
     private Integer id_CTDH;
     
     @ManyToOne
-    @JoinColumn(name = "MaCTSP")
+    @JoinColumn(name = "Mactsp")
     private ChiTietSP maCTSP;
-    
+    @Column(name="Soluong")
     private Integer soLuong;
     private Float gia;
     

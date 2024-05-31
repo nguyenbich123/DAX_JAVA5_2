@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -14,19 +15,25 @@ import lombok.Data;
 public class Account {
 
     @Id
+    @Column(name="Tendn")
     String tenDN;
+    
+    @Column(name="Matkhau")
     String matKhau;
+    
+    @Column(name="Hoten")
     String hoTen;
+    
     String sdt;
     String email;
     String img;
 
     @ManyToOne
-    @JoinColumn(name = "ID_ROLE")
+    @JoinColumn(name = "Idrole")
     Role role;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TTHD")
+    @JoinColumn(name = "Idtthd")
     TrangThaiHD tthd;
     
 //    @OneToMany

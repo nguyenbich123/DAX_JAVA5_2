@@ -20,7 +20,7 @@ public class DanhGia {
     private Integer danhGia;
     
     @ManyToOne
-    @JoinColumn(name = "TenDN")
+    @JoinColumn(name = "Tendn")
     private Account maKH;
     
     @ManyToOne

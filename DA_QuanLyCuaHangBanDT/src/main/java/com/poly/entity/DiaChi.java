@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +20,15 @@ public class DiaChi {
     private Integer id_diaChi;
     
     @ManyToOne
-    @JoinColumn(name = "TenDN")
+    @JoinColumn(name = "Tendn")
     private Account tenDN;
-
+    
+    @Column(name="Duongsonha")
     private String duong_Sonha;
+    
+    @Column(name="Quanhuyen")
     private String quan_Huyen;
+    
+    @Column(name="Tinhthanhpho")
     private String tinh_ThanhPho;
 }

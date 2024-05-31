@@ -19,7 +19,7 @@ public class ChiTietGioHang {
     private Integer id_CTGH;
     
     @ManyToOne
-    @JoinColumn(name = "MaCTSP")
+    @JoinColumn(name = "Mactsp")
     private ChiTietSP maCTSP;
     
     private Integer soLuong;
