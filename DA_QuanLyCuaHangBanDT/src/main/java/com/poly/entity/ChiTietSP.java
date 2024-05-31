@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CHITIETSP")
+@Table(name = "CHITIETSP_")
 public class ChiTietSP {
     
     @Id
@@ -20,19 +20,19 @@ public class ChiTietSP {
     private Integer maCTSP;
     
     @ManyToOne
-    @JoinColumn(name = "MaSP")
+    @JoinColumn(name = "Masp")
     private SanPham maSP;
     
     @ManyToOne
-    @JoinColumn(name = "MaMau")
+    @JoinColumn(name = "Mamau")
     private Mau maMau;
     
     @ManyToOne
-    @JoinColumn(name = "MaDL")
+    @JoinColumn(name = "Madl")
     private DungLuong maDL;
     
     @ManyToOne
-    @JoinColumn(name = "MaRam")
+    @JoinColumn(name = "Maram")
     private Ram maRam;
     
     private Integer soluong;

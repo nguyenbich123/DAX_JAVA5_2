@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CHITIETDONHANG")
+@Table(name = "CHITIETDONHANG_")
 public class ChiTietDonHang {
     
     @Id
@@ -26,6 +26,6 @@ public class ChiTietDonHang {
     private Float gia;
     
     @ManyToOne
-    @JoinColumn(name = "MaDH")
+    @JoinColumn(name = "Madh")
     private DonHang maDH;
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "DONHANG")
+@Table(name = "DONHANG_")
 public class DonHang {
     
     @Id
@@ -29,11 +29,11 @@ public class DonHang {
     private PTTT maPT;
     
     @ManyToOne
-    @JoinColumn(name = "ID_TTDH")
+    @JoinColumn(name = "IdTTDH")
     private TTDH ttdh;
     
     @ManyToOne
-    @JoinColumn(name = "ID_TTTT")
+    @JoinColumn(name = "IdTTTT")
     private TTDH tttt;
     
     private Date ngayTT;
@@ -41,6 +41,6 @@ public class DonHang {
     private String ghiChu;
     
     @ManyToOne
-    @JoinColumn(name = "ID_GIAMGIA")
+    @JoinColumn(name = "Idgiamgia")
     private GiamGia maGG;
 }

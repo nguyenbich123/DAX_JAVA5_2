@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "SANPHAM")
+@Table(name = "SANPHAM_")
 public class SanPham {
     
     @Id
@@ -21,7 +21,7 @@ public class SanPham {
     private String tenSP;
     
     @ManyToOne
-    @JoinColumn(name = "MaHang")
+    @JoinColumn(name = "Mahang")
     private Hang maHang;
     
     @ManyToOne
@@ -31,23 +31,22 @@ public class SanPham {
     private String chip;
     
     @ManyToOne
-    @JoinColumn(name = "IdManHinh")
+    @JoinColumn(name = "Idmanhinh")
     private ManHinh manHinh;
     
     @ManyToOne
-    @JoinColumn(name = "IdPin")
+    @JoinColumn(name = "Idpin")
     private PinSac pinSac;
     
+    @Column(name="Hotrosac")
     private String hoTroSac;
     private String sim;
     
     @ManyToOne
-    @JoinColumn(name = "IdCamTruoc")
-    @Column(name = "CamTruoc")
+    @JoinColumn(name = "Idcamtruoc")
     private CameraTruoc camTruoc;
     
     @ManyToOne
-    @JoinColumn(name = "IdCamSau")
-    @Column(name = "CamSau")
+    @JoinColumn(name = "Idcamsau")
     private CameraSau camSau;
 }

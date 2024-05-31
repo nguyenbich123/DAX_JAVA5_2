@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "PINSAC")
+@Table(name = "PINSAC_")
 public class PinSac {
     
     @Id

@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CHITIETGIOHANG")
+@Table(name = "CHITIETGIOHANG_")
 public class ChiTietGioHang {
     
     @Id
@@ -25,6 +25,6 @@ public class ChiTietGioHang {
     private Integer soLuong;
     
     @ManyToOne
-    @JoinColumn(name = "MaGH")
+    @JoinColumn(name = "Magh")
     private GioHang maGH;
 }

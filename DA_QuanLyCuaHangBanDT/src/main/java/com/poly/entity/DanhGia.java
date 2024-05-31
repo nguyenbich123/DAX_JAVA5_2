@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "DANHGIA")
+@Table(name = "DANHGIA_")
 public class DanhGia {
     
     @Id
@@ -24,6 +24,6 @@ public class DanhGia {
     private Account maKH;
     
     @ManyToOne
-    @JoinColumn(name = "MaSP")
+    @JoinColumn(name = "Masp")
     private SanPham maSP;
 }
