@@ -5,10 +5,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,5 +91,17 @@ public class AccountController {
 			map.put(c.getIdtthd(), c.getTrangThai());
 		}
 		return map;
+	}
+	
+	@GetMapping("account/index")
+	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		Sort sort = Sort.by(Direction.DESC, field.orElse("tenDN"));	
+    	List<Account> acc = accDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("tenDN"));
+	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);
+	    System.out.println(field);
+	    Page<Account> page = accDao.findAll(pageable);
+	    model.addAttribute("page", page);
+	    return "/template/Admin/account";
 	}
 }

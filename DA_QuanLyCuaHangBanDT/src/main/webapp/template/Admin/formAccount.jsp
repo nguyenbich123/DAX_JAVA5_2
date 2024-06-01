@@ -43,7 +43,7 @@
 							<h5 class="card-title">Sửa</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/account/view" modelAttribute="item" enctype="multipart/form-data">
+							<form:form action="/admin/account/index" modelAttribute="item" enctype="multipart/form-data">
 								<form:hidden path="tenDN" />
 								<form:hidden path="hoTen" />
 								<form:hidden path="matKhau" />
@@ -78,8 +78,8 @@
 								</div>
 	<br>
 								<div class="text-center">
-									<button formaction="/admin/account/update" class="btn btn-primary">Cập
-										Nhật</button>
+									<a href="/admin/account/index"><button class="btn btn-primary">Quay lại</button></a>
+									<button formaction="/admin/account/update" class="btn btn-primary">Cập Nhật</button>								
 								</div>
 							</form:form>
 							<!-- End Horizontal Form -->

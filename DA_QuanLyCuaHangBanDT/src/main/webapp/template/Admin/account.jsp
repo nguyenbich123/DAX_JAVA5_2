@@ -47,18 +47,18 @@
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<th><b>T</b>ên Đăng Nhập</th>
-										<th>Họ Tên</th>
-										<th>Số Điện Thoại</th>
-										<th>Email</th>
+										<th><a href="/admin/account/index?field=tenDN">Tên Đăng Nhập</a></th>
+										<th><a href="/admin/account/index?field=hoTen">Họ Tên</a></th>
+										<th><a href="/admin/account/index?field=sdt">Số Điện Thoại</a></th>
+										<th><a href="/admin/account/index?field=email">Email</a></th>
 										<th>Ảnh</th>
-										<th>Role</th>
-										<th>Trạng Thái</th>
+										<th><a href="/admin/account/index?field=role">Role</a></th>
+										<th><a href="/admin/account/index?field=tthd">Trạng Thái</a></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="item" items="${items}">
+									<c:forEach var="item" items="${page.content}">
 										<tr>
 											<td>${item.tenDN}</td>
 											<td>${item.hoTen}</td>
@@ -81,7 +81,9 @@
 								</tbody>
 							</table>
 							<!-- End Table with stripped rows -->
-
+							<c:forEach begin="1" end="${page.totalPages}" step="1" var="number">
+								<a href="/admin/account/index?field=${field}&p=${number-1}">${number}</a>
+							</c:forEach>
 						</div>
 					</div>
 
