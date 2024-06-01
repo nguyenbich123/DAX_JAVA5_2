@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,50 +52,16 @@ public class AccountController {
 		return "/template/Admin/formAccount";
 	}
 
-	@RequestMapping("create")
-	public String create(Account item, @RequestParam("photo_file") MultipartFile img)
-			throws IllegalStateException, IOException {
-		String filename = img.getOriginalFilename();
-		// Kiểm tra và tạo thư mục images nếu nó không tồn tại
-		File uploadFolder = new File(app.getRealPath("/images/"));
-		if (!uploadFolder.exists()) {
-			uploadFolder.mkdirs();
-		}
-
-		// Tạo file trong thư mục images
-		File destFile = new File(uploadFolder, filename);
-
-		// Lưu trữ file vào thư mục đã xác định
-		img.transferTo(destFile);
-		item.setImg(filename);
+	@RequestMapping("account/update")
+	public String update(Account item) throws IllegalStateException, IOException {
 		accDao.save(item);
-		return "redirect:/account/index";
+		return "redirect:/admin/account/edit/"+ item.getTenDN();
 	}
 
-	@RequestMapping("update")
-	public String update(Account item, @RequestParam("photo_file") MultipartFile img)
-			throws IllegalStateException, IOException {
-		String filename = img.getOriginalFilename();
-		// Kiểm tra và tạo thư mục images nếu nó không tồn tại
-		File uploadFolder = new File(app.getRealPath("/images/"));
-		if (!uploadFolder.exists()) {
-			uploadFolder.mkdirs();
-		}
-
-		// Tạo file trong thư mục images
-		File destFile = new File(uploadFolder, filename);
-
-		// Lưu trữ file vào thư mục đã xác định
-		img.transferTo(destFile);
-		item.setImg(filename);
-		accDao.save(item);
-		return "redirect:/account/edit/" + item.getTenDN();
-	}
-
-	@RequestMapping("delete/{username}")
-	public String delete(@PathVariable("username") String username) {
-		accDao.deleteById(username);
-		return "redirect:/account/index";
+	@RequestMapping("account/delete/{tenDN}")
+	public String delete(@PathVariable("tenDN") String tenDN) {
+		accDao.deleteById(tenDN);
+		return "redirect:/template/Admin/account";
 	}
 
 	@ModelAttribute("list_role")
@@ -116,7 +81,7 @@ public class AccountController {
 
 		List<TrangThaiHD> tthds = ttDao.findAll();
 		for (TrangThaiHD c : tthds) {
-			map.put(c.getId_THHD(), c.getTrangThai());
+			map.put(c.getIdtthd(), c.getTrangThai());
 		}
 		return map;
 	}
