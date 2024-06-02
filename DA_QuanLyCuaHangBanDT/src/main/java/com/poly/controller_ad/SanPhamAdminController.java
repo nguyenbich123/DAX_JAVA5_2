@@ -11,5 +11,6 @@ public class SanPhamAdminController {
 	@GetMapping("view")
 	public String getForm() {
 		return "/template/Admin/sanpham";
+		
 	}
 }
