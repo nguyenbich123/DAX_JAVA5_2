@@ -30,7 +30,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/template/user/css/layout.css">
 <link rel="stylesheet" href="/template/user/css/product.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
@@ -38,7 +37,7 @@
 	crossorigin="anonymous"></script>
 <!-- script
     ================================================== -->
-<script src="/template/user/js/modernizr.js"></script>
+<script src="js/modernizr.js"></script>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -160,28 +159,40 @@
 
 	<div class="search-popup">
 		<div class="search-popup-container">
-			<form role="search" method="get" class="search-form"
-				action="/product/search">
+
+			<form role="search" method="get" class="search-form" action="">
 				<input type="search" id="search-form" class="search-field"
-					placeholder="Tìm kiếm" value="" name="search" />
+					placeholder="Tìm kiếm" value="" name="s" />
 				<button type="submit" class="search-submit">
 					<svg class="search">
-                <use xlink:href="#search"></use>
-            </svg>
+						<use xlink:href="#search"></use></svg>
 				</button>
 			</form>
 
 			<h5 class="cat-list-title">Chọn danh mục</h5>
+
 			<ul class="cat-list">
-				<li class="cat-list-item"><a href="" title="Mobile Phones">Iphone15</a></li>
-				<li class="cat-list-item"><a href="" title="Smart Watches">Samsung
+				<li class="cat-list-item"><a href="#" title="Mobile Phones">Iphone15</a>
+				</li>
+				<li class="cat-list-item"><a href="#" title="Smart Watches">Samsung
 						S23 Ultra</a></li>
+				<li class="cat-list-item"><a href="#" title="Headphones">Headphones</a>
+				</li>
+				<li class="cat-list-item"><a href="#" title="Accessories">Accessories</a>
+				</li>
+				<li class="cat-list-item"><a href="#" title="Monitors">Monitors</a>
+				</li>
+				<li class="cat-list-item"><a href="#" title="Speakers">Speakers</a>
+				</li>
+				<li class="cat-list-item"><a href="#" title="Memory Cards">Memory
+						Cards</a></li>
 			</ul>
+
 		</div>
 	</div>
 
 	<header id="header mb-2">
-		<div class="site-header_product text-black bg-light ">
+		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
 				<div class="container-fluid">
 					<a class="navbar-brand " href="index.html"> <img
@@ -264,208 +275,313 @@
 
 	</header>
 
-	<!-- Start Content -->
-	<div class="m-4 py-5 ">
-		<div class="row">
 
-			<div class="col-lg-2">
-				<h3 class="h2 pb-4">Danh mục</h3>
-				<ul class="list-unstyled templatemo-accordion">
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/iphone?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Iphone </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/samsung?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Samsung </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/oppo?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Oppo </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/realme?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Realme </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/view?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=">
-							Tất cả </a></li>
-				</ul>
-				<hr>
-				<h3 class="h2 pb-4">Khoảng giá</h3>
-				<form action="/product/filter-price" method="get">
-					<div class="filter-price py-1">
-						<div class="from-price  d-flex">
-							<input type="text" maxlength="14" name="min" value="${param.min}"
-								placeholder="Từ" class="form-control">
-							<div class="filter-price-line"></div>
-							<input type="text" maxlength="14" name="max" value="${param.max}"
-								placeholder="Đến" class="form-control">
+	<!-- Open Content -->
+	<section class="bg-light pt-2">
+		<div class="container pb-5">
+			<div class="row">
+				<div class="col-lg-5 mt-5">
+					<div class="card mb-3">
+						<img class="card-main-detail-img img-fluid"
+							src="/template/user/images/dt1.jpg" alt="Card image cap"
+							id="product-detail">
+					</div>
+					<div class="row">
+						<!--Start Controls-->
+						<div class="col-1 align-self-center">
+							<a href="#multi-item-example" role="button" data-bs-slide="prev">
+								<i class="text-dark fas fa-chevron-left"></i> <span
+								class="sr-only">Previous</span>
+							</a>
 						</div>
-						<input type="hidden" name="p" value="0" /> <input type="hidden"
-							name="sortby" value="${sortby}" /> <input type="hidden"
-							name="keywords" value="${keywords}" />
-						<button class="btn btn-success form-control my-2">Lọc</button>
-					</div>
-				</form>
-			</div>
+						<!--End Controls-->
+						<!--Start Carousel Wrapper-->
+						<div id="multi-item-example"
+							class="col-10 carousel slide carousel-multi-item"
+							data-bs-ride="carousel">
+							<!--Start Slides-->
+							<div class="carousel-inner product-links-wap" role="listbox">
 
-			<div class="col-lg-10">
-				<div class="row">
-					<div class="col-md-6">
-						<!-- <ul class="list-inline shop-top-menu pb-3 pt-1">
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                          </li>
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                          </li>
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                          </li>
-                      </ul> -->
-					</div>
-					<div class="col-md-6 pb-4">
-						<form id="sortForm" action="/product/sort" method="get">
-							<div class="d-flex">
-								<h5>Sắp xếp:</h5>
-								<select class="form-control" name="sortby"
-									onchange="submitForm()">
-									<option value="maCTSP">--Chọn--</option>
-									<option value="gia" ${sortby == 'gia' ? 'selected' : ''}>Giá</option>
-									<option value="maSP.tenSP"
-										${sortby == 'maSP.tenSP' ? 'selected' : ''}>Tên</option>
-								</select> <input type="hidden" name="p" value="0" /> <input
-									type="hidden" name="min" value="${param.min}" /> <input
-									type="hidden" name="max" value="${param.max}" /> <input
-									type="hidden" name="keywords" value="${keywords}" />
+								<!--First slide-->
+								<div class="carousel-item active">
+									<div class="row">
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="/template/user/images/dt1.jpg" alt="Product Image 1">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="/template/user/images/dt1.jpg" alt="Product Image 2">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="/template/user/images/dt1.jpg" alt="Product Image 3">
+											</a>
+										</div>
+									</div>
+								</div>
+								<!--/.First slide-->
+
+								<!--Second slide-->
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_04.jpg" alt="Product Image 4">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_05.jpg" alt="Product Image 5">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_06.jpg" alt="Product Image 6">
+											</a>
+										</div>
+									</div>
+								</div>
+								<!--/.Second slide-->
+
+								<!--Third slide-->
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_07.jpg" alt="Product Image 7">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_08.jpg" alt="Product Image 8">
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="#"> <img class=" img-fluid"
+												src="assets/img/product_single_09.jpg" alt="Product Image 9">
+											</a>
+										</div>
+									</div>
+								</div>
+								<!--/.Third slide-->
 							</div>
-						</form>
-
+							<!--End Slides-->
+						</div>
+						<!--End Carousel Wrapper-->
+						<!--Start Controls-->
+						<div class="col-1 align-self-center">
+							<a href="#multi-item-example" role="button" data-bs-slide="next">
+								<i class="text-dark fas fa-chevron-right"></i> <span
+								class="sr-only">Next</span>
+							</a>
+						</div>
+						<!--End Controls-->
 					</div>
 				</div>
-				<div class="row">
-					<c:forEach var="sp" items="${page.content}">
-						<div class="col-md-3">
-							<div class="card mb-4 product-wap rounded-0">
-								<div class="card rounded-0">
-									<img class="card-img rounded-0 img-fluid"
-										src="/template/user/images/dt20.jpg" />
-									<div
-										class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-										<ul class="list-unstyled d-flex">
-											<li><a class="btn btn-success text-white m-1"
-												href="details_product.html"><i class="far fa-heart"></i></a></li>
-											<li><a class="btn btn-success text-white m-1"
-												href="/product/product-detail/${sp.maCTSP}"><i
-													class="far fa-eye"></i></a></li>
-											<li><a class="btn btn-success text-white m-1"
-												href="details_product.html"><i class="fas fa-cart-plus"></i></a></li>
+				<!-- col end -->
+				<div class="col-lg-7 mt-5">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="h2">${sanPham.maSP.tenSP}</h1>
+							<p class="h3 py-2">${sanPham.gia}</p>
+							<p class="py-2">
+								<i class="fa fa-star text-warning"></i> <i
+									class="fa fa-star text-warning"></i> <i
+									class="fa fa-star text-warning"></i> <i
+									class="fa fa-star text-warning"></i> <i
+									class="fa fa-star text-secondary"></i> <span
+									class="list-inline-item text-dark">Rating 4.8 | 36
+									Comments</span>
+							</p>
+
+							<ul class="list-inline mb-0">
+								<li class="list-inline-item">
+									<h6>Màu:</h6>
+								</li>
+								<li class="list-inline-item">
+									<p class="text-muted">
+										<strong>${sanPham.maMau.mauSac}</strong>
+									</p>
+								</li>
+							</ul>
+							<ul class="list-inline mb-0">
+								<li class="list-inline-item">
+									<h6>Ram:</h6>
+								</li>
+								<li class="list-inline-item">
+									<p class="text-muted">
+										<strong>${sanPham.maRam.ram}</strong>
+									</p>
+								</li>
+							</ul>
+							<ul class="list-inline mb-0">
+								<li class="list-inline-item">
+									<h6>Dung lượng:</h6>
+								</li>
+								<li class="list-inline-item">
+									<p class="text-muted">
+										<strong>${sanPham.maDL.dungLuong}</strong>
+									</p>
+								</li>
+							</ul>
+
+							<h4>Thông tin :</h4>
+							<ul class="list-unstyled pb-3">
+								<li>Hệ điều hành: ${sanPham.maSP.maHDH.tenHDH}</li>
+								<li>Chip: ${sanPham.maSP.chip}</li>
+								<li>Màn hình:
+									<ul>
+										<li>Công nghệ màn hình: ${sanPham.maSP.manHinh.CNMH}</li>
+										<li>Màn hình rộng: ${sanPham.maSP.manHinh.MHRong}</li>
+										<li>Độ phân giải: ${sanPham.maSP.manHinh.DPG}</li>
+									</ul>
+								</li>
+								<li>Pin:
+									<ul>
+										<li>Dung lượng pin: ${sanPham.maSP.pinSac.DLPin}</li>
+										<li>Loại pin: ${sanPham.maSP.pinSac.loaiPin}</li>
+										<li>Hỗ trợ sạc: ${sanPham.maSP.pinSac.hoTroSac}</li>
+										<li>Công nghệ pin: ${sanPham.maSP.pinSac.CNP}</li>
+									</ul>
+								</li>
+								<li>Hỗ trợ sạc: ${sanPham.maSP.hoTroSac}</li>
+								<li>Sim: ${sanPham.maSP.sim}</li>
+								<li>Cam trước:
+									<ul>
+										<li>Độ phân giải: ${sanPham.maSP.camTruoc.DPG}</li>
+										<li>Tính năng: ${sanPham.maSP.camTruoc.tinhNang}</li>
+									</ul>
+								</li>
+								<li>Cam sau:
+									<ul>
+										<li>Độ phân giải: ${sanPham.maSP.camSau.DPG}</li>
+										<li>Đèn Flash: ${sanPham.maSP.camSau.denFlash}</li>
+										<li>Tính năng: ${sanPham.maSP.camSau.tinhNang}</li>
+									</ul>
+								</li>
+							</ul>
+
+							<form action="" method="GET">
+								<input type="hidden" name="product-title" value="Activewear">
+								<div class="row">
+									<!-- <div class="col-auto">
+                                        <ul class="list-inline pb-3">
+                                            <li class="list-inline-item">Size :
+                                                <input type="hidden" name="product-size" id="product-size" value="S">
+                                            </li>
+                                            <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
+                                        </ul>
+                                    </div> -->
+									<div class="col-auto">
+										<ul class="list-inline pb-3">
+											<li class="list-inline-item text-right">Quantity <input
+												type="hidden" name="product-quanity" id="product-quanity"
+												value="1">
+											</li>
+											<li class="list-inline-item"><span
+												class="btn btn-success" id="btn-minus">-</span></li>
+											<li class="list-inline-item"><span
+												class="badge bg-secondary" id="var-value">1</span></li>
+											<li class="list-inline-item"><span
+												class="btn btn-success" id="btn-plus">+</span></li>
 										</ul>
 									</div>
 								</div>
-								<div class="card-body">
-									<a href="details_product.html" class="h3 text-decoration-none">${sp.maSP.tenSP}</a>
-									<ul
-										class="w-100 list-unstyled d-flex justify-content-between mb-0">
-										<li></li>
-										<li class="pt-2"><span
-											class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-										</li>
-									</ul>
-									<p class="text-left mb-0">${sp.gia}</p>
-									<ul class="list-unstyled d-flex justify-content-center mb-1">
-										<li><i class="text-warning fa fa-star"></i> <i
-											class="text-warning fa fa-star"></i> <i
-											class="text-warning fa fa-star"></i> <i
-											class="text-muted fa fa-star"></i> <i
-											class="text-muted fa fa-star"></i></li>
-									</ul>
+								<div class="row pb-3">
+									<div class="col d-grid">
+										<button type="submit" class="btn btn-success btn-lg"
+											name="submit" value="buy">Buy</button>
+									</div>
+									<div class="col d-grid">
+										<button type="submit" class="btn btn-success btn-lg"
+											name="submit" value="addtocard">Add To Cart</button>
+									</div>
 								</div>
-							</div>
+							</form>
+
 						</div>
-					</c:forEach>
-				</div>
-				<div class="row">
-					<ul class="pagination pagination-lg justify-content-end">
-						<%-- <c:forEach begin="1" end="${page.totalPages}" step="1"
-							var="number">
-							<c:choose>
-								<c:when test="${not empty keywords}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/search-and-page/${keywords}?p=${number-1}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:when test="${not empty min and not empty max}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/view?p=${number-1}" tabindex="-1">${number}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach> --%>
-						<c:forEach begin="1" end="${page.totalPages}" step="1"
-							var="number">
-							<c:choose>
-								<c:when test="${not empty keywords}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/search-and-page/${keywords}?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${param.max}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:when test="${not empty min and not empty max}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}&sortby=${sortby}&keywords=${keywords}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/sort?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${prram.max}&keywords=${keywords}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</ul>
+					</div>
 				</div>
 			</div>
+		</div>
+	</section>
+	<!-- Close Content -->
 
+
+	<!-- Start Content -->
+	<div class="m-4 py-5 ">
+		<h3 class="py-5">-----SẢN PHẨM TƯƠNG TỰ-----</h3>
+		<div class="row">
+			<c:forEach var="sp" items="${page.content}">
+				<div class="col-md-3">
+					<div class="card mb-4 product-wap rounded-0">
+						<div class="card rounded-0">
+							<img class="card-img rounded-0 img-fluid"
+								src="/template/user/images/dt20.jpg" />
+							<div
+								class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+								<ul class="list-unstyled d-flex">
+									<li><a class="btn btn-success text-white m-1"
+										href="details_product.html"><i class="far fa-heart"></i></a></li>
+									<li><a class="btn btn-success text-white m-1"
+										href="/product/product-detail/${sp.maCTSP}"><i
+											class="far fa-eye"></i></a></li>
+									<li><a class="btn btn-success text-white m-1"
+										href="details_product.html"><i class="fas fa-cart-plus"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body">
+							<a href="details_product.html" class="h3 text-decoration-none">${sp.maSP.tenSP}</a>
+							<ul
+								class="w-100 list-unstyled d-flex justify-content-between mb-0">
+								<li></li>
+								<li class="pt-2"><span
+									class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+									<span
+									class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+									<span
+									class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+									<span
+									class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+									<span
+									class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+								</li>
+							</ul>
+							<p class="text-left mb-0">${sp.gia}</p>
+							<ul class="list-unstyled d-flex justify-content-center mb-1">
+								<li><i class="text-warning fa fa-star"></i> <i
+									class="text-warning fa fa-star"></i> <i
+									class="text-warning fa fa-star"></i> <i
+									class="text-muted fa fa-star"></i> <i
+									class="text-muted fa fa-star"></i></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div class="row">
+			<ul class="pagination pagination-lg justify-content-end">
+				<c:forEach begin="1" end="${page.totalPages}" step="1" var="number">
+					<li class="page-item ${page.number == number - 1 ? 'active' : ''}">
+						<a
+						class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
+						href="/product/product-detail/${sanPham.maCTSP}?p=${number-1}" tabindex="-1">${number}</a>
+					</li>
+				</c:forEach>
+			</ul>
 		</div>
 	</div>
+
+
+
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
 		<div class="container">
 			<div class="row">
@@ -581,15 +697,11 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		function submitForm() {
-			document.getElementById("sortForm").submit();
-		}
-	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"
 		src="/template/user/js/bootstrap.bundle.min.js"></script>
+	<script src="/template/user/js/detail_product.js"></script>
 	<script type="text/javascript" src="/template/user/js/plugins.js"></script>
 	<script type="text/javascript" src="/template/user/js/script.js"></script>
 </body>

@@ -19,6 +19,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Idrole")
     Integer id_role;
+    
+    @Column(name = "Roles")
     String role;
 
     @OneToMany(mappedBy = "role")
