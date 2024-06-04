@@ -9,15 +9,22 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "SANPHAM_")
 public class SanPham {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="Masp")
     private Integer maSP;
+    
+    @Column(name="Tensp")
     private String tenSP;
     
     @ManyToOne
