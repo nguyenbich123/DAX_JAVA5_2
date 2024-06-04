@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,18 +34,22 @@
           <div class="col-md-7">
             <h3>Đăng Ký</h3>
             <p class="mb-4">Đăng ký để có những trãi nghiệm tốt nhất </p>
-            <form action="/account/signup" method="post">
-                <div class="form-group first">
-                    <label for="username">Họ và tên</label>
-                    <input type="text" class="form-control" placeholder="Họ tên" id="username">
+            <form:form action="/account/signup" method="post" modelAttribute="tk">
+            	<div class="form-group first">
+                    <form:input path="hoTen" type="text" cssClass="form-control" placeholder="Họ tên" />
+                    <form:errors path="hoTen" cssClass="text-danger" />
                   </div>
               <div class="form-group first">
-                <label for="username">Tài khoản</label>
-                <input type="text" class="form-control" placeholder="Email" id="username">
+                <form:input type="text" path="email" cssClass="form-control" placeholder="Email" />
+                 <form:errors path="email" cssClass="text-danger" />
               </div>
               <div class="form-group last mb-3">
-                <label for="password">Mật khẩu</label>
-                <input type="password" class="form-control" placeholder="Password" id="password">
+                <form:input type="password" cssClass="form-control" placeholder="Password" path="matKhau"/>
+                 <form:errors path="matKhau" cssClass="text-danger" />
+              </div>
+              <div class="form-group last mb-3">
+                <form:input type="password" cssClass="form-control" placeholder="Confirm Password" path="matKhau"/>
+                 <form:errors path="matKhau" cssClass="text-danger" />
               </div>
               
               <div class="d-flex mb-5 align-items-center">
@@ -58,8 +64,11 @@
               <div class="text-center">
                 Bạn đã có tài khoản? <a href="/account/login" class="text-dark">Đăng Nhập</a>
               </div>
-
-            </form>
+            </form:form>
+            
+            
+                
+           
           </div>
         </div>
       </div>

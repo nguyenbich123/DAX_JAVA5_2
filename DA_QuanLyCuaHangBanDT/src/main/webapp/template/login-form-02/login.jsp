@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,30 +34,32 @@
           <div class="col-md-7">
             <h3>Đăng nhập tới <strong style="color: orangered;">THELIEM</strong></h3>
             <p class="mb-4">Trải nghiệm của quý khách là niềm vui của chúng tôi </p>
-            <form action="/account/login" method="post">
+            <form:form action="/account/login" method="post"  modelAttribute="tk">
               <div class="form-group first">
                 <label for="username">Tài khoản</label>
-                <input type="text" class="form-control" placeholder="Email" id="username">
+                <form:input type="text" class="form-control" placeholder="Email" path="tenDN"/>
+                <form:errors path="tenDN" cssClass="text-danger" />
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Mật khẩu</label>
-                <input type="password" class="form-control" placeholder="Password" id="password">
+                <form:input path="matKhau" type="password" cssClass="form-control" placeholder="Password"/>
+                <form:errors path="matKhau" cssClass="text-danger" />
               </div>
               <div class="d-flex mb-5 align-items-center">
                 <label class="control control--checkbox mb-0"><span class="caption">Ghi nhớ</span>
-                  <input type="checkbox" checked="checked"/>
+                  <input type="checkbox" name="remember" cssClass="form-check-input"/>
                   <div class="control__indicator"></div>
                 </label>
                 <span class="ml-auto"><a href="/account/forgot" class="forgot-pass">Quên mật khẩu</a></span> 
               </div>
-              <a href="/account/login"><input value="Đăng nhập" class="btn btn-block btn-primary"></a>
+             <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button>
 
               <div class="card-footer py-3 border-0">
                 <div class="text-center">
                   Bạn chưa có tài khoản? <a href="/account/signup" class="text-dark">Đăng ký</a>
                 </div>
               </div>
-            </form>
+            </form:form>
           </div>
         </div>
       </div>

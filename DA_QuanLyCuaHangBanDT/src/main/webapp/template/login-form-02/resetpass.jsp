@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,24 +34,26 @@
           <div class="col-md-7">
             <h3>Đặt lại mật khẩu</h3>
 
-            <form action="/account/resetpass" method="post">
+            <form:form action="/account/resetpass" method="post" modelAttribute="tk">
              
               <div class="form-group last mb-3">
                 <label for="password">Mật khẩu mới</label>
-                <input type="password" class="form-control" placeholder="New Password" id="password">
+                <form:input type="password" cssClass="form-control" placeholder="New Password" path="matKhau"/>
+                 <form:errors path="matKhau" cssClass="text-danger" />
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Xác nhận Mật khẩu</label>
-                <input type="password" class="form-control" placeholder="Confirm Password" id="password">
+                <form:input type="password" cssClass="form-control" placeholder="Confirm Password" path="matKhau"/>
+                <form:errors path="matKhau" cssClass="text-danger" />
               </div>
-              <input type="submit" value="Xác nhận" class="btn btn-block btn-primary">
+                <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button>
 
               <div class="card-footer py-3 border-0">
                 <div class="text-center">
                   Quay về trang đăng nhập? <a href="/account/login" class="text-dark">Đăng Nhập</a>
                 </div>
               </div>
-            </form>
+            </form:form>
           </div>
         </div>
       </div>
