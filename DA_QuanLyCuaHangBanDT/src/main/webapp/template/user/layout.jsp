@@ -205,20 +205,10 @@
                           </a>
                           <ul class="dropdown-menu ">
                             <li>
-                              <a href="" class="dropdown-item">Về chúng tôi</a>
+                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
                             </li>
                             <li>
-                              <a href="" class="dropdown-item">Bài viết</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Cửa hàng</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Giỏ hàng</a>
-                            </li>
-                            <li>
-                            <li>
-                              <a href="" class="dropdown-item">Liên hệ</a>
+                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
                             </li>
                           </ul>
                         </li>

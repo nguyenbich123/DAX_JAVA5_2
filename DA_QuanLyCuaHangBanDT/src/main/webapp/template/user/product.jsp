@@ -157,7 +157,33 @@
 			d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
       </symbol>
     </svg>
+    
+    
+    <!--Hiển thị modal thông báo đã thêm sản phẩm thành công  -->
+    <c:if test="${not empty message}">
+        <!-- Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ${message}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:if>
 
+
+	<!-- Hiển thị popup của thanh tìm kiếm -->
 	<div class="search-popup">
 		<div class="search-popup-container">
 			<form role="search" method="get" class="search-form"
@@ -180,7 +206,7 @@
 		</div>
 	</div>
 
-	<header id="header mb-2">
+	<!-- <header id="header mb-2">
 		<div class="site-header_product text-black bg-light ">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
 				<div class="container-fluid">
@@ -262,7 +288,119 @@
 			</nav>
 		</div>
 
-	</header>
+	</header> -->
+	<header id="header mb-2">
+      <div class="site-header_product text-black">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
+          <div class="container-fluid">
+            <a  class="navbar-brand " href="index.html">
+              <img src="/template/user/images/TheLiem(2).png" class="logo">
+            </a>
+            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+              <svg class="navbar-icon">
+                <use xlink:href="#navbar-icon"></use>
+              </svg>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+              <div class="offcanvas-header px-4 pb-0">
+                <a class="navbar-brand" href="index.html">
+                  <img src="/template/user/images/2.png" class="logo">
+                </a>
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link me-4 active" href="#billboard">Trang chủ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="#company-services">Dịch vụ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="#mobile-products">Sản phẩm</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="#yearly-sale">Khuyến mãi</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="" class="dropdown-item">Về chúng tôi</a>
+                      </li>
+                      <li>
+                        <a href="" class="dropdown-item">Bài viết</a>
+                      </li>
+                      <li>
+                        <a href="" class="dropdown-item">Cửa hàng</a>
+                      </li>
+                      <li>
+                        <a href="" class="dropdown-item">Giỏ hàng</a>
+                      </li>
+                      <li>
+                      <li>
+                        <a href="lienHe.html" class="dropdown-item">Liên hệ</a>
+                      </li>
+                      <li>
+                        <a href="gioiThieu.html" class="dropdown-item">Giới Thiệu</a>
+                      </li>
+                      <li>
+                        <a href="gopY.html" class="dropdown-item">Góp Ý</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <div class="user-items ps-5">
+                      <ul class="d-flex justify-content-end list-unstyled">
+                        <li class="search-item pe-3">
+                          <a href="#" class="search-button">
+                            <svg class="search">
+                              <use xlink:href="#search"></use>
+                            </svg>
+                          </a>
+                        </li>
+                        <li class="pe-3 dropdown position-relative">
+                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                          Xin chào, ${account.hoTen}
+                            <svg class="user">
+                              <use xlink:href="#user"></use>
+                            </svg>
+                          </a>
+                          <ul class="dropdown-menu ">
+                            <li>
+                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+                            </li>
+                            <li>
+                              <a href="" class="dropdown-item">Đơn hàng của tôi</a>
+                            </li>
+                            <li>
+                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
+                            </li>
+                            <li>
+                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
+                            </li>
+                            <li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
+                            <svg class="cart">
+                              <use xlink:href="#cart"></use>
+                            </svg>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      
+    </header>
 
 	<!-- Start Content -->
 	<div class="m-4 py-5 ">
@@ -356,12 +494,12 @@
 										class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
 										<ul class="list-unstyled d-flex">
 											<li><a class="btn btn-success text-white m-1"
-												href="details_product.html"><i class="far fa-heart"></i></a></li>
+												href=""><i class="far fa-heart"></i></a></li>
 											<li><a class="btn btn-success text-white m-1"
 												href="/product/product-detail/${sp.maCTSP}"><i
 													class="far fa-eye"></i></a></li>
 											<li><a class="btn btn-success text-white m-1"
-												href="details_product.html"><i class="fas fa-cart-plus"></i></a></li>
+												href=""><i class="fas fa-cart-plus"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -586,6 +724,12 @@
 			document.getElementById("sortForm").submit();
 		}
 	</script>
+	<!-- Script to automatically show the modal -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -205,35 +206,33 @@
                         </li>
                         <li class="pe-3 dropdown position-relative">
                           <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                          Xin chào, ${account.hoTen}
                             <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
                             <li>
-                              <a href="" class="dropdown-item">Về chúng tôi</a>
+                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
                             </li>
                             <li>
-                              <a href="" class="dropdown-item">Bài viết</a>
+                              <a href="" class="dropdown-item">Đơn hàng của tôi</a>
                             </li>
                             <li>
-                              <a href="" class="dropdown-item">Cửa hàng</a>
+                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
                             </li>
                             <li>
-                              <a href="" class="dropdown-item">Giỏ hàng</a>
+                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
                             </li>
                             <li>
-                            <li>
-                              <a href="" class="dropdown-item">Liên hệ</a>
-                            </li>
                           </ul>
                         </li>
                         <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="">
+                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
                             <svg class="cart">
                               <use xlink:href="#cart"></use>
                             </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">7</span>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
                           </a>
                         </li>
                       </ul>
@@ -378,7 +377,7 @@
           <div class="display-header d-flex justify-content-between pb-3">
             <h2 class="display-7 text-dark text-uppercase">Products</h2>
             <div class="btn-right">
-              <a href="" class="btn btn-medium btn-normal text-uppercase">Go to List product</a>
+              <a href="/product/view" class="btn btn-medium btn-normal text-uppercase">Go to List product</a>
             </div>
           </div>
           <div class="swiper product-swiper">

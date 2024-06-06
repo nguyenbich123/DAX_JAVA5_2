@@ -20,7 +20,10 @@ public class SanPham {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Masp")
     private Integer maSP;
+    
+    @Column(name="Tensp")
     private String tenSP;
     
     @ManyToOne
