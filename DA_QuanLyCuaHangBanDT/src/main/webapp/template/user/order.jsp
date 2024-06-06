@@ -238,7 +238,7 @@
           </div>
         </nav>
       </div>
-      
+      <!-- ĐÂY -->
     </header>
     <h1 class="text-center mb-4 py-5">Đơn Hàng</h1>
 
@@ -460,7 +460,7 @@
       </div>
     </div>
   </div>
-   
+   <!-- ĐÂY -->
     <footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
       <div class="container">
         <div class="row">

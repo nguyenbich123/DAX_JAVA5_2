@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("vote")
-public class VoteController {
-
-	@GetMapping("view")
-	public String getProduct() {
-		return "/template/user/vote";
-	}
+public class VoteController {	
+	   
+	   @GetMapping("view")
+		public String getProduct() {
+			return "/template/user/vote";
+		}	
+	   
+	   
 }
