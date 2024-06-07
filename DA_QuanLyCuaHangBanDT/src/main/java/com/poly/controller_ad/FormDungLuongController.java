@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.DungLuong;
-
-import com.poly.repository.DungLuongDAO;
+import com.poly.entity.*;
+import com.poly.repository.*;
 
 import jakarta.servlet.ServletContext;
 
@@ -28,37 +27,42 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/dungluong")
 public class FormDungLuongController {
 
+
 	@Autowired
 	 DungLuongDAO dlDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") DungLuong dl) {
+	public String getAccount(Model model,@ModelAttribute("item") DungLuong dl) {
 		List<DungLuong> items = dlDao.findAll();
 		model.addAttribute("items", items);
-		return "/template/Admin/dungluong";
+		return "/template/Admin/formDungLuong";
 	}
 
 	@RequestMapping("edit/{maDL}")
-	public String edit(Model model, @PathVariable("maDL") Integer maDL) {
+	public String edit(Model model, @ModelAttribute("item") DungLuong dl,@PathVariable("maDL") Integer maDL,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		DungLuong item = dlDao.findById(maDL).get();
 		model.addAttribute("item", item);
-		List<DungLuong> items = dlDao.findAll();
-		model.addAttribute("items", items);
-		return "/template/Admin/duongluong";
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<DungLuong> page = dlDao.findAll(pageable);
+		model.addAttribute("page", page);
+		return "/template/Admin/formDungLuong";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(DungLuong item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") DungLuong item) throws IllegalStateException, IOException {
 		dlDao.save(item);
-		return "redirect:/admin/dungluong/edit/"+ item.getMaDL();
+		return "redirect:/admin/dungluong/index";
 	}
 
+	
 	@RequestMapping("delete/{maDL}")
-	public String delete(@PathVariable("maDL") Integer maDL) {
+	public String delete(Ram ram,@PathVariable("maDL") Integer maDL) throws IllegalStateException, IOException{
+		
 		dlDao.deleteById(maDL);
-		return "redirect:/template/Admin/dungluong";
+		return "redirect:/admin/dungluong/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -74,14 +78,14 @@ public class FormDungLuongController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") DungLuong dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")DungLuong dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maDL"));	
-   	List<DungLuong> acc = dlDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("maDL"));
+    	List<DungLuong> acc = dlDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("maDL"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<DungLuong> page = dlDao.findAll(pageable);
-	    model.addAttribute("page", page);
-	    return "/template/Admin/dungluong";
+        model.addAttribute("page", page);
+	    return "/template/Admin/formDungLuong";
 	}
 }

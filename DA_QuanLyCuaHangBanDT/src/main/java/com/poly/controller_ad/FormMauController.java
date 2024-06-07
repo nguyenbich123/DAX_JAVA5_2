@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.DungLuong;
-import com.poly.entity.Mau;
-import com.poly.repository.MauDAO;
+import com.poly.entity.*;
+import com.poly.repository.*;
 
 import jakarta.servlet.ServletContext;
 
@@ -28,37 +27,42 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/mau")
 public class FormMauController {
 
+
 	@Autowired
-	 MauDAO mauDao;
+	 MauDAO mDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") Mau mau) {
-		List<Mau> items = mauDao.findAll();
-		model.addAttribute("items", items);
-		return "/template/Admin/fromMau";
-	}
-
-	@RequestMapping("edit/{maMau}")
-	public String edit(Model model, @PathVariable("maMau") Integer maMau) {
-		Mau item = mauDao.findById(maMau).get();
-		model.addAttribute("item", item);
-		List<Mau> items = mauDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") Mau mau) {
+		List<Mau> items = mDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formMau";
 	}
 
+	@RequestMapping("edit/{maMau}")
+	public String edit(Model model, @ModelAttribute("item") Mau mau,@PathVariable("maMau") Integer maMau,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		Mau item = mDao.findById(maMau).get();
+		model.addAttribute("item", item);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<Mau> page = mDao.findAll(pageable);
+		model.addAttribute("page", page);
+		return "/template/Admin/formMau";
+	}
+	
 	@RequestMapping("update")
 	public String update(Mau item) throws IllegalStateException, IOException {
-		mauDao.save(item);
-		return "redirect:/admin/mau/edit/"+ item.getMaMau();
+		mDao.save(item);
+		return "redirect:/admin/mau/index";
 	}
 
+	
 	@RequestMapping("delete/{maMau}")
-	public String delete(@PathVariable("maMau") Integer maMau) {
-		mauDao.deleteById(maMau);
-		return "redirect:/template/Admin/formMau";
+	public String delete(Mau mau,@PathVariable("maMau") Integer maMau) throws IllegalStateException, IOException{
+		
+		mDao.deleteById(maMau);
+		return "redirect:/admin/mau/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -76,12 +80,12 @@ public class FormMauController {
 	@GetMapping("index")
 	public String bai5(Model model,@ModelAttribute("item") Mau mau,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maMau"));	
-  	List<Mau> acc = mauDao.findAll(sort);	
-  	model.addAttribute("field", field.orElse("maMau"));
+    	List<Mau> acc = mDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("maMau"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<Mau> page = mauDao.findAll(pageable);
-	    model.addAttribute("page", page);
+	    Page<Mau> page = mDao.findAll(pageable);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formMau";
 	}
 }

@@ -1,9 +1,7 @@
 package com.poly.controller_ad;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.*;
-import com.poly.entity.Role;
-import com.poly.repository.RamDAO;
+import com.poly.repository.*;
 
 import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/ram")
 public class FormRamController {
-	
+
+
 	@Autowired
 	 RamDAO rDao;
 	@Autowired
@@ -43,24 +41,28 @@ public class FormRamController {
 	}
 
 	@RequestMapping("edit/{maRam}")
-	public String edit(Model model, @PathVariable("maRam") Integer maRam) {
+	public String edit(Model model, @ModelAttribute("item") Ram ram,@PathVariable("maMau") Integer maRam,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Ram item = rDao.findById(maRam).get();
 		model.addAttribute("item", item);
-		List<Ram> items = rDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<Ram> page = rDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formRAM";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(Ram item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") Ram item) throws IllegalStateException, IOException {
 		rDao.save(item);
-		return "redirect:/admin/ram/edit/"+ item.getMaRam();
+		return "redirect:/admin/ram/index";
 	}
 
+	
 	@RequestMapping("delete/{maRam}")
-	public String delete(@PathVariable("maRam") Integer maRam) {
+	public String delete(Ram ram,@PathVariable("maRam") Integer maRam) throws IllegalStateException, IOException{
+		
 		rDao.deleteById(maRam);
-		return "redirect:/template/Admin/formRAM";
+		return "redirect:/admin/ram/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -83,8 +85,7 @@ public class FormRamController {
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<Ram> page = rDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formRAM";
 	}
-	
 }
