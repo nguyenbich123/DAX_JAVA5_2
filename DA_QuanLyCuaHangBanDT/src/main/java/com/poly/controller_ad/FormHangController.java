@@ -28,40 +28,39 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/hang")
 public class FormHangController {
 
-
 	@Autowired
-	 HangDAO hangDao;
+	HangDAO hangDao;
 	@Autowired
 	ServletContext app;
-	
+
 	@RequestMapping("view")
-	public String getAccount(Model model,@ModelAttribute("item") Hang hang) {
+	public String getAccount(Model model, @ModelAttribute("item") Hang hang) {
 		List<Hang> items = hangDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formHang";
 	}
 
 	@RequestMapping("edit/{maHang}")
-	public String edit(Model model, @ModelAttribute("item") Hang hang,@PathVariable("maHang") Integer maHang,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("item") Hang hang, @PathVariable("maHang") Integer maHang,
+			@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Hang item = hangDao.findById(maHang).get();
 		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
-	    System.out.println(field);
+		System.out.println(field);
 		Page<Hang> page = hangDao.findAll(pageable);
 		model.addAttribute("page", page);
 		return "/template/Admin/formHang";
 	}
-	
+
 	@RequestMapping("update")
 	public String update(Hang item) throws IllegalStateException, IOException {
 		hangDao.save(item);
 		return "redirect:/admin/hang/index";
 	}
 
-	
 	@RequestMapping("delete/{maHang}")
-	public String delete(Hang hang,@PathVariable("maHang") Integer maHang) throws IllegalStateException, IOException{
-		
+	public String delete(Hang hang, @PathVariable("maHang") Integer maHang) throws IllegalStateException, IOException {
+
 		hangDao.deleteById(maHang);
 		return "redirect:/admin/hang/index";
 	}
@@ -76,17 +75,17 @@ public class FormHangController {
 //		}
 //		return map;
 //	}
-	
-	
+
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") Hang hang,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
-		Sort sort = Sort.by(Direction.ASC, field.orElse("maHang"));	
-    	List<Hang> acc = hangDao.findAll(sort);	
-    	model.addAttribute("field", field.orElse("maHang"));
-	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
-	    System.out.println(field);
-	    Page<Hang> page = hangDao.findAll(pageable);
-	    model.addAttribute("page", page);
-	    return "/template/Admin/formHang";
+	public String bai5(Model model, @ModelAttribute("item") Hang hang, @RequestParam("field") Optional<String> field,
+			@RequestParam("p") Optional<Integer> p) {
+		Sort sort = Sort.by(Direction.ASC, field.orElse("maHang"));
+		List<Hang> acc = hangDao.findAll(sort);
+		model.addAttribute("field", field.orElse("maHang"));
+		Pageable pageable = PageRequest.of(p.orElse(0), 3, sort);
+		System.out.println(field);
+		Page<Hang> page = hangDao.findAll(pageable);
+		model.addAttribute("page", page);
+		return "/template/Admin/formHang";
 	}
 }

@@ -47,42 +47,22 @@
 							<form:form action="/admin/hedieuhanh/index" modelAttribute="item"
 								enctype="multipart/form-data">
 								<div class="row mb-3">
-									<label for="inputPassword3" class="col-sm-3 col-form-label">Mã
-										Hệ Điều Hành</label>
+									<label for="inputName" class="col-sm-3 col-form-label">
+										Mã Hệ Điều Hành</label>
 									<div class="col-sm-9">
-										<div class="row">
-											<div class="col-md-4">
-												<div id="inputState" class="d-flex align-items-center">
-													<form:input path="maHDH" type="text" class="form-control" />
-
-												</div>
-											</div>
-
-										</div>
+										<form:input path="maHDH" type="text" class="form-control" />
+										
 									</div>
 								</div>
 								<div class="row mb-3">
-									<label for="inputPassword3" class="col-sm-3 col-form-label">Hệ
-										Điều Hành</label>
+									<label for="inputName" class="col-sm-3 col-form-label">
+										Hệ Điều Hành</label>
 									<div class="col-sm-9">
-										<div class="row">
-											<div class="col-md-4">
-												<div id="inputState" class="d-flex align-items-center">
-
-													<form:input path="tenHDH" type="text" class="form-control" />
-
-
-												</div>
-											</div>
-
-										</div>
+										<form:input path="tenHDH" type="text" class="form-control" />
 									</div>
 								</div>
 								<div class="text-center">
-									<button formaction="/admin/hedieuhang/create"
-										class="btn btn-primary">Thêm</button>
-									<button formaction="/admin/hedieuhang/update"
-										class="btn btn-primary">Sửa</button>
+									<button formaction="/admin/hedieuhanh/update" class="btn btn-primary">Lưu</button>
 									<button type="reset" class="btn btn-secondary">Làm Mới</button>
 								</div>
 							</form:form>
@@ -107,8 +87,8 @@
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<th><a href="/admin/hedieuhanh/index?field=maHang">Mã Hệ Điều Hành</a></th>
-										<th><a href="/admin/hedieuhanh/index?field=tenHang">Hệ Điều Hành</a></th>
+										<th><a href="/admin/hedieuhanh/index?field=maHDH">Mã Hệ Điều Hành</a></th>
+										<th><a href="/admin/hedieuhanh/index?field=tenHDH">Hệ Điều Hành</a></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -120,7 +100,7 @@
 												<div class="icon">
 													<a href="/admin/hedieuhanh/edit/${item.maHDH}"><i
 														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/hedieuhanh/delete/${item.tenHDH}"><i
+														href="/admin/hedieuhanh/delete/${item.maHDH}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>

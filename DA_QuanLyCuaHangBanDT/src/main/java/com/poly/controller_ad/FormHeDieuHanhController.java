@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.entity.Hang;
 import com.poly.entity.HeDieuHanh;
 import com.poly.repository.HeDieuHanhDAO;
 
@@ -40,26 +41,28 @@ public class FormHeDieuHanhController {
 	}
 
 	@RequestMapping("edit/{maHDH}")
-	public String edit(Model model, @PathVariable("maHDH") Integer maHDH) {
+	public String edit(Model model, @ModelAttribute("item") HeDieuHanh hedieuhanh,@PathVariable("maHDH") Integer maHDH,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		HeDieuHanh item = hdhDao.findById(maHDH).get();
 		model.addAttribute("item", item);
-		List<HeDieuHanh> items = hdhDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<HeDieuHanh> page = hdhDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formHeDieuHanh";
 	}
-
 	@RequestMapping("update")
 	public String update(HeDieuHanh item) throws IllegalStateException, IOException {
 		hdhDao.save(item);
 		return "redirect:/admin/hedieuhanh/edit/" + item.getMaHDH();
 	}
 
+	
 	@RequestMapping("delete/{maHDH}")
-	public String delete(@PathVariable("maHDH") Integer maHDH) {
+	public String delete(Hang hang,@PathVariable("maHDH") Integer maHDH) throws IllegalStateException, IOException{
+		
 		hdhDao.deleteById(maHDH);
-		return "redirect:/template/Admin/formHeDieuHanh";
+		return "redirect:/admin/hedieuhanh/index";
 	}
-
 //	@ModelAttribute("list_ram")
 //	public Map<Integer, String> getRoles() {
 //		Map<Integer, String> map = new HashMap<>();
