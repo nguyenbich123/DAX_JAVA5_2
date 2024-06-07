@@ -80,9 +80,9 @@ public class CTSPController {
 		ctspDao.deleteById(MaCTSP);
 		return "redirect:/index";
 	}
-	@GetMapping("/index")
-	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
-		Sort sort = Sort.by(Direction.DESC, field.orElse("maCTSP"));	
+	@GetMapping("/index/{maSP}")
+	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p,@PathVariable("maSP") Integer maSP) {
+		Sort sort = Sort.by(Direction.ASC, field.orElse("maCTSP"));	
     	List<ChiTietSP> sp = ctspDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maCTSP"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);

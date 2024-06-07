@@ -23,21 +23,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.Account;
+import com.poly.entity.CNMH;
+import com.poly.entity.CNP;
 import com.poly.entity.CameraSau;
 import com.poly.entity.CameraTruoc;
+import com.poly.entity.DLP;
+import com.poly.entity.DPGCS;
+import com.poly.entity.DPGCT;
+import com.poly.entity.DPGMH;
+import com.poly.entity.HTS;
 import com.poly.entity.Hang;
 import com.poly.entity.HeDieuHanh;
+import com.poly.entity.LP;
+import com.poly.entity.MHR;
 import com.poly.entity.ManHinh;
 import com.poly.entity.PinSac;
 import com.poly.entity.SanPham;
+import com.poly.entity.TNCS;
+import com.poly.entity.TNCT;
 import com.poly.entity.TrangThaiHD;
+import com.poly.repository.CNMHDAO;
+import com.poly.repository.CNPDAO;
 import com.poly.repository.CameraSauDAO;
 import com.poly.repository.CameraTruocDAO;
+import com.poly.repository.DLPDAO;
+import com.poly.repository.DPGCSDAO;
+import com.poly.repository.DPGCTDAO;
+import com.poly.repository.DPGMHDAO;
+import com.poly.repository.HTSDAO;
 import com.poly.repository.HangDAO;
 import com.poly.repository.HeDieuHanhDAO;
+import com.poly.repository.LPDAO;
+import com.poly.repository.MHRDAO;
 import com.poly.repository.ManHinhDAO;
 import com.poly.repository.PinSacDAO;
 import com.poly.repository.SanPhamDAO;
+import com.poly.repository.TNCSDAO;
+import com.poly.repository.TNCTDAO;
 
 import jakarta.servlet.ServletContext;
 
@@ -58,6 +80,38 @@ public class SanPhamAdminController {
 	ManHinhDAO mhDao;
 	@Autowired
 	HangDAO hDao;
+	
+	// bảng phụ 
+	// màn hình 
+	@Autowired
+	CNMHDAO cnmhDao;
+	@Autowired
+	DPGMHDAO dpgDao;
+	@Autowired
+	MHRDAO mhrDao;
+	
+	//pinsac
+	@Autowired
+	CNPDAO cnpDao;
+	@Autowired
+	LPDAO lpDao;
+	@Autowired
+	HTSDAO htsDao;
+	@Autowired
+	DLPDAO dlpDao;
+	
+	//Camtruoc
+	@Autowired
+	DPGCTDAO dpgctDao;
+	@Autowired
+	TNCTDAO tnctDao;
+	
+	//camsau
+	@Autowired
+	DPGCSDAO dpgcsDao;
+	@Autowired
+	TNCSDAO tncsDao;
+	
 	@Autowired
 	ServletContext app;
 
@@ -67,10 +121,19 @@ public class SanPhamAdminController {
 		model.addAttribute("items", items);
 		return "/template/Admin/sanpham";
 	}
+	
+	@RequestMapping("add")
+	public String add(Model model) {
+		SanPham item =  new SanPham();
+		model.addAttribute("item", item);
+		List<SanPham> items = spDao.findAll();
+		model.addAttribute("items", items);
+		return "/template/Admin/formSanPham";
+	}
 
-	@RequestMapping("edit/{MaSP}")
-	public String edit(Model model, @PathVariable("MaSP") Integer MaSP) {
-		SanPham item = spDao.findById(MaSP).get();
+	@RequestMapping("edit/{maSP}")
+	public String edit(Model model, @PathVariable("maSP") Integer maSP) {
+		SanPham item = spDao.findById(maSP).get();
 		model.addAttribute("item", item);
 		List<SanPham> items = spDao.findAll();
 		model.addAttribute("items", items);
@@ -78,25 +141,43 @@ public class SanPhamAdminController {
 	}
 	
 	@RequestMapping("create")
-	public String create(SanPham item) throws IllegalStateException, IOException {
+	public String createallsp(SanPham item) throws IllegalStateException, IOException {
+		ManHinh mh = item.getManHinh();
+	    mhDao.save(mh);
+	    PinSac ps = item.getPinSac();
+	    psDao.save(ps);
+	    CameraSau cs = item.getCamSau();
+	    csDao.save(cs);
+	    CameraTruoc ct = item.getCamTruoc();
+	    ctDao.save(ct);
+	    
 		spDao.save(item);
 		return "redirect:index";
 	}
 	
 	@RequestMapping("update")
 	public String update(SanPham item) throws IllegalStateException, IOException {
+		ManHinh mh = item.getManHinh();
+	    mhDao.save(mh);
+	    PinSac ps = item.getPinSac();
+	    psDao.save(ps);
+	    CameraSau cs = item.getCamSau();
+	    csDao.save(cs);
+	    CameraTruoc ct = item.getCamTruoc();
+	    ctDao.save(ct);
+		
 		spDao.save(item);
-		return "redirect:edit/"+ item.getMaSP();
+		return "redirect:index";
 	}
 
 	@RequestMapping("delete/{id}")
-	public String delete(@PathVariable("MaSP") Integer MaSP) {
-		spDao.deleteById(MaSP);
+	public String delete(@PathVariable("maSP") Integer maSP) {
+		spDao.deleteById(maSP);
 		return "redirect:/index";
 	}
 	@GetMapping("/index")
 	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
-		Sort sort = Sort.by(Direction.DESC, field.orElse("maSP"));	
+		Sort sort = Sort.by(Direction.ASC, field.orElse("maSP"));	
     	List<SanPham> sp = spDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maSP"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);
@@ -126,145 +207,142 @@ public class SanPhamAdminController {
 		return map;
 	}
 	
-	public Map<Integer, String> getManHinhList(String attribute) {
-	    Map<Integer, String> map = new HashMap<>();
-
-	    List<ManHinh> x = mhDao.findAll();
-	    for (ManHinh c : x) {
-	        switch (attribute) {
-	            case "CNMH":
-	                map.put(c.getIdManHinh(), c.getCNMH());
-	                break;
-	            case "MHRong":
-	                map.put(c.getIdManHinh(), c.getMHRong());
-	                break;
-	            case "DPG":
-	                map.put(c.getIdManHinh(), c.getDPG());
-	                break;
-	        }
-	    }
-	    return map;
-	}
+//	public Map<Integer, String> getManHinhList(String attribute) {
+//	    Map<Integer, String> map = new HashMap<>();
+//
+//	    List<ManHinh> x = mhDao.findAll();
+//	    for (ManHinh c : x) {
+//	        switch (attribute) {
+//	            case "CNMH":
+//	                map.put(c.getIdManHinh(), c.getCNMH().getCnmh());
+//	                break;
+//	            case "MHRong":
+//	                map.put(c.getIdManHinh(), c.getMHR().getMhRong());
+//	                break;
+//	            case "DPG":
+//	                map.put(c.getIdManHinh(), c.getDPG().getDpg());
+//	                break;
+//	        }
+//	    }
+//	    return map;
+//	}
 	
 	@ModelAttribute("list_cnmh")
 	public Map<Integer, String> getmh1() {
-	    return getManHinhList("CNMH");
+		Map<Integer, String> map = new HashMap<>();
+		List<CNMH> x = cnmhDao.findAll();
+		for (CNMH c : x) {
+			map.put(c.getIdCNMH(), c.getCnmh());
+		}
+		return map;
 	}
 
 	@ModelAttribute("list_mhr")
 	public Map<Integer, String> getmh2() {
-	    return getManHinhList("MHRong");
+		Map<Integer, String> map = new HashMap<>();
+		List<MHR> x = mhrDao.findAll();
+		for (MHR c : x) {
+			map.put(c.getIdMHR(), c.getMhRong());
+		}
+		return map;
 	}
 
 	@ModelAttribute("list_dpg")
 	public Map<Integer, String> getmh3() {
-	    return getManHinhList("DPG");
+		Map<Integer, String> map = new HashMap<>();
+		List<DPGMH> x = dpgDao.findAll();
+		for (DPGMH c : x) {
+			map.put(c.getIdDPGMH(), c.getDpg());
+		}
+		return map;
 	}
 	
-	
-	public Map<Integer, String> getCamSau(String attribute) {
-	    Map<Integer, String> map = new HashMap<>();
-
-	    List<CameraSau> x = csDao.findAll();
-	    for (CameraSau c : x) {
-	        switch (attribute) {
-	            case "DPG":
-	                map.put(c.getIdCamSau(), c.getDPG());
-	                break;
-	            case "TN":
-	                map.put(c.getIdCamSau(), c.getTinhNang());
-	                break;
-	        }
-	    }
-	    return map;
-	}
 	
 	@ModelAttribute("list_cs_1")
 	public Map<Integer, String> getcs1() {
-	    return getCamSau("DPG");
+		Map<Integer, String> map = new HashMap<>();
+		List<DPGCS> x = dpgcsDao.findAll();
+		for (DPGCS c : x) {
+			map.put(c.getIdDPGCS(), c.getDpg());
+		}
+		return map;
 	}
 
 	@ModelAttribute("list_cs_2")
 	public Map<Integer, String> getcs2() {
-	    return getCamSau("TN");
+		Map<Integer, String> map = new HashMap<>();
+		List<TNCS> x = tncsDao.findAll();
+		for (TNCS c : x) {
+			map.put(c.getIdTNCS(), c.getTinhNang());
+		}
+		return map;
 	}
 	
 	@ModelAttribute("list_yesno")
 	public Map<Boolean, String> getYesno() {
 		Map<Boolean, String> map = new HashMap<>();
-		map.put(false, "");
-		map.put(true, "");
+		map.put(false, "no");
+		map.put(true, "yes");
 		return map;
-	}
-	
-	
-	public Map<Integer, String> getCamTruoc(String attribute) {
-	    Map<Integer, String> map = new HashMap<>();
-
-	    List<CameraTruoc> x = ctDao.findAll();
-	    for (CameraTruoc c : x) {
-	        switch (attribute) {
-	            case "DPG":
-	                map.put(c.getIdCamTruoc(), c.getDPG());
-	                break;
-	            case "TN":
-	                map.put(c.getIdCamTruoc(), c.getTinhNang());
-	                break;
-	        }
-	    }
-	    return map;
 	}
 	
 	@ModelAttribute("list_ct_1")
 	public Map<Integer, String> getct1() {
-	    return getCamTruoc("DPG");
+		Map<Integer, String> map = new HashMap<>();
+		List<DPGCT> x = dpgctDao.findAll();
+		for (DPGCT c : x) {
+			map.put(c.getIdDPGCT(), c.getDpg());
+		}
+		return map;
 	}
 
 	@ModelAttribute("list_ct_2")
 	public Map<Integer, String> getct2() {
-	    return getCamTruoc("TN");
-	}
-	
-	public Map<Integer, String> getPinSac(String attribute) {
-	    Map<Integer, String> map = new HashMap<>();
-
-	    List<PinSac> x = psDao.findAll();
-	    for (PinSac c : x) {
-	        switch (attribute) {
-	            case "CNP":
-	                map.put(c.getIdPin(), c.getCNP());
-	                break;
-	            case "DLP":
-	            	map.put(c.getIdPin(), c.getDLPin());
-	                break;
-	            case "LP":
-	            	map.put(c.getIdPin(), c.getLoaiPin());
-	                break;
-	            case "HTS":
-	            	map.put(c.getIdPin(), c.getHoTroSac());
-	                break;
-	        }
-	    }
-	    return map;
+		Map<Integer, String> map = new HashMap<>();
+		List<TNCT> x = tnctDao.findAll();
+		for (TNCT c : x) {
+			map.put(c.getIdTNCT(), c.getTinhNang());
+		}
+		return map;
 	}
 	
 	@ModelAttribute("list_cnp")
 	public Map<Integer, String> getps1() {
-	    return getPinSac("CNP");
+		Map<Integer, String> map = new HashMap<>();
+		List<CNP> x = cnpDao.findAll();
+		for (CNP c : x) {
+			map.put(c.getIdcnp(), c.getCongNghePin());
+		}
+		return map;
 	}
 
 	@ModelAttribute("list_dlp")
 	public Map<Integer, String> getps2() {
-	    return getPinSac("DLP");
+		Map<Integer, String> map = new HashMap<>();
+		List<DLP> x = dlpDao.findAll();
+		for (DLP c : x) {
+			map.put(c.getIdDLP(), c.getDlPin());
+		}
+		return map;
 	}
 	
 	@ModelAttribute("list_lp")
 	public Map<Integer, String> getps3() {
-	    return getPinSac("LP");
+		Map<Integer, String> map = new HashMap<>();
+		List<LP> x = lpDao.findAll();
+		for (LP c : x) {
+			map.put(c.getIdlp(), c.getLoaiPin());
+		}
+		return map;
 	}
 	
 	@ModelAttribute("list_hts")
 	public Map<Integer, String> getps4() {
-	    return getPinSac("HTS");
+		Map<Integer, String> map = new HashMap<>();
+		List<HTS> x = htsDao.findAll();
+		for (HTS c : x) {
+			map.put(c.getIdHTS(), c.getHoTroSac());
+		}
+		return map;
 	}
 }

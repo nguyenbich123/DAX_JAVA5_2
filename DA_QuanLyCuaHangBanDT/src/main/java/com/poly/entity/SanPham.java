@@ -45,8 +45,6 @@ public class SanPham {
     @JoinColumn(name = "Idpin")
     private PinSac pinSac;
     
-    @Column(name="Hotrosac")
-    private String hoTroSac;
     private String sim;
     
     @ManyToOne

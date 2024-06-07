@@ -44,6 +44,11 @@
                             
                             <!-- Horizontal Form -->
                             <form:form action="/admin/sanpham/index" modelAttribute="item" enctype="multipart/form-data">
+                              <form:hidden path="maSP" />
+                              <form:hidden path="manHinh.idManHinh" />
+                              <form:hidden path="pinSac.idPin" />
+                              <form:hidden path="camTruoc.idCamTruoc" />
+                              <form:hidden path="camSau.idCamSau" />
                               <div class="row mb-3" >
                                     <label for="inputHName" class="col-sm-3 col-form-label">Hãng Điện Thoại</label>
                                     <div class="col-sm-9">
@@ -71,7 +76,7 @@
                                   <hr>
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Chip</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-9">
                                       <form:input path="chip" type="text" class="form-control"  placeholder="VD: Apple A17 Pro 6 nhân"/>
                                   </div>
                                 </div>
@@ -83,7 +88,7 @@
                                         <div class="row">
                                             <label class="col-md-3" style="font-size: 13px;">Công Nghệ Màn Hình :</label>
                                             <div class="col-md-9">
-                                                <form:select path="manHinh.idManHinh" class="form-select" >
+                                                <form:select path="manHinh.CNMH.idCNMH" class="form-select" >
 												<form:options items="${list_cnmh}"/>
 												</form:select>
                                             </div>
@@ -92,13 +97,13 @@
                                         <div class="row">
                                             <label class="col-md-2" style="font-size: 12px;">Màn Hình Rộng :</label>
                                             <div class="col-md-4">
-                                                <form:select path="manHinh.idManHinh" class="form-select">
+                                                <form:select path="manHinh.MHR.idMHR" class="form-select">
 												<form:options items="${list_mhr}" />
 												</form:select>
                                             </div>
                                             <label class="col-md-2" style="font-size: 12px;">Độ Phân Giải :</label>
                                             <div class="col-md-4">
-                                                <form:select path="manHinh.idManHinh" class="form-select" >
+                                                <form:select path="manHinh.DPG.idDPGMH" class="form-select" >
 												<form:options items="${list_dpg}" />
 												</form:select>
                                             </div>
@@ -112,13 +117,13 @@
                                         <div class="row">
                                             <label class="col-md-2" style="font-size: 12px;">Dung Lượng PIN :</label>
                                             <div class="col-md-4">
-                                                <form:select path="pinSac.idPin" class="form-select">
+                                                <form:select path="pinSac.DLPin.idDLP" class="form-select">
 												<form:options items="${list_dlp}" />
 												</form:select>
                                             </div>
                                             <label class="col-md-2" style="font-size: 12px;">Hỗ Trợ Sạc :</label>
                                             <div class="col-md-4">
-                                                <form:select path="pinSac.idPin" class="form-select">
+                                                <form:select path="pinSac.hoTroSac.idHTS" class="form-select">
 												<form:options items="${list_hts}" />
 												</form:select>
                                             </div>
@@ -127,13 +132,13 @@
                                         <div class="row">
                                             <label class="col-md-2" style="font-size: 12px;">Loại PIN :</label>
                                             <div class="col-md-4">
-                                                <form:select path="pinSac.idPin" class="form-select" onchange="this.form.submit()">
+                                                <form:select path="pinSac.loaiPin.idlp" class="form-select" >
 												<form:options items="${list_lp}" />
 												</form:select>
                                             </div>
                                             <label class="col-md-2" style="font-size: 12px;">Công Nghệ PIN :</label>
                                             <div class="col-md-4">
-                                                <form:select path="pinSac.idPin" class="form-select" onchange="this.form.submit()">
+                                                <form:select path="pinSac.CNP.idcnp" class="form-select">
 												<form:options items="${list_cnp}" />
 												</form:select>
                                             </div>
@@ -154,13 +159,13 @@
                                         <div class="row">
                                             <label class="col-md-2" style="font-size: 12px;">Độ Phân Giải :</label>
                                             <div class="col-md-3">
-                                                <form:select path="camTruoc.idCamTruoc" class="form-select" >
+                                                <form:select path="camTruoc.DPGCT.idDPGCT" class="form-select" >
 												<form:options items="${list_ct_1}" />
 												</form:select>
                                             </div>
                                             <label class="col-md-2" style="font-size: 12px;">Tính Năng :</label>
-                                            <div class="col-md-4">
-                                                <form:select path="camTruoc.idCamTruoc" class="form-select" >
+                                            <div class="col-md-3">
+                                                <form:select path="camTruoc.TNCT.idTNCT" class="form-select" >
 												<form:options items="${list_ct_2}" />
 												</form:select>
                                             </div>
@@ -174,30 +179,28 @@
                                         <div class="row">
                                             <label class="col-md-2" style="font-size: 12px;">Độ Phân Giải :</label>
                                             <div class="col-md-3">
-                                                <form:select path="camSau.idCamSau" class="form-select">
+                                                <form:select path="camSau.DPGCS.idDPGCS" class="form-select">
 												<form:options items="${list_cs_1}" />
 												</form:select>
                                             </div>
                                             <label class="col-md-2" style="font-size: 12px;">Tính Năng :</label>
-                                            <div class="col-md-4">
-                                               <form:select path="camSau.idCamSau" class="form-select" >
+                                            <div class="col-md-3">
+                                               <form:select path="camSau.TNCS.idTNCS" class="form-select" >
 												<form:options items="${list_cs_2}" />
 												</form:select>
                                             </div>
-                                            <div class="form-check col-md-1">
-                                            <form:radiobuttons class="form-check-input" path="camSau.denFlash" items="${list_yesno}" />
-                                 
-                                                <label class="form-check-label" for="gridCheck1"
-                                                    style="font-size: 12px;">
-                                                    Flash
+                                            <div class="form-check col-md-2">
+                                            <label class="form-check-label" style="font-size: 12px;">
+                                                    Flash :
                                                 </label>
+                                 			<form:radiobuttons path="camSau.denFlash" items="${list_yesno}" class="form-check-input" />                                             
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button formaction="/admin/sanpham/create" class="btn btn-primary">Create</button>
-                                    <button formaction="/admin/sanpham/update" class="btn btn-primary">Update</button>
+                                    <a href="/admin/ctsp/index/${maSP}">Đi tới chi tiết sản phẩm</a>
+                                    <button formaction="/admin/sanpham/update" class="btn btn-primary">Save</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                            </form:form><!-- End Horizontal Form -->

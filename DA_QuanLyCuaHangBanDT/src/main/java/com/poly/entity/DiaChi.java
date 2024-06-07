@@ -17,6 +17,7 @@ public class DiaChi {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Iddiachi")
     private Integer id_diaChi;
     
     @ManyToOne
