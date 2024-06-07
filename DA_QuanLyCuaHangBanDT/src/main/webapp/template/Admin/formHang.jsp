@@ -53,7 +53,7 @@
 										Mã Hãng</label>
 									<div class="col-sm-9">
 										<form:input path="maHang" type="text" class="form-control" />
-
+										
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -61,12 +61,10 @@
 										Hãng</label>
 									<div class="col-sm-9">
 										<form:input path="tenHang" type="text" class="form-control" />
-
 									</div>
 								</div>
 								<div class="text-center">
-									<button formaction="/admin/hang/create" class="btn btn-primary">Thêm</button>
-									<button formaction="/admin/hang/update" class="btn btn-primary">Sửa</button>
+									<button formaction="/admin/hang/update" class="btn btn-primary">Lưu</button>
 									<button type="reset" class="btn btn-secondary">Làm Mới</button>
 								</div>
 							</form:form>
@@ -104,8 +102,8 @@
 											<td>
 												<div class="icon">
 													<a href="/admin/hang/edit/${item.maHang}"><i
-														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/hang/delete/${item.tenHang}"><i
+														class="bi bi-pencil-fill"></i></a> 
+													<a href="/admin/hang/delete/${item.maHang}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>

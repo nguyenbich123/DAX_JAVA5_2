@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.Hang;
+import com.poly.entity.SanPham;
 import com.poly.repository.HangDAO;
 
 import jakarta.servlet.ServletContext;
@@ -41,24 +42,28 @@ public class FormHangController {
 	}
 
 	@RequestMapping("edit/{maHang}")
-	public String edit(Model model, @PathVariable("maHang") Integer maHang) {
+	public String edit(Model model, @ModelAttribute("item") Hang hang,@PathVariable("maHang") Integer maHang,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Hang item = hangDao.findById(maHang).get();
 		model.addAttribute("item", item);
-		List<Hang> items = hangDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<Hang> page = hangDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formHang";
 	}
-
+	
 	@RequestMapping("update")
 	public String update(Hang item) throws IllegalStateException, IOException {
 		hangDao.save(item);
-		return "redirect:/admin/hang/edit/"+ item.getMaHang();
+		return "redirect:/admin/hang/index";
 	}
 
+	
 	@RequestMapping("delete/{maHang}")
-	public String delete(@PathVariable("maHang") Integer maHang) {
+	public String delete(Hang hang,@PathVariable("maHang") Integer maHang) throws IllegalStateException, IOException{
+		
 		hangDao.deleteById(maHang);
-		return "redirect:/template/Admin/formHang";
+		return "redirect:/admin/hang/index";
 	}
 
 //	@ModelAttribute("list_ram")
