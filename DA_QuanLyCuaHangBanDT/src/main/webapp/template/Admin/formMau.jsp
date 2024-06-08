@@ -58,7 +58,7 @@
 									<label for="inputName" class="col-sm-3 col-form-label">
 										Mã Màu</label>
 									<div class="col-sm-9">
-										<form:input path="maMau" type="text" class="form-control short-input"  />
+										<form:input path="maMau" type="text" class="form-control short-input"  readonly="true" />
 									</div>
 								</div>
 								<div class="row mb-3">

@@ -58,7 +58,7 @@
 									<label for="inputName" class="col-sm-3 col-form-label">
 										Mã Dung Lượng</label>
 									<div class="col-sm-9">
-										<form:input path="maDL" type="text" class="form-control short-input"  />
+										<form:input path="maDL" type="text" class="form-control short-input"  readonly="true"  />
 									</div>
 								</div>
 								<div class="row mb-3">
