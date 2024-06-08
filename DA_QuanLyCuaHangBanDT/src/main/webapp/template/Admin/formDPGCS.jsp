@@ -59,6 +59,7 @@
 										Mã DPG</label>
 									<div class="col-sm-9">
 										<form:input path="idDPGCS" type="text" class="form-control short-input"  readonly="true"  />
+										
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -66,6 +67,7 @@
 										Độ Phân Giải</label>
 									<div class="col-sm-9">
 										<form:input path="dpg" type="text" class="form-control short-input" />
+										<form:errors path="dpg" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">
@@ -136,7 +138,7 @@
 									href="/admin/dpgcs/index?field=${field}&p=${number - 1}">${number}</a>
 								</li>
 							</c:forEach>
-							<c:if test="${page.number < page.totalPages}">
+							<c:if test="${page.number < page.totalPages-1}">
 								<li class="page-item"><a class="page-link"
 									href="/admin/dpgcs/index?field=${field}&p=${page.number + 1}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>

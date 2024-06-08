@@ -66,6 +66,7 @@
 										Công Nghệ</label>
 									<div class="col-sm-9">
 										<form:input path="cnmh" type="text" class="form-control short-input" />
+										<form:errors path="cnmh" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">
@@ -136,7 +137,7 @@
 									href="/admin/cnmh/index?field=${field}&p=${number - 1}">${number}</a>
 								</li>
 							</c:forEach>
-							<c:if test="${page.number < page.totalPages}">
+							<c:if test="${page.number < page.totalPages-1}">
 								<li class="page-item"><a class="page-link"
 									href="/admin/cnmh/index?field=${field}&p=${page.number + 1}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>

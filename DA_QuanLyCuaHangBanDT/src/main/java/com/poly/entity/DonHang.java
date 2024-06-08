@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
@@ -39,7 +41,11 @@ public class DonHang {
     
     @Column(name="Ngaytt")
     private Date ngayTT;
+    
+    @Column(name="Tongtien")
     private Double tongTien;
+    
+    @Column(name="Ghichu")
     private String ghiChu;
     
     @ManyToOne

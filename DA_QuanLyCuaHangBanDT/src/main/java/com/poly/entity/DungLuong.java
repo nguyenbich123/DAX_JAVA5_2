@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -17,6 +18,8 @@ public class DungLuong {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Madl")
     private Integer maDL;
+    
     @Column(name="Dungluong")
+    @NotBlank(message = "{NotBlank.dl.dungLuong}")
     private String dungLuong;
 }

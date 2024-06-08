@@ -66,6 +66,7 @@
 										Dung lượng Pin</label>
 									<div class="col-sm-9">
 										<form:input path="dlPin" type="text" class="form-control short-input" />
+										<form:errors path="dlPin" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">

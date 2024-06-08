@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,10 @@ public class FormLPController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") LP item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("item") LP item, BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors() ) {
+			return "/template/Admin/formLP";
+		}
 		lDao.save(item);
 		return "redirect:/admin/lp/index";
 	}

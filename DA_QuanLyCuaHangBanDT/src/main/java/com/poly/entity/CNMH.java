@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -18,6 +19,7 @@ public class CNMH {
 	@Column(name = "Idcnmh")
 	private Integer idCNMH;
 	
+	@NotBlank(message = "{NotBlank.item.cnmh}")
 	@Column(name = "Cnmh")
 	private String cnmh;
 

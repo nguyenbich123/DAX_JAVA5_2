@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,10 @@ public class FormHTSController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") HTS item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("item") HTS item, BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formHTS";
+		}
 		hDao.save(item);
 		return "redirect:/admin/hts/index";
 	}

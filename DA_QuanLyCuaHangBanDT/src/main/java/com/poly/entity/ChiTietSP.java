@@ -1,5 +1,7 @@
 package com.poly.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,7 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -17,6 +22,7 @@ public class ChiTietSP {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Mactsp")
     private Integer maCTSP;
     
     @ManyToOne
@@ -37,5 +43,10 @@ public class ChiTietSP {
     
     @Column(name="Soluong")
     private Integer soluong;
+    
+    @Column(name = "Gia")
     private Double gia;
+    
+    @Column(name="Img")
+    private String img;
 }
