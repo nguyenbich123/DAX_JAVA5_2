@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -20,7 +19,6 @@ public class HTS {
 	private Integer idHTS;
 	
 	@Column(name = "Hotrosac")
-	@NotBlank(message = "{NotBlank.hts.hoTroSac}")
 	private String hoTroSac;
 
 }

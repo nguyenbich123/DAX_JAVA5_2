@@ -22,8 +22,9 @@ public class Mau {
     @Column(name="Mamau")
     private Integer maMau;
     
+    
     @Column(name="Mausac")
-    @NotBlank(message = "{NotBlank.mau.mauSac}")
+    @NotBlank(message="NotBlank.item.mauSac")
     private String mauSac;
     
 //    @OneToMany(mappedBy = "maMau")

@@ -31,35 +31,34 @@ public class FormRamController {
 
 
 	@Autowired
-	 RamDAO rDao;
+	 RamDAO mDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getAccount(Model model,@ModelAttribute("ram") Ram ram) {
-		List<Ram> items = rDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") Ram ram) {
+		List<Ram> items = mDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formRAM";
 	}
 
 	@RequestMapping("edit/{maRam}")
-	public String edit(Model model, @ModelAttribute("ram") Ram ram,@PathVariable("maMau") Integer maRam,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
-		Ram item = rDao.findById(maRam).get();
-		model.addAttribute("ram", item);
+	public String edit(Model model, @ModelAttribute("item") Ram ram,@PathVariable("maRam") Integer maRam,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		Ram item = mDao.findById(maRam).get();
+		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
 	    System.out.println(field);
-		Page<Ram> page = rDao.findAll(pageable);
+		Page<Ram> page = mDao.findAll(pageable);
 		model.addAttribute("page", page);
 		return "/template/Admin/formRAM";
 	}
 	
 	@RequestMapping("update")
-	public String update(Ram ram,@Validated @ModelAttribute("ram") Ram item,BindingResult result) throws IllegalStateException, IOException {
-		if (result.hasErrors()) {
-            // Trả về trang form để hiển thị lỗi
-            return "/template/Admin/formRAM"; // Tên của trang hiển thị form
-        }
-		rDao.save(ram);
+	public String update(@Validated @ModelAttribute("item") Ram item,BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formRAM";
+		}
+		mDao.save(item);
 		return "redirect:/admin/ram/index";
 	}
 
@@ -67,7 +66,7 @@ public class FormRamController {
 	@RequestMapping("delete/{maRam}")
 	public String delete(Ram ram,@PathVariable("maRam") Integer maRam) throws IllegalStateException, IOException{
 		
-		rDao.deleteById(maRam);
+		mDao.deleteById(maRam);
 		return "redirect:/admin/ram/index";
 	}
 
@@ -84,13 +83,13 @@ public class FormRamController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model, @ModelAttribute("ram") Ram ram,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item") Ram ram,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maRam"));	
-    	List<Ram> acc = rDao.findAll(sort);	
+    	List<Ram> acc = mDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maRam"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<Ram> page = rDao.findAll(pageable);
+	    Page<Ram> page = mDao.findAll(pageable);
         model.addAttribute("page", page);
 	    return "/template/Admin/formRAM";
 	}

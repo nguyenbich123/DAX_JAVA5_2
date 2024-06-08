@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -20,6 +19,5 @@ public class TrangThaiTT {
     Integer id_TTTT;
     
     @Column(name="Trangthai")
-    @NotBlank(message = "{NotBlank.ttThanht.trangThai}")
     String trangThai;
 }

@@ -33,12 +33,12 @@
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>RAM điện thoại</h1>
+			<h1>Ram điện thoại</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="FE_home.html">Home</a></li>
 					<li class="breadcrumb-item">Forms</li>
-					<li class="breadcrumb-item active">RAM điện thoại</li>
+					<li class="breadcrumb-item active">Ram điện thoại</li>
 				</ol>
 			</nav>
 		</div>
@@ -52,13 +52,13 @@
 							<h5 class="card-title">Thêm</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/ram/index" modelAttribute="ram"
+							<form:form action="/admin/ram/index" modelAttribute="item"
 								enctype="multipart/form-data">
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">
 										Mã Ram</label>
 									<div class="col-sm-9">
-										<form:input path="maRam" type="text" class="form-control short-input" readonly="true"  />
+										<form:input path="maRam" type="text" class="form-control short-input"  readonly="true" />
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -66,7 +66,7 @@
 										Ram</label>
 									<div class="col-sm-9">
 										<form:input path="ram" type="text" class="form-control short-input" />
-										<form:errors path="ram" class="text-danger" />
+										<form:errors path="ram" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">
@@ -89,14 +89,14 @@
 
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Ram điện thoại</h5>
+							<h5 class="card-title">Màu sắc điện thoại</h5>
 
 							<!-- Table with stripped rows 1-->
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<th><a href="/admin/mau/index?field=maRam">Mã Ram</a></th>
-										<th><a href="/admin/mau/index?field=ram">Ram</a></th>
+										<th><a href="/admin/ram/index?field=maRam">Mã Ram</a></th>
+										<th><a href="/admin/ram/index?field=ram">Ram</a></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -137,7 +137,7 @@
 									href="/admin/ram/index?field=${field}&p=${number - 1}">${number}</a>
 								</li>
 							</c:forEach>
-							<c:if test="${page.number < page.totalPages}">
+							<c:if test="${page.number < page.totalPages-1}">
 								<li class="page-item"><a class="page-link"
 									href="/admin/ram/index?field=${field}&p=${page.number + 1}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>

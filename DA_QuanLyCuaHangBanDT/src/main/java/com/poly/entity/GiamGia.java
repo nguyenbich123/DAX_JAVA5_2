@@ -6,8 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,11 +21,9 @@ public class GiamGia {
     private Integer id_giamGia;
     
     @Column(name="Magg")
-    @NotBlank(message = "{NotBlank.gg.maGG}")
     private String maGG;
     
     @Column(name="Giamgia")
-    @NotBlank(message = "{NotBlank.gg.giamGia}")
     private Float giamGia;
     
     @Column(name="Dhtt")

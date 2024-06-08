@@ -12,14 +12,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.*;
-import com.poly.repository.*;
+import com.poly.entity.DungLuong;
+import com.poly.entity.Ram;
+import com.poly.repository.DungLuongDAO;
 
 import jakarta.servlet.ServletContext;
 
@@ -52,7 +55,10 @@ public class FormDungLuongController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") DungLuong item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("item") DungLuong item, BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formDungLuong";
+		}
 		dlDao.save(item);
 		return "redirect:/admin/dungluong/index";
 	}

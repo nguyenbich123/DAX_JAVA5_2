@@ -17,7 +17,7 @@ public class Account {
 
 	@Id
     @Column(name="Tendn")
-    @NotBlank(message = "{NotBlank.item.tenDN}")
+    @NotBlank(message = "{NotBlank.tk.tenDN}")
     String tenDN;
     
     @Column(name="Matkhau")

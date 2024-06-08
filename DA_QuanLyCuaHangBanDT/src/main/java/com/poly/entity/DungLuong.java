@@ -20,6 +20,6 @@ public class DungLuong {
     private Integer maDL;
     
     @Column(name="Dungluong")
-    @NotBlank(message = "{NotBlank.dl.dungLuong}")
+    @NotBlank(message="NotBlank.item.dungLuong")
     private String dungLuong;
 }
