@@ -18,47 +18,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.CNMH;
-import com.poly.entity.DPGMH;
-import com.poly.repository.CNMHDAO;
-import com.poly.repository.DPGMHDAO;
+import com.poly.entity.*;
+import com.poly.repository.*;
 
 import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/dpgmh")
 public class FormDPGMHController {
+
+
 	@Autowired
-	DPGMHDAO dDao;
+	 DPGMHDAO mDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") DPGMH dl) {
-		List<DPGMH> items = dDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") DPGMH dl) {
+		List<DPGMH> items = mDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formDPGMH";
 	}
 
 	@RequestMapping("edit/{idDPGMH}")
-	public String edit(Model model, @PathVariable("idDPGMH") Integer idDPGMH) {
-		DPGMH item = dDao.findById(idDPGMH).get();
+	public String edit(Model model, @ModelAttribute("item") DPGMH dl,@PathVariable("idDPGMH") Integer idDPGMH,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		DPGMH item = mDao.findById(idDPGMH).get();
 		model.addAttribute("item", item);
-		List<DPGMH> items = dDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<DPGMH> page = mDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formDPGMH";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(DPGMH item) throws IllegalStateException, IOException {
-		dDao.save(item);
-		return "redirect:/admin/dpgmh/edit/"+ item.getDpg();
+	public String update( @ModelAttribute("item") DPGMH item) throws IllegalStateException, IOException {
+		mDao.save(item);
+		return "redirect:/admin/dpgmh/index";
 	}
 
+	
 	@RequestMapping("delete/{idDPGMH}")
-	public String delete(@PathVariable("idDPGMH") Integer idDPGMH) {
-		dDao.deleteById(idDPGMH);
-		return "redirect:/template/Admin/dpgmh";
+	public String delete(DPGMH dp,@PathVariable("idDPGMH") Integer idDPGMH) throws IllegalStateException, IOException{
+		
+		mDao.deleteById(idDPGMH);
+		return "redirect:/admin/dpgmh/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -74,16 +78,14 @@ public class FormDPGMHController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") DPGMH dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")DPGMH dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGMH"));	
-   	List<DPGMH> acc = dDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idDPGMH"));
+    	List<DPGMH> acc = mDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idDPGMH"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<DPGMH> page = dDao.findAll(pageable);
-	    model.addAttribute("page", page);
+	    Page<DPGMH> page = mDao.findAll(pageable);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formDPGMH";
 	}
-	
-	
 }

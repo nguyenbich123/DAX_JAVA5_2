@@ -26,37 +26,43 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/dpgct")
 public class FormDPGCTController {
+
+
 	@Autowired
-	DPGCTDAO ctDao;
+	 DPGCTDAO csDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item")DPGCT dl) {
-		List<DPGCT> items = ctDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") DPGCT dl) {
+		List<DPGCT> items = csDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formDPGCT";
 	}
 
 	@RequestMapping("edit/{idDPGCT}")
-	public String edit(Model model, @PathVariable("idDPGCT") Integer idDPGCT) {
-		DPGCT item = ctDao.findById(idDPGCT).get();
+	public String edit(Model model, @ModelAttribute("item") DPGCT dl,@PathVariable("idDPGCT") Integer idDPGCT,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		DPGCT item = csDao.findById(idDPGCT).get();
 		model.addAttribute("item", item);
-		List<DPGCT> items = ctDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<DPGCT> page = csDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formDPGCT";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(DPGCT item) throws IllegalStateException, IOException {
-		ctDao.save(item);
-		return "redirect:/admin/dpgct/edit/"+ item.getDpg();
+	public String update( @ModelAttribute("item") DPGCT item) throws IllegalStateException, IOException {
+		csDao.save(item);
+		return "redirect:/admin/dpgct/index";
 	}
 
-	@RequestMapping("delete/{idDPGCT}")
-	public String delete(@PathVariable("idDPGCT") Integer idDPGCT) {
-		ctDao.deleteById(idDPGCT);
-		return "redirect:/template/Admin/dpgct";
+	
+	@RequestMapping("delete/{idDPGCS}")
+	public String delete(DPGCT dp,@PathVariable("idDPGCT") Integer idDPGCT) throws IllegalStateException, IOException{
+		
+		csDao.deleteById(idDPGCT);
+		return "redirect:/admin/dpgct/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -72,17 +78,14 @@ public class FormDPGCTController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") DPGCT dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")DPGCT dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGCT"));	
-   	List<DPGCT> acc = ctDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idDPGCT"));
+    	List<DPGCT> acc = csDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idDPGCT"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<DPGCT> page = ctDao.findAll(pageable);
-	    model.addAttribute("page", page);
+	    Page<DPGCT> page = csDao.findAll(pageable);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formDPGCT";
 	}
-	
-	
 }
-

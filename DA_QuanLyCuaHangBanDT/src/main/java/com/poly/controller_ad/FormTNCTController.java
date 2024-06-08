@@ -26,44 +26,50 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/tnct")
 public class FormTNCTController {
+
+
 	@Autowired
-	TNCTDAO ctDao;
+	 TNCTDAO tnDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item")TNCT dl) {
-		List<TNCT> items = ctDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") TNCT dl) {
+		List<TNCT> items = tnDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formTNCT";
 	}
 
 	@RequestMapping("edit/{idTNCT}")
-	public String edit(Model model, @PathVariable("idTNCT") Integer idTNCT) {
-		TNCT item = ctDao.findById(idTNCT).get();
+	public String edit(Model model, @ModelAttribute("item") TNCT dl,@PathVariable("idTNCT") Integer idTNCT,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		TNCT item = tnDao.findById(idTNCT).get();
 		model.addAttribute("item", item);
-		List<TNCT> items = ctDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<TNCT> page = tnDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formTNCT";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(TNCT item) throws IllegalStateException, IOException {
-		ctDao.save(item);
-		return "redirect:/admin/tnct/edit/"+ item.getTinhNang();
+	public String update( @ModelAttribute("item") TNCT item) throws IllegalStateException, IOException {
+		tnDao.save(item);
+		return "redirect:/admin/tnct/index";
 	}
 
+	
 	@RequestMapping("delete/{idTNCT}")
-	public String delete(@PathVariable("idTNCT") Integer idTNCT) {
-		ctDao.deleteById(idTNCT);
-		return "redirect:/template/Admin/tnct";
+	public String delete(TNCT dp,@PathVariable("idTNCT") Integer idTNCT) throws IllegalStateException, IOException{
+		
+		tnDao.deleteById(idTNCT);
+		return "redirect:/admin/tnct/index";
 	}
 
 //	@ModelAttribute("list_ram")
 //	public Map<Integer, String> getRoles() {
 //		Map<Integer, String> map = new HashMap<>();
 //
-//		List<Ram> x = rDao.findAll();
+//		List<Ram> x = tnDao.findAll();
 //		for (Ram c : x) {
 //			map.put(c.getMaRam(), c.getRam());
 //		}
@@ -72,17 +78,14 @@ public class FormTNCTController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") TNCT dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")TNCT dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idTNCT"));	
-   	List<TNCT> acc = ctDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idTNCT"));
+    	List<TNCT> acc = tnDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idTNCT"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<TNCT> page = ctDao.findAll(pageable);
-	    model.addAttribute("page", page);
+	    Page<TNCT> page = tnDao.findAll(pageable);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formTNCT";
 	}
-	
-	
 }
-

@@ -26,44 +26,50 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/tncs")
 public class FormTNCSController {
+
+
 	@Autowired
-	TNCSDAO tnDao;
+	 TNCSDAO tnDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item")TNCS dl) {
+	public String getAccount(Model model,@ModelAttribute("item") TNCS dl) {
 		List<TNCS> items = tnDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formTNCS";
 	}
 
 	@RequestMapping("edit/{idTNCS}")
-	public String edit(Model model, @PathVariable("idTNCS") Integer idTNCS) {
+	public String edit(Model model, @ModelAttribute("item") TNCS dl,@PathVariable("idTNCS") Integer idTNCS,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		TNCS item = tnDao.findById(idTNCS).get();
 		model.addAttribute("item", item);
-		List<TNCS> items = tnDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<TNCS> page = tnDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formTNCS";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(TNCS item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") TNCS item) throws IllegalStateException, IOException {
 		tnDao.save(item);
-		return "redirect:/admin/dpgcs/edit/"+ item.getTinhNang();
+		return "redirect:/admin/tncs/index";
 	}
 
+	
 	@RequestMapping("delete/{idTNCS}")
-	public String delete(@PathVariable("idTNCS") Integer idTNCS) {
+	public String delete(TNCS dp,@PathVariable("idTNCS") Integer idTNCS) throws IllegalStateException, IOException{
+		
 		tnDao.deleteById(idTNCS);
-		return "redirect:/template/Admin/tncs";
+		return "redirect:/admin/tncs/index";
 	}
 
 //	@ModelAttribute("list_ram")
 //	public Map<Integer, String> getRoles() {
 //		Map<Integer, String> map = new HashMap<>();
 //
-//		List<Ram> x = rDao.findAll();
+//		List<Ram> x = tnDao.findAll();
 //		for (Ram c : x) {
 //			map.put(c.getMaRam(), c.getRam());
 //		}
@@ -72,17 +78,14 @@ public class FormTNCSController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") TNCS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")TNCS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idTNCS"));	
-   	List<TNCS> acc = tnDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idTNCS"));
+    	List<TNCS> acc = tnDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idTNCS"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<TNCS> page = tnDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formTNCS";
 	}
-	
-	
 }
-

@@ -26,37 +26,43 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/hts")
 public class FormHTSController {
+
+
 	@Autowired
-	HTSDAO hDao;
+	 HTSDAO hDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") HTS dl) {
+	public String getAccount(Model model,@ModelAttribute("item") HTS dl) {
 		List<HTS> items = hDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formHTS";
 	}
 
 	@RequestMapping("edit/{idHTS}")
-	public String edit(Model model, @PathVariable("idHTS") Integer idHTS) {
+	public String edit(Model model, @ModelAttribute("item") HTS dl,@PathVariable("idHTS") Integer idHTS,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		HTS item = hDao.findById(idHTS).get();
 		model.addAttribute("item", item);
-		List<HTS> items = hDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<HTS> page = hDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formHTS";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(HTS item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") HTS item) throws IllegalStateException, IOException {
 		hDao.save(item);
-		return "redirect:/admin/hts/edit/"+ item.getHoTroSac();
+		return "redirect:/admin/hts/index";
 	}
 
+	
 	@RequestMapping("delete/{idHTS}")
-	public String delete(@PathVariable("idHTS") Integer idHTS) {
+	public String delete(HTS dp,@PathVariable("idHTS") Integer idHTS) throws IllegalStateException, IOException{
+		
 		hDao.deleteById(idHTS);
-		return "redirect:/template/Admin/hts";
+		return "redirect:/admin/hts/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -72,17 +78,14 @@ public class FormHTSController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") HTS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")HTS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idHTS"));	
-   	List<HTS> acc = hDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idHTS"));
+    	List<HTS> acc = hDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idHTS"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<HTS> page = hDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formHTS";
 	}
-	
-	
 }
-

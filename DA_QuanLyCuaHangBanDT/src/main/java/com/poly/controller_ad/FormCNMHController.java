@@ -18,45 +18,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.CNMH;
-import com.poly.repository.CNMHDAO;
+import com.poly.entity.*;
+import com.poly.repository.*;
 
 import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/cnmh")
 public class FormCNMHController {
+
+
 	@Autowired
-	CNMHDAO mDao;
+	 CNMHDAO cDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") CNMH dl) {
-		List<CNMH> items = mDao.findAll();
+	public String getAccount(Model model,@ModelAttribute("item") CNMH dl) {
+		List<CNMH> items = cDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formCNMH";
 	}
 
 	@RequestMapping("edit/{idCNMH}")
-	public String edit(Model model, @PathVariable("idCNMH") Integer idCNMH) {
-		CNMH item = mDao.findById(idCNMH).get();
+	public String edit(Model model, @ModelAttribute("item") CNMH dl,@PathVariable("idCNMH") Integer idCNMH,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		CNMH item = cDao.findById(idCNMH).get();
 		model.addAttribute("item", item);
-		List<CNMH> items = mDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<CNMH> page = cDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formCNMH";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(CNMH item) throws IllegalStateException, IOException {
-		mDao.save(item);
-		return "redirect:/admin/cnmh/edit/"+ item.getCnmh();
+	public String update( @ModelAttribute("item") CNMH item) throws IllegalStateException, IOException {
+		cDao.save(item);
+		return "redirect:/admin/cnmh/index";
 	}
 
+	
 	@RequestMapping("delete/{idCNMH}")
-	public String delete(@PathVariable("idCNMH") Integer idCNMH) {
-		mDao.deleteById(idCNMH);
-		return "redirect:/template/Admin/cnmh";
+	public String delete(CNMH cnmh,@PathVariable("idCNMH") Integer idCNMH) throws IllegalStateException, IOException{
+		
+		cDao.deleteById(idCNMH);
+		return "redirect:/admin/cnmh/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -72,16 +78,14 @@ public class FormCNMHController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") CNMH dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")CNMH dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idCNMH"));	
-   	List<CNMH> acc = mDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idCNMH"));
+    	List<CNMH> acc = cDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idCNMH"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
-	    Page<CNMH> page = mDao.findAll(pageable);
-	    model.addAttribute("page", page);
+	    Page<CNMH> page = cDao.findAll(pageable);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formCNMH";
 	}
-	
-	
 }

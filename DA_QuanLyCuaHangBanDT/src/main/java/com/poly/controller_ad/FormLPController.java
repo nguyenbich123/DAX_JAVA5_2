@@ -26,37 +26,43 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/lp")
 public class FormLPController {
+
+
 	@Autowired
-	LPDAO lDao;
+	 LPDAO lDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") LP dl) {
+	public String getAccount(Model model,@ModelAttribute("item") LP dl) {
 		List<LP> items = lDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formLP";
 	}
 
 	@RequestMapping("edit/{idlp}")
-	public String edit(Model model, @PathVariable("idlp") Integer idlp) {
+	public String edit(Model model, @ModelAttribute("item") LP dl,@PathVariable("idlp") Integer idlp,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		LP item = lDao.findById(idlp).get();
 		model.addAttribute("item", item);
-		List<LP> items = lDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<LP> page = lDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formLP";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(LP item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") LP item) throws IllegalStateException, IOException {
 		lDao.save(item);
-		return "redirect:/admin/lp/edit/"+ item.getLoaiPin();
+		return "redirect:/admin/lp/index";
 	}
 
+	
 	@RequestMapping("delete/{idlp}")
-	public String delete(@PathVariable("idlp") Integer idlp) {
+	public String delete(LP dp,@PathVariable("idlp") Integer idlp) throws IllegalStateException, IOException{
+		
 		lDao.deleteById(idlp);
-		return "redirect:/template/Admin/lp";
+		return "redirect:/admin/lp/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -72,16 +78,14 @@ public class FormLPController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") LP dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")LP dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idlp"));	
-   	List<LP> acc = lDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idcnp"));
+    	List<LP> acc = lDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idlp"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<LP> page = lDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formLP";
 	}
-	
-	
 }

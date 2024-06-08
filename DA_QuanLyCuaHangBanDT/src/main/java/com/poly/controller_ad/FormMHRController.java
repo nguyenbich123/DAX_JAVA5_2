@@ -21,43 +21,48 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.poly.entity.*;
 import com.poly.repository.*;
 
-
 import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("admin/mhr")
 public class FormMHRController {
+
+
 	@Autowired
-	MHRDAO rDao;
+	 MHRDAO rDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item") MHR dl) {
+	public String getAccount(Model model,@ModelAttribute("item") MHR dl) {
 		List<MHR> items = rDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formMHR";
 	}
 
 	@RequestMapping("edit/{idMHR}")
-	public String edit(Model model, @PathVariable("idMHR") Integer idMHR) {
+	public String edit(Model model, @ModelAttribute("item") MHR dl,@PathVariable("idMHR") Integer idMHR,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		MHR item = rDao.findById(idMHR).get();
 		model.addAttribute("item", item);
-		List<MHR> items = rDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<MHR> page = rDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formMHR";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(MHR item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") MHR item) throws IllegalStateException, IOException {
 		rDao.save(item);
-		return "redirect:/admin/mhr/edit/"+ item.getMhRong();
+		return "redirect:/admin/mhr/index";
 	}
 
+	
 	@RequestMapping("delete/{idMHR}")
-	public String delete(@PathVariable("idMHR") Integer idMHR) {
+	public String delete(MHR dp,@PathVariable("idMHR") Integer idMHR) throws IllegalStateException, IOException{
+		
 		rDao.deleteById(idMHR);
-		return "redirect:/template/Admin/mhr";
+		return "redirect:/admin/mhr/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -73,16 +78,14 @@ public class FormMHRController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") MHR dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")MHR dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idMHR"));	
-   	List<MHR> acc = rDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idMHR"));
+    	List<MHR> acc = rDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idMHR"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<MHR> page = rDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formMHR";
 	}
-	
-	
 }

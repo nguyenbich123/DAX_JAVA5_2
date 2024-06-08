@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ include file="/template/Admin/common/taglib.jsp"%>
 
 <!DOCTYPE html>
@@ -13,26 +14,31 @@
 <meta content="" name="description">
 <meta content="" name="keywords">
 <%@ include file="/template/Admin/common/head.jsp"%>
+
+<style>
+    .short-input {
+        width: 50%; /* Adjust the width as needed */
+    }
+</style>
 </head>
 
 <body>
+
 	<!-- ======= Header ======= -->
 	<%@ include file="/template/Admin/common/header.jsp"%>
 
 	<!-- ======= Sidebar ======= -->
 	<%@ include file="/template/Admin/common/sidebar.jsp"%>
 
-
-
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>DPG Màn Hình</h1>
+			<h1>Độ Phân Giải Màn Hình</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="FE_home.html">Home</a></li>
 					<li class="breadcrumb-item">Forms</li>
-					<li class="breadcrumb-item active">Phone Manage</li>
+					<li class="breadcrumb-item active">Độ Phân Giải Màn Hình</li>
 				</ol>
 			</nav>
 		</div>
@@ -43,65 +49,53 @@
 
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">DPG màn hình</h5>
-							<h5 class="card-title"></h5>
+							<h5 class="card-title">Thêm</h5>
+
 							<!-- Horizontal Form -->
 							<form:form action="/admin/dpgmh/index" modelAttribute="item"
 								enctype="multipart/form-data">
 								<div class="row mb-3">
-									<label for="inputPassword3" class="col-sm-3 col-form-label">Mã
-										DPGMH</label>
+									<label for="inputName" class="col-sm-3 col-form-label">
+										Mã DPG</label>
 									<div class="col-sm-9">
-										<div class="row">
-											<div class="col-md-4">
-												<div id="inputState" class="d-flex align-items-center">
-
-													<form:input path="idDPGMH" type="text" class="form-control" />
-
-
-												</div>
-											</div>
-
-										</div>
+										<form:input path="idDPGMH" type="text" class="form-control short-input"  readonly="true"  />
 									</div>
 								</div>
 								<div class="row mb-3">
-									<label for="inputPassword3" class="col-sm-3 col-form-label">DPG Màn Hình</label>
+									<label for="inputName" class="col-sm-3 col-form-label">
+										Độ Phân Giải</label>
 									<div class="col-sm-9">
-										<div class="row">
-											<div class="col-md-4">
-												<div id="inputState" class="d-flex align-items-center">
-
-													<form:input path="dpg" type="text" class="form-control" />
-
-
-												</div>
-											</div>
-
-										</div>
+										<form:input path="dpg" type="text" class="form-control short-input" />
 									</div>
 								</div>
 								<div class="text-center">
-									<button formaction="/admin/dpgmh/create"
-										class="btn btn-primary">Create</button>
-									<button formaction="/admin/dpgmh/update"
-										class="btn btn-primary">Update</button>
-									<button type="reset" class="btn btn-secondary">Reset</button>
+									<button formaction="/admin/dpgmh/update" class="btn btn-primary">Lưu</button>
+									<button type="reset" class="btn btn-secondary">Làm Mới</button>
 								</div>
 							</form:form>
 							<!-- End Horizontal Form -->
 
 						</div>
 					</div>
+
+
+				</div>
+			</div>
+		</section>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">DPG màn hình</h5>
-							<!-- Table with stripped rows -->
+							<h5 class="card-title">Độ Phân Giải</h5>
+
+							<!-- Table with stripped rows 1-->
 							<table class="table datatable">
 								<thead>
 									<tr>
 										<th><a href="/admin/dpgmh/index?field=idDPGMH">Mã DPG</a></th>
-										<th><a href="/admin/dpgmh/index?field=dpg">DPG màn</a></th>
+										<th><a href="/admin/dpgmh/index?field=dpg">Độ Phân Giải</a></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -111,9 +105,9 @@
 											<td>${item.dpg}</td>
 											<td>
 												<div class="icon">
-													<a href="/admin/pdgmh/edit/${item.idDPGMH}"><i
-														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/pdgmh/delete/${item.idDPGMH}"><i
+													<a href="/admin/dpgmh/edit/${item.idDPGMH}"><i
+														class="bi bi-pencil-fill"></i></a>
+													<a href="/admin/dpgmh/delete/${item.idDPGMH}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>
@@ -124,38 +118,33 @@
 							<!-- End Table with stripped rows -->
 
 						</div>
-
 					</div>
-					
-		
-		
-		
-			<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
 
-	<c:if test="${page.number > 0}">
-      <li class="page-item">
-        <a class="page-link" href="/admin/dpgmh/index?field=${field}&p=${page.number - 1}" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-    </c:if>
-    <c:forEach begin="1" end="${page.totalPages}" step="1" var="number">
-      <li class="page-item <c:if test="${number == page.number +1}">active</c:if>">
-        <a class="page-link" href="/admin/dpgmh/index?field=${field}&p=${number - 1}">${number}</a>
-      </li>
-    </c:forEach>
-    <c:if test="${page.number < page.totalPages}">
-      <li class="page-item">
-        <a class="page-link" href="/admin/dpgmh/index?field=${field}&p=${page.number + 1}" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </c:if>
+							<c:if test="${page.number > 0}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/dpgmh/index?field=${field}&p=${page.number - 1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+							</c:if>
+							<c:forEach begin="1" end="${page.totalPages}" step="1"
+								var="number">
+								<li
+									class="page-item <c:if test="${number == page.number +1}">active</c:if>">
+									<a class="page-link"
+									href="/admin/dpgmh/index?field=${field}&p=${number - 1}">${number}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${page.number < page.totalPages}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/dpgmh/index?field=${field}&p=${page.number + 1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</c:if>
 
-  </ul>
-</nav>
-
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</section>

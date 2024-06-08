@@ -26,37 +26,43 @@ import jakarta.servlet.ServletContext;
 @Controller
 @RequestMapping("admin/dpgcs")
 public class FormDPGCSController {
+
+
 	@Autowired
-	DPGCSDAO csDao;
+	 DPGCSDAO csDao;
 	@Autowired
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getDungLuong(Model model,@ModelAttribute("item")DPGCS dl) {
+	public String getAccount(Model model,@ModelAttribute("item") DPGCS dl) {
 		List<DPGCS> items = csDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formDPGCS";
 	}
 
 	@RequestMapping("edit/{idDPGCS}")
-	public String edit(Model model, @PathVariable("idDPGCS") Integer idDPGCS) {
+	public String edit(Model model, @ModelAttribute("item") DPGCS dl,@PathVariable("idDPGCS") Integer idDPGCS,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		DPGCS item = csDao.findById(idDPGCS).get();
 		model.addAttribute("item", item);
-		List<DPGCS> items = csDao.findAll();
-		model.addAttribute("items", items);
+		Pageable pageable = PageRequest.of(p.orElse(0), 3);
+	    System.out.println(field);
+		Page<DPGCS> page = csDao.findAll(pageable);
+		model.addAttribute("page", page);
 		return "/template/Admin/formDPGCS";
 	}
-
+	
 	@RequestMapping("update")
-	public String update(DPGCS item) throws IllegalStateException, IOException {
+	public String update( @ModelAttribute("item") DPGCS item) throws IllegalStateException, IOException {
 		csDao.save(item);
-		return "redirect:/admin/dpgcs/edit/"+ item.getDpg();
+		return "redirect:/admin/dpgcs/index";
 	}
 
+	
 	@RequestMapping("delete/{idDPGCS}")
-	public String delete(@PathVariable("idDPGCS") Integer idDPGCS) {
+	public String delete(DPGCS dp,@PathVariable("idDPGCS") Integer idDPGCS) throws IllegalStateException, IOException{
+		
 		csDao.deleteById(idDPGCS);
-		return "redirect:/template/Admin/dpgcs";
+		return "redirect:/admin/dpgcs/index";
 	}
 
 //	@ModelAttribute("list_ram")
@@ -72,17 +78,14 @@ public class FormDPGCSController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") DPGCS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("item")DPGCS dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGCS"));	
-   	List<DPGCS> acc = csDao.findAll(sort);	
-   	model.addAttribute("field", field.orElse("idDPGCS"));
+    	List<DPGCS> acc = csDao.findAll(sort);	
+    	model.addAttribute("field", field.orElse("idDPGCS"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
 	    System.out.println(field);
 	    Page<DPGCS> page = csDao.findAll(pageable);
-	    model.addAttribute("page", page);
+        model.addAttribute("page", page);
 	    return "/template/Admin/formDPGCS";
 	}
-	
-	
 }
-
