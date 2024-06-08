@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -18,6 +19,7 @@ public class TTDH{
     @Column(name="Idttdh")
     private Integer id_TTDH;
     
-    @Column(name="Idtrangthai")
+    @Column(name="Trangthai")
+    @NotBlank(message = "{NotBlank.ttHD2.trangThai}")
     private String trangThai;
 }

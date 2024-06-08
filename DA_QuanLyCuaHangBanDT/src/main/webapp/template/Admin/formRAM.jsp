@@ -52,7 +52,7 @@
 							<h5 class="card-title">Thêm</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/ram/index" modelAttribute="item"
+							<form:form action="/admin/ram/index" modelAttribute="ram"
 								enctype="multipart/form-data">
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">
@@ -66,6 +66,7 @@
 										Ram</label>
 									<div class="col-sm-9">
 										<form:input path="ram" type="text" class="form-control short-input" />
+										<form:errors path="ram" class="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">

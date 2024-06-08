@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -22,6 +23,7 @@ public class Mau {
     private Integer maMau;
     
     @Column(name="Mausac")
+    @NotBlank(message = "{NotBlank.mau.mauSac}")
     private String mauSac;
     
 //    @OneToMany(mappedBy = "maMau")

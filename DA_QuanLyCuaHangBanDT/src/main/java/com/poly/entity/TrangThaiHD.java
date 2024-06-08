@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -21,8 +23,10 @@ public class TrangThaiHD {
     Integer Idtthd;
     
     @Column(name="Trangthai")
+    @NotBlank(message = "{NotBlank.ttHD.trangThai}")
     String trangThai;
     
     @OneToMany(mappedBy = "tthd")
+    @NotEmpty(message = "{NotEmpty.ttHD.accounts}")
 	List<Account> accounts;
 }

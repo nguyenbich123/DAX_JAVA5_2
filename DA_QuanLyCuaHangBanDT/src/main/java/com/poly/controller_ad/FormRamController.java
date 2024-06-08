@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,16 +36,16 @@ public class FormRamController {
 	ServletContext app;
 	
 	@RequestMapping("view")
-	public String getAccount(Model model,@ModelAttribute("item") Ram ram) {
+	public String getAccount(Model model,@ModelAttribute("ram") Ram ram) {
 		List<Ram> items = rDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formRAM";
 	}
 
 	@RequestMapping("edit/{maRam}")
-	public String edit(Model model, @ModelAttribute("item") Ram ram,@PathVariable("maMau") Integer maRam,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("ram") Ram ram,@PathVariable("maMau") Integer maRam,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Ram item = rDao.findById(maRam).get();
-		model.addAttribute("item", item);
+		model.addAttribute("ram", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
 	    System.out.println(field);
 		Page<Ram> page = rDao.findAll(pageable);
@@ -52,8 +54,12 @@ public class FormRamController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") Ram item) throws IllegalStateException, IOException {
-		rDao.save(item);
+	public String update(Ram ram,@Validated @ModelAttribute("ram") Ram item,BindingResult result) throws IllegalStateException, IOException {
+		if (result.hasErrors()) {
+            // Trả về trang form để hiển thị lỗi
+            return "/template/Admin/formRAM"; // Tên của trang hiển thị form
+        }
+		rDao.save(ram);
 		return "redirect:/admin/ram/index";
 	}
 
@@ -78,7 +84,7 @@ public class FormRamController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item") Ram ram,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model, @ModelAttribute("ram") Ram ram,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maRam"));	
     	List<Ram> acc = rDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maRam"));
