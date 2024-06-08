@@ -20,6 +20,9 @@ public class PinSac {
     @Column(name="Idpin")
     private Integer idPin;
     
+    @Column(name="Tenpin")
+    private String tenPin;
+    
     @ManyToOne
     @JoinColumn(name = "Iddlp")
     private DLP DLPin;

@@ -40,15 +40,16 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Thêm Sản Phẩm</h5>
+                            <h5 class="card-title">Form Sản Phẩm</h5>
 
                             <!-- Horizontal Form -->
                             <form:form action="/admin/ctsp/index" modelAttribute="item" enctype="multipart/form-data">
-                                <form:hidden path="maSP" />
+                                
+                              	<form:hidden path="maCTSP" />
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-3 col-form-label">Màu Sắc</label>
                                     <div class="col-sm-9">
-                                       <form:select path="maMau.mauSac" class="form-select">
+                                       <form:select path="maMau.maMau" class="form-select">
 												<form:options items="${list_m}" />
 										</form:select>
                                     </div>
@@ -56,21 +57,17 @@
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-3 col-form-label">Dung Lượng</label>
                                     <div class="col-sm-9 ">
-                                        <div class="">
-                                            <form:select path="maDL.dungLuong" class="form-select">
+                                            <form:select path="maDL.maDL" class="form-select">
 												<form:options items="${list_dl}" />
 											</form:select>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-3 col-form-label">RAM</label>
-                                    <div class="col-sm-9 ">
-                                        <div class="">
-                                            <form:select path="maRam.ram" class="form-select">
+                                    <div class="col-sm-9 ">   
+                                            <form:select path="maRam.maRam" class="form-select">
 												<form:options items="${list_r}" />
 											</form:select>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -87,14 +84,13 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-3 col-form-label">Hình</label>
-                                    <div class="col-sm-9 row">
-                                        <input class="col-md-9" type="file" class="form-control" id="inputText" name="images[]" multiple>
-                                        <button class="col-md-3" type="button" onclick="uploadImages()">Tải lên</button>
+                                    <div class="col-sm-9 row">                          
+                                       <input type="file" name="photo_file">
+                                       <form:hidden path="img" />
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                   <button formaction="/admin/ctsp/create" class="btn btn-primary">Create</button>
-                                    <button formaction="/admin/ctsp/update" class="btn btn-primary">Update</button>
+                                    <button formaction="/admin/ctsp/update?maSP=${maSP}" class="btn btn-primary">Save</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                            </form:form><!-- End Horizontal Form -->

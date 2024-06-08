@@ -38,9 +38,6 @@ public class Account {
     @JoinColumn(name = "Idtthd")
     TrangThaiHD tthd;
     
-//    @OneToMany
-//    @JoinColumn(name="ID_DIACHI")
-//    DiaChi diaChi;
     @OneToMany(mappedBy = "tenDN")
 	List<DiaChi> diachi;
 

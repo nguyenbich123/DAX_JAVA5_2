@@ -48,14 +48,16 @@
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<th><a href="/admin/ctsp/index?field=maCTSP">Mã Chi
-												Tiết Sản Phẩm</a></th>
-										<th><a href="/admin/ctsp/index?field=maMau">Màu sắc</a></th>
-										<th><a href="/admin/ctsp/index?field=maDL">Dung Lượng</a></th>
-										<th><a href="/admin/ctsp/index?field=maRam">RAM</a></th>
-										<th><a href="/admin/ctsp/index?field=soluong">Số
+										<th><a href="/admin/ctsp/index/${maSP}?field=maCTSP">Mã
+												Chi Tiết Sản Phẩm</a></th>
+										<th><a href="/admin/ctsp/index/${maSP}?field=maMau">Màu
+												sắc</a></th>
+										<th><a href="/admin/ctsp/index/${maSP}?field=maDL">Dung
 												Lượng</a></th>
-										<th><a href="/admin/ctsp/index?field=gia">Giá</a></th>
+										<th><a href="/admin/ctsp/index/${maSP}?field=maRam">RAM</a></th>
+										<th><a href="/admin/ctsp/index/${maSP}?field=soluong">Số
+												Lượng</a></th>
+										<th><a href="/admin/ctsp/index/${maSP}?field=gia">Giá</a></th>
 										<th></th>
 									</tr>
 								</thead>
@@ -70,7 +72,7 @@
 											<td>${item.gia}</td>
 											<td>
 												<div class="icon">
-													<a href="/admin/ctsp/edit/${item.maCTSP}"><i
+													<a href="/admin/ctsp/edit/${item.maCTSP}?maSP=${maSP}"><i
 														class="bi bi-pencil-fill"></i></a> <a
 														href="/admin/ctsp/delete/${item.maCTSP}"><i
 														class="ri-delete-bin-5-fill"></i></a>
@@ -81,7 +83,12 @@
 								</tbody>
 							</table>
 							<!-- End Table with stripped rows -->
-
+							<div class="text-center">
+								<button>
+									<a href="/admin/ctsp/add?maSP=${maSP}" class="btn btn-primary">thêm
+										mới </a>
+								</button>
+							</div>
 						</div>
 					</div>
 

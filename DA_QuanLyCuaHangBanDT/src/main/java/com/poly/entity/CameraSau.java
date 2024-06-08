@@ -20,6 +20,9 @@ public class CameraSau {
     @Column(name="Idcamsau")
     private Integer idCamSau;
     
+    @Column(name="Tencamsau")
+    private String tenCamSau;
+    
     @ManyToOne
     @JoinColumn(name = "Iddpgcs")
     private DPGCS DPGCS;

@@ -20,6 +20,9 @@ public class CameraTruoc {
     @Column(name="Idcamtruoc")
     private Integer idCamTruoc;
     
+    @Column(name="Tencamtruoc")
+    private String tenCamTruoc;
+    
     @ManyToOne
     @JoinColumn(name = "Iddpgct")
     private DPGCT DPGCT;

@@ -20,6 +20,9 @@ public class ManHinh {
     @Column(name="Idmanhinh")
     private Integer idManHinh;
     
+    @Column(name="Tenmanhinh")
+    private String tenManhHinh;
+    
     @ManyToOne
     @JoinColumn(name = "Idcnmh")
     private CNMH CNMH;
