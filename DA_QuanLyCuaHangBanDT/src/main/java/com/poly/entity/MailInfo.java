@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MailInfo {
-	
+
 	String from;
 	String to;
 	String[] cc;
