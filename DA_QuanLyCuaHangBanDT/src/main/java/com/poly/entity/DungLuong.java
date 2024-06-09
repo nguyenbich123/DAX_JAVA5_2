@@ -18,7 +18,7 @@ public class DungLuong {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Madl")
     private Integer maDL;
-    
+
     @Column(name="Dungluong")
     @NotBlank(message = "{NotBlank.dl.dungLuong}")
     private String dungLuong;

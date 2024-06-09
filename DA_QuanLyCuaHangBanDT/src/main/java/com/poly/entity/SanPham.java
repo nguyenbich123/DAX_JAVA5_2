@@ -25,7 +25,7 @@ public class SanPham {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Masp")
     private Integer maSP;
-    
+
     @Column(name="Tensp")
     @NotBlank(message = "{NotBlank.sanpham.tenSP}")
     private String tenSP;
@@ -46,12 +46,10 @@ public class SanPham {
     
     @ManyToOne
     @JoinColumn(name = "Idmanhinh")
-    @NotBlank(message = "{NotBlank.sanpham.manHinh}")
     private ManHinh manHinh;
     
     @ManyToOne
     @JoinColumn(name = "Idpin")
-    @NotBlank(message = "{NotBlank.sanpham.pinSac}")
     private PinSac pinSac;
     
     @Column(name="Sim")
@@ -67,8 +65,8 @@ public class SanPham {
     @JoinColumn(name = "Idcamsau")
     @NotBlank(message = "{NotBlank.sanpham.camSau}")
     private CameraSau camSau;
-    
-    
+
+
     @OneToMany(mappedBy = "maSP")
-	List<ChiTietSP> ctsp; 
+	List<ChiTietSP> ctsp;
 }

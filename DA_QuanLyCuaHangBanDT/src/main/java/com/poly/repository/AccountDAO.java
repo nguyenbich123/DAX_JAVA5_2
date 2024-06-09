@@ -8,9 +8,10 @@ import com.poly.entity.Account;
 
 public interface AccountDAO extends JpaRepository<Account,String>{
 	 Optional<Account> findByTenDN(String username);
-	 
+
 	 Optional<Account> findByEmail(String email);
-	 
-	
-	 
+
+
+
+	 Optional<Account> findByTenDN(String username);
 }

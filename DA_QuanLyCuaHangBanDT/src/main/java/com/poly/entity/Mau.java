@@ -18,7 +18,7 @@ public class Mau {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Mamau")
     private Integer maMau;
-    
+
     @Column(name="Mausac")
      @NotBlank(message = "{NotBlank.mau.mauSac}")
     private String mauSac;

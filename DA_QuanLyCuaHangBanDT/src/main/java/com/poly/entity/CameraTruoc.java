@@ -20,18 +20,30 @@ public class CameraTruoc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Idcamtruoc")
     @NotBlank(message = "{NotBlank.ct.tenCamTruoc}")
+    @Column(name="Idcamtruoc")
     private Integer idCamTruoc;
-    
+
     @Column(name="Tencamtruoc")
      @NotBlank(message = "{NotBlank.ct.DPGCT}")
     private String tenCamTruoc;
-    
+
     @ManyToOne
     @JoinColumn(name = "Iddpgct")
     private DPGCT DPGCT;
-    
+
     @ManyToOne
     @JoinColumn(name = "Idtnct")
      @NotBlank(message = "{NotBlank.ct.TNCT}")
+    private TNCT TNCT;
+
+    @Column(name="Tencamtruoc")
+    private String tenCamTruoc;
+
+    @ManyToOne
+    @JoinColumn(name = "Iddpgct")
+    private DPGCT DPGCT;
+
+    @ManyToOne
+    @JoinColumn(name = "Idtnct")
     private TNCT TNCT;
 }

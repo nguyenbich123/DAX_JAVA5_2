@@ -18,7 +18,7 @@ public class Hang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Mahang")
     private Integer maHang;
-    
+
     @Column(name="Tenhang")
      @NotBlank(message = "{NotBlank.hang.tenHang}")
     private String tenHang;

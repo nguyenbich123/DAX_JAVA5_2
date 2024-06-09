@@ -18,7 +18,7 @@ public class Ram {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Maram")
     private Integer maRam;
-    
+
     @Column(name="Ram")
     @NotBlank(message = "{NotBlank.ram.ram}")
     private String ram;
