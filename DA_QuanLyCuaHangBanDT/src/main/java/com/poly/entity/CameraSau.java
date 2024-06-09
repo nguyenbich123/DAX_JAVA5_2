@@ -21,16 +21,16 @@ public class CameraSau {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Idcamsau")
     private Integer idCamSau;
-    
+
     @Column(name="Tencamsau")
      @NotBlank(message = "{NotBlank.cs.tenCamSau}")
     private String tenCamSau;
-    
+
     @ManyToOne
     @JoinColumn(name = "Iddpgcs")
     @NotBlank(message = "{NotBlank.cs.DPGCS}")
     private DPGCS DPGCS;
-    
+
     @ManyToOne
     @JoinColumn(name = "Idtncs")
      @NotBlank(message = "{NotBlank.cs.TNCS}")
@@ -39,5 +39,5 @@ public class CameraSau {
     @Column(name="Denflash")
      @NotNull(message = "{NotNull.cs.denFlash}")
     private Boolean denFlash;
-    
+
 }

@@ -1,4 +1,4 @@
-package com.poly.controller_ad;
+package com.poly.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.Account;
 import com.poly.entity.DiaChi;
-import com.poly.entity.ManHinh;
 import com.poly.entity.Pass;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
@@ -25,9 +24,8 @@ import com.poly.repository.DiaChiDAO;
 import jakarta.servlet.ServletContext;
 
 @Controller
-@RequestMapping("admin/user")
-public class UserController {
-
+@RequestMapping("user")
+public class InformationController {
 	@Autowired
 	AccountDAO accDao; 
 	@Autowired
@@ -38,32 +36,31 @@ public class UserController {
 	@GetMapping("view/{tenDN}")
 	public String getuser(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN) {
 		Account item = accDao.findById(tenDN).get();
-		model.addAttribute("item", item);
-		
-		Pass pass = new Pass();
-		model.addAttribute("pass", pass);
-		
-		List<DiaChi> diachi = item.getDiachi();
-		model.addAttribute("items", diachi);
-		return "/template/Admin/user";
+		model.addAttribute("item", item);	
+		return "/template/user/information";
 	}
 	
-	@GetMapping("viewdc/{tenDN}")
-	public String getdc(Model model,@ModelAttribute("item") Account ac,
-			@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,
-			@RequestParam("id_diaChi") Integer id_diaChi ) {
+	@PostMapping("viewdc/{tenDN}")
+	public String getuser1(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN) {
 		Account item = accDao.findById(tenDN).get();
 		model.addAttribute("item", item);
 		
-		Pass pass = new Pass();
-		model.addAttribute("pass", pass);
+		List<DiaChi> diachi = item.getDiachi();
+		model.addAttribute("items", diachi);
+		return "/template/user/diachi";
+	}
+	
+	@GetMapping("editdc/{tenDN}")
+	public String getdc(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,@RequestParam("id_diaChi") Integer id_diaChi ) {
+		Account item = accDao.findById(tenDN).get();
+		model.addAttribute("item", item);
 		
 		DiaChi dchi = dcDao.findById(id_diaChi).get();
 		model.addAttribute("diachi", dchi);
 		List<DiaChi> diachi = item.getDiachi();
 		model.addAttribute("items", diachi);
 		
-		return "/template/Admin/user";
+		return "/template/user/diachi";
 	}
 
 	
@@ -86,44 +83,14 @@ public class UserController {
 		return "redirect:view/"+ item.getTenDN();
 	}
 	
-	@PostMapping("updatemk/{tenDN}")
-	public String submitForm(Model model,@ModelAttribute("pass") Pass pass,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
-		
-		Account item = accDao.findById(tenDN).get();
-		System.out.println("mật khẩu củ trong db "+item.getMatKhau());
-		System.out.println("mật khẩu củ nhập vào "+ pass.getOpass());
-		
-		String mkc = item.getMatKhau();
-		String mkm = pass.getNpass();
-				
-		if(!pass.getOpass().equals(mkc)) {
-			System.out.println("sai mật khẩu");
-			
-			return "redirect:/admin/user/view/"+tenDN;
-		}
-		
-		
-		if(!pass.getNpass().equals(pass.getCfpass())) {
-			System.out.println("mật khẩu không khớp");
-			
-			return "redirect:/admin/user/view/"+tenDN;
-		}
-		
-		item.setMatKhau(mkm);
-		accDao.save(item);
-		return "redirect:/admin/user/view/"+tenDN;
-	}
-	
 	@PostMapping("updatedc/{tenDN}")
 	public String update(@ModelAttribute("diachi") DiaChi diachi,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
 		dcDao.save(diachi);	
-		return "redirect:/admin/user/view/"+tenDN;
+		return "redirect:/user/view/"+tenDN;
 	}
-	
 	@RequestMapping("deletedc/{tenDN}")
 	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
 		dcDao.deleteById(id_diaChi);	
-		return "redirect:/admin/user/view/"+tenDN;
+		return "redirect:/user/view/"+tenDN;
 	}
-	
 }

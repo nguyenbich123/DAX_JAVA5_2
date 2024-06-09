@@ -23,10 +23,10 @@ public class ChiTietDonHang {
     @ManyToOne
     @JoinColumn(name = "Mactsp")
     private ChiTietSP maCTSP;
-    
+
     @Column(name="Soluong")
     private Integer soLuong;
-    
+
     @Column(name="Gia")
     private Float gia;
     

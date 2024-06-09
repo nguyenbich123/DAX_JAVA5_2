@@ -21,15 +21,15 @@ public class CameraTruoc {
     @Column(name="Idcamtruoc")
     @NotBlank(message = "{NotBlank.ct.tenCamTruoc}")
     private Integer idCamTruoc;
-    
+
     @Column(name="Tencamtruoc")
      @NotBlank(message = "{NotBlank.ct.DPGCT}")
     private String tenCamTruoc;
-    
+
     @ManyToOne
     @JoinColumn(name = "Iddpgct")
     private DPGCT DPGCT;
-    
+
     @ManyToOne
     @JoinColumn(name = "Idtnct")
      @NotBlank(message = "{NotBlank.ct.TNCT}")
