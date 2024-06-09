@@ -20,6 +20,6 @@ public class HeDieuHanh {
     private Integer maHDH;
 
     @Column(name="Tenhdh")
-      @NotBlank(message = "{NotBlank.hdh.tenHDH}")
+    @NotBlank(message = "{NotBlank.hdh.tenHDH}")
     private String tenHDH;
 }
