@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pass {
+
 	@NotBlank(message = "{NotBlank.pass.opass}")
 	private String opass;
 	@NotBlank(message = "{NotBlank.pass.npass}")

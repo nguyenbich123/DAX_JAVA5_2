@@ -26,14 +26,14 @@ public class DiaChi {
     private Account tenDN;
     
     @Column(name="Duongsonha")
-     @NotBlank(message = "{NotBlank.dc.duong_Sonha}")
+    @NotBlank(message="{NotBlank.diachi.duong_Sonha}")
     private String duong_Sonha;
     
     @Column(name="Quanhuyen")
-    @NotBlank(message = "{NotBlank.dc.quan_Huyen}")
+    @NotBlank(message="{NotBlank.diachi.quan_Huyen}")
     private String quan_Huyen;
     
     @Column(name="Tinhthanhpho")
-      @NotBlank(message = "{NotBlank.dc.tinh_ThanhPho}")
+    @NotBlank(message="{NotBlank.diachi.tinh_ThanhPho}")
     private String tinh_ThanhPho;
 }

@@ -251,63 +251,62 @@
       </div>    
     </header>
     	
-    	<section id="company-services" class="padding-large">
-      <div class="container">
-      <h2> Chỉnh Sửa Thông Tin</h2>
-      <br>
+
+     <section id="company-services" class="py-5">
+    <div class="container">
+        <h2>Chỉnh Sửa Thông Tin</h2>
+        <br>
         <div class="row">
-	        <div class=col-md-3>
-	        	<img src="/images/${item.img}" alt="Profile" style="height: 300px ; width: 250px">
-	        </div>
-	        <div class=col-md-9>
-	          <form:form action="/user/index" modelAttribute="item"
-											enctype="multipart/form-data">
-											<div class="row mb-3">
-												<label for="profileImage"
-													class="col-md-4 col-lg-3 col-form-label">Hình Ảnh</label>
-												<div class="col-md-8 col-lg-9">
-													<input type="file" name="photo_file">
-												</div>
-											</div>
-											<form:hidden path="tenDN" />
-											<form:hidden path="matKhau" />
-											<form:hidden path="img" />
-	
-											<div class="row mb-3">
-												<label for="fullName"
-													class="col-md-4 col-lg-3 col-form-label">Họ và Tên</label>
-												<div class="col-md-8 col-lg-9">
-													<form:input path="hoTen" type="text" class="form-control" />
-												</div>
-											</div>
-	
-											<div class="row mb-3">
-												<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Số
-													Điện Thoại</label>
-												<div class="col-md-8 col-lg-9">
-													<form:input path="sdt" type="text" class="form-control" />
-												</div>
-											</div>
-	
-											<div class="row mb-3">
-												<label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-												<div class="col-md-8 col-lg-9">
-													<form:input path="email" type="email" class="form-control" />
-												</div>
-											</div>
-	
-											<div class="text-center">
-												<button formaction="/user/update"
-													class="btn btn-primary">Save</button>
-													<button formaction="/user/viewdc/${tenDN}"
-													class="btn btn-primary">Địa Chỉ</button>
-											</div>
-										</form:form>
-										<!-- End Profile Edit Form -->
-	        </div>
+            <div class="col-md-3">
+                <img src="/images/${item.img}" alt="Profile" class="img-fluid rounded" style="height: 300px; width: 250px;">
+            </div>
+            <div class="col-md-9">
+                <form:form action="/user/index" modelAttribute="item" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label for="profileImage" class="col-md-4 col-form-label">Hình Ảnh</label>
+                        <div class="col-md-8">
+                            <input type="file" name="photo_file" class="form-control">
+                        </div>
+                    </div>
+                    <input type="hidden" name="tenDN">
+                    <input type="hidden" name="matKhau">
+                    <input type="hidden" name="img">
+
+                    <div class="mb-3 row">
+                        <label for="fullName" class="col-md-4 col-form-label">Họ và Tên</label>
+                        <div class="col-md-8">
+                            <form:input type="text" path="hoTen" class="form-control"/>
+                            <form:errors path="hoTen" cssClass="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="Phone" class="col-md-4 col-form-label">Số Điện Thoại</label>
+                        <div class="col-md-8">
+                            <form:input type="text" path="sdt" class="form-control"/>
+                            <form:errors path="sdt" cssClass="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="Email" class="col-md-4 col-form-label">Email</label>
+                        <div class="col-md-8">
+                            <form:input path="email" class="form-control"/>
+                            <form:errors path="email" cssClass="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button formaction="/user/update" class="btn btn-primary mx-2">Save</button>
+                        <button formaction="/user/viewdc/${tenDN}" class="btn btn-secondary mx-2">Địa Chỉ</button>
+                    </div>
+                </form:form>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
+
+
     	
     	
      <footer id="footer" class="overflow-hidden mt-3 border-top pt-3">

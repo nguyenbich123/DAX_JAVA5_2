@@ -22,7 +22,7 @@ public class Account {
     @Column(name="Tendn")
     @NotBlank(message = "{NotBlank.tk.tenDN}")
     String tenDN;
-
+    
     @Column(name="Matkhau")
     @NotBlank(message = "{NotBlank.tk.matKhau}")
     String matKhau;
@@ -51,7 +51,7 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "Idtthd")
     TrangThaiHD tthd;
-    
+
     @OneToMany(mappedBy = "tenDN")
 	List<DiaChi> diachi;
 
