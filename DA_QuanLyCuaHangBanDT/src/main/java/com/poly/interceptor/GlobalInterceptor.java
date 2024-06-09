@@ -32,13 +32,13 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest req, HttpServletResponse res, Object handler, ModelAndView mv)
 			throws Exception {
-		if(session.get("account") != null) {
-        	// Lấy thông tin tài khoản người dùng
-            Account currentAccount = (Account)session.get("account");
-    		int sl = cartService.getTotalQuantity(currentAccount.getTenDN());
-    		req.setAttribute("sl", sl);
-    		
-        }
+		Account currentAccount = (Account) session.get("account");
+	    if (currentAccount != null) {
+	        Integer totalQuantity = cartService.getTotalQuantity(currentAccount.getTenDN());
+	        // Kiểm tra nếu totalQuantity không null trước khi sử dụng
+	        int sl = (totalQuantity != null) ? totalQuantity : 0;
+	        req.setAttribute("sl", sl);
+	    }
 		
 	}
 }

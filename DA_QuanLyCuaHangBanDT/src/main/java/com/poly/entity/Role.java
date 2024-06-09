@@ -17,11 +17,10 @@ public class Role {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Idrole")
-    Integer id_role;
+    Integer Idrole;
     
-    @Column(name = "Roles")
-    String role;
+    @Column(name="Roles")
+    String roles;
 
     @OneToMany(mappedBy = "role")
     List<Account> accounts;

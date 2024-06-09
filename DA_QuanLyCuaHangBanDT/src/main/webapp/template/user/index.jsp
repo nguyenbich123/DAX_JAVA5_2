@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -177,20 +178,20 @@
                         <a href="" class="dropdown-item">Bài viết</a>
                       </li>
                       <li>
-                        <a href="" class="dropdown-item">Cửa hàng</a>
+                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
                       </li>
                       <li>
-                        <a href="" class="dropdown-item">Giỏ hàng</a>
+                        <a href="/cart/view" class="dropdown-item">Giỏ hàng</a>
                       </li>
                       <li>
                       <li>
-                        <a href="lienHe.html" class="dropdown-item">Liên hệ</a>
+                        <a href="" class="dropdown-item">Liên hệ</a>
                       </li>
                       <li>
-                        <a href="gioiThieu.html" class="dropdown-item">Giới Thiệu</a>
+                        <a href="" class="dropdown-item">Giới Thiệu</a>
                       </li>
                       <li>
-                        <a href="gopY.html" class="dropdown-item">Góp Ý</a>
+                        <a href="" class="dropdown-item">Góp Ý</a>
                       </li>
                     </ul>
                   </li>
@@ -206,25 +207,38 @@
                         </li>
                         <li class="pe-3 dropdown position-relative">
                           <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          Xin chào, ${account.hoTen}
+                          	  <c:if test="${account != null}">
+								    Xin chào, ${account.hoTen}
+							  </c:if>
                             <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
-                            <li>
-                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Đơn hàng của tôi</a>
-                            </li>
-                            <li>
-                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-                            </li>
-                            <li>
-                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
-                            </li>
-                            <li>
+	                          <c:choose>
+								    <c:when test="${account != null}">
+								        <li>
+			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                            </li>
+			                            <li>
+			                              <a href="" class="dropdown-item">Đơn hàng của tôi</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
+			                            </li>
+								    </c:when>
+								    <c:otherwise>
+								         <li>
+			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
+			                            </li>
+								    </c:otherwise>
+							  </c:choose>  
                           </ul>
                         </li>
                         <li>

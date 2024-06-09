@@ -2,8 +2,8 @@ package com.poly.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.poly.entity.Hinh;
+import com.poly.entity.TNCT;
 
-public interface HinhDAO extends JpaRepository<Hinh,Integer>{
+public interface TNCTDAO extends JpaRepository<TNCT,Integer>{
 
 }

@@ -17,7 +17,7 @@ public class ChiTietGioHang {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="Idctgh")
+    @Column(name="Idctgh")
     private Integer id_CTGH;
     
     @ManyToOne

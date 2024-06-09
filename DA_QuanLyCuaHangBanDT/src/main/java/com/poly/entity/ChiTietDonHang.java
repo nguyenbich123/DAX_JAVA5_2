@@ -17,13 +17,17 @@ public class ChiTietDonHang {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Idctdh")
     private Integer id_CTDH;
     
     @ManyToOne
     @JoinColumn(name = "Mactsp")
     private ChiTietSP maCTSP;
+    
     @Column(name="Soluong")
     private Integer soLuong;
+    
+    @Column(name="Gia")
     private Float gia;
     
     @ManyToOne

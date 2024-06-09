@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.poly.entity.ChiTietSP;
+import com.poly.entity.SanPham;
 
 public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
-	
-//	@Query("SELECT o FROM ChiTietSP o WHERE o.gia BETWEEN ?1 AND ?2")
-//	List<ChiTietSP> findByGiaBetween(double minPrice, double maxPrice);
+	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP = ?1")
+	Page<ChiTietSP> findBySP(SanPham maSP, Pageable pageable);
 	
 	@Query("SELECT c FROM ChiTietSP c WHERE " +
 	           "(:min IS NULL OR c.gia >= :min) AND " +
@@ -22,4 +22,5 @@ public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
 
 	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP.tenSP LIKE ?1")
 	Page<ChiTietSP> findByKeywords(String keywords, Pageable pageable);
+
 }

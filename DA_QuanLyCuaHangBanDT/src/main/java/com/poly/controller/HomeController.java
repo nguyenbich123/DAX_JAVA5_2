@@ -26,9 +26,9 @@ public class HomeController {
         // Kiểm tra đăng nhập
         if(session.get("account") != null) {
         	// Lấy thông tin tài khoản người dùng
-            Account currentAccount = (Account)session.get("account");
-    		int sl = cartService.getTotalQuantity(currentAccount.getTenDN());
-    		model.addAttribute("sl", sl);
+//            Account currentAccount = (Account)session.get("account");
+//    		int sl = cartService.getTotalQuantity(currentAccount.getTenDN());
+//    		model.addAttribute("sl", sl == null);
     		
         }
         return "/template/user/index";

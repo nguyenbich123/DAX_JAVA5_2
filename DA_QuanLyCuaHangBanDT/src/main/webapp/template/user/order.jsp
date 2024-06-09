@@ -191,6 +191,9 @@
                       <ul class="d-flex justify-content-end list-unstyled">
                         <li class="search-item pe-3">
                           <a href="#" class="search-button">
+                          	<c:if test="${account != null}">
+								    Xin chào, ${account.hoTen}
+							 </c:if>
                             <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>

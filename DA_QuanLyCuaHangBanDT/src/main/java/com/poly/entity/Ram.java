@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,5 +20,6 @@ public class Ram {
     private Integer maRam;
     
     @Column(name="Ram")
+    @NotBlank(message = "{NotBlank.ram.ram}")
     private String ram;
 }

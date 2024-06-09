@@ -24,5 +24,6 @@ public class Hinh {
     @JoinColumn(name = "MaCTSP")
     private ChiTietSP maCTSP;
     
+    @Column(name="Img")
     private String img;
 }

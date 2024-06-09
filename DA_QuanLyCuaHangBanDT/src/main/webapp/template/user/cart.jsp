@@ -364,7 +364,9 @@
 											</a></li>
 											<li class="pe-3 dropdown position-relative"><a href="#"
 												class="" data-bs-toggle="dropdown" aria-expanded="false">
-													Xin chào, ${account.hoTen} <svg class="user">
+													<c:if test="${account != null}">
+													    Xin chào, ${account.hoTen}
+												  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
 											</a>
@@ -405,7 +407,7 @@
 		<div class="container">
 
 			<!-- Danh sách sản phẩm trong giỏ hàng -->
-			<div class="card my-3">
+			<%-- <div class="card my-3">
 				<div class="card-header">
 					<h5>Sản phẩm trong giỏ hàng</h5>
 				</div>
@@ -413,7 +415,7 @@
 					<table class="table cart">
 						<thead>
 							<tr>
-								<th scope="col"><input type="checkbox" value="all"></th>
+								<th scope="col"><input type="checkbox" id="checkAll"></th>
 								<th scope="col">#</th>
 								<th scope="col">Tên sản phẩm</th>
 								<th scope="col">Giá</th>
@@ -447,22 +449,121 @@
 									</form>
 								</tr>
 							</c:forEach>
-
+							<c:forEach var="sp" items="${sp}">
+								<tr>
+									<td scope="col"><input type="checkbox" class="checkItem"
+										value="${sp.id_CTGH}"
+										data-total="${sp.soLuong * sp.maCTSP.gia}"></td>
+									<td scope="col">
+										<div class="img-cart">
+											<img src="/template/user/images/dt1.jpg" alt="">
+										</div>
+									</td>
+									<td>${sp.maCTSP.maSP.tenSP}</td>
+									<td>${sp.maCTSP.gia}</td>
+									<td class="d-flex align-items-center">
+										<form action="/cart/update/${sp.id_CTGH}" method="post"
+											class="d-inline">
+											<button type="submit" name="action" value="decrease"
+												class="btn btn-secondary me-2">-</button>
+											<span>${sp.soLuong}</span>
+											<button type="submit" name="action" value="increase"
+												class="btn btn-secondary ms-2">+</button>
+										</form>
+									</td>
+									<td>${sp.soLuong * sp.maCTSP.gia}</td>
+									<td><a href="/cart/remove/${sp.id_CTGH}"
+										class="btn btn-danger btn-sm">Xóa</a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				<div class="card-footer">
 					<div class="d-flex txt-bold justify-content-between">
-						<div>Tổng thanh toán(2 sản phẩm):</div>
-						<div class="ml-auto">30.000.000Đ</div>
+						<div>
+							Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+						</div>
+						<div class="ml-auto">
+							<span id="totalAmount">0</span> Đ
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="d-flex justify-content-end py-2">
 				<!-- Thêm dòng này để căn chỉnh nút mua hàng về bên phải -->
-				<button class="btn btn-success ">Mua hàng</button>
+				<input type="hidden" name="selectedItems" id="selectedItems">
+				<a href="/cart/checkout" class="btn btn-success ">Mua hàng</a>
+			</div> --%>
+
+
+			<div class="card my-3">
+				<div class="card-header">
+					<h5>Sản phẩm trong giỏ hàng</h5>
+				</div>
+				<div class="card-body">
+					<table class="table cart">
+						<thead>
+							<tr>
+								<th scope="col"><input type="checkbox" id="checkAll"></th>
+								<th scope="col">#</th>
+								<th scope="col">Tên sản phẩm</th>
+								<th scope="col">Giá</th>
+								<th scope="col">Số lượng</th>
+								<th scope="col">Tổng</th>
+								<th scope="col">Hành động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="sp" items="${sp}">
+								<tr>
+									<td scope="col"><input type="checkbox" class="checkItem"
+										value="${sp.id_CTGH}"
+										data-total="${sp.soLuong * sp.maCTSP.gia}"></td>
+									<td scope="col">
+										<div class="img-cart">
+											<img src="/template/user/images/dt1.jpg" alt="">
+										</div>
+									</td>
+									<td>${sp.maCTSP.maSP.tenSP}</td>
+									<td>${sp.maCTSP.gia}</td>
+									<td class="d-flex align-items-center">
+										<form action="/cart/update/${sp.id_CTGH}" method="post"
+											class="d-inline">
+											<button type="submit" name="action" value="decrease"
+												class="btn btn-secondary me-2">-</button>
+											<span>${sp.soLuong}</span>
+											<button type="submit" name="action" value="increase"
+												class="btn btn-secondary ms-2">+</button>
+										</form>
+									</td>
+									<td>${sp.soLuong * sp.maCTSP.gia}</td>
+									<td><a href="/cart/remove/${sp.maCTSP.maCTSP}"
+										class="btn btn-danger btn-sm">Xóa</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex txt-bold justify-content-between">
+						<div>
+							Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+						</div>
+						<div class="ml-auto">
+							<span id="totalAmount">0</span> Đ
+						</div>
+					</div>
+				</div>
 			</div>
+			<form action="/cart/checkout" method="post" id="checkoutForm">
+				<div class="d-flex justify-content-end py-2">
+					<input type="hidden" name="selectedItems" id="selectedItems">
+					<button type="submit" class="btn btn-warning" id="checkoutButton"
+						disabled>Thanh toán</button>
+				</div>
+			</form>
 
 		</div>
 
@@ -598,6 +699,59 @@
 			var value = parseInt(input.value);
 			input.value = value + 1;
 		}
+	</script>
+	<script>
+	document.getElementById('checkAll').addEventListener('change', function() {
+	    let checkboxes = document.querySelectorAll('.checkItem');
+	    checkboxes.forEach(checkbox => {
+	        checkbox.checked = this.checked;
+	    });
+	    calculateTotal();
+	});
+
+	document.querySelectorAll('.checkItem').forEach(checkbox => {
+	    checkbox.addEventListener('change', function() {
+	        if (!this.checked) {
+	            document.getElementById('checkAll').checked = false;
+	        } else {
+	            let allChecked = true;
+	            document.querySelectorAll('.checkItem').forEach(item => {
+	                if (!item.checked) {
+	                    allChecked = false;
+	                }
+	            });
+	            if (allChecked) {
+	                document.getElementById('checkAll').checked = true;
+	            }
+	        }
+	        calculateTotal();
+	    });
+	});
+
+	function calculateTotal() {
+	    let total = 0;
+	    let count = 0;
+	    let selectedItems = [];
+	    document.querySelectorAll('.checkItem:checked').forEach(checkbox => {
+	        total += parseFloat(checkbox.dataset.total);
+	        count++;
+	        selectedItems.push(checkbox.value);
+	    });
+	    document.getElementById('totalAmount').innerText = total.toLocaleString('vi-VN');
+	    document.getElementById('itemCount').innerText = count;
+	    document.getElementById('selectedItems').value = selectedItems.join(',');
+
+	    // Bật hoặc tắt nút thanh toán dựa trên số lượng sản phẩm được chọn
+	    let checkoutButton = document.getElementById('checkoutButton');
+	    if (count > 0) {
+	        checkoutButton.removeAttribute('disabled');
+	    } else {
+	        checkoutButton.setAttribute('disabled', 'disabled');
+	    }
+	}
+
+
+
 	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

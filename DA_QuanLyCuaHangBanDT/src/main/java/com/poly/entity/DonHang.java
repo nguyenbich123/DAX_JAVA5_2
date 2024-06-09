@@ -39,7 +39,11 @@ public class DonHang {
     
     @Column(name="Ngaytt")
     private Date ngayTT;
+    
+    @Column(name="Tongtien")
     private Double tongTien;
+    
+    @Column(name="Ghichu")
     private String ghiChu;
     
     @ManyToOne

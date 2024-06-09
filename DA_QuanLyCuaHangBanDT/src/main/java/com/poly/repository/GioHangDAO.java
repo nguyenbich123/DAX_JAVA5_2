@@ -8,6 +8,5 @@ import com.poly.entity.Account;
 import com.poly.entity.GioHang;
 
 public interface GioHangDAO extends JpaRepository<GioHang,Integer>{
-    Optional<GioHang> findBymaKH(Account kh);
-
+	Optional<GioHang> findBymaKH(Account kh);
 }

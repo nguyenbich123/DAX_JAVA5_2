@@ -36,11 +36,11 @@
              
               <div class="form-group last mb-3">
                 <label for="password">Mật khẩu mới</label>
-                <input type="password" class="form-control" placeholder="New Password" id="password">
+                <input type="password" name="matKhau" class="form-control" placeholder="New Password" id="password">
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Xác nhận Mật khẩu</label>
-                <input type="password" class="form-control" placeholder="Confirm Password" id="password">
+                <input type="password"  name="reMatKhau" class="form-control" placeholder="Confirm Password" id="password">
               </div>
               <input type="submit" value="Xác nhận" class="btn btn-block btn-primary">
 
@@ -50,6 +50,7 @@
                 </div>
               </div>
             </form>
+            ${error}
           </div>
         </div>
       </div>

@@ -29,6 +29,7 @@ public class Account {
     String hoTen;
     
     @Column(name="Sdt")
+    @NotBlank(message = "{NotBlank.tk.sdt}")
     String sdt;
     
    
@@ -47,5 +48,9 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "Idtthd")
     TrangThaiHD tthd;
+    
+//    @OneToMany
+//    @JoinColumn(name="ID_DIACHI")
+//    DiaChi diaChi;
 
 }

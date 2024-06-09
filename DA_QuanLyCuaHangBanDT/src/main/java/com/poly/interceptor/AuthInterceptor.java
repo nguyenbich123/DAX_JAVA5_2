@@ -25,7 +25,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			error = "Please login!";
 		}
 		// không đúng vai trò
-		else if (!account.getRole().getRole().equals("Admin") && uri.startsWith("/admin/")) {
+		else if (!account.getRole().getRoles().equals("Admin") && uri.startsWith("/admin/")) {
 			error = "Access denied!";
 		}
 		if (error.length() > 0) { // có lỗi

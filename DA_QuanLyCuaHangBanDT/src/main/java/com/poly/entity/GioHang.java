@@ -17,6 +17,7 @@ public class GioHang {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Magh")
     private Integer maGH;
     
     @ManyToOne
