@@ -22,8 +22,9 @@ public class CameraSau {
     @Column(name="Idcamsau")
     private Integer idCamSau;
 
+
     @Column(name="Tencamsau")
-     @NotBlank(message = "{NotBlank.cs.tenCamSau}")
+    @NotBlank(message = "{NotBlank.cs.tenCamSau}")
     private String tenCamSau;
 
     @ManyToOne
@@ -33,11 +34,11 @@ public class CameraSau {
 
     @ManyToOne
     @JoinColumn(name = "Idtncs")
-     @NotBlank(message = "{NotBlank.cs.TNCS}")
+    @NotBlank(message = "{NotBlank.cs.TNCS}")
     private TNCS TNCS;
 
     @Column(name="Denflash")
-     @NotNull(message = "{NotNull.cs.denFlash}")
+    @NotNull(message = "{NotNull.cs.denFlash}")
     private Boolean denFlash;
 
 }

@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
@@ -18,29 +20,28 @@ import lombok.ToString;
 @Entity
 @Table(name = "CHITIETSP_")
 public class ChiTietSP {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Mactsp")
     private Integer maCTSP;
-
+    
     @ManyToOne
     @JoinColumn(name = "Masp")
-    @ToString.Exclude
     private SanPham maSP;
-
+    
     @ManyToOne
     @JoinColumn(name = "Mamau")
     private Mau maMau;
-
+    
     @ManyToOne
     @JoinColumn(name = "Madl")
     private DungLuong maDL;
-
+    
     @ManyToOne
     @JoinColumn(name = "Maram")
     private Ram maRam;
-
+    
     @Column(name="Soluong")
     private Integer soluong;
 

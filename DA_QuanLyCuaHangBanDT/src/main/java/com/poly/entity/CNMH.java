@@ -19,8 +19,8 @@ public class CNMH {
 	@Column(name = "Idcnmh")
 	private Integer idCNMH;
 	
+	@NotBlank(message = "{NotBlank.item.cnmh}")
 	@Column(name = "Cnmh")
-	@NotBlank(message = "{NotBlank.cnmh.cnmh}")
 	private String cnmh;
 
 }
