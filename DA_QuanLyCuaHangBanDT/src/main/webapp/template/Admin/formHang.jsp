@@ -52,7 +52,7 @@
 									<label for="inputName" class="col-sm-3 col-form-label">
 										Mã Hãng</label>
 									<div class="col-sm-9">
-										<form:input path="maHang" type="text" class="form-control" />
+										<form:input path="maHang" type="text" class="form-control" readonly=""/>
 										
 									</div>
 								</div>
@@ -61,6 +61,8 @@
 										Hãng</label>
 									<div class="col-sm-9">
 										<form:input path="tenHang" type="text" class="form-control" />
+										<br>
+										<form:errors path="tenHang" cssClass="text-danger" /> 
 									</div>
 								</div>
 								<div class="text-center">

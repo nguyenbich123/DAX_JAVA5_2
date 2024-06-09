@@ -50,7 +50,7 @@
 									<label for="inputName" class="col-sm-3 col-form-label">
 										Mã Hệ Điều Hành</label>
 									<div class="col-sm-9">
-										<form:input path="maHDH" type="text" class="form-control" />
+										<form:input path="maHDH" type="text" class="form-control" readonly="true"/>
 										
 									</div>
 								</div>
@@ -59,6 +59,8 @@
 										Hệ Điều Hành</label>
 									<div class="col-sm-9">
 										<form:input path="tenHDH" type="text" class="form-control" />
+										<br>
+										<form:errors path="tenHDH" cssClass="text-danger" /> 
 									</div>
 								</div>
 								<div class="text-center">
