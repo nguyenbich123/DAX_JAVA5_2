@@ -158,221 +158,144 @@
     </svg>
 
 
-	
-
-
-	
-
+	<!-- Hiển thị popup của thanh tìm kiếm -->
 	<div class="search-popup">
 		<div class="search-popup-container">
-
-			<form role="search" method="get" class="search-form" action="">
+			<form role="search" method="get" class="search-form"
+				action="/product/search?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
 				<input type="search" id="search-form" class="search-field"
-					placeholder="Tìm kiếm" value="" name="s" />
+					placeholder="Tìm kiếm" value="" name="keywords" />
 				<button type="submit" class="search-submit">
 					<svg class="search">
-						<use xlink:href="#search"></use></svg>
+                <use xlink:href="#search"></use>
+            </svg>
 				</button>
 			</form>
 
 			<h5 class="cat-list-title">Chọn danh mục</h5>
-
 			<ul class="cat-list">
-				<li class="cat-list-item"><a href="#" title="Mobile Phones">Iphone15</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Smart Watches">Samsung
+				<li class="cat-list-item"><a href="" title="Mobile Phones">Iphone15</a></li>
+				<li class="cat-list-item"><a href="" title="Smart Watches">Samsung
 						S23 Ultra</a></li>
-				<li class="cat-list-item"><a href="#" title="Headphones">Headphones</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Accessories">Accessories</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Monitors">Monitors</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Speakers">Speakers</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Memory Cards">Memory
-						Cards</a></li>
 			</ul>
-
 		</div>
 	</div>
 
-	<!-- <header id="header mb-2">
-		<div class="site-header_product text-black">
-			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-				<div class="container-fluid">
-					<a class="navbar-brand " href="index.html"> <img
-						src="/template/user/images/TheLiem(2).png" class="logo">
-					</a>
-					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
-						type="button" data-bs-toggle="offcanvas"
-						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<svg class="navbar-icon">
-                <use xlink:href="#navbar-icon"></use>
-              </svg>
-					</button>
-					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
-						aria-labelledby="bdNavbarOffcanvasLabel">
-						<div class="offcanvas-header px-4 pb-0">
-							<a class="navbar-brand" href="index.html"> <img
-								src="/template/user/images/2.png" class="logo">
-							</a>
-							<button type="button" class="btn-close btn-close-black"
-								data-bs-dismiss="offcanvas" aria-label="Close"
-								data-bs-target="#bdNavbar"></button>
-						</div>
-						<div class="offcanvas-body">
-							<ul id="navbar"
-								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-								<li class="nav-item"><a class="nav-link me-4" href="">Khuyến
-										mãi</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link me-4 dropdown-toggle link-dark"
-									data-bs-toggle="dropdown" href="#" role="button"
-									aria-expanded="false">Trang</a>
-									<ul class="dropdown-menu">
-										<li><a href="" class="dropdown-item">Về chúng tôi</a></li>
-										<li><a href="" class="dropdown-item">Bài viết</a></li>
-										<li><a href="" class="dropdown-item">Cửa hàng</a></li>
-										<li><a href="" class="dropdown-item">Giỏ hàng</a></li>
-										<li>
-										<li><a href="" class="dropdown-item">Liên hệ</a></li>
-									</ul></li>
-								<li class="nav-item">
-									<div class="user-items ps-5">
-										<ul class="d-flex justify-content-end list-unstyled">
-											<li class="search-item pe-3"><a href="#"
-												class="search-button"> <svg class="search">
-                              <use xlink:href="#search"></use>
-                            </svg>
-											</a></li>
-											<li class="pe-3 dropdown position-relative"><a href="#"
-												class="" data-bs-toggle="dropdown" aria-expanded="false">
-													<svg class="user">
-                              <use xlink:href="#user"></use>
-                            </svg>
-											</a>
-												<ul class="dropdown-menu ">
-													<li><a href="" class="dropdown-item">Về chúng tôi</a>
-													</li>
-													<li><a href="" class="dropdown-item">Bài viết</a></li>
-													<li><a href="" class="dropdown-item">Cửa hàng</a></li>
-													<li><a href="" class="dropdown-item">Giỏ hàng</a></li>
-													<li>
-													<li><a href="" class="dropdown-item">Liên hệ</a></li>
-												</ul></li>
-											<li><a
-												class="nav-icon position-relative text-decoration-none"
-												href=""> <svg class="cart">
-                              <use xlink:href="#cart"></use>
-                            </svg> <span
-													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">7</span>
-											</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
 
-	</header> -->
 
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-				<div class="container-fluid">
-					<a class="navbar-brand " href="index.html"> <img
-						src="/template/user/images/TheLiem(2).png" class="logo">
-					</a>
-					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
-						type="button" data-bs-toggle="offcanvas"
-						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<svg class="navbar-icon">
+          <div class="container-fluid">
+            <a  class="navbar-brand " href="/home/index">
+              <img src="/template/user/images/TheLiem(2).png" class="logo">
+            </a>
+            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+              <svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-					</button>
-					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
-						aria-labelledby="bdNavbarOffcanvasLabel">
-						<div class="offcanvas-header px-4 pb-0">
-							<a class="navbar-brand" href="index.html"> <img
-								src="/template/user/images/2.png" class="logo">
-							</a>
-							<button type="button" class="btn-close btn-close-black"
-								data-bs-dismiss="offcanvas" aria-label="Close"
-								data-bs-target="#bdNavbar"></button>
-						</div>
-						<div class="offcanvas-body">
-							<ul id="navbar"
-								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-								<li class="nav-item"><a class="nav-link me-4 active"
-									href="#billboard">Trang chủ</a></li>
-								<li class="nav-item"><a class="nav-link me-4"
-									href="#company-services">Dịch vụ</a></li>
-								<li class="nav-item"><a class="nav-link me-4"
-									href="#mobile-products">Sản phẩm</a></li>
-								<li class="nav-item"><a class="nav-link me-4"
-									href="#yearly-sale">Khuyến mãi</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link me-4 dropdown-toggle link-dark"
-									data-bs-toggle="dropdown" href="#" role="button"
-									aria-expanded="false">Trang</a>
-									<ul class="dropdown-menu">
-										<li><a href="" class="dropdown-item">Về chúng tôi</a></li>
-										<li><a href="" class="dropdown-item">Bài viết</a></li>
-										<li><a href="" class="dropdown-item">Cửa hàng</a></li>
-										<li><a href="" class="dropdown-item">Giỏ hàng</a></li>
-										<li>
-										<li><a href="" class="dropdown-item">Liên hệ</a></li>
-										<li><a href="" class="dropdown-item">Giới Thiệu</a></li>
-										<li><a href="" class="dropdown-item">Góp Ý</a></li>
-									</ul></li>
-								<li class="nav-item">
-									<div class="user-items ps-5">
-										<ul class="d-flex justify-content-end list-unstyled">
-											<li class="search-item pe-3"><a href="#"
-												class="search-button"> <svg class="search">
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+              <div class="offcanvas-header px-4 pb-0">
+                <a class="navbar-brand" href="index.html">
+                  <img src="/template/user/images/2.png" class="logo">
+                </a>
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
+                      </li>
+                      <li>
+                      <li>
+                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
+                      </li>
+                      <li>
+                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
+                      </li>
+                      <li>
+                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <div class="user-items ps-5">
+                      <ul class="d-flex justify-content-end list-unstyled">
+                        <li class="search-item pe-3">
+                          <a href="#" class="search-button">
+                            <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-											</a></li>
-											<li class="pe-3 dropdown position-relative"><a href="#"
-												class="" data-bs-toggle="dropdown" aria-expanded="false">
-													<c:if test="${account != null}">
-												    Xin chào, ${account.hoTen}
-											  </c:if> <svg class="user">
+                          </a>
+                        </li>
+                        <li class="pe-3 dropdown position-relative">
+                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                          	  <c:if test="${account != null}">
+								    Xin chào, ${account.hoTen}
+							  </c:if>
+                            <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-											</a>
-												<ul class="dropdown-menu ">
-													<li><a href="" class="dropdown-item">Chỉnh sửa
-															thông tin</a></li>
-													<li><a href="" class="dropdown-item">Đơn hàng của
-															tôi</a></li>
-													<li><a href="/account/logout" class="dropdown-item">Đăng
-															xuất</a></li>
-													<li><a href="/account/resetpass" class="dropdown-item">Đổi
-															mật khẩu</a></li>
-													<li>
-												</ul></li>
-											<li><a
-												class="nav-icon position-relative text-decoration-none"
-												href="/cart/view"> <svg class="cart">
+                          </a>
+                          <ul class="dropdown-menu ">
+	                          <c:choose>
+								    <c:when test="${account != null}">
+								        <li>
+			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                            </li>
+			                            <li>
+			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
+			                            </li>
+								    </c:when>
+								    <c:otherwise>
+								         <li>
+			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
+			                            </li>
+								    </c:otherwise>
+							  </c:choose>  
+                          </ul>
+                        </li>
+                        <li>
+                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
+                            <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg> <span
-													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-											</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
+                            </svg>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
 		</div>
 
 	</header>

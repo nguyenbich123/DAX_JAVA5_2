@@ -91,18 +91,20 @@ public class ProductController {
 	}
 
 	@RequestMapping("search")
-	public String searchAndPage(Model model, @RequestParam("search") Optional<String> kw,
-			@RequestParam("p") Optional<Integer> p) {
+	public String searchAndPageByKeyword(Model model, @RequestParam("keywords") Optional<String> kw,
+			@RequestParam("p") Optional<Integer> p,@RequestParam("min") Optional<Double> min,
+			@RequestParam("max") Optional<Double> max, @RequestParam("sortby") Optional<String> field) {
 		String keywords = kw.orElse("");
 		int pageNumber = p.orElse(0);
 		Pageable pageable = PageRequest.of(pageNumber, 12);
 		Page<ChiTietSP> page = ctspDAO.findByKeywords("%" + keywords + "%", pageable);
 
-		model.addAttribute("page", page);
-		model.addAttribute("keywords", keywords);
-		model.addAttribute("min", null); // Thêm dòng này
-		model.addAttribute("max", null); // Thêm dòng này
-		return "/template/user/product";
+		
+//		model.addAttribute("page", page);
+//		model.addAttribute("keywords", keywords);
+//		model.addAttribute("min", null); // Thêm dòng này
+//		model.addAttribute("max", null); // Thêm dòng này
+		return getProduct(model, p, field, min, max,kw);
 	}
 
 	@GetMapping("product-detail/{maCTSP}")
@@ -126,63 +128,6 @@ public class ProductController {
 		}
 	}
 
-//    @RequestMapping("add-to-cart/{maCTSP}")
-//    public String addToCart(@PathVariable("maCTSP") Integer id, Model model, @RequestParam("product-quantity") Integer sl,  @RequestParam("p") Optional<Integer> p) {
-//        
-//        // Kiểm tra đăng nhập
-//        if(session.get("account") == null) {
-//            return "redirect:/account/login";
-//        }
-//        
-//        // Lấy thông tin tài khoản người dùng
-//        Account currentAccount = (Account)session.get("account");
-//        
-//        // Lấy hoặc tạo giỏ hàng cho người dùng
-//        GioHang gioHang = ghDAO.findBymaKH(currentAccount).orElseGet(() -> {
-//            GioHang newGioHang = new GioHang();
-//            newGioHang.setMaKH(currentAccount);
-//            ghDAO.save(newGioHang);
-//            return newGioHang;
-//        });
-//
-//        // Lấy thông tin chi tiết sản phẩm
-//        Optional<ChiTietSP> optionalCtsp = ctspDAO.findById(id);
-//        
-//        if (optionalCtsp.isPresent()) {
-//            ChiTietSP ctsp = optionalCtsp.get();
-//
-//            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-//            List<ChiTietGioHang> ctghList = ctghDAO.findByMaGHAndMaCTSP(gioHang, ctsp);
-//            if (!ctghList.isEmpty()) {
-//                // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
-//                ChiTietGioHang ctgh = ctghList.get();
-//                ctgh.setSoLuong(ctgh.getSoLuong() + sl);
-//            } else {
-//                // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
-//                ChiTietGioHang ctgh = new ChiTietGioHang();
-//                ctgh.setMaCTSP(ctsp);
-//                ctgh.setMaGH(gioHang);
-//                ctgh.setSoLuong(sl);
-//                // Lưu mới vào cơ sở dữ liệu
-//                ctghDAO.save(ctgh);
-//            }
-//            
-//            // Tính giá sản phẩm
-//            double gia = sl * ctsp.getGia();
-//            // Thêm giá vào model để sử dụng trong view
-//            model.addAttribute("gia", gia);
-//            
-//            // Thêm thông báo thành công vào model
-//            model.addAttribute("thongbao", "Đã thêm vào giỏ hàng");
-//
-//            // Chuyển hướng đến trang chi tiết sản phẩm
-//            return "redirect:/cart/view";
-//        } else {
-//            // Xử lý trường hợp không tìm thấy sản phẩm
-//            model.addAttribute("error", "Sản phẩm không tồn tại");
-//            return "error";
-//        }
-//    }
 
 	@RequestMapping("add-to-cart/{maCTSP}")
 	public String addToCart(@PathVariable("maCTSP") Integer id, Model model, @RequestParam("product-quantity") Integer sl,  @RequestParam("p") Optional<Integer> p) {
