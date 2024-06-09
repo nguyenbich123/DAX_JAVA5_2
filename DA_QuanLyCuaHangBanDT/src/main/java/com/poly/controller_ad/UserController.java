@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.Account;
 import com.poly.entity.DiaChi;
+import com.poly.entity.ManHinh;
 import com.poly.entity.Pass;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
@@ -48,7 +49,9 @@ public class UserController {
 	}
 	
 	@GetMapping("viewdc/{tenDN}")
-	public String getdc(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,@RequestParam("id_diaChi") Integer id_diaChi ) {
+	public String getdc(Model model,@ModelAttribute("item") Account ac,
+			@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,
+			@RequestParam("id_diaChi") Integer id_diaChi ) {
 		Account item = accDao.findById(tenDN).get();
 		model.addAttribute("item", item);
 		
@@ -116,4 +119,11 @@ public class UserController {
 		dcDao.save(diachi);	
 		return "redirect:/admin/user/view/"+tenDN;
 	}
+	
+	@RequestMapping("deletedc/{tenDN}")
+	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
+		dcDao.deleteById(id_diaChi);	
+		return "redirect:/admin/user/view/"+tenDN;
+	}
+	
 }

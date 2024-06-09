@@ -58,6 +58,7 @@
 										<th><a href="/admin/ctsp/index/${maSP}?field=soluong">Số
 												Lượng</a></th>
 										<th><a href="/admin/ctsp/index/${maSP}?field=gia">Giá</a></th>
+										<th>Hình</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -70,6 +71,7 @@
 											<td>${item.maRam.ram}</td>
 											<td>${item.soluong}</td>
 											<td>${item.gia}</td>
+											<td><img src="/images/${item.img}" width="90%" height="100px"></td>
 											<td>
 												<div class="icon">
 													<a href="/admin/ctsp/edit/${item.maCTSP}?maSP=${maSP}"><i
@@ -91,7 +93,33 @@
 							</div>
 						</div>
 					</div>
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
 
+							<c:if test="${page.number > 0}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/ctsp/index?field=${field}&p=${page.number - 1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+							</c:if>
+							<c:forEach begin="1" end="${page.totalPages}" step="1"
+								var="number">
+								<li
+									class="page-item <c:if test="${number == page.number +1}">active</c:if>">
+									<a class="page-link"
+									href="/admin/ctsp/index?field=${field}&p=${number - 1}">${number}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${page.number < page.totalPages-1}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/ctsp/index?field=${field}&p=${page.number + 1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</c:if>
+
+						</ul>
+					</nav>
+					
 				</div>
 			</div>
 		</section>

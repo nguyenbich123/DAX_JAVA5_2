@@ -22,7 +22,7 @@ public class DonHang {
     private Integer maDH;
     
     @ManyToOne
-    @JoinColumn(name = "Tendn")
+    @JoinColumn(name = "Makh")
     private Account maKH;
     
     @ManyToOne

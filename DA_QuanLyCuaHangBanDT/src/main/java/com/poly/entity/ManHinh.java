@@ -33,5 +33,5 @@ public class ManHinh {
     
     @ManyToOne
     @JoinColumn(name = "Iddpgmh")
-    private DPGMH DPG;
+    private DPGMH DPGMH;
 }

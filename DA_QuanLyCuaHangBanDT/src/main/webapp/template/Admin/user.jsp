@@ -129,8 +129,6 @@
 											</div>
 										</div>
 
-
-
 										<div class="row mb-3">
 											<label for="Phone" class="col-md-4 col-lg-3 col-form-label">Số
 												Điện Thoại</label>
@@ -219,7 +217,7 @@
 												<div class="icon">
 													<a href="/admin/user/viewdc/${tenDN}?id_diaChi=${diachi.id_diaChi}"><i
 														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/user/deletedc/${diachi.id_diaChi}"><i
+														href="/admin/user/deletedc/${tenDN}?id_diaChi=${diachi.id_diaChi}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>

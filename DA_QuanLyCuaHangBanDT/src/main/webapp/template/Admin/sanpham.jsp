@@ -83,10 +83,8 @@
 											<td>${item.pinSac.DLPin.dlPin}</td>
 											<td>${item.pinSac.hoTroSac.hoTroSac}</td>
 											<td>${item.sim}</td>
-											<td>Độ phân giải : ${item.camTruoc.DPGCT.dpg} tính năng
-												: ${item.camTruoc.TNCT.tinhNang}</td>
-											<td>Độ phân giải : ${item.camSau.DPGCS.dpg} tính năng :
-												${item.camSau.TNCS.tinhNang}</td>
+											<td>${item.camTruoc.DPGCT.dpg}</td>
+											<td>${item.camSau.DPGCS.dpg}</td>
 											<td>
 												<div class="icon">
 													<a href="/admin/sanpham/edit/${item.maSP}"><i
@@ -100,19 +98,42 @@
 								</tbody>
 							</table>
 							<div class="text-center">
-								<button> <a href="/admin/sanpham/add" class="btn btn-primary">thêm mới </a></button>
+								<button>
+									<a href="/admin/sanpham/add" class="btn btn-primary">thêm
+										mới </a>
+								</button>
 							</div>
-
-
-							<c:forEach begin="1" end="${page.totalPages}" step="1"
-								var="number">
-								<a href="/admin/sanpham/index?field=${field}&p=${number-1}">${number}</a>
-							</c:forEach>
 
 							<!-- End Table with stripped rows -->
 
 						</div>
 					</div>
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
+
+							<c:if test="${page.number > 0}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/sanpham/index?field=${field}&p=${page.number - 1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+							</c:if>
+							<c:forEach begin="1" end="${page.totalPages}" step="1"
+								var="number">
+								<li
+									class="page-item <c:if test="${number == page.number +1}">active</c:if>">
+									<a class="page-link"
+									href="/admin/sanpham/index?field=${field}&p=${number - 1}">${number}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${page.number < page.totalPages-1}">
+								<li class="page-item"><a class="page-link"
+									href="/admin/sanpham/index?field=${field}&p=${page.number + 1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</c:if>
+
+						</ul>
+					</nav>
 
 				</div>
 			</div>

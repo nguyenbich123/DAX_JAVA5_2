@@ -81,37 +81,6 @@ public class SanPhamAdminController {
 	@Autowired
 	HangDAO hDao;
 	
-	// bảng phụ 
-	// màn hình 
-	@Autowired
-	CNMHDAO cnmhDao;
-	@Autowired
-	DPGMHDAO dpgDao;
-	@Autowired
-	MHRDAO mhrDao;
-	
-	//pinsac
-	@Autowired
-	CNPDAO cnpDao;
-	@Autowired
-	LPDAO lpDao;
-	@Autowired
-	HTSDAO htsDao;
-	@Autowired
-	DLPDAO dlpDao;
-	
-	//Camtruoc
-	@Autowired
-	DPGCTDAO dpgctDao;
-	@Autowired
-	TNCTDAO tnctDao;
-	
-	//camsau
-	@Autowired
-	DPGCSDAO dpgcsDao;
-	@Autowired
-	TNCSDAO tncsDao;
-	
 	@Autowired
 	ServletContext app;
 
@@ -196,6 +165,46 @@ public class SanPhamAdminController {
 		return map;
 	}
 	
+	@ModelAttribute("list_mh")
+	public Map<Integer, String> getmh() {
+		Map<Integer, String> map = new HashMap<>();
+		List<ManHinh> x = mhDao.findAll();
+		for (ManHinh c : x) {
+			map.put(c.getIdManHinh(), c.getTenManhHinh());
+		}
+		return map;
+	}
+	
+	@ModelAttribute("list_ps")
+	public Map<Integer, String> getps() {
+		Map<Integer, String> map = new HashMap<>();
+		List<PinSac> x = psDao.findAll();
+		for (PinSac c : x) {
+			map.put(c.getIdPin(), c.getTenPin());
+		}
+		return map;
+	}
+	
+	@ModelAttribute("list_ct")
+	public Map<Integer, String> getct() {
+		Map<Integer, String> map = new HashMap<>();
+		List<CameraTruoc> x = ctDao.findAll();
+		for (CameraTruoc c : x) {
+			map.put(c.getIdCamTruoc(), c.getTenCamTruoc());		
+		}
+		return map;
+	}
+	
+	@ModelAttribute("list_cs")
+	public Map<Integer, String> getcs() {
+		Map<Integer, String> map = new HashMap<>();
+		List<CameraSau> x = csDao.findAll();
+		for (CameraSau c : x) {
+			map.put(c.getIdCamSau(), c.getTenCamSau());		
+		}
+		return map;
+	}
+	
 	@ModelAttribute("list_h")
 	public Map<Integer, String> geth() {
 		Map<Integer, String> map = new HashMap<>();
@@ -227,122 +236,4 @@ public class SanPhamAdminController {
 //	    return map;
 //	}
 	
-	@ModelAttribute("list_cnmh")
-	public Map<Integer, String> getmh1() {
-		Map<Integer, String> map = new HashMap<>();
-		List<CNMH> x = cnmhDao.findAll();
-		for (CNMH c : x) {
-			map.put(c.getIdCNMH(), c.getCnmh());
-		}
-		return map;
-	}
-
-	@ModelAttribute("list_mhr")
-	public Map<Integer, String> getmh2() {
-		Map<Integer, String> map = new HashMap<>();
-		List<MHR> x = mhrDao.findAll();
-		for (MHR c : x) {
-			map.put(c.getIdMHR(), c.getMhRong());
-		}
-		return map;
-	}
-
-	@ModelAttribute("list_dpg")
-	public Map<Integer, String> getmh3() {
-		Map<Integer, String> map = new HashMap<>();
-		List<DPGMH> x = dpgDao.findAll();
-		for (DPGMH c : x) {
-			map.put(c.getIdDPGMH(), c.getDpg());
-		}
-		return map;
-	}
-	
-	
-	@ModelAttribute("list_cs_1")
-	public Map<Integer, String> getcs1() {
-		Map<Integer, String> map = new HashMap<>();
-		List<DPGCS> x = dpgcsDao.findAll();
-		for (DPGCS c : x) {
-			map.put(c.getIdDPGCS(), c.getDpg());
-		}
-		return map;
-	}
-
-	@ModelAttribute("list_cs_2")
-	public Map<Integer, String> getcs2() {
-		Map<Integer, String> map = new HashMap<>();
-		List<TNCS> x = tncsDao.findAll();
-		for (TNCS c : x) {
-			map.put(c.getIdTNCS(), c.getTinhNang());
-		}
-		return map;
-	}
-	
-	@ModelAttribute("list_yesno")
-	public Map<Boolean, String> getYesno() {
-		Map<Boolean, String> map = new HashMap<>();
-		map.put(false, "no");
-		map.put(true, "yes");
-		return map;
-	}
-	
-	@ModelAttribute("list_ct_1")
-	public Map<Integer, String> getct1() {
-		Map<Integer, String> map = new HashMap<>();
-		List<DPGCT> x = dpgctDao.findAll();
-		for (DPGCT c : x) {
-			map.put(c.getIdDPGCT(), c.getDpg());
-		}
-		return map;
-	}
-
-	@ModelAttribute("list_ct_2")
-	public Map<Integer, String> getct2() {
-		Map<Integer, String> map = new HashMap<>();
-		List<TNCT> x = tnctDao.findAll();
-		for (TNCT c : x) {
-			map.put(c.getIdTNCT(), c.getTinhNang());
-		}
-		return map;
-	}
-	
-	@ModelAttribute("list_cnp")
-	public Map<Integer, String> getps1() {
-		Map<Integer, String> map = new HashMap<>();
-		List<CNP> x = cnpDao.findAll();
-		for (CNP c : x) {
-			map.put(c.getIdcnp(), c.getCongNghePin());
-		}
-		return map;
-	}
-
-	@ModelAttribute("list_dlp")
-	public Map<Integer, String> getps2() {
-		Map<Integer, String> map = new HashMap<>();
-		List<DLP> x = dlpDao.findAll();
-		for (DLP c : x) {
-			map.put(c.getIdDLP(), c.getDlPin());
-		}
-		return map;
-	}
-	
-	@ModelAttribute("list_lp")
-	public Map<Integer, String> getps3() {
-		Map<Integer, String> map = new HashMap<>();
-		List<LP> x = lpDao.findAll();
-		for (LP c : x) {
-			map.put(c.getIdlp(), c.getLoaiPin());
-		}
-		return map;
-	}
-	
-	@ModelAttribute("list_hts")
-	public Map<Integer, String> getps4() {
-		Map<Integer, String> map = new HashMap<>();
-		List<HTS> x = htsDao.findAll();
-		for (HTS c : x) {
-			map.put(c.getIdHTS(), c.getHoTroSac());
-		}
-		return map;
-	}
 }
