@@ -278,7 +278,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="feedback" class="form-label">Nội dung góp ý:</label>
-                    <textarea class="form-control" id="feedback" name="feedback" rows="5" required ></textarea>
+                    <textarea class="form-control" id="feedback" name="feedback" rows="5" maxlength="300" required ></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark">Gửi góp ý</button>
             </form>
