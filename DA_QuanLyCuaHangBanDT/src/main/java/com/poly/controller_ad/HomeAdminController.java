@@ -35,10 +35,10 @@ public class HomeAdminController {
 
 	@GetMapping("view")
 	public String getForm(Model model) {
-		List<Object> khtd = dhDao.findKHBytday(new Date());
-
-		List<Object> khttData = dhDao.findKHByngayTT(new Date());
-		model.addAttribute("datakh",khttData);
+//		List<Object> khtd = dhDao.findKHBytday(new Date());
+//
+//		List<Object> khttData = dhDao.findKHByngayTT(new Date());
+//		model.addAttribute("datakh",khttData);
 //		List<Object> dhttData = dhDao.findDHByngayTT(new Date());
 //		model.addAttribute("datadh",dhttData);
 //		List<Object> dtttData = dhDao.findDTByngayTT(new Date());
