@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer Idrole;
     
+    @Column(name="Roles")
     String roles;
 
     @OneToMany(mappedBy = "role")
