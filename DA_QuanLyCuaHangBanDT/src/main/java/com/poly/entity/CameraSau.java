@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -24,21 +25,21 @@ public class CameraSau {
 
 
     @Column(name="Tencamsau")
-    @NotBlank(message = "{NotBlank.cs.tenCamSau}")
+    @NotBlank(message = "{NotBlank.item.tenCamSau}")
     private String tenCamSau;
 
     @ManyToOne
     @JoinColumn(name = "Iddpgcs")
-    @NotBlank(message = "{NotBlank.cs.DPGCS}")
+    @NotNull(message = "{NotNull.item.DPGCS}")
     private DPGCS DPGCS;
 
     @ManyToOne
     @JoinColumn(name = "Idtncs")
-    @NotBlank(message = "{NotBlank.cs.TNCS}")
+    @NotNull(message = "{NotNull.item.TNCS}")
     private TNCS TNCS;
 
     @Column(name="Denflash")
-    @NotNull(message = "{NotNull.cs.denFlash}")
+    @NotNull(message = "{NotNull.item.denFlash}")
     private Boolean denFlash;
 
 }
