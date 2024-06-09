@@ -36,4 +36,5 @@ public interface MailerService {
 	 * @param body    nội dung email
 	 */
 	void queue(String to, String subject, String body);
+
 }

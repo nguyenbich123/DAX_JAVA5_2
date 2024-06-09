@@ -259,29 +259,31 @@
     </header>
 
 
-    <div style="margin-top: 50px;">
+    <div style="margin-top: 20px;">
         <section class="container py-5">
             <h1 style="text-align: center;">Góp ý</h1>
             <p style="text-align: center;">Cảm ơn bạn đã dành thời gian để chia sẻ ý kiến của mình với chúng tôi. Mọi
                 góp ý của bạn đều rất quan
                 trọng và sẽ
                 giúp chúng tôi cải thiện dịch vụ tốt hơn.</p>
-
-            <form action="#" method="post">
+			<div class="card" style="margin-left: 90px; margin-right: 90px;" >
+			 <form action="/feedback/send" method="post" style="margin: 60px;">
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và tên:</label>
                     <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
                 </div>
                 <div class="mb-3">
                     <label for="feedback" class="form-label">Nội dung góp ý:</label>
-                    <textarea class="form-control" id="feedback" rows="5"></textarea>
+                    <textarea class="form-control" id="feedback" name="feedback" rows="5" maxlength="300" required ></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Gửi góp ý</button>
+                <button type="submit" class="btn btn-dark">Gửi góp ý</button>
             </form>
+			</div>
+           
         </section>
     </div>
 
