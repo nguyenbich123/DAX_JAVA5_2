@@ -40,6 +40,7 @@
 <!-- script
     ================================================== -->
 <script src="/template/user/js/modernizr.js"></script>
+<link rel="stylesheet" href="/template/user/css/index.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -186,7 +187,7 @@
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-             <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -253,8 +254,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -298,41 +305,42 @@
 		</div>
 
 	</header>
-	<h1 class="text-center mb-4 py-5">Đơn Hàng</h1>
 
-	<div class="row justify-content-center ">
-		<div class="col-lg-10">
+	<div class="row justify-content-center">
+		<div class="container">
 			<div class="card">
 				<div class="card-header">
 					<h5 class="card-title">Danh sách đơn hàng</h5>
 				</div>
 				<div class="card-body">
-					<div class="row mb-3">
-						<div class="col-md-4">
-							<label for="statusFilter" class="form-label">Trạng
-								thái</label> <select id="statusFilter" class="form-select">
-								<option selected>Tất cả</option>
-								<option value="Đã giao">Đã giao</option>
-								<option value="Đang giao">Đang giao</option>
-								<option value="Đã hủy">Đã hủy</option>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<label for="dateFrom" class="form-label">Từ ngày</label> <input
-								type="date" id="dateFrom" class="form-control" />
-						</div>
-						<div class="col-md-4">
-							<label for="dateTo" class="form-label">Đến ngày</label> <input
-								type="date" id="dateTo" class="form-control" />
-						</div>
+					<div class="row mb-3 p-3">
+						<!-- Form lọc đơn hàng -->
+						<form id="filterForm" method="get" action="/order/view">
+							<div class="col-md-4">
+								<label for="statusFilter" class="form-label">Trạng thái</label>
+								<select id="statusFilter" name="filterby" class="form-select"
+									onchange="this.form.submit()">
+									<option value="" ${selectedStatus == null ? 'selected' : ''}>Tất
+										cả</option>
+									<c:forEach var="status" items="${listTT}">
+										<option value="${status.trangThai}"
+											${status.trangThai == selectedStatus ? 'selected' : ''}>${status.trangThai}</option>
+									</c:forEach>
+								</select> <input type="hidden" name="p" value="0" />
+							</div>
+						</form>
+						<!-- Kết thúc form lọc đơn hàng -->
+
+						<!-- Phân trang -->
 					</div>
-					<div class="table-responsive">
+
+					<!-- Hiển thị danh sách đơn hàng -->
+					<div class="table-responsive p-3">
 						<table class="table table-bordered table-striped table-hover">
+							<!-- Tiêu đề bảng -->
 							<thead class="table-primary">
 								<tr>
 									<th>Mã đơn</th>
-									<th>Sản phẩm</th>
-									<th>Tên sản phẩm</th>
 									<th>Tổng phí dịch vụ</th>
 									<th>Ngày Đặt</th>
 									<th>Tùy chọn thanh toán</th>
@@ -340,21 +348,21 @@
 									<th>Chi tiết đơn hàng</th>
 								</tr>
 							</thead>
+							<!-- Nội dung bảng -->
 							<tbody>
 								<c:forEach var="dh" items="${pageDH.content}">
 									<tr>
 										<td>${dh.maDH}</td>
-										<td><img src="/template/user/images/dt1.jpg" alt=""
-											width="80" /></td>
-										<td>Iphone-15-Pro-Max</td>
-										<td>12.500.000 VND</td>
-										<td>20/05/2024</td>
-										<td>Thanh toán online</td>
-										<td style="color: yellow">Đang giao</td>
+										<td>${dh.tongTien}</td>
+										<td>${dh.ngayTT}</td>
+										<td>${dh.maPT.tenPT}</td>
+										<td style="color: yellow">${dh.ttdh.trangThai}</td>
 										<!-- Button trigger modal -->
 										<td><a href="#" class="btn btn-primary"
 											data-bs-toggle="modal" data-bs-target="#exampleModal">Chi
 												tiết</a></td>
+										<!-- Modal -->
+										<!-- Modal content here -->
 										<!-- Modal -->
 										<div class="modal fade" id="exampleModal" tabindex="-1"
 											aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -367,36 +375,36 @@
 															data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
 													<div class="modal-body">
-														<!-- Đặt các trường thông tin chi tiết đơn hàng ở đây -->
-														<p>Mã đơn: 5FHLA4UL</p>
-														<p>
-															Sản phẩm: <img
-																src="/template/user/images/iphone-15-pro-max_256GB.webp"
-																alt="" width="50" />
-														</p>
-														<p>Tên sản phẩm: Iphone-15-Pro-Max</p>
-														<p>
-															Màu: <span class="color-circle"
-																style="background-color: black;"></span>
-														</p>
-														<p>Tổng phí dịch vụ: 12.500.000 VND</p>
+														<p>Mã đơn: ${dh.maDH}</p>
+														<c:forEach var="ctdh"
+															items="${chiTietDonHangMap[dh.maDH]}">
+															<div class="d-flex row">
+																<div class="col-lg-3">
+																	<img src="/images/${ctdh.maCTSP.img}" alt="" width="50" />
+																</div>
+																<p class="col-lg-6">${ctdh.maCTSP.maSP.tenSP}</p>
+																<p class="col-lg-2">
+																	Màu: <span class="color-circle"
+																		style="background-color: black;"></span>
+																</p>
+															</div>
+														</c:forEach>
+														<p>Tổng phí dịch vụ: ${dh.tongTien}</p>
 														<hr>
-														<p>Tên Khách hàng: Danh Thanh Huy</p>
-														<p>Số điện thoại: 036* *** ***</p>
-														<p>Địa chỉ: Phú Quốc-Kiêng Giang</p>
-														<p style="color: green;">Ngày đặt hàng: 20/05/2024</p>
+														<p>Tên Khách hàng: ${dh.maKH.hoTen}</p>
+														<p>Số điện thoại: ${dh.maKH.sdt}</p>
+														<p style="color: green;">Ngày đặt hàng: ${dh.ngayTT}</p>
 														<hr>
 														<p style="color: rgb(129, 129, 22);">Ngày giao hàng dự
 															kiến: 26/05/2024</p>
-														<p style="color: green;">Tùy chọn thanh toán: Thanh
-															toán online</p>
-														<p style="color: yellow;">Trạng thái: Đang giao</p>
-														<!-- Thêm các trường thông tin khác tùy thuộc vào nhu cầu của bạn -->
+														<p style="color: green;">Phương thức thanh toán:
+															${dh.maPT.tenPT}</p>
+														<p style="color: lightgray;">Trạng thái thanh toán:
+															${dh.tttt.trangThai}</p>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary"
 															data-bs-dismiss="modal">Đóng</button>
-														<!-- Bạn cũng có thể thêm các nút khác ở đây như nút sửa đơn hàng, nút hủy đơn hàng, v.v. -->
 													</div>
 												</div>
 											</div>
@@ -406,29 +414,41 @@
 								<!-- Xử lý trường hợp không có đơn hàng -->
 								<c:if test="${empty pageDH.content}">
 									<tr>
-										<td colspan="8">Không có đơn hàng nào.</td>
+										<td colspan="6">Không có đơn hàng nào.</td>
 									</tr>
 								</c:if>
 							</tbody>
 						</table>
 					</div>
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item disabled"><a class="page-link" href=""
-								tabindex="-1" aria-disabled="true">Previous</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="">Next</a>
-							</li>
-						</ul>
-					</nav>
+					<!-- Kết thúc hiển thị danh sách đơn hàng -->
 				</div>
 			</div>
+			<div class="col-md-12">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item ${pageDH.first ? 'disabled' : ''}"><a
+							class="page-link"
+							href="?p=${pageDH.number - 1 <= 0 ? 0: pageDH.number - 1}&filterby=${selectedStatus}">Previous</a>
+						</li>
+						<c:if test="${not empty pageDH.totalPages}">
+							<c:forEach var="i" begin="0" end="${pageDH.totalPages - 1}">
+								<li class="page-item ${pageDH.number == i ? 'active' : ''}">
+									<a class="page-link" href="?p=${i}&filterby=${selectedStatus}">${i + 1}</a>
+								</li>
+							</c:forEach>
+						</c:if>
+						<li class="page-item ${pageDH.last ? 'disabled' : ''}"><a
+							class="page-link"
+							href="?p=${pageDH.number + 1}&filterby=${selectedStatus}">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<!-- Kết thúc phân trang -->
 		</div>
 	</div>
-	</div>
+
+
 
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
 		<div class="container">
@@ -545,6 +565,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		/* function filterOrders() {
+			var selectedStatus = document.getElementById("statusFilter").value;
+			window.location.href = "/order/view?filterby=${selectedStatus}";
+		} */
+	</script>
+
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"

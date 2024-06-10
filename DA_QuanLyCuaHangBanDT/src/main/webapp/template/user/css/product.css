@@ -31,35 +31,33 @@
     margin: 1rem;
 }
 
+.sales {
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Sử dụng gradient màu cho nền */
+    border-radius: 10px; /* Bo tròn các góc */
+    overflow: hidden; /* Ẩn phần nội dung tràn ra ngoài */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    display: flex; /* Hiển thị nội dung theo chiều ngang */
+    align-items: center; /* Căn chỉnh nội dung theo trục dọc */
+}
 
+.sales img {
+    width: 50%;
+    height: auto; /* Chiều cao tự động điều chỉnh theo tỉ lệ */
+    border-top-left-radius: 10px; /* Bo tròn góc trên bên trái của hình ảnh */
+    border-bottom-left-radius: 10px; /* Bo tròn góc dưới bên trái của hình ảnh */
+}
 
-/*
-
-TemplateMo 559 Zay Shop
-
-https://templatemo.com/tm-559-zay-shop
-
----------------------------------------------
-Table of contents
-------------------------------------------------
-1. Typography
-2. General
-3. Nav
-4. Hero Carousel
-5. Accordion
-6. Shop
-7. Product
-8. Carousel Hero
-9. Carousel Brand
-10. Services
-11. Contact map
-12. Footer
-13. Small devices (landscape phones, 576px and up)
-14. Medium devices (tablets, 768px and up)
-15. Large devices (desktops, 992px and up)
-16. Extra large devices (large desktops, 1200px and up)
---------------------------------------------- */
-
+.sales p {
+    font-size: 24px;
+    color: #fff; /* Màu văn bản */
+    line-height: 1.5; /* Khoảng cách giữa dòng */
+    margin: 0; /* Xóa margin mặc định */
+    padding: 20px; /* Khoảng cách giữa nội dung và viền */
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền cho văn bản */
+    border-top-right-radius: 10px; /* Bo tròn góc trên bên phải của văn bản */
+    border-bottom-right-radius: 10px; /* Bo tròn góc dưới bên phải của văn bản */
+    flex-grow: 1; /* Mở rộng văn bản để lấp đầy không gian trống */
+}
 
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -37,6 +38,7 @@
 <!-- script
     ================================================== -->
 <script src="/template/user/js/modernizr.js"></script>
+<link rel="stylesheet" href="/template/user/css/index.css">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbar"
@@ -179,13 +181,13 @@
 			</ul>
 		</div>
 	</div>
-	
+
 
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-             <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,8 +254,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -301,83 +309,93 @@
 	<div class="container py-5">
 		<div class="row">
 			<div class="col-md-8">
-				<h2 style="font-weight: bold;">Thanh toán</h2>
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-								<label for="fullName">Họ và tên:</label> <input type="text"
-									class="form-control" id="fullName" placeholder="Nhập họ và tên"
-									value="${account.hoTen}">
-							</div>
-							<div class="col-md-6">
-								<label for="phoneNumber">Số điện thoại:</label> <input
-									type="text" class="form-control" id="phoneNumber"
-									placeholder="Nhập số điện thoại" value="${account.sdt}">
-							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<label for="amount">Số tiền:</label> <input type="number"
-									class="form-control" id="amount" placeholder="${totalAmount}"
-									disabled>
-							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<label for="note">Địa Chỉ</label> <input class="form-control"
-									id="adress" value=""></input>
-							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<label for="note">Ghi chú:</label>
-								<textarea class="form-control" id="note" rows="3"></textarea>
-							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<a href="#" style="margin-right: 5px;">
-									<button class="btn btn-warning" id="btnOnlinePayment">Thanh
-										Toán Online</button>
-								</a> <a href="#">
-									<button class="btn btn-secondary" id="btnCashOnDelivery">Thanh
-										Toán Khi Nhận Hàng</button>
-								</a>
-							</div>
+				<%-- <div class="row">
+					<c:forEach var="entry" items="${selectedItemsMap}">
+						<tr>
+							<td>${entry.key}</td>
+							<td>${entry.value.soLuong}</td>
+							<td>${entry.value.maCTSP.gia}</td>
+							<td>${entry.value.soLuong * entry.value.maCTSP.gia}</td>
+						</tr>	
+					</c:forEach>
+				
+				</div> --%>
 
-							<div class="col-md-12 payment-options"
-								style="display: none; margin-top: 10px;">
-								<input type="radio" id="radio1" name="radioGroup"
-									value="option1" class="radio-custom"> <label
-									for="radio1"> <i class="fa-solid fa-credit-card"
-									style="margin-right: 5px;"></i> ATM
-								</label> <br> <input type="radio" id="radio2" name="radioGroup"
-									value="option2" class="radio-custom"> <label
-									for="radio2"> <i class="fa-brands fa-cc-paypal"
-									style="margin-right: 5px;"></i> Paypal
-								</label>
+				<form action="/payment/pay" method="post">
+					<input type="hidden" id="selectedItemsMap" name="selectedItemsMap">
+					<h2 style="font-weight: bold;">Thanh toán</h2>
+					<div class="card mb-3">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="fullName">Họ và tên:</label> <input type="text"
+										class="form-control" id="fullName"
+										placeholder="Nhập họ và tên" value="${account.hoTen}" readonly>
+								</div>
+								<div class="col-md-6">
+									<label for="phoneNumber">Số điện thoại:</label> <input
+										type="text" class="form-control" id="phoneNumber"
+										placeholder="Nhập số điện thoại" value="${account.sdt}"
+										readonly>
+								</div>
 							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<label for="note">Nhập Mã Giảm Giá (Nếu Có):</label> <input
-									type="text" class="form-control" placeholder="Nhập mã giảm giá">
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="amount">Số tiền:</label> <input type="number"
+										class="form-control" id="amount" name="tongTien"
+										value="${totalAmount}" readonly>
+								</div>
 							</div>
-
-						</div>
-						<div class="row mt-3">
-							<div class="col-md-12">
-								<strong>
-									<h4>Tổng Tiền:</h4>
-								</strong>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="diachi">Địa Chỉ</label> <select name="diachiHT"
+										class="form-select">
+										<c:forEach var="dc" items="${diachi}">
+											<option
+												value="${dc.duong_Sonha}, ${dc.quan_Huyen}, ${dc.tinh_ThanhPho}">
+												${dc.duong_Sonha}, ${dc.quan_Huyen}, ${dc.tinh_ThanhPho}</option>
+										</c:forEach>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="mt-3">
-							<button type="button" class="btn btn-dark">Thanh toán</button>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="note">Ghi chú:</label>
+									<textarea class="form-control" id="note" name="note" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="paymentMethod">Phương thức thanh toán:</label> <select
+										name="phuongThuc" class="form-select">
+										<option value="Ví Momo">Ví Momo</option>
+										<option value="Thanh toán khi nhận hàng">Thanh toán
+											khi nhận hàng</option>
+									</select>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="discountCode">Nhập Mã Giảm Giá (Nếu Có):</label> <input
+										type="text" class="form-control" id="discountCode"
+										name="discountCode" placeholder="Nhập mã giảm giá">
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<strong>
+										<h4>Thành tiền:</h4>
+									</strong>
+								</div>
+							</div>
+							<div class="mt-3">
+								<button type="submit" class="btn btn-dark">Thanh toán</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
+
+
 			</div>
 			<div class="col-md-4">
 				<h2>Thông tin thanh toán</h2>
@@ -415,136 +433,145 @@
 					</div>
 				</div>
 			</div>
-
-
-			<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
-				<div class="container">
-					<div class="row">
-						<div class="footer-top-area">
-							<div class="row d-flex flex-wrap justify-content-between">
-								<div class="col-lg-3 col-sm-6 pb-3">
-									<div class="footer-menu">
-										<img src="/template/user/images/TheLiem(2).png" alt="logo">
-										<!-- <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p> -->
-										<div class="footer-section">
-											<p>Chỉ bán sản phẩm chính hãng, đảm bảo chất lượng cao
-												nhất.</p>
-											<p>Đảm bảo sản phẩm chính hãng, bảo hành toàn diện.</p>
-										</div>
-										<div class="social-links">
-											<ul class="d-flex list-unstyled">
-												<li><a href="#"> <svg class="facebook">
-                                                            <use
-																xlink:href="#facebook" />
-                                                        </svg>
-												</a></li>
-												<li><a href="#"> <svg class="instagram">
-                                                            <use
-																xlink:href="#instagram" />
-                                                        </svg>
-												</a></li>
-												<li><a href="#"> <svg class="twitter">
-                                                            <use
-																xlink:href="#twitter" />
-                                                        </svg>
-												</a></li>
-												<li><a href="#"> <svg class="linkedin">
-                                                            <use
-																xlink:href="#linkedin" />
-                                                        </svg>
-												</a></li>
-												<li><a href="#"> <svg class="youtube">
-                                                            <use
-																xlink:href="#youtube" />
-                                                        </svg>
-												</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2 col-sm-6 pb-3">
-									<div class="footer-menu text-uppercase">
-										<h5 class="widget-title pb-2">Liên kết nhanh</h5>
-										<ul class="menu-list list-unstyled text-uppercase">
-											<li class="menu-item pb-2"><a href="#">Trang chủ</a></li>
-											<li class="menu-item pb-2"><a href="#">Giới thiệu</a></li>
-											<li class="menu-item pb-2"><a href="#">Cửa hàng</a></li>
-											<li class="menu-item pb-2"><a href="#">Bài viết</a></li>
-											<li class="menu-item pb-2"><a href="#">Liên hệ</a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-lg-3 col-sm-6 pb-3">
-									<div class="footer-menu text-uppercase">
-										<h5 class="widget-title pb-2">Trợ giúp & Thông tin</h5>
-										<ul class="menu-list list-unstyled">
-											<li class="menu-item pb-2"><a href="#">Theo dõi đơn
-													hàng</a></li>
-											<li class="menu-item pb-2"><a href="#">Chính sách
-													hoàn trả</a></li>
-											<li class="menu-item pb-2"><a href="#">Giao hàng +
-													Vận chuyển</a></li>
-											<li class="menu-item pb-2"><a href="#">Liên hệ</a></li>
-											<li class="menu-item pb-2"><a href="#">Câu hỏi
-													thường gặp</a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-lg-3 col-sm-6 pb-3">
-									<div class="footer-menu contact-item">
-										<h5 class="widget-title text-uppercase pb-2">Liên hệ</h5>
-										<p>
-											Bạn có bất kỳ thắc mắc hoặc đề xuất nào? <a href="mailto:">theliem2024@gmail.com</a>
-										</p>
-										<p>
-											Nếu bạn cần hỗ trợ? Hãy gọi cho chúng tôi. <a href="">+84
-												111 222 333</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<hr>
-			</footer>
-			<div id="footer-bottom">
-				<div class="container">
+		</div>
+	</div>
+	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
+		<div class="container">
+			<div class="row">
+				<div class="footer-top-area">
 					<div class="row d-flex flex-wrap justify-content-between">
-						<div class="col-md-4 col-sm-6">
-							<div class="Shipping d-flex">
-								<p>We ship with:</p>
-								<div class="card-wrap ps-2">
-									<img src="/template/user/images/logo_ghn.png" alt="visa">
+						<div class="col-lg-3 col-sm-6 pb-3">
+							<div class="footer-menu">
+								<img src="/template/user/images/TheLiem(2).png" alt="logo">
+								<!-- <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p> -->
+								<div class="footer-section">
+									<p>Chỉ bán sản phẩm chính hãng, đảm bảo chất lượng cao
+										nhất.</p>
+									<p>Đảm bảo sản phẩm chính hãng, bảo hành toàn diện.</p>
+								</div>
+								<div class="social-links">
+									<ul class="d-flex list-unstyled">
+										<li><a href="#"> <svg class="facebook">
+                                                            <use
+														xlink:href="#facebook" />
+                                                        </svg>
+										</a></li>
+										<li><a href="#"> <svg class="instagram">
+                                                            <use
+														xlink:href="#instagram" />
+                                                        </svg>
+										</a></li>
+										<li><a href="#"> <svg class="twitter">
+                                                            <use
+														xlink:href="#twitter" />
+                                                        </svg>
+										</a></li>
+										<li><a href="#"> <svg class="linkedin">
+                                                            <use
+														xlink:href="#linkedin" />
+                                                        </svg>
+										</a></li>
+										<li><a href="#"> <svg class="youtube">
+                                                            <use
+														xlink:href="#youtube" />
+                                                        </svg>
+										</a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="payment-method d-flex">
-								<p>Payment options:</p>
-								<div class="card-wrap ps-2">
-									<img src="/template/user/images/logo_momo_out.png" alt="paypal">
-								</div>
+						<div class="col-lg-2 col-sm-6 pb-3">
+							<div class="footer-menu text-uppercase">
+								<h5 class="widget-title pb-2">Liên kết nhanh</h5>
+								<ul class="menu-list list-unstyled text-uppercase">
+									<li class="menu-item pb-2"><a href="#">Trang chủ</a></li>
+									<li class="menu-item pb-2"><a href="#">Giới thiệu</a></li>
+									<li class="menu-item pb-2"><a href="#">Cửa hàng</a></li>
+									<li class="menu-item pb-2"><a href="#">Bài viết</a></li>
+									<li class="menu-item pb-2"><a href="#">Liên hệ</a></li>
+								</ul>
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="copyright">
-								<p>© Copyright 2024 TheLiem. Design by TheLiem Team. All
-									rights reserved.</p>
+						<div class="col-lg-3 col-sm-6 pb-3">
+							<div class="footer-menu text-uppercase">
+								<h5 class="widget-title pb-2">Trợ giúp & Thông tin</h5>
+								<ul class="menu-list list-unstyled">
+									<li class="menu-item pb-2"><a href="#">Theo dõi đơn
+											hàng</a></li>
+									<li class="menu-item pb-2"><a href="#">Chính sách hoàn
+											trả</a></li>
+									<li class="menu-item pb-2"><a href="#">Giao hàng + Vận
+											chuyển</a></li>
+									<li class="menu-item pb-2"><a href="#">Liên hệ</a></li>
+									<li class="menu-item pb-2"><a href="#">Câu hỏi thường
+											gặp</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6 pb-3">
+							<div class="footer-menu contact-item">
+								<h5 class="widget-title text-uppercase pb-2">Liên hệ</h5>
+								<p>
+									Bạn có bất kỳ thắc mắc hoặc đề xuất nào? <a href="mailto:">theliem2024@gmail.com</a>
+								</p>
+								<p>
+									Nếu bạn cần hỗ trợ? Hãy gọi cho chúng tôi. <a href="">+84
+										111 222 333</a>
 								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<script src="/template/user/js/jquery-1.11.0.min.js"></script>
-			<script
-				src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-			<script type="text/javascript"
-				src="/template/user/js/bootstrap.bundle.min.js"></script>
-			<script type="text/javascript" src="/template/user/js/plugins.js"></script>
-			<script type="text/javascript" src="/template/user/js/script.js"></script>
-			<script src="/template/user/js/thanhToan.js"></script>
+		</div>
+		<hr>
+	</footer>
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row d-flex flex-wrap justify-content-between">
+				<div class="col-md-4 col-sm-6">
+					<div class="Shipping d-flex">
+						<p>We ship with:</p>
+						<div class="card-wrap ps-2">
+							<img src="/template/user/images/logo_ghn.png" alt="visa">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="payment-method d-flex">
+						<p>Payment options:</p>
+						<div class="card-wrap ps-2">
+							<img src="/template/user/images/logo_momo_out.png" alt="paypal">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="copyright">
+						<p>© Copyright 2024 TheLiem. Design by TheLiem Team. All
+							rights reserved.</p>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	    // Dữ liệu ctsp là danh sách các CartItem từ backend
+	    var ctsp = ${dssp};
+	
+	    // Chuyển đổi thành JSON
+	    var selectedItemsJson = JSON.stringify(ctsp);
+	
+	    // Gán giá trị JSON vào input hidden
+    document.getElementById('selectedItemsMap').value = selectedItemsJson;
+</script>
+	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+	<script type="text/javascript"
+		src="/template/user/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="/template/user/js/plugins.js"></script>
+	<script type="text/javascript" src="/template/user/js/script.js"></script>
+	<script src="/template/user/js/thanhToan.js"></script>
 </body>
 
 </html>

@@ -38,6 +38,7 @@
 <!-- script
     ================================================== -->
 <script src="js/modernizr.js"></script>
+<link rel="stylesheet" href="/template/user/css/index.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -157,7 +158,7 @@
       </symbol>
     </svg>
 
-	 <!-- Hiển thị popup của thanh tìm kiếm -->
+	<!-- Hiển thị popup của thanh tìm kiếm -->
 	<div class="search-popup">
 		<div class="search-popup-container">
 			<form role="search" method="get" class="search-form"
@@ -185,7 +186,7 @@
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-             <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,8 +253,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -299,107 +306,17 @@
 	</header>
 
 	<div class="m-4 py-3">
-		<h4 class="pt-green-txt px-6">
-			<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG
-		</h4>
+		<div class="pt-green-txt d-flex bg-black text-white px-5 align-items-center" style="height: 50px">
+			<h4>
+				<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG |
+			</h4>
+			<h4>
+				<a class="text-white" href="/product/view">MUA SẮM</a>
+			</h4>
+		</div>
 		<div class="container">
 
-			<!-- Danh sách sản phẩm trong giỏ hàng -->
-			<%-- <div class="card my-3">
-				<div class="card-header">
-					<h5>Sản phẩm trong giỏ hàng</h5>
-				</div>
-				<div class="card-body">
-					<table class="table cart">
-						<thead>
-							<tr>
-								<th scope="col"><input type="checkbox" id="checkAll"></th>
-								<th scope="col">#</th>
-								<th scope="col">Tên sản phẩm</th>
-								<th scope="col">Giá</th>
-								<th scope="col">Số lượng</th>
-								<th scope="col">Tổng</th>
-								<th scope="col">Hành động</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="sp" items="${sp}">
-								<tr>
-									<form action="/cart/update/${sp.id_CTGH}" method="post" class="d-inline">
-										<input type="hidden" name="maCTSP" value="${sp.id_CTGH}">
-										<td scope="col"><input type="checkbox"></td>
-										<td scope="col">
-											<div class="img-cart">
-												<img src="/template/user/images/dt1.jpg" alt="">
-											</div>
-										</td>
-										<td>${sp.maCTSP.maSP.tenSP}</td>
-										<td>${sp.maCTSP.gia}</td>
-										<td class="d-flex align-items-center">
-											<button type="submit" name="action" value="decrease"
-												class="btn btn-secondary me-2">-</button> <span>${sp.soLuong}</span>
-											<button type="submit" name="action" value="increase"
-												class="btn btn-secondary ms-2">+</button>
-										</td>
-										<td>${sp.soLuong * sp.maCTSP.gia}</td>
-										<td><a href="/cart/remove/${sp.maCTSP.maCTSP}"
-											class="btn btn-danger btn-sm">Xóa</a></td>
-									</form>
-								</tr>
-							</c:forEach>
-							<c:forEach var="sp" items="${sp}">
-								<tr>
-									<td scope="col"><input type="checkbox" class="checkItem"
-										value="${sp.id_CTGH}"
-										data-total="${sp.soLuong * sp.maCTSP.gia}"></td>
-									<td scope="col">
-										<div class="img-cart">
-											<img src="/template/user/images/dt1.jpg" alt="">
-										</div>
-									</td>
-									<td>${sp.maCTSP.maSP.tenSP}</td>
-									<td>${sp.maCTSP.gia}</td>
-									<td class="d-flex align-items-center">
-										<form action="/cart/update/${sp.id_CTGH}" method="post"
-											class="d-inline">
-											<button type="submit" name="action" value="decrease"
-												class="btn btn-secondary me-2">-</button>
-											<span>${sp.soLuong}</span>
-											<button type="submit" name="action" value="increase"
-												class="btn btn-secondary ms-2">+</button>
-										</form>
-									</td>
-									<td>${sp.soLuong * sp.maCTSP.gia}</td>
-									<td><a href="/cart/remove/${sp.id_CTGH}"
-										class="btn btn-danger btn-sm">Xóa</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="card-footer">
-					<div class="d-flex txt-bold justify-content-between">
-						<div>
-							Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
-						</div>
-						<div class="ml-auto">
-							<span id="totalAmount">0</span> Đ
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="d-flex justify-content-end py-2">
-				<!-- Thêm dòng này để căn chỉnh nút mua hàng về bên phải -->
-				<input type="hidden" name="selectedItems" id="selectedItems">
-				<a href="/cart/checkout" class="btn btn-success ">Mua hàng</a>
-			</div> --%>
-
-
 			<div class="card my-3">
-				<div class="card-header">
-					<h5>Sản phẩm trong giỏ hàng</h5>
-				</div>
 				<div class="card-body">
 					<table class="table cart">
 						<thead>
@@ -421,20 +338,22 @@
 										data-total="${sp.soLuong * sp.maCTSP.gia}"></td>
 									<td scope="col">
 										<div class="img-cart">
-											<img src="/template/user/images/dt1.jpg" alt="">
+											<img src="/images/${sp.maCTSP.img}" alt="">
 										</div>
 									</td>
 									<td>${sp.maCTSP.maSP.tenSP}</td>
 									<td>${sp.maCTSP.gia}</td>
-									<td class="d-flex align-items-center">
-										<form action="/cart/update/${sp.id_CTGH}" method="post"
-											class="d-inline">
-											<button type="submit" name="action" value="decrease"
-												class="btn btn-secondary me-2">-</button>
-											<span>${sp.soLuong}</span>
-											<button type="submit" name="action" value="increase"
-												class="btn btn-secondary ms-2">+</button>
-										</form>
+									<td>
+										<div class="d-flex align-items-center">
+											<form action="/cart/update/${sp.id_CTGH}" method="post"
+												class="d-inline">
+												<button type="submit" name="action" value="decrease"
+													class="btn btn-secondary me-2">-</button>
+												<span>${sp.soLuong}</span>
+												<button type="submit" name="action" value="increase"
+													class="btn btn-secondary ms-2">+</button>
+											</form>
+										</div>
 									</td>
 									<td>${sp.soLuong * sp.maCTSP.gia}</td>
 									<td><a href="/cart/remove/${sp.maCTSP.maCTSP}"

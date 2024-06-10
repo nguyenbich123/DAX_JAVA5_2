@@ -29,7 +29,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			error = "Access denied!";
 		}
 		if (error.length() > 0) { // có lỗi
-			response.sendRedirect("/login?error=" + error);
+			response.sendRedirect("/account/login?error=" + error);
 			return false;
 		}
 		return true;

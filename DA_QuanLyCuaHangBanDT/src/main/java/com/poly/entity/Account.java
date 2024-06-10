@@ -1,9 +1,9 @@
 package com.poly.entity;
 
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,41 +18,39 @@ import lombok.Data;
 @Table(name = "ACCOUNT_")
 public class Account {
 
-	@Id
+    @Id
     @Column(name="Tendn")
     @NotBlank(message = "{NotBlank.tk.tenDN}")
-    String tenDN;
+    private String tenDN;
 
     @Column(name="Matkhau")
     @NotBlank(message = "{NotBlank.tk.matKhau}")
-    String matKhau;
+    private String matKhau;
 
     @Column(name="Hoten")
     @NotBlank(message = "{NotBlank.tk.hoTen}")
-    String hoTen;
+    private String hoTen;
 
     @Column(name="Sdt")
     @NotBlank(message = "{NotBlank.tk.sdt}")
-    String sdt;
-
+    private String sdt;
 
     @Column(name="Email")
     @NotBlank(message = "{NotBlank.tk.email}")
     @Email(message = "{Email.tk.email}")
-    String email;
+    private String email;
 
     @Column(name="Img")
-    String img;
+    private String img;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idrole")
-    Role role;
+    private Role role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Idtthd")
-    TrangThaiHD tthd;
-    
-    @OneToMany(mappedBy = "tenDN")
-	List<DiaChi> diachi;
+    private TrangThaiHD tthd;
 
+    @OneToMany(mappedBy = "tenDN", fetch = FetchType.LAZY)
+    private List<DiaChi> diachi;
 }

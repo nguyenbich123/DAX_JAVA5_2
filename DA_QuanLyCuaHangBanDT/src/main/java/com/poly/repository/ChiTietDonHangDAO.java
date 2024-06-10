@@ -12,6 +12,5 @@ import com.poly.entity.DonHang;
 
 public interface ChiTietDonHangDAO extends JpaRepository<ChiTietDonHang,Integer>{
 	// Truy vấn lấy ra danh sách chi tiết đơn hàng của các đơn hàng của tài khoản đăng nhập
-    @Query("SELECT c FROM ChiTietDonHang c JOIN c.maDH d WHERE d.maKH = :account")
-   List<ChiTietDonHang> findByAccount(Account account);
+	List<ChiTietDonHang> findByMaDH(DonHang maDH);
 }

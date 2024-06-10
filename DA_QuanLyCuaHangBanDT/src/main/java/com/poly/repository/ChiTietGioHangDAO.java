@@ -32,4 +32,9 @@ public interface ChiTietGioHangDAO extends JpaRepository<ChiTietGioHang,Integer>
 	    @Transactional
 	    @Query("DELETE FROM ChiTietGioHang ctgh WHERE ctgh.maCTSP.maCTSP = :mactsp")
 	    void deleteByMaCTSP(@Param("mactsp") Integer maCTSP);
+	    
+	    ChiTietGioHang findByMaCTSPAndMaGH(ChiTietSP maCTSP, GioHang maGH);
+	    
+	    
+	    
 }
