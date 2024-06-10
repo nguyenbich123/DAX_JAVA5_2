@@ -9,8 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -19,6 +23,7 @@ public class ChiTietSP {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Mactsp")
     private Integer maCTSP;
     
     @ManyToOne
@@ -38,10 +43,11 @@ public class ChiTietSP {
     private Ram maRam;
     
     @Column(name="Soluong")
-    private Integer soLuong;
-    
+    private Integer soluong;
+
+    @Column(name = "Gia")
     private Double gia;
-    
-    @Column(name="img")
+
+    @Column(name="Img")
     private String img;
 }

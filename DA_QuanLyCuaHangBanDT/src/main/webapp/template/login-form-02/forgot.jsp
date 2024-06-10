@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,14 +33,14 @@
           <div class="col-md-7">
             <h3>Quên mật khẩu</h3>
             <p class="mb-3">Nhập E-mail để lấy lại mật khẩu </p>
-            <form action="#" method="post">
-              <div class="form-group first">
-                <label for="username">Email</label>
-                <input type="text" class="form-control" placeholder="Nhập Email" id="username">
-              </div> 
-
+            <form:form action="/account/forgot" method="post" modelAttribute="tk">
+                <div class="form-group first">
+					<label for="email">Email</label>
+					<form:input path="email" id="email" type="email" class="form-control" placeholder="Email" />
+					<form:errors path="email" cssClass="text-danger" />
+				</div>
               <input type="submit" value="Lấy mã" class="btn btn-block btn-primary">
-            </form>
+            </form:form>
           </div>
         </div>
       </div>

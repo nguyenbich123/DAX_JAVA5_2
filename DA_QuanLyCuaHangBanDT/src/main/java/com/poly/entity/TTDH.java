@@ -18,6 +18,6 @@ public class TTDH{
     @Column(name="Idttdh")
     private Integer id_TTDH;
     
-    @Column(name="Idtrangthai")
+    @Column(name="Trangthai")
     private String trangThai;
 }

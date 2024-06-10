@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -25,11 +26,14 @@ public class DiaChi {
     private Account tenDN;
     
     @Column(name="Duongsonha")
+    @NotBlank(message="{NotBlank.diachi.duong_Sonha}")
     private String duong_Sonha;
     
     @Column(name="Quanhuyen")
+    @NotBlank(message="{NotBlank.diachi.quan_Huyen}")
     private String quan_Huyen;
     
     @Column(name="Tinhthanhpho")
+    @NotBlank(message="{NotBlank.diachi.tinh_ThanhPho}")
     private String tinh_ThanhPho;
 }

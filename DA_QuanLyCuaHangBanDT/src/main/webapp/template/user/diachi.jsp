@@ -32,6 +32,8 @@
 	rel="stylesheet">
 	<link rel="stylesheet" type="text/css"
 	href="/template/user/css/table.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <!-- script
     ================================================== -->
 <script src="/template/user/js/modernizr.js"></script>
@@ -278,81 +280,75 @@
 		</div>
 	</header>
 
-	<section id="company-services" class="padding-large">
-		<div class="container">
-			
-			<br>
-			<div class="row">
-				<div class="col-md-5">
-				
-					<h5>Địa Chỉ</h5>
-					<table>
-						<thead>
-							<tr>
-								<th><b>Đ</b>ường, Số nhà</th>
-								<th>Quận , Huyện</th>
-								<th>Tỉnh , Thành Phố</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="diachi" items="${items}">
-								<tr>
-									<td>${diachi.duong_Sonha}</td>
-									<td>${diachi.quan_Huyen}</td>
-									<td>${diachi.tinh_ThanhPho}</td>
-									<td>
-										<div class="icon">
-											<a href="/user/editdc/${tenDN}?id_diaChi=${diachi.id_diaChi}">sửa</a> 
-											<a href="/user/deletedc/${tenDN}?id_diaChi=${diachi.id_diaChi}">xóa</a>
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					</div>
-					<br>
-					<div class="col-md-7">
-					<h5>Form Địa Chỉ</h5>
-					<!-- Địa chỉ  Form -->
-					<form:form action="/user/index" modelAttribute="diachi"
-						enctype="multipart/form-data">
-						<form:hidden path="id_diaChi" />
-						<div class="row mb-3">
-							<label for="Address" class="col-md-4 col-lg-3  col-form-label">Đường
-								Số Nhà</label>
-							<div class="col-md-8 col-lg-9">
-								<form:input path="duong_Sonha" type="text" class="form-control" />
-							</div>
-						</div>
+	<section id="company-services" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h5 class="mb-3">Địa Chỉ</h5>
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Đường, Số nhà</th>
+                            <th>Quận, Huyện</th>
+                            <th>Tỉnh, Thành Phố</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="diachi" items="${items}">
+                            <tr>
+                                <td>${diachi.duong_Sonha}</td>
+                                <td>${diachi.quan_Huyen}</td>
+                                <td>${diachi.tinh_ThanhPho}</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="/user/editdc/${tenDN}?id_diaChi=${diachi.id_diaChi}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a href="/user/deletedc/${tenDN}?id_diaChi=${diachi.id_diaChi}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-7">
+                <h5 class="mb-3">Form Địa Chỉ</h5>
+                <form:form action="/user/index" modelAttribute="diachi" enctype="multipart/form-data">
+                    <form:input type="hidden" path="id_diaChi"/>
+                    <div class="mb-3 row">
+                        <label for="Address" class="col-md-4 col-form-label">Đường Số Nhà</label>
+                        <div class="col-md-8">
+                            <form:input type="text" path="duong_Sonha" cssClass="form-control"/>
 
-						<div class="row mb-3">
-							<label for="Address2" class="col-md-4 col-lg-3 col-form-label">Quận
-								Huyện</label>
-							<div class="col-md-8 col-lg-9">
-								<form:input path="quan_Huyen" type="text" class="form-control" />
-							</div>
-						</div>
-						<div class="row mb-3">
-							<label for="Address3" class="col-md-4 col-lg-3 col-form-label">Tỉnh
-								Thành Phố</label>
-							<div class="col-md-8 col-lg-9">
-								<form:input path="tinh_ThanhPho" type="text"
-									class="form-control" />
-							</div>
-						</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="Address2" class="col-md-4 col-form-label">Quận Huyện</label>
+                        <div class="col-md-8">
+                            <form:input type="text" path="quan_Huyen" cssClass="form-control"/>
 
-						<div class="text-center">
-							<button formaction="/user/updatedc/${tenDN}"
-								class="btn btn-primary">Save</button>
-						</div>
-					</form:form>
-					<!--địa chỉ Form -->
-					</div>
-			</div>
-		</div>
-	</section>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="Address3" class="col-md-4 col-form-label">Tỉnh Thành Phố</label>
+                        <div class="col-md-8">
+                            <form:input type="text" path="tinh_ThanhPho" cssClass="form-control"/>
+
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button formaction="/user/updatedc/${tenDN}" class="btn btn-primary">Save</button>
+                    </div>
+               </form:form>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">

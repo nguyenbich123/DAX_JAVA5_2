@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,6 +20,7 @@ public class DPGCS {
 	private Integer idDPGCS;
 	
 	@Column(name = "Dpg")
+	@NotBlank(message = "{NotBlank.dpg.dpg}")
 	private String dpg;
 
 }

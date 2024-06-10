@@ -251,10 +251,11 @@
       </div>    
     </header>
     	
-    	<section id="company-services" class="padding-large">
-      <div class="container">
-      <h2> Chỉnh Sửa Thông Tin</h2>
-      <br>
+
+     <section id="company-services" class="py-5">
+    <div class="container">
+        <h2>Chỉnh Sửa Thông Tin</h2>
+        <br>
         <div class="row">
 	        <div class=col-md-3>
 	        	<img src="/images/${item.img}" alt="Profile" style="height: 300px ; width: 250px">
@@ -305,8 +306,10 @@
 										<!-- End Profile Edit Form -->
 	        </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
+
+
     	
     	
      <footer id="footer" class="overflow-hidden mt-3 border-top pt-3">

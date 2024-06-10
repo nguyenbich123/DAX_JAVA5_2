@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,6 +20,7 @@ public class MHR {
 	private Integer idMHR;
 	
 	@Column(name = "Mhrong")
+		@NotBlank(message = "{NotBlank.mhr.mhRong}")
 	private String mhRong;
 
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,5 +20,6 @@ public class Hang {
     private Integer maHang;
     
     @Column(name="Tenhang")
+     @NotBlank(message = "{NotBlank.hang.tenHang}")
     private String tenHang;
 }

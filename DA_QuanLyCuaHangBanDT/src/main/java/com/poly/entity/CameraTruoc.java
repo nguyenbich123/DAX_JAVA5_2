@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,15 +20,18 @@ public class CameraTruoc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Idcamtruoc")
     private Integer idCamTruoc;
-    
+
     @Column(name="Tencamtruoc")
+    @NotBlank(message = "{NotBlank.item.tenCamTruoc}")
     private String tenCamTruoc;
-    
+
     @ManyToOne
     @JoinColumn(name = "Iddpgct")
+
     private DPGCT DPGCT;
-    
+
     @ManyToOne
     @JoinColumn(name = "Idtnct")
+
     private TNCT TNCT;
 }

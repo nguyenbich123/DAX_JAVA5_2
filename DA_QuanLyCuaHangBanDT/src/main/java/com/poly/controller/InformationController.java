@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.poly.entity.Account;
-import com.poly.entity.DiaChi;
-import com.poly.entity.Pass;
+
+import com.poly.entity.*;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
 
@@ -57,6 +58,7 @@ public class InformationController {
 		
 		DiaChi dchi = dcDao.findById(id_diaChi).get();
 		model.addAttribute("diachi", dchi);
+
 		List<DiaChi> diachi = item.getDiachi();
 		model.addAttribute("items", diachi);
 		
@@ -65,20 +67,24 @@ public class InformationController {
 
 	
 	@RequestMapping("update")
-	public String update(Account item,@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
-		if(!img.isEmpty()) {
-			String filename = img.getOriginalFilename();
-			File uploadFolder = new File(app.getRealPath("/images/"));
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdirs();
+	public String update(Account items,@RequestParam("photo_file") MultipartFile img,@Validated @ModelAttribute("item") Account item,BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			if(!img.isEmpty()) {
+				String filename = img.getOriginalFilename();
+				File uploadFolder = new File(app.getRealPath("/images/"));
+				if (!uploadFolder.exists()) {
+					uploadFolder.mkdirs();
+				}
+				File destFile = new File(uploadFolder, filename);
+				img.transferTo(destFile);
+				items.setImg(filename);
+				System.out.println(uploadFolder);
+				System.out.println(destFile);
 			}
-			File destFile = new File(uploadFolder, filename);
-			img.transferTo(destFile);
-			item.setImg(filename);
-			System.out.println(uploadFolder);
-			System.out.println(destFile);
+			return "/template/user/information";
 		}
-		
+
+
 		accDao.save(item);
 		return "redirect:view/"+ item.getTenDN();
 	}

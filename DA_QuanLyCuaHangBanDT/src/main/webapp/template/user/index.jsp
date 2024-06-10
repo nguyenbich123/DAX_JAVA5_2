@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -96,48 +98,34 @@
       </symbol>
     </svg>  
 
-    <div class="search-popup">
-      <div class="search-popup-container">
+    <!-- Hiển thị popup của thanh tìm kiếm -->
+	<div class="search-popup">
+		<div class="search-popup-container">
+			<form role="search" method="get" class="search-form"
+				action="/product/search?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
+				<input type="search" id="search-form" class="search-field"
+					placeholder="Tìm kiếm" value="" name="keywords" />
+				<button type="submit" class="search-submit">
+					<svg class="search">
+                <use xlink:href="#search"></use>
+            </svg>
+				</button>
+			</form>
 
-        <form role="search" method="get" class="search-form" action="">
-          <input type="search" id="search-form" class="search-field" placeholder="Tìm kiếm" value="" name="s" />
-          <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
-        </form>
-
-        <h5 class="cat-list-title">Chọn danh mục</h5>
-        
-        <ul class="cat-list">
-          <li class="cat-list-item">
-            <a href="#" title="Mobile Phones">Iphone15</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Smart Watches">Samsung S23 Ultra</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Headphones">Headphones</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Accessories">Accessories</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Monitors">Monitors</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Speakers">Speakers</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Memory Cards">Memory Cards</a>
-          </li>
-        </ul>
-
-      </div>
-  </div>
+			<h5 class="cat-list-title">Chọn danh mục</h5>
+			<ul class="cat-list">
+				<li class="cat-list-item"><a href="" title="Mobile Phones">Iphone15</a></li>
+				<li class="cat-list-item"><a href="" title="Smart Watches">Samsung
+						S23 Ultra</a></li>
+			</ul>
+		</div>
+	</div>
     
     <header id="header">
       <div class="site-header  position-fixed text-black bg-light">
         <nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="index.html">
+            <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,41 +143,32 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="#billboard">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="#mobile-products">Sản phẩm</a>
+                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a href="" class="dropdown-item">Về chúng tôi</a>
-                      </li>
-                      <li>
-                        <a href="" class="dropdown-item">Bài viết</a>
-                      </li>
-                      <li>
-                        <a href="" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                        <a href="" class="dropdown-item">Giỏ hàng</a>
+                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
                       </li>
                       <li>
                       <li>
-                        <a href="lienHe.html" class="dropdown-item">Liên hệ</a>
+                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
                       </li>
                       <li>
-                        <a href="gioiThieu.html" class="dropdown-item">Giới Thiệu</a>
+                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
                       </li>
                       <li>
-                        <a href="gopY.html" class="dropdown-item">Góp Ý</a>
+                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
                       </li>
                     </ul>
                   </li>
@@ -205,35 +184,46 @@
                         </li>
                         <li class="pe-3 dropdown position-relative">
                           <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                          	  <c:if test="${account != null}">
+								    Xin chào, ${account.hoTen}
+							  </c:if>
                             <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
-                            <li>
-                              <a href="" class="dropdown-item">Về chúng tôi</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Bài viết</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Cửa hàng</a>
-                            </li>
-                            <li>
-                              <a href="" class="dropdown-item">Giỏ hàng</a>
-                            </li>
-                            <li>
-                            <li>
-                              <a href="" class="dropdown-item">Liên hệ</a>
-                            </li>
+	                          <c:choose>
+								    <c:when test="${account != null}">
+								        <li>
+			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                            </li>
+			                            <li>
+			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
+			                            </li>
+								    </c:when>
+								    <c:otherwise>
+								         <li>
+			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
+			                            </li>
+			                            <li>
+			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
+			                            </li>
+								    </c:otherwise>
+							  </c:choose>  
                           </ul>
                         </li>
                         <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="">
+                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
                             <svg class="cart">
                               <use xlink:href="#cart"></use>
                             </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">7</span>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
                           </a>
                         </li>
                       </ul>
@@ -378,7 +368,7 @@
           <div class="display-header d-flex justify-content-between pb-3">
             <h2 class="display-7 text-dark text-uppercase">Products</h2>
             <div class="btn-right">
-              <a href="" class="btn btn-medium btn-normal text-uppercase">Go to List product</a>
+              <a href="/product/view" class="btn btn-medium btn-normal text-uppercase">Go to List product</a>
             </div>
           </div>
           <div class="swiper product-swiper">
