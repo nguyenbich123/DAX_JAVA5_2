@@ -97,15 +97,13 @@ public class UserController {
 		String mkm = pass.getNpass();
 				
 		if(!pass.getOpass().equals(mkc)) {
-			System.out.println("sai mật khẩu");
-			
+			System.out.println("sai mật khẩu");	
 			return "redirect:/admin/user/view/"+tenDN;
 		}
 		
 		
 		if(!pass.getNpass().equals(pass.getCfpass())) {
 			System.out.println("mật khẩu không khớp");
-			
 			return "redirect:/admin/user/view/"+tenDN;
 		}
 		

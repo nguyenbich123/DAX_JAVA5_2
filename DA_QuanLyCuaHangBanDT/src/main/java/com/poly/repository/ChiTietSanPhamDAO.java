@@ -1,5 +1,8 @@
 package com.poly.repository;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +25,5 @@ public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
 
 	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP.tenSP LIKE ?1")
 	Page<ChiTietSP> findByKeywords(String keywords, Pageable pageable);
-
+	
 }

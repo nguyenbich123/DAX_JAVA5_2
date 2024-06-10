@@ -120,7 +120,8 @@
 										<form:hidden path="tenDN" />
 										<form:hidden path="matKhau" />
 										<form:hidden path="img" />
-
+										<form:hidden path="role.Idrole"/>
+										<form:hidden path="tthd.Idtthd"/>
 										<div class="row mb-3">
 											<label for="fullName"
 												class="col-md-4 col-lg-3 col-form-label">Họ và Tên</label>
@@ -185,8 +186,6 @@
 													class="form-control" />
 											</div>
 										</div>
-										
-
 										<div class="text-center">
 											<button formaction="/admin/user/updatemk/${tenDN}"
 												class="btn btn-primary">Save</button>

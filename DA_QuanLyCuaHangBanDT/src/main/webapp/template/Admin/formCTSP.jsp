@@ -73,7 +73,7 @@
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-3 col-form-label">Số Lượng</label>
                                     <div class="col-sm-9 ">
-                                        <form:input path="soluong" type="text" class="form-control" />
+                                        <form:input path="soLuong" type="text" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">

@@ -1,6 +1,5 @@
 package com.poly.controller_ad;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,46 +19,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.poly.entity.Account;
-import com.poly.entity.CNMH;
-import com.poly.entity.CNP;
 import com.poly.entity.CameraSau;
 import com.poly.entity.CameraTruoc;
-import com.poly.entity.DLP;
-import com.poly.entity.DPGCS;
-import com.poly.entity.DPGCT;
-import com.poly.entity.DPGMH;
-import com.poly.entity.HTS;
 import com.poly.entity.Hang;
 import com.poly.entity.HeDieuHanh;
-import com.poly.entity.LP;
-import com.poly.entity.MHR;
 import com.poly.entity.ManHinh;
 import com.poly.entity.PinSac;
 import com.poly.entity.SanPham;
-import com.poly.entity.TNCS;
-import com.poly.entity.TNCT;
-import com.poly.entity.TrangThaiHD;
-import com.poly.repository.CNMHDAO;
-import com.poly.repository.CNPDAO;
 import com.poly.repository.CameraSauDAO;
 import com.poly.repository.CameraTruocDAO;
-import com.poly.repository.DLPDAO;
-import com.poly.repository.DPGCSDAO;
-import com.poly.repository.DPGCTDAO;
-import com.poly.repository.DPGMHDAO;
-import com.poly.repository.HTSDAO;
 import com.poly.repository.HangDAO;
 import com.poly.repository.HeDieuHanhDAO;
-import com.poly.repository.LPDAO;
-import com.poly.repository.MHRDAO;
 import com.poly.repository.ManHinhDAO;
 import com.poly.repository.PinSacDAO;
 import com.poly.repository.SanPhamDAO;
-import com.poly.repository.TNCSDAO;
-import com.poly.repository.TNCTDAO;
+import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
 
@@ -80,7 +55,8 @@ public class SanPhamAdminController {
 	ManHinhDAO mhDao;
 	@Autowired
 	HangDAO hDao;
-	
+	@Autowired
+	SessionService session;
 	@Autowired
 	ServletContext app;
 
@@ -145,16 +121,28 @@ public class SanPhamAdminController {
 		return "redirect:/index";
 	}
 	@GetMapping("/index")
-	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String index(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {	
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maSP"));	
     	List<SanPham> sp = spDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maSP"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);
 	    Page<SanPham> page = spDao.findAll(pageable);
+	  
 	    model.addAttribute("page", page);
 	    return "/template/Admin/sanpham";
 	}
-		
+	
+	@RequestMapping("/search")
+	public  String timkiem(Model model,@RequestParam("keywords") Optional<String> kw,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) {
+		model.addAttribute("field", field.orElse("maSP"));
+		String kwords = kw.orElse(session.get("keywords"));
+		session.set("keywords", kwords);
+		Pageable pageable = PageRequest.of(p.orElse(0), 10);
+		Page<SanPham> page = spDao.findAllBykeyword("%"+kwords+"%", pageable);
+		model.addAttribute("page", page);
+		return "/template/Admin/sanpham";
+	}
+	
 	@ModelAttribute("list_hdh")
 	public Map<Integer, String> gethdh() {
 		Map<Integer, String> map = new HashMap<>();

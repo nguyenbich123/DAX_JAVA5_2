@@ -7,10 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -39,10 +41,17 @@ public class DonHang {
     
     @Column(name="Ngaytt")
     private Date ngayTT;
+    
+    @Column(name="Tongtien")
     private Double tongTien;
+    
+    @Column(name="Ghichu")
     private String ghiChu;
     
     @ManyToOne
     @JoinColumn(name = "Idgiamgia")
     private GiamGia maGG;
+    
+    @OneToMany(mappedBy = "maDH")
+   	List<ChiTietDonHang> ctdh;
 }

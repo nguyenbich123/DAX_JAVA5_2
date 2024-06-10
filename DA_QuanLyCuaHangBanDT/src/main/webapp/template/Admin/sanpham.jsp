@@ -34,6 +34,7 @@
 					<li class="breadcrumb-item active">Data</li>
 				</ol>
 			</nav>
+
 		</div>
 		<!-- End Page Title -->
 
@@ -45,6 +46,16 @@
 						<div class="card-body">
 							<h5 class="card-title">Sản Phẩm</h5>
 
+							<form action="/admin/sanpham/search" method="post" class="row">
+								<div class="col-sm-9">
+									<input name="keywords" value="${keywords}" class="form-control">
+								</div>
+								<div class="col-sm-3">
+									<button>
+										<i class="bi bi-search"></i>
+									</button>
+								</div>
+							</form>
 							<!-- Table with stripped rows -->
 							<table class="table datatable">
 								<thead>
