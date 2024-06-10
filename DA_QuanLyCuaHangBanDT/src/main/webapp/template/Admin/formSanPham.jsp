@@ -47,10 +47,6 @@
 							<form:form action="/admin/sanpham/index" modelAttribute="item"
 								enctype="multipart/form-data">
 								<form:hidden path="maSP" />
-								<form:hidden path="manHinh.idManHinh" />
-								<form:hidden path="pinSac.idPin" />
-								<form:hidden path="camTruoc.idCamTruoc" />
-								<form:hidden path="camSau.idCamSau" />
 								<div class="row mb-3">
 									<label for="inputHName" class="col-sm-3 col-form-label">Hãng
 										Điện Thoại</label>

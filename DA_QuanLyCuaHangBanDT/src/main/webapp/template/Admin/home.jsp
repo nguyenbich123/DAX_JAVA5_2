@@ -53,9 +53,9 @@
 											<h6>Filter</h6>
 										</li>
 
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=today">Today</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=month">This Month</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=year">This Year</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=today&BCTKDT=${BCTKDT}&BCTKKH=${BCTKKH}">Today</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=month&BCTKDT=${BCTKDT}&BCTKKH=${BCTKKH}">This Month</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDH=year&BCTKDT=${BCTKDT}&BCTKKH=${BCTKKH}">This Year</a></li>
 									</ul>
 								</div>
 
@@ -91,9 +91,9 @@
 											<h6>Filter</h6>
 										</li>
 
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=today">Today</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=month">This Month</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=year">This Year</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=today&BCTKDH=${BCTKDH}&BCTKKH=${BCTKKH}">Today</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=month&BCTKDH=${BCTKDH}&BCTKKH=${BCTKKH}">This Month</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKDT=year&BCTKDH=${BCTKDH}&BCTKKH=${BCTKKH}">This Year</a></li>
 									</ul>
 								</div>
 
@@ -130,9 +130,9 @@
 											<h6>Filter</h6>
 										</li>
 
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=today">Today</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=month">This Month</a></li>
-										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=year">This Year</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=today&BCTKDH=${BCTKDH}&BCTKDT=${BCTKDT}">Today</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=month&BCTKDH=${BCTKDH}&BCTKDT=${BCTKDT}">This Month</a></li>
+										<li><a class="dropdown-item" href="/admin/home/view?BCTKKH=year&BCTKDH=${BCTKDH}&BCTKDT=${BCTKDT}">This Year</a></li>
 									</ul>
 								</div>
 

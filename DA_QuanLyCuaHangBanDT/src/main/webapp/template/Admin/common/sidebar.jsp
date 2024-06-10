@@ -7,78 +7,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/admin/home/view">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>Trang Chủ</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Quản lý Thông Tin Sản Phẩm</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/admin/mh/index">
-                            <i class="bi bi-circle"></i><span>Màn Hình</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/ps/index">
-                            <i class="bi bi-circle"></i><span>Pin Sạc</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/ct/index">
-                            <i class="bi bi-circle"></i><span>Cam Trước</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/cs/index">
-                            <i class="bi bi-circle"></i><span>Cam Sau</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin//index">
-                            <i class="bi bi-circle"></i><span>Hệ Điều Hành</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-modal.html">
-                            <i class="bi bi-circle"></i><span>Hãng Sản Xuất</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Components Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Quản Lý Chi Tiết Sản Phẩm  </span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/admin//index">
-                            <i class="bi bi-circle"></i><span>Màu Sắc</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin//index">
-                            <i class="bi bi-circle"></i><span>Dung Lượng</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin//index">
-                            <i class="bi bi-circle"></i><span>Ram</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Forms Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+			<li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#sanpham" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Quản Lý Sản Phẩm</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="sanpham" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="/admin/sanpham/index">
                             <i class="bi bi-circle"></i><span>Thông Tin Sản Phẩm</span>
@@ -91,104 +28,147 @@
                     </li>
                 </ul>
             </li><!-- End Tables Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+			
+			<li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#ttchitietsp" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Quản Lý Chi Tiết Sản Phẩm  </span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="ttchitietsp" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="charts-chartjs.html">
-                            <i class="bi bi-circle"></i><span>Chart.js</span>
+                        <a href="/admin/mau/index">
+                            <i class="bi bi-circle"></i><span>Màu Sắc</span>
                         </a>
                     </li>
                     <li>
-                        <a href="charts-apexcharts.html">
-                            <i class="bi bi-circle"></i><span>ApexCharts</span>
+                        <a href="/admin/dungluong/index">
+                            <i class="bi bi-circle"></i><span>Dung Lượng</span>
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>ECharts</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Charts Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="icons-bootstrap.html">
-                            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons-remix.html">
-                            <i class="bi bi-circle"></i><span>Remix Icons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons-boxicons.html">
-                            <i class="bi bi-circle"></i><span>Boxicons</span>
+                        <a href="/admin/ram/index">
+                            <i class="bi bi-circle"></i><span>Ram</span>
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Icons Nav -->
-
-            <li class="nav-heading">Pages</li>
-
+            </li><!-- End Forms Nav -->
+			
             <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                    <i class="bi bi-person"></i>
-                    <span>Profile</span>
+                <a class="nav-link collapsed" data-bs-target="#linhkien" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Quản lý Linh Kiện</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li><!-- End Profile Page Nav -->
+                <ul id="linhkien" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/mh/index">
+                            <i class="bi bi-circle"></i><span>Màn Hình</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/ps/index">
+                            <i class="bi bi-circle"></i><span>Pin Sạc</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/camtruoc/index">
+                            <i class="bi bi-circle"></i><span>Cam Trước</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/camsau/index">
+                            <i class="bi bi-circle"></i><span>Cam Sau</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/hedieuhanh/index">
+                            <i class="bi bi-circle"></i><span>Hệ Điều Hành</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/hang/index">
+                            <i class="bi bi-circle"></i><span>Hãng Sản Xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
 
+          
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-faq.html">
-                    <i class="bi bi-question-circle"></i>
-                    <span>F.A.Q</span>
+                <a class="nav-link collapsed" data-bs-target="#pinsac" data-bs-toggle="collapse" href="#">
+                   <i class="bi bi-menu-button-wide"></i><span>Quản Lý Pin Sạc</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li><!-- End F.A.Q Page Nav -->
+                <ul id="pinsac" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/lp/index">
+                            <i class="bi bi-circle"></i><span>Loại Pin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/dlp/index">
+                            <i class="bi bi-circle"></i><span>Dung Lượng Pin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/cnp/index">
+                            <i class="bi bi-circle"></i><span>Công Nghệ Pin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/hts/index">
+                            <i class="bi bi-circle"></i><span>Hỗ Trợ Sạc</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End pin -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-contact.html">
-                    <i class="bi bi-envelope"></i>
-                    <span>Contact</span>
+             <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#manhinh" data-bs-toggle="collapse" href="#">
+                   <i class="bi bi-menu-button-wide"></i><span>Quản Lý Màn Hình</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li><!-- End Contact Page Nav -->
+                <ul id="manhinh" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/cnmh/index">
+                            <i class="bi bi-circle"></i><span>Công Nghệ Màn Hình</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/dpgmh/index">
+                            <i class="bi bi-circle"></i><span>Độ Phân Giải Màn Hình</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/mhr/index">
+                            <i class="bi bi-circle"></i><span>Màn Hình Rộng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End màn hình -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-register.html">
-                    <i class="bi bi-card-list"></i>
-                    <span>Register</span>
+          	<li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#camera" data-bs-toggle="collapse" href="#">
+                   <i class="bi bi-menu-button-wide"></i><span>Quản Lý Cammera</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li><!-- End Register Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-login.html">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Login</span>
-                </a>
-            </li><!-- End Login Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-error-404.html">
-                    <i class="bi bi-dash-circle"></i>
-                    <span>Error 404</span>
-                </a>
-            </li><!-- End Error 404 Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-blank.html">
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Blank</span>
-                </a>
-            </li><!-- End Blank Page Nav -->
-
-        </ul>
+                <ul id="camera" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/tnct/index">
+                            <i class="bi bi-circle"></i><span>Tính Năng Camera Trước</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/tncs/index">
+                            <i class="bi bi-circle"></i><span>Tính Năng Camera Sau</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/dpgct/index">
+                            <i class="bi bi-circle"></i><span>Độ Phân Giải Camera Trước</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/dpgcs/index">
+                            <i class="bi bi-circle"></i><span>Độ Phân Giải Camera Sau</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End màn hình -->
 
     </aside><!-- End Sidebar-->

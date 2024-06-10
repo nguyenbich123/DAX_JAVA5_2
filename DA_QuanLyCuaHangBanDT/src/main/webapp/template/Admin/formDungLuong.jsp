@@ -38,7 +38,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="FE_home.html">Home</a></li>
 					<li class="breadcrumb-item">Forms</li>
-					<li class="breadcrumb-item active">RAM điện thoại</li>
+					<li class="breadcrumb-item active">Dung lượng điện thoại</li>
 				</ol>
 			</nav>
 		</div>

@@ -85,32 +85,8 @@ public class SanPhamAdminController {
 		return "/template/Admin/formSanPham";
 	}
 	
-	@RequestMapping("create")
-	public String createallsp(SanPham item) throws IllegalStateException, IOException {
-		ManHinh mh = item.getManHinh();
-	    mhDao.save(mh);
-	    PinSac ps = item.getPinSac();
-	    psDao.save(ps);
-	    CameraSau cs = item.getCamSau();
-	    csDao.save(cs);
-	    CameraTruoc ct = item.getCamTruoc();
-	    ctDao.save(ct);
-	    
-		spDao.save(item);
-		return "redirect:index";
-	}
-	
 	@RequestMapping("update")
 	public String update(SanPham item) throws IllegalStateException, IOException {
-		ManHinh mh = item.getManHinh();
-	    mhDao.save(mh);
-	    PinSac ps = item.getPinSac();
-	    psDao.save(ps);
-	    CameraSau cs = item.getCamSau();
-	    csDao.save(cs);
-	    CameraTruoc ct = item.getCamTruoc();
-	    ctDao.save(ct);
-		
 		spDao.save(item);
 		return "redirect:index";
 	}

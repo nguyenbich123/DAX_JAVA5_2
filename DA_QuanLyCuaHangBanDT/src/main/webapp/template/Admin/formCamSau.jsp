@@ -25,7 +25,7 @@
 	<main id="main" class="main">
 
 		<div class="pagetitle">
-			<h1>Quản Lý Màn Hình</h1>
+			<h1>Quản Lý Cam Sau</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="FE_home.html">Home</a></li>

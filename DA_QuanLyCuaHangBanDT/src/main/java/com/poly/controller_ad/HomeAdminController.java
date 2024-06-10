@@ -112,6 +112,8 @@ public class HomeAdminController {
 		}).collect(Collectors.toList());
 
 		model.addAttribute("timedata", formattedTimeData);
+		
+		
 		return "/template/Admin/home";
 	}
 

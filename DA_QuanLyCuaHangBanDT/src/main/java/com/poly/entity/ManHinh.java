@@ -22,12 +22,12 @@ public class ManHinh {
     private Integer idManHinh;
     
     @Column(name="Tenmanhinh")
-     @NotBlank(message = "{NotBlank.mh.tenManHing}")
+    @NotBlank(message = "{NotBlank.mh.tenManHinh}")
     private String tenManhHinh;
-    
+
     @ManyToOne
     @JoinColumn(name = "Idcnmh")
-     @NotBlank(message = "{NotBlank.mh.CNMH}")
+    @NotBlank(message = "{NotBlank.mh.CNMH}")
     private CNMH CNMH;
     
     @ManyToOne
@@ -37,6 +37,6 @@ public class ManHinh {
     
     @ManyToOne
     @JoinColumn(name = "Iddpgmh")
-     @NotBlank(message = "{NotBlank.mh.DPG}")
-    private DPGMH DPG;
+    @NotBlank(message = "{NotBlank.mh.DPGMH}")
+    private DPGMH DPGMH;
 }
