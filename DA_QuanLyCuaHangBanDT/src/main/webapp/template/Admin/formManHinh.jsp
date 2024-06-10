@@ -76,7 +76,7 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Độ
 										Phân Giải</label>
 									<div class="col-sm-9 ">
-										<form:select path="DPGMH.idDPGMH" class="form-select">
+										<form:select path="DPG.idDPGMH" class="form-select">
 											<form:options items="${list_dpg}" />
 										</form:select>
 									</div>
@@ -111,7 +111,7 @@
 										<th><a href="/admin/mh/index?field=tenManhHinh">Tên Màn Hình</a></th>
 										<th><a href="/admin/mh/index?field=CNMH">Công Nghệ Màn Hình</a></th>
 										<th><a href="/admin/mh/index?field=MHR">Màn Hình Rộng</a></th>
-										<th><a href="/admin/mh/index?field=DPGMH">Độ Phân Giải</a></th>
+										<th><a href="/admin/mh/index?field=DPG">Độ Phân Giải</a></th>
 										<th></th>
 									</tr>
 								</thead>
@@ -122,7 +122,7 @@
 											<td>${item.tenManhHinh }</td>
 											<td>${item.CNMH.cnmh}</td>
 											<td>${item.MHR.mhRong}</td>
-											<td>${item.DPGMH.dpg}</td>
+											<td>${item.DPG.dpg}</td>
 											<td>
 												<div class="icon">
 													<a href="/admin/mh/edit/${item.idManHinh}"><i

@@ -12,25 +12,22 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CHITIETDONHANG_")
-public class ChiTietDonHang {
+@Table(name = "DANHGIA_")
+public class DanhGia {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Idctdh")
-    private Integer id_CTDH;
+    @Column(name="Iddanhgia")
+    private Integer id_danhGia;
+    
+    @Column(name="Danhgia")
+    private Integer danhGia;
     
     @ManyToOne
-    @JoinColumn(name = "Mactsp")
-    private ChiTietSP maCTSP;
-
-    @Column(name="Soluong")
-    private Integer soLuong;
-
-    @Column(name="Gia")
-    private Double gia;
+    @JoinColumn(name = "Tendn")
+    private Account maKH;
     
     @ManyToOne
-    @JoinColumn(name = "Madh")
-    private DonHang maDH;
+    @JoinColumn(name = "Masp")
+    private SanPham maSP;
 }

@@ -1,28 +1,25 @@
 package com.poly.entity;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "TRANGTHAIHD_")
-public class TrangThaiHD {
+@Table(name = "HEDIEUHANH_")
+public class HeDieuHanh {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer Idtthd;
+    @Column(name="Mahdh")
+    private Integer maHDH;
     
-    @Column(name="Trangthai")
-    String trangThai;
-    
-    @OneToMany(mappedBy = "tthd")
-	List<Account> accounts;
+    @Column(name="Tenhdh")
+      @NotBlank(message = "{NotBlank.hdh.tenHDH}")
+    private String tenHDH;
 }

@@ -20,6 +20,6 @@ public class Hang {
     private Integer maHang;
     
     @Column(name="Tenhang")
-     @NotBlank(message = "{NotBlank.hang.tenHang}")
+    @NotBlank(message = "{NotBlank.hang.tenHang}")
     private String tenHang;
 }

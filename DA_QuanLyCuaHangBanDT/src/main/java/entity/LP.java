@@ -11,16 +11,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CNMH_")
-public class CNMH {
+@Table(name = "LP_")
+public class LP {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Idcnmh")
-	private Integer idCNMH;
+	@Column(name = "Idlp")
+	private Integer idlp;
 	
-	@Column(name = "Cnmh")
-	@NotBlank(message = "{NotBlank.cnmh.cnmh}")
-	private String cnmh;
+	@Column(name = "loaipin")
+	@NotBlank(message = "{NotBlank.lp.loaiPin}")
+	private String loaiPin;
 
 }
+

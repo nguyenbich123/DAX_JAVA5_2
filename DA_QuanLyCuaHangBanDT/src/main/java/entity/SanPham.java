@@ -32,32 +32,40 @@ public class SanPham {
     
     @ManyToOne
     @JoinColumn(name = "Mahang")
+    @NotBlank(message = "{NotBlank.sanpham.maHang}")
     private Hang maHang;
     
     @ManyToOne
     @JoinColumn(name = "Mahdh")
+    @NotBlank(message = "{NotBlank.sanpham.maHDH}")
     private HeDieuHanh maHDH;
     
     @Column(name="Chip")
+    @NotBlank(message = "{NotBlank.sanpham.Chip}")
     private String chip;
     
     @ManyToOne
     @JoinColumn(name = "Idmanhinh")
+    @NotBlank(message = "{NotBlank.sanpham.manHinh}")
     private ManHinh manHinh;
     
     @ManyToOne
     @JoinColumn(name = "Idpin")
+    @NotBlank(message = "{NotBlank.sanpham.pinSac}")
     private PinSac pinSac;
     
     @Column(name="Sim")
+    @NotBlank(message = "{NotBlank.sanpham.sim}")
     private String sim;
     
     @ManyToOne
     @JoinColumn(name = "Idcamtruoc")
+    @NotBlank(message = "{NotBlank.sanpham.camTruoc}")
     private CameraTruoc camTruoc;
     
     @ManyToOne
     @JoinColumn(name = "Idcamsau")
+    @NotBlank(message = "{NotBlank.sanpham.camSau}")
     private CameraSau camSau;
     
     
