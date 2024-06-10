@@ -36,9 +36,13 @@
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
 <script src="https://kit.fontawesome.com/49bc4d7d5f.js"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/template/user/css/index.css">
 <!-- script
     ================================================== -->
 <script src="/template/user/js/modernizr.js"></script>
+
+
+
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -157,30 +161,30 @@
 			d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
       </symbol>
     </svg>
-    
-    
-    <!--Hiển thị modal thông báo đã thêm sản phẩm thành công  -->
-    <c:if test="${not empty message}">
-        <!-- Modal -->
-        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ${message}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
+
+
+	<!--Hiển thị modal thông báo đã thêm sản phẩm thành công  -->
+	<c:if test="${not empty message}">
+		<!-- Modal -->
+		<div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+			aria-labelledby="successModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">${message}</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 
 
 	<!-- Hiển thị popup của thanh tìm kiếm -->
@@ -207,10 +211,10 @@
 	</div>
 
 	<header id="header mb-2">
-      <div class="site-header_product text-black">
-        <nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
+		<div class="site-header_product text-black">
+			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-             <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -277,8 +281,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -319,12 +329,20 @@
             </div>
           </div>
         </nav>
-      </div>
-      
-    </header>
+		</div>
+
+	</header>
+
+	<div class="m-2 banner-container">
+		<div class="sales d-flex">
+			<img alt="" src="/template/user/images/banner1.jpg">
+			<p>Khuyến mãi ngập tràn. Nhanh tay lên nào!</p>
+		</div>
+	</div>
+
 
 	<!-- Start Content -->
-	<div class="m-4 py-5 ">
+	<div class="m-4 py-3 ">
 		<div class="row">
 
 			<div class="col-lg-2">
@@ -387,18 +405,19 @@
 					</div>
 					<div class="col-md-6 pb-4">
 						<form id="sortForm" action="/product/sort" method="get">
-							<div class="d-flex">
-								<h5>Sắp xếp:</h5>
-								<select class="form-control" name="sortby"
-									onchange="submitForm()">
-									<option value="maCTSP">--Chọn--</option>
-									<option value="gia" ${sortby == 'gia' ? 'selected' : ''}>Giá</option>
-									<option value="maSP.tenSP"
-										${sortby == 'maSP.tenSP' ? 'selected' : ''}>Tên</option>
-								</select> <input type="hidden" name="p" value="0" /> <input
-									type="hidden" name="min" value="${param.min}" /> <input
-									type="hidden" name="max" value="${param.max}" /> <input
-									type="hidden" name="keywords" value="${keywords}" />
+							<div class="d-flex align-items-center">
+									<label>Sắp xếp: </label> 
+									<select class="form-control"
+										name="sortby" onchange="submitForm()" style="width: 80%">
+										<option value="maCTSP">--Chọn--</option>
+										<option value="gia" ${sortby == 'gia' ? 'selected' : ''}>Giá</option>
+										<option value="maSP.tenSP"
+											${sortby == 'maSP.tenSP' ? 'selected' : ''}>Tên</option>
+									</select>
+								<input type="hidden" name="p" value="0" /> <input type="hidden"
+									name="min" value="${param.min}" /> <input type="hidden"
+									name="max" value="${param.max}" /> <input type="hidden"
+									name="keywords" value="${keywords}" />
 							</div>
 						</form>
 
@@ -410,17 +429,17 @@
 							<div class="card mb-4 product-wap rounded-0">
 								<div class="card rounded-0">
 									<img class="card-img rounded-0 img-fluid"
-										src="/template/user/images/dt20.jpg" />
+										src="/images/${sp.img}" />
 									<div
 										class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
 										<ul class="list-unstyled d-flex">
-											<li><a class="btn btn-success text-white m-1"
-												href=""><i class="far fa-heart"></i></a></li>
+											<li><a class="btn btn-success text-white m-1" href=""><i
+													class="far fa-heart"></i></a></li>
 											<li><a class="btn btn-success text-white m-1"
 												href="/product/product-detail/${sp.maCTSP}"><i
 													class="far fa-eye"></i></a></li>
-											<li><a class="btn btn-success text-white m-1"
-												href=""><i class="fas fa-cart-plus"></i></a></li>
+											<li><a class="btn btn-success text-white m-1" href=""><i
+													class="fas fa-cart-plus"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -646,11 +665,11 @@
 		}
 	</script>
 	<!-- Script to automatically show the modal -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#successModal').modal('show');
-            });
-        </script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#successModal').modal('show');
+		});
+	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"

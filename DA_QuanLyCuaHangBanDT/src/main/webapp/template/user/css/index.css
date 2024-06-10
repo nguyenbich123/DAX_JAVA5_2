@@ -2,3 +2,17 @@
     width: 270px;
     height: 364.062px;
 }
+
+.avatar{
+	width: 70%;
+	height: 70px;
+	margin: 0 auto;
+}
+
+.avatar img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block; /* Đảm bảo hình ảnh hiển thị là một khối */
+    margin: auto; /* Căn giữa hình ảnh */
+    border-radius: 50%; 
+}

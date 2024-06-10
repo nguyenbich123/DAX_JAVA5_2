@@ -1,7 +1,9 @@
 package com.poly.repository;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import java.util.Date;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,5 +27,16 @@ public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
 
 	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP.tenSP LIKE ?1")
 	Page<ChiTietSP> findByKeywords(String keywords, Pageable pageable);
-	
+
+	List<ChiTietSP> findByMaCTSP(Integer maCTSP);
+
+	@Query("SELECT o FROM ChiTietSP o WHERE o.maCTSP = ?1")
+	Optional<ChiTietSP> findByMaCTSP2(Integer maCTSP);
+
+	@Query("SELECT o FROM ChiTietSP o WHERE o.maCTSP = ?1")
+	ChiTietSP findByMaCTSP3(Integer maCTSP);
+
+
+
+
 }

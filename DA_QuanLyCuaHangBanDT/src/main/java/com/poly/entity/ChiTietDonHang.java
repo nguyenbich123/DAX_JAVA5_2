@@ -31,7 +31,7 @@ public class ChiTietDonHang {
     private Integer soLuong;
 
     @Column(name="Gia")
-    private Float gia;
+    private Double gia;
     
     @ManyToOne
     @JoinColumn(name = "Madh")

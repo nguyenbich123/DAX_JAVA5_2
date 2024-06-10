@@ -35,6 +35,7 @@
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
 <script src="https://kit.fontawesome.com/49bc4d7d5f.js"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/template/user/css/index.css">
 <!-- script
     ================================================== -->
 <script src="js/modernizr.js"></script>
@@ -185,7 +186,7 @@
 
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
-			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
+				<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
             <a  class="navbar-brand " href="/home/index">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
@@ -254,8 +255,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -307,7 +314,7 @@
 				<div class="col-lg-5 mt-5">
 					<div class="card mb-3">
 						<img class="card-main-detail-img img-fluid"
-							src="/template/user/images/dt1.jpg" alt="Card image cap"
+							src="/images/${sanPham.img}" alt="Card image cap"
 							id="product-detail">
 					</div>
 				</div>
@@ -486,7 +493,7 @@
 					<div class="card mb-4 product-wap rounded-0">
 						<div class="card rounded-0">
 							<img class="card-img rounded-0 img-fluid"
-								src="/template/user/images/dt20.jpg" />
+								src="/images/${sp.img}" />
 							<div
 								class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
 								<ul class="list-unstyled d-flex">

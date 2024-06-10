@@ -192,8 +192,14 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
+                          	
 	                          <c:choose>
 								    <c:when test="${account != null}">
+									    <li style="max-height: 100px" class="p-2">
+										    <div class="avatar">
+										        <img alt="" src="/template/user/images/meo.jpg">
+										    </div>
+										</li>
 								        <li>
 			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
@@ -734,7 +740,7 @@
       <div class="swiper-pagination"></div>
     </section>
 
-    <!-- <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
+    <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
       <div class="container">
         <div class="row">
           <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
@@ -755,9 +761,9 @@
           </div>
         </div>
       </div>
-</section> -->
+</section>
 
-    <!-- <section id="instagram" class="padding-large overflow-hidden no-padding-top">
+    <section id="instagram" class="padding-large overflow-hidden no-padding-top">
       <div class="container">
         <div class="row">
           <div class="display-header text-uppercase text-dark text-center pb-3">
@@ -817,7 +823,9 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
+    
+    
     <footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
       <div class="container">
         <div class="row">
@@ -877,19 +885,19 @@
                   <h5 class="widget-title pb-2">Liên kết nhanh</h5>
                   <ul class="menu-list list-unstyled text-uppercase">
                     <li class="menu-item pb-2">
-                      <a href="#">Trang chủ</a>
+                      <a href="/home/index">Trang chủ</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Giới thiệu</a>
+                      <a href="/about/view">Giới thiệu</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Cửa hàng</a>
+                      <a href="/product/view">Cửa hàng</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Bài viết</a>
+                      <a href="/about/view">Bài viết</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Liên hệ</a>
+                      <a href="/contact/view">Liên hệ</a>
                     </li>
                   </ul>
                 </div>
@@ -899,19 +907,19 @@
                   <h5 class="widget-title pb-2">Trợ giúp & Thông tin</h5>
                   <ul class="menu-list list-unstyled">
                     <li class="menu-item pb-2">
-                      <a href="#">Theo dõi đơn hàng</a>
+                      <a href="/order/view">Theo dõi đơn hàng</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Chính sách hoàn trả</a>
+                      <a href="/about/view">Chính sách hoàn trả</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Giao hàng + Vận chuyển</a>
+                      <a href="/order/view">Giao hàng + Vận chuyển</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Liên hệ</a>
+                      <a href="/contact/view">Liên hệ</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Câu hỏi thường gặp</a>
+                      <a href="/about/view">Câu hỏi thường gặp</a>
                     </li>
                   </ul>
                 </div>

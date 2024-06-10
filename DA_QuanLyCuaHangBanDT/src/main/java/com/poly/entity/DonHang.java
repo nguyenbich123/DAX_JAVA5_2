@@ -1,5 +1,7 @@
 package com.poly.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,7 +41,7 @@ public class DonHang {
     
     @ManyToOne
     @JoinColumn(name = "Idtttt")
-    private TTDH tttt;
+    private TrangThaiTT tttt;
     
     @Column(name="Ngaytt")
     private Date ngayTT;
@@ -53,7 +55,10 @@ public class DonHang {
     @ManyToOne
     @JoinColumn(name = "Idgiamgia")
     private GiamGia maGG;
-    
+
+    @Column(name = "Diachi")
+    private String diaChi;
+
     @OneToMany(mappedBy = "maDH")
    	List<ChiTietDonHang> ctdh;
 }
