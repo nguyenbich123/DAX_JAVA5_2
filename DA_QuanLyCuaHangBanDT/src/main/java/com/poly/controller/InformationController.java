@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.poly.entity.*;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
+import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
 
@@ -34,27 +35,42 @@ public class InformationController {
 	@Autowired
 	ServletContext app;
 	
-	@GetMapping("view/{tenDN}")
-	public String getuser(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN) {
-		Account item = accDao.findById(tenDN).get();
+	@Autowired
+	SessionService session;
+	
+	@GetMapping("view")
+	public String getuser(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc) {
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
 		model.addAttribute("item", item);	
 		return "/template/user/information";
 	}
 	
-	@PostMapping("viewdc/{tenDN}")
-	public String getuser1(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN) {
-		Account item = accDao.findById(tenDN).get();
-		model.addAttribute("item", item);
+	@PostMapping("viewdc")
+	public String getuser1(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc) {
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
+		model.addAttribute("item", item);	
 		
 		List<DiaChi> diachi = item.getDiachi();
 		model.addAttribute("items", diachi);
 		return "/template/user/diachi";
 	}
 	
-	@GetMapping("editdc/{tenDN}")
-	public String getdc(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,@RequestParam("id_diaChi") Integer id_diaChi ) {
-		Account item = accDao.findById(tenDN).get();
-		model.addAttribute("item", item);
+	@GetMapping("editdc")
+	public String getdc(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@RequestParam("id_diaChi") Integer id_diaChi ) {
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
+		model.addAttribute("item", item);	
 		
 		DiaChi dchi = dcDao.findById(id_diaChi).get();
 		model.addAttribute("diachi", dchi);
@@ -89,14 +105,14 @@ public class InformationController {
 		return "redirect:view/"+ item.getTenDN();
 	}
 	
-	@PostMapping("updatedc/{tenDN}")
-	public String update(@ModelAttribute("diachi") DiaChi diachi,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
+	@PostMapping("updatedc")
+	public String update(@ModelAttribute("diachi") DiaChi diachi) throws IllegalStateException, IOException{
 		dcDao.save(diachi);	
-		return "redirect:/user/view/"+tenDN;
+		return "redirect:/user/view";
 	}
-	@RequestMapping("deletedc/{tenDN}")
-	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
+	@RequestMapping("deletedc")
+	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ) throws IllegalStateException, IOException{
 		dcDao.deleteById(id_diaChi);	
-		return "redirect:/user/view/"+tenDN;
+		return "redirect:/user/view";
 	}
 }

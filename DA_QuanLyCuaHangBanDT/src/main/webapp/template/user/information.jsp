@@ -224,7 +224,7 @@
 										    </div>
 										</li>
 								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
 			                            <li>
 			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
@@ -316,7 +316,7 @@
 											<div class="text-center">
 												<button formaction="/user/update"
 													class="btn btn-primary">Save</button>
-													<button formaction="/user/viewdc/${tenDN}"
+													<button formaction="/user/viewdc"
 													class="btn btn-primary">Địa Chỉ</button>
 											</div>
 										</form:form>

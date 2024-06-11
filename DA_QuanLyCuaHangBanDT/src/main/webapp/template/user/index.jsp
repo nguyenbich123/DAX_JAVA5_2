@@ -201,7 +201,7 @@
 										    </div>
 										</li>
 								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
 			                            <li>
 			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>

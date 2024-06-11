@@ -182,9 +182,7 @@
                         </li>
                         <li class="pe-3 dropdown position-relative">
                           <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
-								    Xin chào, ${account.hoTen}
-							  </c:if>
+                          	  
                             <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
