@@ -54,9 +54,15 @@ public class FormDPGMHController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") DPGMH item , BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") DPGMH item , BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		
 		if(result.hasErrors()) {
-			return "/template/Admin/formDPGMH";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGMH"));
+			model.addAttribute("field", field.orElse("idDPGMH"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<DPGMH> page = mDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	    	return "/template/Admin/formDPGMH";
 		}
 		mDao.save(item);
 		return "redirect:/admin/dpgmh/index";

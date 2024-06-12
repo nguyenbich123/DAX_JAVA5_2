@@ -54,9 +54,14 @@ public class FormMHRController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") MHR item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") MHR item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
-			return "/template/Admin/formMHR";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idMHR"));
+			model.addAttribute("field", field.orElse("idMHR"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<MHR> page = rDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formMHR";
 		}
 		rDao.save(item);
 		return "redirect:/admin/mhr/index";

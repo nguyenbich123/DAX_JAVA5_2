@@ -21,6 +21,7 @@ import com.poly.entity.ManHinh;
 import com.poly.entity.Pass;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
+import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
 
@@ -34,10 +35,16 @@ public class UserController {
 	DiaChiDAO dcDao;
 	@Autowired
 	ServletContext app;
+	@Autowired
+	SessionService session;
 	
-	@GetMapping("view/{tenDN}")
-	public String getuser(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN) {
-		Account item = accDao.findById(tenDN).get();
+	@GetMapping("view")
+	public String getuser(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc) {
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
 		model.addAttribute("item", item);
 		
 		Pass pass = new Pass();
@@ -48,11 +55,15 @@ public class UserController {
 		return "/template/Admin/user";
 	}
 	
-	@GetMapping("viewdc/{tenDN}")
+	@GetMapping("viewdc")
 	public String getdc(Model model,@ModelAttribute("item") Account ac,
-			@ModelAttribute("diachi") DiaChi dc,@PathVariable("tenDN") String tenDN,
+			@ModelAttribute("diachi") DiaChi dc,
 			@RequestParam("id_diaChi") Integer id_diaChi ) {
-		Account item = accDao.findById(tenDN).get();
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
 		model.addAttribute("item", item);
 		
 		Pass pass = new Pass();
@@ -83,13 +94,16 @@ public class UserController {
 		}
 		
 		accDao.save(item);
-		return "redirect:view/"+ item.getTenDN();
+		return "redirect:view";
 	}
 	
-	@PostMapping("updatemk/{tenDN}")
-	public String submitForm(Model model,@ModelAttribute("pass") Pass pass,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
-		
-		Account item = accDao.findById(tenDN).get();
+	@PostMapping("updatemk")
+	public String submitForm(Model model,@ModelAttribute("pass") Pass pass) throws IllegalStateException, IOException{
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
 		System.out.println("mật khẩu củ trong db "+item.getMatKhau());
 		System.out.println("mật khẩu củ nhập vào "+ pass.getOpass());
 		
@@ -98,30 +112,36 @@ public class UserController {
 				
 		if(!pass.getOpass().equals(mkc)) {
 			System.out.println("sai mật khẩu");	
-			return "redirect:/admin/user/view/"+tenDN;
+			return "redirect:/admin/user/view";
 		}
 		
 		
 		if(!pass.getNpass().equals(pass.getCfpass())) {
 			System.out.println("mật khẩu không khớp");
-			return "redirect:/admin/user/view/"+tenDN;
+			return "redirect:/admin/user/view";
 		}
 		
 		item.setMatKhau(mkm);
 		accDao.save(item);
-		return "redirect:/admin/user/view/"+tenDN;
+		return "redirect:/admin/user/view";
 	}
 	
-	@PostMapping("updatedc/{tenDN}")
-	public String update(@ModelAttribute("diachi") DiaChi diachi,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
+	@PostMapping("updatedc")
+	public String update(@ModelAttribute("diachi") DiaChi diachi) throws IllegalStateException, IOException{
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		Account item = accDao.findById(account.getTenDN()).get();
+		diachi.setTenDN(item);
 		dcDao.save(diachi);	
-		return "redirect:/admin/user/view/"+tenDN;
+		return "redirect:/admin/user/view";
 	}
 	
-	@RequestMapping("deletedc/{tenDN}")
-	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ,@PathVariable("tenDN") String tenDN) throws IllegalStateException, IOException{
+	@RequestMapping("deletedc")
+	public String delete(@RequestParam("id_diaChi") Integer id_diaChi) throws IllegalStateException, IOException{
 		dcDao.deleteById(id_diaChi);	
-		return "redirect:/admin/user/view/"+tenDN;
+		return "redirect:/admin/user/view";
 	}
 	
 }

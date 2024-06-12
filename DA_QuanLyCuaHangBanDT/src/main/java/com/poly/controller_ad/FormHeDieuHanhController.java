@@ -56,9 +56,10 @@ public class FormHeDieuHanhController {
 	public String update(@Validated @ModelAttribute("item") HeDieuHanh item, BindingResult result) throws IllegalStateException, IOException {
 		if(result.hasErrors() ) {
 			return "/template/Admin/formHeDieuHanh";
+			
 		}
 		hdhDao.save(item);
-		return "redirect:/admin/hedieuhanh/edit/" + item.getMaHDH();
+		return "redirect:/admin/hedieuhanh/index";
 	}
 
 	

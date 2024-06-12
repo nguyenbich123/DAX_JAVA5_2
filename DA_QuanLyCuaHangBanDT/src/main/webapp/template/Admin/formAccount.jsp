@@ -62,17 +62,19 @@
 									<label for="inputName" class="col-sm-2 col-form-label">Role</label>
 									<div class="col-sm-4">
 										<div id="inputState" class="d-flex align-items-center">
-											<form:select path="role.Idrole" class="form-select">
+											<%-- <form:select path="role.Idrole" class="form-select">
 												<form:options items="${list_role}" />
-											</form:select>
+											</form:select> --%>
+											<form:radiobuttons path="role.Idrole" items="${list_role}" style="margin-left: 20px" />
 										</div>
 									</div>
 									<label for="inputName" class="col-sm-2 col-form-label">Trạng Thái</label>
 									<div class="col-sm-4">
 										<div id="inputState" class="d-flex align-items-center">
-											<form:select path="tthd.Idtthd" class="form-select">
+											<%-- <form:select path="tthd.Idtthd" class="form-select">
 												<form:options items="${list_tthd}" />
-											</form:select>
+											</form:select> --%>
+											<form:radiobuttons path="tthd.Idtthd" items="${list_tthd}" style="margin-left: 20px"/>
 										</div>
 									</div>
 								</div>

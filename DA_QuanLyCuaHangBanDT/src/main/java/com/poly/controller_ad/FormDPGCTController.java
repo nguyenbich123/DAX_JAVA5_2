@@ -54,9 +54,15 @@ public class FormDPGCTController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") DPGCT item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") DPGCT item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		
 		if(result.hasErrors()) {
-			return "/template/Admin/formDPGCT";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGCT"));
+			model.addAttribute("field", field.orElse("idDPGCT"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<DPGCT> page = csDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formDPGCT";
 		}
 		csDao.save(item);
 		return "redirect:/admin/dpgct/index";

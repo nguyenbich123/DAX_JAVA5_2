@@ -83,26 +83,19 @@ public class InformationController {
 
 	
 	@RequestMapping("update")
-	public String update(Account items,@RequestParam("photo_file") MultipartFile img,@Validated @ModelAttribute("item") Account item,BindingResult result) throws IllegalStateException, IOException {
-		if(result.hasErrors()) {
-			if(!img.isEmpty()) {
-				String filename = img.getOriginalFilename();
-				File uploadFolder = new File(app.getRealPath("/images/"));
-				if (!uploadFolder.exists()) {
-					uploadFolder.mkdirs();
-				}
-				File destFile = new File(uploadFolder, filename);
-				img.transferTo(destFile);
-				items.setImg(filename);
-				System.out.println(uploadFolder);
-				System.out.println(destFile);
+	public String update(Account item,@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
+		if(!img.isEmpty()) {
+			String filename = img.getOriginalFilename();
+			File uploadFolder = new File(app.getRealPath("/images/"));
+			if (!uploadFolder.exists()) {
+				uploadFolder.mkdirs();
 			}
-			return "/template/user/information";
+			File destFile = new File(uploadFolder, filename);
+			img.transferTo(destFile);
+			item.setImg(filename);
 		}
-
-
 		accDao.save(item);
-		return "redirect:view/"+ item.getTenDN();
+		return "redirect:view";
 	}
 	
 	@PostMapping("updatedc")

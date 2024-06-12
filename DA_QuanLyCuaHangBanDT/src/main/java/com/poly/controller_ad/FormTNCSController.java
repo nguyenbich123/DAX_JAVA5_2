@@ -54,9 +54,14 @@ public class FormTNCSController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") TNCS item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") TNCS item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
-			return "/template/Admin/formTNCS";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idTNCS"));
+			model.addAttribute("field", field.orElse("idTNCS"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<TNCS> page = tnDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formTNCS";
 		}
 		tnDao.save(item);
 		return "redirect:/admin/tncs/index";

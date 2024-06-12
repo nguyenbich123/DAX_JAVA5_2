@@ -54,9 +54,14 @@ public class FormDLPController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") DLP item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") DLP item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
-			return "/template/Admin/formDLP";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idDLP"));
+			model.addAttribute("field", field.orElse("idDLP"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<DLP> page = dDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formDLP";
 		}
 		dDao.save(item);
 		return "redirect:/admin/dlp/index";

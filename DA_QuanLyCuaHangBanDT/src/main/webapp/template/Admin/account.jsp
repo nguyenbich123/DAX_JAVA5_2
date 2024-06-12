@@ -64,8 +64,7 @@
 											<td>${item.hoTen}</td>
 											<td>${item.sdt}</td>
 											<td>${item.email}</td>
-											<td><img src="/template/Admin/assets/img/${item.img}"
-												alt=""></td>
+											<td><img src="/images/${item.img}" alt="" style="width: 50px; height: 50px"></td>
 											<td>${item.role.roles}</td>
 											<td>${item.tthd.trangThai}</td>
 											<td>

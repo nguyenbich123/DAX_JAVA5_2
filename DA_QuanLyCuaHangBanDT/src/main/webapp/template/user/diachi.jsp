@@ -255,7 +255,7 @@
                         <li class="pe-3 dropdown position-relative">
                           <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
                           	  <c:if test="${account != null}">
-								    Xin chào, ${account.hoTen}
+								    ${account.hoTen}
 							  </c:if>
                             <svg class="user">
                               <use xlink:href="#user"></use>
@@ -356,23 +356,21 @@
                         <label for="Address" class="col-md-4 col-form-label">Đường Số Nhà</label>
                         <div class="col-md-8">
                             <form:input type="text" path="duong_Sonha" cssClass="form-control"/>
-
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="Address2" class="col-md-4 col-form-label">Quận Huyện</label>
                         <div class="col-md-8">
                             <form:input type="text" path="quan_Huyen" cssClass="form-control"/>
-
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="Address3" class="col-md-4 col-form-label">Tỉnh Thành Phố</label>
                         <div class="col-md-8">
                             <form:input type="text" path="tinh_ThanhPho" cssClass="form-control"/>
-
                         </div>
                     </div>
+                    <form:hidden path="tenDN.tenDN" />
                     <div class="text-center">
                         <button formaction="/user/updatedc" class="btn btn-primary">Save</button>
                     </div>

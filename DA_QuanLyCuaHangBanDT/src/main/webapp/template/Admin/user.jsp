@@ -187,7 +187,7 @@
 											</div>
 										</div>
 										<div class="text-center">
-											<button formaction="/admin/user/updatemk/${tenDN}"
+											<button formaction="/admin/user/updatemk"
 												class="btn btn-primary">Save</button>
 										</div>
 									</form:form>
@@ -214,9 +214,9 @@
 													<td>${diachi.tinh_ThanhPho}</td>
 													<td>
 												<div class="icon">
-													<a href="/admin/user/viewdc/${tenDN}?id_diaChi=${diachi.id_diaChi}"><i
+													<a href="/admin/user/viewdc?id_diaChi=${diachi.id_diaChi}"><i
 														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/user/deletedc/${tenDN}?id_diaChi=${diachi.id_diaChi}"><i
+														href="/admin/user/deletedc?id_diaChi=${diachi.id_diaChi}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>
@@ -229,6 +229,7 @@
 									<!-- Địa chỉ  Form -->
 									<form:form action="/admin/user/index" modelAttribute="diachi"
 										enctype="multipart/form-data">
+										
 										<form:hidden path="id_diaChi" />
 										<div class="row mb-3">
 											<label for="Address"
@@ -259,7 +260,7 @@
 										</div>
 
 										<div class="text-center">
-											<button formaction="/admin/user/updatedc/${tenDN}"
+											<button formaction="/admin/user/updatedc"
 												class="btn btn-primary">Save</button>
 										</div>
 									</form:form>

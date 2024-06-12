@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
@@ -273,7 +273,7 @@
         <br>
         <div class="row">
 	        <div class=col-md-3>
-	        	<img src="/images/${item.img}" alt="Profile" style="height: 300px ; width: 250px">
+	        	<img src="/images/<c:if test="${account != null}">${account.img}</c:if>" alt="Profile" style="height: 300px ; width: 250px">
 	        </div>
 	        <div class=col-md-9>
 	          <form:form action="/user/index" modelAttribute="item"

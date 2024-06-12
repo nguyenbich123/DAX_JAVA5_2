@@ -28,6 +28,7 @@ import com.poly.entity.TrangThaiHD;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.RoleDAO;
 import com.poly.repository.TrangThaiHoatDongDAO;
+import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
 
@@ -42,6 +43,8 @@ public class AccountController {
 	TrangThaiHoatDongDAO ttDao;
 	@Autowired
 	ServletContext app;
+	@Autowired
+	SessionService session;
 
 	@RequestMapping("account/view")
 	public String getAccount(Model model,@ModelAttribute("item") Account ac) {
@@ -60,9 +63,10 @@ public class AccountController {
 	}
 
 	@RequestMapping("account/update")
-	public String update(Account item) throws IllegalStateException, IOException {
+	public String update(Model model,Account item) throws IllegalStateException, IOException {
+		System.out.println(item);
 		accDao.save(item);
-		return "redirect:/admin/account/edit/"+ item.getTenDN();
+		return "redirect:/admin/account/index";
 	}
 
 	@RequestMapping("account/delete/{tenDN}")
@@ -77,7 +81,9 @@ public class AccountController {
 
 		List<Role> roles = roleDao.findAll();
 		for (Role c : roles) {
-			map.put(c.getIdrole(), c.getRoles());
+			if(!c.getRoles().equals("Admin")) {
+				map.put(c.getIdrole(),c.getRoles());
+			}		
 		}
 		return map;
 	}
@@ -95,6 +101,18 @@ public class AccountController {
 	
 	@GetMapping("account/index")
 	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+		
+		//kiểm tra có quyền vào hay không 
+		Account account = session.get("account");
+		if(account == null) {
+			return  "redirect:/account/login";
+		}
+		
+		if(!account.getRole().getRoles().equals("Admin")) {		
+			System.out.println("Bạn không có quyền truy cập !");
+			return  "redirect:/admin/home/view";
+		}
+		
 		Sort sort = Sort.by(Direction.DESC, field.orElse("tenDN"));	
     	List<Account> acc = accDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("tenDN"));

@@ -54,9 +54,15 @@ public class FormHTSController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") HTS item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") HTS item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		
 		if(result.hasErrors()) {
-			return "/template/Admin/formHTS";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idHTS"));
+			model.addAttribute("field", field.orElse("idHTS"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<HTS> page = hDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formHTS";
 		}
 		hDao.save(item);
 		return "redirect:/admin/hts/index";

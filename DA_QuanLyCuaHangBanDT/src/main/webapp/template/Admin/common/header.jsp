@@ -38,7 +38,7 @@
 					</li>
 
 					<li><a class="dropdown-item d-flex align-items-center"
-						href="/admin/user/view/men0ngu"> <i class="bi bi-person"></i> <span>My
+						href="/admin/user/view"> <i class="bi bi-person"></i> <span>My
 								Profile</span>
 					</a></li>
 					<li>

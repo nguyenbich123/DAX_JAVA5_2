@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.DungLuong;
+import com.poly.entity.Mau;
 import com.poly.entity.Ram;
 import com.poly.repository.DungLuongDAO;
 
@@ -55,8 +56,13 @@ public class FormDungLuongController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") DungLuong item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") DungLuong item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("maDL"));
+			model.addAttribute("field", field.orElse("maDL"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<DungLuong> page = dlDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formDungLuong";
 		}
 		dlDao.save(item);
@@ -84,7 +90,7 @@ public class FormDungLuongController {
 	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item")DungLuong dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String index(Model model,@ModelAttribute("item")DungLuong dl,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maDL"));	
     	List<DungLuong> acc = dlDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maDL"));

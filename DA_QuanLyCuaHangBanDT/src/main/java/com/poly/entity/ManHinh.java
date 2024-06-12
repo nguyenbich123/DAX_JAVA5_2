@@ -22,21 +22,17 @@ public class ManHinh {
     private Integer idManHinh;
     
     @Column(name="Tenmanhinh")
-     @NotBlank(message = "{NotBlank.mh.tenManHing}")
     private String tenManhHinh;
     
     @ManyToOne
     @JoinColumn(name = "Idcnmh")
-     @NotBlank(message = "{NotBlank.mh.CNMH}")
     private CNMH CNMH;
     
     @ManyToOne
     @JoinColumn(name = "Idmhr")
-     @NotBlank(message = "{NotBlank.mh.MHR}")
     private MHR MHR;
     
     @ManyToOne
     @JoinColumn(name = "Iddpgmh")
-     @NotBlank(message = "{NotBlank.mh.DPG}")
     private DPGMH DPG;
 }

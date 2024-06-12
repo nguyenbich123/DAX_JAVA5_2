@@ -54,8 +54,13 @@ public class FormMauController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @Validated @ModelAttribute("item") Mau item,BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model, @Validated @ModelAttribute("item") Mau item,BindingResult result, @RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("maMau"));
+			model.addAttribute("field", field.orElse("maMau"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<Mau> page = mDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formMau";
 		}
 		mDao.save(item);

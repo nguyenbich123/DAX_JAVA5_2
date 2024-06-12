@@ -88,7 +88,7 @@ public class DangNhapController {
 				session.set("account", account);
 				if (account.getRole().getRoles().equals("Admin")) {
 					return "redirect:/admin/home/view";
-				} else {
+				}else {
 					return "redirect:/home/index";
 				}
 			}

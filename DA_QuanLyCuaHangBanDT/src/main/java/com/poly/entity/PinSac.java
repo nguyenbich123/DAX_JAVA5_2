@@ -22,26 +22,21 @@ public class PinSac {
     private Integer idPin;
     
     @Column(name="Tenpin")
-    @NotBlank(message = "{NotBlank.pinsac.tenPin}")
     private String tenPin;
     
     @ManyToOne
     @JoinColumn(name = "Iddlp")
-    @NotBlank(message = "{NotBlank.pinsac.DLPin}")
     private DLP DLPin;
     
     @ManyToOne
     @JoinColumn(name = "Idlp")
-    @NotBlank(message = "{NotBlank.pinsac.loaiPin}")
     private LP loaiPin;
     
     @ManyToOne
     @JoinColumn(name = "Idhts")
-    @NotBlank(message = "{NotBlank.pinsac.hoTroSac}")
     private HTS hoTroSac;
     
     @ManyToOne
     @JoinColumn(name = "Idcnp")
-    @NotBlank(message = "{NotBlank.pinsac.CNP}")
     private CNP CNP;
 }

@@ -54,9 +54,14 @@ public class FormCNPController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") CNP item,BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("item") CNP item,BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
-			return "/template/Admin/formCNP";
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idcnp"));
+			model.addAttribute("field", field.orElse("idcnp"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<CNP> page = cDao.findAll(pageable);
+	        model.addAttribute("page", page);
+	        return "/template/Admin/formCNP";
 		}
 		cDao.save(item);
 		return "redirect:/admin/cnp/index";

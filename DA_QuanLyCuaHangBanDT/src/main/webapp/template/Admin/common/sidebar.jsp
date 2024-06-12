@@ -170,5 +170,17 @@
                     </li>
                 </ul>
             </li><!-- End màn hình -->
-
+			<li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#nguoidung" data-bs-toggle="collapse" href="#">
+                   <i class="bi bi-menu-button-wide"></i><span>Quản Lý Người Dùng</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="nguoidung" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/account/index">
+                            <i class="bi bi-circle"></i><span>Người Dùng</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li><!-- End màn hình -->
     </aside><!-- End Sidebar-->
