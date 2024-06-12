@@ -63,7 +63,7 @@
 								</div>
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">
-										Loại Màn</label>
+										Kích Thước</label>
 									<div class="col-sm-9">
 										<form:input path="mhRong" type="text" class="form-control short-input" />
 										<form:errors path="mhRong" cssClass="text-danger" />
@@ -96,7 +96,7 @@
 								<thead>
 									<tr>
 										<th><a href="/admin/mhr/index?field=idMHR">Mã Màn Hình</a></th>
-										<th><a href="/admin/mhr/index?field=mhRong">Loại Màn</a></th>
+										<th><a href="/admin/mhr/index?field=mhRong">Kích Thước Màn</a></th>
 									</tr>
 								</thead>
 								<tbody>

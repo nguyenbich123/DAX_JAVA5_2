@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,14 +49,14 @@ public class ManHinhController {
 		MHRDAO mhrDao;
 		
 	@RequestMapping("view")
-	public String getform(Model model,@ModelAttribute("item") ManHinh mh) {
+	public String getform(Model model,@ModelAttribute("mhc") ManHinh mh) {
 		List<ManHinh> items = mhDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formManHinh";
 	}
 
 	@RequestMapping("edit/{idManHinh}")
-	public String edit(Model model, @ModelAttribute("item") ManHinh mh,@PathVariable("idManHinh") Integer idManHinh,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("mhc") ManHinh mh,@PathVariable("idManHinh") Integer idManHinh,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		ManHinh item = mhDao.findById(idManHinh).get();
 		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
@@ -65,7 +67,10 @@ public class ManHinhController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") ManHinh item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("mhc") ManHinh item,BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formManHinh";
+		}
 		mhDao.save(item);
 		return "redirect:/admin/mh/index";
 	}
@@ -78,7 +83,7 @@ public class ManHinhController {
 	}	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item")ManHinh mhinh,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("mhc")ManHinh mhinh,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idManHinh"));	
     	List<ManHinh> mh = mhDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("idManHinh"));

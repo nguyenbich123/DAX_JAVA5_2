@@ -44,22 +44,24 @@
 							<h5 class="card-title">Form Màn Hình</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/mh/index" modelAttribute="item" enctype="multipart/form-data">
+							<form:form action="/admin/mh/index" modelAttribute="mhc" enctype="multipart/form-data">
 								  <form:hidden path="idManHinh" />
 								  <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Màn Hình</label>
                                     <div class="col-sm-9">
                                       <form:input path="tenManhHinh" type="text" class="form-control"/>
-                                      <form:errors path="tenManhHinh" />
+                                      <form:errors path="tenManhHinh" cssClass="text-danger" />
                                   </div>
                                 </div>
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">Công
 										Nghệ Màn Hình</label>
 									<div class="col-sm-9">
-										<form:select path="CNMH.idCNMH" class="form-select">
+										<form:select path="CNMH" class="form-select">
+										<form:option value="">--Chọn Công Nghệ Màn Hình--</form:option>
 											<form:options items="${list_cnmh}" />
 										</form:select>
+										<form:errors path="CNMH" cssClass="text-danger" />
 									</div>
 								</div>
 
@@ -67,18 +69,22 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Màn
 										Hình Rộng</label>
 									<div class="col-sm-9 ">
-										<form:select path="MHR.idMHR" class="form-select">
+										<form:select path="MHR" class="form-select">
+										<form:option value="">--Chọn Kích Thước Màn--</form:option>
 											<form:options items="${list_mhr}" />
 										</form:select>
+										<form:errors path="MHR" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Độ
 										Phân Giải</label>
 									<div class="col-sm-9 ">
-										<form:select path="DPG.idDPGMH" class="form-select">
+										<form:select path="DPG" class="form-select">
+										<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpg}" />
 										</form:select>
+										<form:errors path="DPG" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">

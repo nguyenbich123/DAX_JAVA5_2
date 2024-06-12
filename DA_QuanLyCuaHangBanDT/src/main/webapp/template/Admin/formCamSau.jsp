@@ -44,7 +44,7 @@
 							<h5 class="card-title">Form Cam Sau</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/camsau/index" modelAttribute="item"
+							<form:form action="/admin/camsau/index" modelAttribute="cs"
 								enctype="multipart/form-data">
 								<form:hidden path="idCamSau" />
 								<div class="row mb-3">
@@ -61,12 +61,12 @@
 									<label for="DPGCS" class="col-sm-3 col-form-label">Độ
 										Phân Giải Cam Sau</label>
 									<div class="col-sm-9">
-										<form:select path="DPGCS.idDPGCS" cssClass="form-select" id="DPGCS">
+										<form:select path="DPGCS" cssClass="form-select" id="DPGCS">
 										<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpgcs}" />
 										</form:select>
 										<br>
-										<form:errors path="DPGCS.idDPGCS" cssClass="text-danger" />
+										<form:errors path="DPGCS" cssClass="text-danger" />
 									</div>
 
 								</div>
@@ -74,12 +74,12 @@
 									<label for="TNCS" class="col-sm-3 col-form-label">Tính
 										Năng Cam Sau</label>
 									<div class="col-sm-9 ">
-										<form:select path="TNCS.idTNCS" cssClass="form-select" id="TNCS">
+										<form:select path="TNCS" cssClass="form-select" id="TNCS">
 										<form:option value="">--Chọn Tính Năng--</form:option>
 											<form:options items="${list_tncs}" />
 										</form:select>
 										<br>
-										<form:errors path="TNCS.idTNCS" cssClass="text-danger" />
+										<form:errors path="TNCS" cssClass="text-danger" />
 									</div>
 
 								</div>

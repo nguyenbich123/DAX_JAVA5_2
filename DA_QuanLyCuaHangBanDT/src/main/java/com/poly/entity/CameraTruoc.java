@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -27,9 +29,11 @@ public class CameraTruoc {
 
     @ManyToOne
     @JoinColumn(name = "Iddpgct")
+    @NotNull(message = "{NotNull.ct.DPGCT}")
     private DPGCT DPGCT;
 
     @ManyToOne
     @JoinColumn(name = "Idtnct")
+    @NotNull(message = "{NotNull.ct.TNCT}")
     private TNCT TNCT;
 }
