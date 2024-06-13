@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.CNP;
+import com.poly.entity.CameraSau;
 import com.poly.entity.DLP;
 import com.poly.entity.HTS;
 import com.poly.entity.LP;
@@ -71,8 +72,13 @@ public class FormPinController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("pinsac") PinSac item,BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("pinsac") PinSac item,BindingResult result,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idPin"));
+			model.addAttribute("field", field.orElse("idPin"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<PinSac> page = psDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formPin";
 		}
 		psDao.save(item);

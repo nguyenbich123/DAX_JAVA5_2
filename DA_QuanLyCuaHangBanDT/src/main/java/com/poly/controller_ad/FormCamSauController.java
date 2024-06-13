@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.CameraSau;
 import com.poly.entity.DPGCS;
+import com.poly.entity.ManHinh;
 import com.poly.entity.TNCS;
 import com.poly.repository.CameraSauDAO;
 import com.poly.repository.DPGCSDAO;
@@ -66,10 +67,16 @@ public class FormCamSauController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @Validated @ModelAttribute("cs") CameraSau item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("cs") CameraSau item, BindingResult result,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors() ) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idCamSau"));
+			model.addAttribute("field", field.orElse("idCamSau"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<CameraSau> page = csDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formCamSau";
 		}
+		
 		csDao.save(item);
 		return "redirect:/admin/camsau/index";
 	}

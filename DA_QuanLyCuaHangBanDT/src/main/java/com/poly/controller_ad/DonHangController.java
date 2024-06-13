@@ -13,17 +13,18 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.entity.Account;
 import com.poly.entity.ChiTietDonHang;
 import com.poly.entity.DonHang;
 import com.poly.entity.SanPham;
+import com.poly.entity.TTDH;
 import com.poly.repository.ChiTietDonHangDAO;
 import com.poly.repository.DonHangDAO;
+import com.poly.repository.TTDH_DAO;
 import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
@@ -33,6 +34,8 @@ import jakarta.servlet.ServletContext;
 public class DonHangController {
 	@Autowired
 	DonHangDAO dhDao;
+	@Autowired
+	TTDH_DAO ttdhDao;
 	 @Autowired
 	 ChiTietDonHangDAO ctdhDAO;
 	 
@@ -69,6 +72,21 @@ public class DonHangController {
 		return "/template/Admin/DonHang";
 	}
 	
+	@PostMapping("xn")
+	public String Xn(Model model, @ModelAttribute("dh") DonHang dh,@RequestParam("maDH") Integer maDH) {
+		
+		List<TTDH> tt = ttdhDao.findAll();
+		for(TTDH x : tt) {
+			if(x.getTrangThai().equalsIgnoreCase("Xác nhận")){
+				dh.setTtdh(x);
+			}
+		}
+		
+		dhDao.save(dh);
+        
+		
+		return "/template/Admin/DonHang";
+	}
 
 //	@RequestMapping("edit/{maDH}")
 //	public String edit(Model model, @ModelAttribute("item") CameraSau cs,@PathVariable("maDH") Integer maDH) {

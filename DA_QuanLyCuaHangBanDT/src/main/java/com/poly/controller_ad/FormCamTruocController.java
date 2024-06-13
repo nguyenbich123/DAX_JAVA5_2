@@ -67,8 +67,13 @@ public class FormCamTruocController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("ct") CameraTruoc item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("ct") CameraTruoc item, BindingResult result,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors() ) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idCamTruoc"));
+			model.addAttribute("field", field.orElse("idCamTruoc"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<CameraTruoc> page = ctDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formCamTruoc";
 		}
 		ctDao.save(item);

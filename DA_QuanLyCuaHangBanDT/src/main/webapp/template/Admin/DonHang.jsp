@@ -170,7 +170,8 @@
 															</div>
 														</div>
 														<div class="modal-footer">
-															<button formaction="/order/remove/">Hủy</button>
+															<button formaction="/admin/donhang/xn" class="btn btn-success">Xác Nhận</button>
+															<button formaction="/admin/donhang/remove" class="btn btn-warning">Hủy</button>
 															<button type="button" class="btn btn-secondary"
 																data-bs-dismiss="modal">Đóng</button>
 														</div>

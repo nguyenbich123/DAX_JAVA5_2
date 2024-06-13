@@ -26,6 +26,7 @@ import com.poly.entity.CNMH;
 import com.poly.entity.DPGMH;
 import com.poly.entity.MHR;
 import com.poly.entity.ManHinh;
+import com.poly.entity.Mau;
 import com.poly.repository.CNMHDAO;
 import com.poly.repository.DPGMHDAO;
 import com.poly.repository.MHRDAO;
@@ -67,8 +68,13 @@ public class ManHinhController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("mhc") ManHinh item,BindingResult result) throws IllegalStateException, IOException {
+	public String update(Model model,@Validated @ModelAttribute("mhc") ManHinh item,BindingResult result,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		if(result.hasErrors()) {
+			Sort sort = Sort.by(Direction.ASC, field.orElse("idManHinh"));
+			model.addAttribute("field", field.orElse("idManHinh"));
+			Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+			Page<ManHinh> page = mhDao.findAll(pageable);
+	        model.addAttribute("page", page);
 			return "/template/Admin/formManHinh";
 		}
 		mhDao.save(item);
