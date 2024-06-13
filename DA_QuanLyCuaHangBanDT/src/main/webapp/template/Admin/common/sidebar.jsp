@@ -30,6 +30,20 @@
             </li><!-- End Tables Nav -->
 			
 			<li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#donhang" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản Lý Đơn Hàng</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="donhang" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/admin/donhang/index">
+                            <i class="bi bi-circle"></i><span>Quản Lý Đơn Hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav -->
+			
+			<li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#ttchitietsp" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-journal-text"></i><span>Quản Lý Chi Tiết Sản Phẩm  </span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>

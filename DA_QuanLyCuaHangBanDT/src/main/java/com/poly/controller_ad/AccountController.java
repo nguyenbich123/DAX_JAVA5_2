@@ -36,9 +36,9 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin")
 public class AccountController {
 	@Autowired
-	AccountDAO accDao; 
+	AccountDAO accDao;
 	@Autowired
-	RoleDAO roleDao; 
+	RoleDAO roleDao;
 	@Autowired
 	TrangThaiHoatDongDAO ttDao;
 	@Autowired
@@ -47,7 +47,7 @@ public class AccountController {
 	SessionService session;
 
 	@RequestMapping("account/view")
-	public String getAccount(Model model,@ModelAttribute("item") Account ac) {
+	public String getAccount(Model model, @ModelAttribute("item") Account ac) {
 		List<Account> items = accDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/account";
@@ -63,7 +63,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("account/update")
-	public String update(Model model,Account item) throws IllegalStateException, IOException {
+	public String update(Model model, Account item) throws IllegalStateException, IOException {
 		System.out.println(item);
 		accDao.save(item);
 		return "redirect:/admin/account/index";
@@ -81,13 +81,11 @@ public class AccountController {
 
 		List<Role> roles = roleDao.findAll();
 		for (Role c : roles) {
-			if(!c.getRoles().equals("Admin")) {
-				map.put(c.getIdrole(),c.getRoles());
-			}		
+			map.put(c.getIdrole(), c.getRoles());
 		}
 		return map;
 	}
-	
+
 	@ModelAttribute("list_tthd")
 	public Map<Integer, String> gettthd() {
 		Map<Integer, String> map = new HashMap<>();
@@ -98,28 +96,28 @@ public class AccountController {
 		}
 		return map;
 	}
-	
+
 	@GetMapping("account/index")
-	public String bai5(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
-		
-		//kiểm tra có quyền vào hay không 
+	public String bai5(Model model, @RequestParam("field") Optional<String> field,
+			@RequestParam("p") Optional<Integer> p) {
+
+		// kiểm tra có quyền vào hay không
 		Account account = session.get("account");
-		if(account == null) {
-			return  "redirect:/account/login";
+		if (account == null) {
+			return "redirect:/account/login";
 		}
+
+//		if(!account.getRole().getRoles().equals("Admin")) {		
+//			System.out.println("Bạn không có quyền truy cập !");
+//			return  "redirect:/admin/home/view";
+//		}
 		
-		if(!account.getRole().getRoles().equals("Admin")) {		
-			System.out.println("Bạn không có quyền truy cập !");
-			return  "redirect:/admin/home/view";
-		}
-		
-		Sort sort = Sort.by(Direction.DESC, field.orElse("tenDN"));	
-    	List<Account> acc = accDao.findAll(sort);	
-    	model.addAttribute("field", field.orElse("tenDN"));
-	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);
-	    System.out.println(field);
-	    Page<Account> page = accDao.findAll(pageable);
-	    model.addAttribute("page", page);
-	    return "/template/Admin/account";
+		Sort sort = Sort.by(Direction.DESC, field.orElse("tenDN"));
+		//  List<Account> acc = accDao.findAll(sort);
+		model.addAttribute("field", field.orElse("tenDN"));
+		Pageable pageable = PageRequest.of(p.orElse(0), 10, sort);
+		Page<Account> page = accDao.findAll(pageable);
+		model.addAttribute("page", page);
+		return "/template/Admin/account";
 	}
 }
