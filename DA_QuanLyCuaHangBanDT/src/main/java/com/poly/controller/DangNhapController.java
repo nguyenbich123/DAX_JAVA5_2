@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +37,12 @@ import com.poly.utils.SessionService;
 
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
+
+import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.Attributes;
+import javax.naming.NamingException;
+import java.util.Hashtable;
 
 @Controller
 @RequestMapping("account")
@@ -62,7 +72,7 @@ public class DangNhapController {
 	public String showLoginForm(Model model) {
 		model.addAttribute("tk", new Account());
 		if(session.get("account") != null) {
-			return "redirect:/home/index";
+			return "redirect:/home/0";
 		}
 		return "/template/login-form-02/login";
 	}
@@ -70,26 +80,26 @@ public class DangNhapController {
 	@PostMapping("login")
 	public String login(Model model, @Validated @ModelAttribute("tk") Account tk, BindingResult result) {
 		if (!result.hasErrors()) {
-			return "/template/login-form-02/login";
+			return "redirect:/account/login";
 		}
 		
 //		Optional<Account> account = accountDao.findById(tk.getTenDN());
 //		if (account.get().getRole().equals("Admin")) {
 //			return "redirect:/admin/home/view";
 //		} else {
-//			return "redirect:/home/index";
+//			return "redirect:/home/0";
 //		}
 
 		try {
 			Account account = accountDao.findById(tk.getTenDN()).orElseThrow(() -> new Exception("Account not found"));
 			if (!account.getMatKhau().equals(tk.getMatKhau())) {
-				model.addAttribute("message", "Login failed!");
+				result.rejectValue("matKhau", "error.tk", "Sai mật khẩu. Vui lòng nhập lại!");
 			} else {
 				session.set("account", account);
 				if (account.getRole().getRoles().equals("Admin")) {
 					return "redirect:/admin/home/view";
-				}else {
-					return "redirect:/home/index";
+				} else {
+					return "redirect:/home/0";
 				}
 			}
 		} catch (Exception e) {
@@ -160,9 +170,15 @@ public class DangNhapController {
 
 	@PostMapping("forgot")
 	public String forgot(@Valid @ModelAttribute("tk") Account tk, BindingResult result, Model model) {
-	    if (!result.hasErrors()) {
-	        return "/template/login-form-02/forgot";
-	    }
+		if (result.hasErrors()) {
+            return "/template/login-form-02/forgot";
+        }
+
+        String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
+        if(checkMXRecord(email)) {
+        	result.rejectValue("email", "error.tk", "Email không tồn tại!");
+        	return "/template/login-form-02/forgot";
+        }
 
 	    Optional<Account> accountOpt = accountDao.findByEmail(tk.getEmail());
 	    if (accountOpt.isPresent()) {
@@ -226,7 +242,18 @@ public class DangNhapController {
 		return "/template/login-form-02/signup";
 	}
 	
-	
+	//Kiểm tra mail có tồn tại hay không
+	public static boolean checkMXRecord(String domain) {
+        try {
+            Hashtable<String, String> env = new Hashtable<>();
+            env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
+            DirContext ictx = new InitialDirContext(env);
+            Attributes attrs = ictx.getAttributes(domain, new String[]{"MX"});
+            return attrs != null && attrs.size() > 0;
+        } catch (NamingException e) {
+            return false;
+        }
+    }
 	
 	@PostMapping("signup")
     public String signup(@Valid @ModelAttribute("tk") Account tk, BindingResult result, Model model) {
@@ -234,8 +261,22 @@ public class DangNhapController {
             return "/template/login-form-02/signup";
         }
 
+        String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
+        if(!checkMXRecord(email)) {
+        	result.rejectValue("email", "error.tk", "Email không tồn tại!");
+        	return "/template/login-form-02/signup";
+        }
+
         try {
-            accountDao.save(tk);
+        	Account account = new Account();
+        	Role role = roleDAO.getById(3);
+        	account.setHoTen(tk.getHoTen());
+        	account.setTenDN(tk.getTenDN());
+        	account.setMatKhau(tk.getTenDN());
+        	account.setSdt(tk.getSdt());
+        	account.setEmail(tk.getEmail());
+        	account.setRole(role);
+            accountDao.save(account);
 
             // Generate confirmation token (here we use email as token for simplicity)
             String confirmationToken = tk.getEmail();
@@ -337,16 +378,16 @@ public class DangNhapController {
 	}
 
 	    
-		@ModelAttribute("role")
-		public Map<Integer, String> getCategory() {
-			Map<Integer, String> map = new HashMap<>();
-
-			List<Role> role = roleDAO.findAll();
-			for (Role c : role) {
-				map.put(c.getIdrole(), c.getRoles());
-			}
-			return map;
-		}
+//		@ModelAttribute("role")
+//		public Map<Integer, String> getCategory() {
+//			Map<Integer, String> map = new HashMap<>();
+//
+//			List<Role> role = roleDAO.findAll();
+//			for (Role c : role) {
+//				map.put(c.getIdrole(), c.getRoles());
+//			}
+//			return map;
+//		}
 
 	// Đặt lại mật khẩu
 	@GetMapping("resetpass")

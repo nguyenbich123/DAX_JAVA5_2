@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,16 @@
 <!-- script
     ================================================== -->
 <script src="js/modernizr.js"></script>
+<style>
+	@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+	}
+
+	.blink-animation {
+	animation: blink 0.3s 1;
+	}
+</style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -158,7 +169,36 @@
       </symbol>
     </svg>
 
+	<!-- Modal HTML -->
+    <c:if test="${not empty thongbao}">
+        <!-- Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">${thongbao}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Script to automatically show the modal -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+                myModal.show();
+            });
+        </script>
+    </c:if>
+
+    <!-- Ensure Bootstrap JavaScript is included -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 	<!-- Hiển thị popup của thanh tìm kiếm -->
 	<div class="search-popup">
 		<div class="search-popup-container">
@@ -188,7 +228,7 @@
 		<div class="site-header_product text-black">
 				<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/0">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -206,16 +246,16 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
@@ -323,7 +363,7 @@
 					<div class="card">
 						<div class="card-body">
 							<h1 class="h2">${sanPham.maSP.tenSP}</h1>
-							<p class="h3 py-2">${sanPham.gia}</p>
+							<p class="h3 py-2"><fmt:formatNumber value="${sanPham.gia}" pattern="#,###đ"/></p>
 							<p class="py-2">
 								<i class="fa fa-star text-warning"></i> <i
 									class="fa fa-star text-warning"></i> <i
@@ -379,7 +419,7 @@
                                             <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
                                         </ul>
                                     </div> -->
-									<div class="col-auto">
+									<div class="col-md-6">
 										<ul class="list-inline pb-3">
 											<li class="list-inline-item text-right">Quantity <input
 												type="hidden" name="product-quantity" id="product-quantity"
@@ -393,14 +433,19 @@
 												class="btn btn-warning" id="btn-plus">+</a></li>
 										</ul>
 									</div>
+									<div class="col-md-6">
+										<p>Còn lại trong kho: ${sanPham.soluong}</p>
+										<div id="sanPhamSoLuong" style="display: none;">${sanPham.soluong}</div>
+									</div>
 								</div>
+								<p id="maxQuantityMessage" class="text-danger d-none blink-animation">Số lượng bạn chọn đã đạt đến mức tối đa</p>
 								<div class="row pb-3">
 									<div class="col d-grid">
-										<button type="submit" class="btn btn-warning btn-lg"
-											name="submit" value="buy">Buy</button>
+										<button type="" class="btn btn-warning btn-lg"
+											name="submit" value="buy">Mua</button>
 									</div>
 									<div class="col d-grid">
-										<button type="submit" class="btn btn-warning btn-lg" >Add To Cart</button>
+										<button type="submit" class="btn btn-warning btn-lg" >Thêm vào giỏ</button>
 									</div>
 								</div>
 							</form>
@@ -442,42 +487,51 @@
 				</div>
 			</div>
 			<div class="row py-5">
-				<h4>Thông tin :</h4>
-				<ul class="list-unstyled pb-3">
-					<li>Hệ điều hành: ${sanPham.maSP.maHDH.tenHDH}</li>
-					<li>Chip: ${sanPham.maSP.chip}</li>
-					<li>Màn hình:
-						<ul>
-							<li>Công nghệ màn hình: ${sanPham.maSP.manHinh.CNMH.cnmh}</li>
-							<li>Màn hình rộng: ${sanPham.maSP.manHinh.MHR.mhRong}</li>
-							<li>Độ phân giải: ${sanPham.maSP.manHinh.DPG.dpg}</li>
-						</ul>
-					</li>
-					<li>Pin:
-						<ul>
-							<li>Dung lượng pin: ${sanPham.maSP.pinSac.DLPin.dlPin}</li>
-							<li>Loại pin: ${sanPham.maSP.pinSac.loaiPin.loaiPin}</li>
-							<li>Hỗ trợ sạc: ${sanPham.maSP.pinSac.hoTroSac.hoTroSac}</li>
-							<li>Công nghệ pin: ${sanPham.maSP.pinSac.CNP.congNghePin}</li>
-						</ul>
-					</li>
-					<li>Sim: ${sanPham.maSP.sim}</li>
-					<li>Cam trước:
-						<ul>
-							<li>Tên cam trước: ${sanPham.maSP.camTruoc.tenCamTruoc}</li>
-							<li>Độ phân giải: ${sanPham.maSP.camTruoc.DPGCT.dpg}</li>
-							<li>Tính năng: ${sanPham.maSP.camTruoc.TNCT.tinhNang}</li>
-						</ul>
-					</li>
-					<li>Cam sau:
-						<ul>
-							<li>Tên cam sau: ${sanPham.maSP.camSau.tenCamSau}</li>
-							<li>Độ phân giải: ${sanPham.maSP.camSau.DPGCS.dpg}</li>
-							<li>Đèn Flash: ${sanPham.maSP.camSau.denFlash == true ? "Có" : "Không"}</li>
-							<li>Tính năng: ${sanPham.maSP.camSau.TNCS.tinhNang}</li>
-						</ul>
-					</li>
-				</ul>
+				<div class="col-md-6">
+					<ul class="product-details-list">
+						<li><strong>Operating System:</strong> ${sanPham.maSP.maHDH.tenHDH}</li>
+						<li><strong>Chip:</strong> ${sanPham.maSP.chip}</li>
+						<li>
+							<strong>Display:</strong>
+							<ul>
+								<li><strong>Display Technology:</strong> ${sanPham.maSP.manHinh.CNMH.cnmh}</li>
+								<li><strong>Screen Width:</strong> ${sanPham.maSP.manHinh.MHR.mhRong}</li>
+								<li><strong>Resolution:</strong> ${sanPham.maSP.manHinh.DPG.dpg}</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Battery:</strong>
+							<ul>
+								<li><strong>Battery Capacity:</strong> ${sanPham.maSP.pinSac.DLPin.dlPin}</li>
+								<li><strong>Battery Type:</strong> ${sanPham.maSP.pinSac.loaiPin.loaiPin}</li>
+								<li><strong>Charging Support:</strong> ${sanPham.maSP.pinSac.hoTroSac.hoTroSac}</li>
+								<li><strong>Battery Technology:</strong> ${sanPham.maSP.pinSac.CNP.congNghePin}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<ul class="product-details-list">
+						<li><strong>SIM:</strong> ${sanPham.maSP.sim}</li>
+						<li>
+							<strong>Front Camera:</strong>
+							<ul>
+								<li><strong>Camera Name:</strong> ${sanPham.maSP.camTruoc.tenCamTruoc}</li>
+								<li><strong>Resolution:</strong> ${sanPham.maSP.camTruoc.DPGCT.dpg}</li>
+								<li><strong>Features:</strong> ${sanPham.maSP.camTruoc.TNCT.tinhNang}</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Rear Camera:</strong>
+							<ul>
+								<li><strong>Camera Name:</strong> ${sanPham.maSP.camSau.tenCamSau}</li>
+								<li><strong>Resolution:</strong> ${sanPham.maSP.camSau.DPGCS.dpg}</li>
+								<li><strong>Flash:</strong> ${sanPham.maSP.camSau.denFlash ? "Yes" : "No"}</li>
+								<li><strong>Features:</strong> ${sanPham.maSP.camSau.TNCS.tinhNang}</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -524,7 +578,7 @@
 									class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
 								</li>
 							</ul>
-							<p class="text-left mb-0">${sp.gia}</p>
+							<p class="text-left mb-0"><fmt:formatNumber value="${sp.gia}" pattern="#,###đ"/></p>
 							<ul class="list-unstyled d-flex justify-content-center mb-1">
 								<li><i class="text-warning fa fa-star"></i> <i
 									class="text-warning fa fa-star"></i> <i
@@ -538,7 +592,7 @@
 			</c:forEach>
 		</div>
 		<div class="row">
-			<ul class="pagination pagination-lg justify-content-end">
+			<ul class="pagination pagination-lg justify-content-center">
 				<c:forEach begin="1" end="${page.totalPages}" step="1" var="number">
 					<li class="page-item ${page.number == number - 1 ? 'active' : ''}">
 						<a
@@ -666,12 +720,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Script to automatically show the modal -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#successModal').modal('show');
-		});
-	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"
@@ -679,5 +727,9 @@
 	<script src="/template/user/js/detail_product.js"></script>
 	<script type="text/javascript" src="/template/user/js/plugins.js"></script>
 	<script type="text/javascript" src="/template/user/js/script.js"></script>
+	
+	<!-- Ensure jQuery and Bootstrap JavaScript are included -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

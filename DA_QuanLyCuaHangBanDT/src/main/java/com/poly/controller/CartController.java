@@ -43,16 +43,16 @@ public class CartController {
 
 	@Autowired
 	private SessionService session;
-	
+
 	@Autowired
 	private DiaChiDAO diaChiDAO;
 
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private AccountDAO accountDAO;
-	
+
 	@Autowired
 	ChiTietSanPhamDAO ctspDAO;
 
@@ -78,13 +78,12 @@ public class CartController {
 			model.addAttribute("gioHang", gioHang);
 			model.addAttribute("sp", chiTietGioHangList);
 
-			// Trả về tên view
-			return "/template/user/cart";
 		} else {
 			// Xử lý trường hợp không tìm thấy giỏ hàng
 			model.addAttribute("error", "Giỏ hàng không tồn tại");
-			return "error";
 		}
+		// Trả về tên view
+		return "/template/user/cart";
 	}
 
 	@RequestMapping("remove/{maCTSP}")
@@ -100,7 +99,11 @@ public class CartController {
 		if (spOptional.isPresent()) {
 			ChiTietGioHang sp = spOptional.get();
 			if ("increase".equals(action)) {
-				sp.setSoLuong(sp.getSoLuong() + 1);
+				if (sp.getSoLuong() == sp.getMaCTSP().getSoluong()) {
+					sp.setSoLuong(sp.getMaCTSP().getSoluong());
+				} else {
+					sp.setSoLuong(sp.getSoLuong() + 1);
+				}
 			} else if ("decrease".equals(action)) {
 				if (sp.getSoLuong() > 1) {
 					sp.setSoLuong(sp.getSoLuong() - 1);
@@ -115,53 +118,48 @@ public class CartController {
 		return "redirect:/cart/view";
 	}
 
-
-	
 	@RequestMapping("checkout")
-    public String checkout(@RequestParam("selectedItems") String selectedItems, Model model) {
-        // Kiểm tra đăng nhập
-        Account currentAccount = (Account) session.get("account");
-        if (currentAccount == null) {
-            return "redirect:/account/login";
-        }
+	public String checkout(@RequestParam("selectedItems") String selectedItems, Model model) {
+		// Kiểm tra đăng nhập
+		Account currentAccount = (Account) session.get("account");
+		if (currentAccount == null) {
+			return "redirect:/account/login";
+		}
 
-        // Tải lại tài khoản với thuộc tính Lazy được khởi tạo
-        Optional<Account> accountOpt = accountDAO.findByTenDN(currentAccount.getTenDN());
-        if (!accountOpt.isPresent()) {
-            return "redirect:/account/login";
-        }
+		// Tải lại tài khoản với thuộc tính Lazy được khởi tạo
+		Optional<Account> accountOpt = accountDAO.findByTenDN(currentAccount.getTenDN());
+		if (!accountOpt.isPresent()) {
+			return "redirect:/account/login";
+		}
 
-        Account account = accountOpt.get();
-        Hibernate.initialize(account.getDiachi());
-        List<DiaChi> diachi = account.getDiachi();
+		Account account = accountOpt.get();
+		Hibernate.initialize(account.getDiachi());
+		List<DiaChi> diachi = account.getDiachi();
 
-        Map<Integer, ChiTietGioHang> selectedItemsMap = new HashMap<>();
-        double totalAmount = 0;
-        List<CartItem> ctsp = new ArrayList<>();
-        
-        for (String itemId : selectedItems.split(",")) {
-            Integer id = Integer.parseInt(itemId);
-            Optional<ChiTietGioHang> spOptional = ctghDAO.findById(id);
-            if (spOptional.isPresent()) {
-                ChiTietGioHang sp = spOptional.get();
-                selectedItemsMap.put(id, sp);
-                totalAmount += sp.getSoLuong() * sp.getMaCTSP().getGia();
-                
-                ctsp.add(new CartItem(sp.getMaCTSP().getMaCTSP(),sp.getSoLuong(),sp.getMaCTSP().getGia()));
-                
-                System.out.println(ctsp + "---------------------------------------");
-            }
-            
-        }
-        
-        
-        session.set("dssp", ctsp);
-        model.addAttribute("diachi", diachi);
-        model.addAttribute("selectedItemsMap", selectedItemsMap);
-        model.addAttribute("totalAmount", totalAmount);
-        return "/template/user/payment";
-    }
-	
+		Map<Integer, ChiTietGioHang> selectedItemsMap = new HashMap<>();
+		double totalAmount = 0;
+		List<CartItem> ctsp = new ArrayList<>();
 
+		for (String itemId : selectedItems.split(",")) {
+			Integer id = Integer.parseInt(itemId);
+			Optional<ChiTietGioHang> spOptional = ctghDAO.findById(id);
+			if (spOptional.isPresent()) {
+				ChiTietGioHang sp = spOptional.get();
+				selectedItemsMap.put(id, sp);
+				totalAmount += sp.getSoLuong() * sp.getMaCTSP().getGia();
+
+				ctsp.add(new CartItem(sp.getMaCTSP().getMaCTSP(), sp.getSoLuong(), sp.getMaCTSP().getGia()));
+
+				System.out.println(ctsp + "---------------------------------------");
+			}
+
+		}
+
+		session.set("dssp", ctsp);
+		model.addAttribute("diachi", diachi);
+		model.addAttribute("selectedItemsMap", selectedItemsMap);
+		model.addAttribute("totalAmount", totalAmount);
+		return "/template/user/payment";
+	}
 
 }

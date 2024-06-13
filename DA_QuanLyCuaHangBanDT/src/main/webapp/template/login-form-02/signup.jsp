@@ -103,14 +103,6 @@
                                     class="form-control" placeholder="Email" />
                                 <form:errors path="email" cssClass="text-danger" />
                             </div>
-
-                            <div class="col-md-6 form-group first">
-                                <label for="role">Chọn vai trò</label>
-                                <form:select path="role.Idrole" cssClass="form-select form-control">
-                                    <form:option value="">Select role</form:option>
-                                    <form:options items="${role}" />
-                                </form:select>
-                            </div>
                         </div>
 
                         <div class="d-flex mb-5 align-items-center">

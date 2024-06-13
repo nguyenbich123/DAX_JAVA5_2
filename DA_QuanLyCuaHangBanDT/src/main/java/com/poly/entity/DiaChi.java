@@ -27,14 +27,14 @@ public class DiaChi {
     
     @Column(name="Tinhthanhpho")
     private Integer tinh_ThanhPho;
-    
+
     @Column(name="Quanhuyen")
     private Integer quan_Huyen;
-    
+
     @Column(name="Xaphuongthitran")
     private String xa_Phuong_Thitran;
-    
+
     @Column(name="Duongsonha")
-    private String duong_Sonha;  
+    private String duong_Sonha;
     
 }

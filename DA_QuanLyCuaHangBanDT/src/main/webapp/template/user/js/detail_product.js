@@ -34,15 +34,33 @@ $(document).ready(function() {
       val = (val=='1')?val:val-1;
       $("#var-value").html(val);
       $("#product-quantity").val(val);
+      // Ẩn thông báo nếu số lượng sản phẩm chưa đạt đến mức tối đa
+      $("#maxQuantityMessage").addClass("d-none");
       return false;
     });
     $('#btn-plus').click(function(){
-      var val = $("#var-value").html();
+      var val = parseInt($("#var-value").html()); // Chuyển đổi val thành số nguyên
+      var sanPhamSoLuong = parseInt($("#sanPhamSoLuong").text()); // Lấy giá trị số lượng từ thẻ HTML
+      console.log(sanPhamSoLuong)
+      // So sánh val với giá trị của sanPhamSoLuong
+      if (val === sanPhamSoLuong) {
+        $("#maxQuantityMessage").removeClass("d-none");
+          // Nếu val bằng với giá trị số lượng của sản phẩm, không thực hiện thêm 1 vào val
+          // và kết thúc hàm
+          return false;
+      }
+  
+      // Nếu val không bằng giá trị số lượng của sản phẩm, thì tăng val lên 1
       val++;
       $("#var-value").html(val);
       $("#product-quantity").val(val);
+
+      // Ẩn thông báo nếu số lượng sản phẩm chưa đạt đến mức tối đa
+      $("#maxQuantityMessage").addClass("d-none");
       return false;
-    });
+  });
+  
+  
     $('.btn-size').click(function(){
       var this_val = $(this).html();
       $("#product-size").val(this_val);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,16 @@
 <!-- script
     ================================================== -->
 <script src="/template/user/js/modernizr.js"></script>
+<style>
+    @keyframes blink {
+        0%, 100% { color: rgb(255, 255, 255); }
+        50% { color: red; }
+    }
 
+    .blink-animation {
+        animation: blink 1s infinite;
+    }
+</style>
 
 
 </head>
@@ -191,7 +201,7 @@
 	<div class="search-popup">
 		<div class="search-popup-container">
 			<form role="search" method="get" class="search-form"
-				action="/product/search?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
+				action="/product/search?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}#product-category">
 				<input type="search" id="search-form" class="search-field"
 					placeholder="Tìm kiếm" value="" name="keywords" />
 				<button type="submit" class="search-submit">
@@ -214,7 +224,7 @@
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/0">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -232,16 +242,16 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
@@ -334,216 +344,225 @@
 	</header>
 
 	<div class="m-2 banner-container">
-		<div class="sales d-flex">
+		<div class="sales d-flex ">
 			<img alt="" src="/template/user/images/banner1.jpg">
-			<p>Khuyến mãi ngập tràn. Nhanh tay lên nào!</p>
+			<div class="justify-content-end" style="margin: 0 auto; width: 100%;">
+				<h5>HÃY CÙNG TRẢI NGHIỆM SẢN PHẨM CỦA CỦA CHÚNG TÔI </h5>
+				<p class="blink-animation">Khuyến mãi ngập tràn. Nhanh tay lên nào!</p>
+				<a href="/product/view#product-category" class="btn btn-dark m-2" >KHÁM PHÁ NGAY</a>
+			</div>
 		</div>
 	</div>
 
 
 	<!-- Start Content -->
-	<div class="m-4 py-3 ">
-		<div class="row">
-
-			<div class="col-lg-2">
-				<h3 class="h2 pb-4">Danh mục</h3>
-				<ul class="list-unstyled templatemo-accordion">
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/iphone?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Iphone </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/samsung?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Samsung </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/oppo?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Oppo </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/search-and-page/realme?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
-							Realme </a></li>
-					<li class="pb-3"><a
-						class="collapsed d-flex justify-content-between  text-decoration-none"
-						href="/product/view?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=">
-							Tất cả </a></li>
-				</ul>
-				<hr>
-				<h3 class="h2 pb-4">Khoảng giá</h3>
-				<form action="/product/filter-price" method="get">
-					<div class="filter-price py-1">
-						<div class="from-price  d-flex">
-							<input type="text" maxlength="14" name="min" value="${param.min}"
-								placeholder="Từ" class="form-control">
-							<div class="filter-price-line"></div>
-							<input type="text" maxlength="14" name="max" value="${param.max}"
-								placeholder="Đến" class="form-control">
-						</div>
-						<input type="hidden" name="p" value="0" /> <input type="hidden"
-							name="sortby" value="${sortby}" /> <input type="hidden"
-							name="keywords" value="${keywords}" />
-						<button class="btn btn-success form-control my-2">Lọc</button>
-					</div>
-				</form>
-			</div>
-
-			<div class="col-lg-10">
-				<div class="row">
-					<div class="col-md-6">
-						<!-- <ul class="list-inline shop-top-menu pb-3 pt-1">
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                          </li>
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                          </li>
-                          <li class="list-inline-item">
-                              <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                          </li>
-                      </ul> -->
-					</div>
-					<div class="col-md-6 pb-4">
-						<form id="sortForm" action="/product/sort" method="get">
-							<div class="d-flex align-items-center">
-									<label>Sắp xếp: </label> 
-									<select class="form-control"
-										name="sortby" onchange="submitForm()" style="width: 80%">
-										<option value="maCTSP">--Chọn--</option>
-										<option value="gia" ${sortby == 'gia' ? 'selected' : ''}>Giá</option>
-										<option value="maSP.tenSP"
-											${sortby == 'maSP.tenSP' ? 'selected' : ''}>Tên</option>
-									</select>
-								<input type="hidden" name="p" value="0" /> <input type="hidden"
-									name="min" value="${param.min}" /> <input type="hidden"
-									name="max" value="${param.max}" /> <input type="hidden"
-									name="keywords" value="${keywords}" />
+	<section id="product-category">
+		<div class="m-4 py-3 ">
+			<div class="row">
+				<div class="col-lg-2">
+					<h3 class="h2 pb-4">Danh mục</h3>
+					<ul class="list-unstyled templatemo-accordion">
+						<li class="pb-3"><a
+							class="collapsed d-flex justify-content-between  text-decoration-none"
+							href="/product/search-and-page/iphone?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}#product-category">
+								Iphone </a></li>
+						<li class="pb-3"><a
+							class="collapsed d-flex justify-content-between  text-decoration-none"
+							href="/product/search-and-page/samsung?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}#product-category">
+								Samsung </a></li>
+						<li class="pb-3"><a
+							class="collapsed d-flex justify-content-between  text-decoration-none"
+							href="/product/search-and-page/oppo?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}#product-category">
+								Oppo </a></li>
+						<li class="pb-3"><a
+							class="collapsed d-flex justify-content-between  text-decoration-none"
+							href="/product/search-and-page/realme?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}#product-category">
+								Realme </a></li>
+						<li class="pb-3"><a
+							class="collapsed d-flex justify-content-between  text-decoration-none"
+							href="/product/view?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=#product-category">
+								Tất cả </a></li>
+					</ul>
+					<hr>
+					<h3 class="h2 pb-4">Khoảng giá</h3>
+					<form action="/product/filter-price#product-category" method="get">
+						<div class="filter-price py-1">
+							<div class="from-price  d-flex">
+								<input type="text" maxlength="14" name="min" value="${param.min}"
+									placeholder="Từ" class="form-control">
+								<div class="filter-price-line"></div>
+								<input type="text" maxlength="14" name="max" value="${param.max}"
+									placeholder="Đến" class="form-control">
 							</div>
-						</form>
-
-					</div>
+							<input type="hidden" name="p" value="0" /> <input type="hidden"
+								name="sortby" value="${sortby}" /> <input type="hidden"
+								name="keywords" value="${keywords}" />
+							<button  class="btn btn-success form-control my-2">Lọc</button>
+						</div>
+					</form>
 				</div>
-				<div class="row">
-					<c:forEach var="sp" items="${page.content}">
-						<div class="col-md-3">
-							<div class="card mb-4 product-wap rounded-0">
-								<div class="card rounded-0">
-									<img class="card-img rounded-0 img-fluid"
-										src="/images/${sp.img}" />
-									<div
-										class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-										<ul class="list-unstyled d-flex">
-											<li><a class="btn btn-success text-white m-1" href=""><i
-													class="far fa-heart"></i></a></li>
-											<li><a class="btn btn-success text-white m-1"
-												href="/product/product-detail/${sp.maCTSP}"><i
-													class="far fa-eye"></i></a></li>
-											<li><a class="btn btn-success text-white m-1" href=""><i
-													class="fas fa-cart-plus"></i></a></li>
+	
+				<div class="col-lg-10">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- <ul class="list-inline shop-top-menu pb-3 pt-1">
+	                          <li class="list-inline-item">
+	                              <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+	                          </li>
+	                          <li class="list-inline-item">
+	                              <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+	                          </li>
+	                          <li class="list-inline-item">
+	                              <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+	                          </li>
+	                      </ul> -->
+						</div>
+						<div class="col-md-6 pb-4">
+							<form id="sortForm" action="/product/sort#product-category" method="get">
+								<div class="d-flex align-items-center">
+										<label>Sắp xếp: </label> 
+										<select class="form-control"
+											name="sortby" onchange="submitForm()" style="width: 80%">
+											<option value="maCTSP">--Chọn--</option>
+											<option value="gia" ${sortby == 'gia' ? 'selected' : ''}>Giá</option>
+											<option value="maSP.tenSP"
+												${sortby == 'maSP.tenSP' ? 'selected' : ''}>Tên</option>
+										</select>
+									<input type="hidden" name="p" value="0" /> <input type="hidden"
+										name="min" value="${param.min}" /> <input type="hidden"
+										name="max" value="${param.max}" /> <input type="hidden"
+										name="keywords" value="${keywords}" />
+								</div>
+							</form>
+	
+						</div>
+					</div>
+					<div class="row">
+						<c:forEach var="sp" items="${page.content}">
+							<div class="col-md-3">
+								<div class="card mb-4 product-wap rounded-0">
+									<div class="card rounded-0">
+										<img class="card-img rounded-0 img-fluid"
+											src="/images/${sp.img}" />
+										<div
+											class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+											<ul class="list-unstyled d-flex">
+												<li><a class="btn btn-success text-white m-1" href=""><i
+														class="far fa-heart"></i></a></li>
+												<li><a class="btn btn-success text-white m-1"
+													href="/product/product-detail/${sp.maCTSP}"><i
+														class="far fa-eye"></i></a></li>
+												<li><a class="btn btn-success text-white m-1" href=""><i
+														class="fas fa-cart-plus"></i></a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="card-body">
+										<a href="details_product.html" class="h3 text-decoration-none">${sp.maSP.tenSP}</a>
+										<ul
+											class="w-100 list-unstyled d-flex justify-content-between mb-0">
+											<li></li>
+											<li class="pt-2"><span
+												class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+												<span
+												class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+												<span
+												class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+												<span
+												class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+												<span
+												class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+											</li>
+										</ul>
+										<p class="text-left mb-0">
+											<fmt:formatNumber value="${sp.gia}" pattern="#,###đ"/>
+										</p>
+										<ul class="list-unstyled d-flex justify-content-center mb-1">
+											<li><i class="text-warning fa fa-star"></i> <i
+												class="text-warning fa fa-star"></i> <i
+												class="text-warning fa fa-star"></i> <i
+												class="text-muted fa fa-star"></i> <i
+												class="text-muted fa fa-star"></i></li>
 										</ul>
 									</div>
 								</div>
-								<div class="card-body">
-									<a href="details_product.html" class="h3 text-decoration-none">${sp.maSP.tenSP}</a>
-									<ul
-										class="w-100 list-unstyled d-flex justify-content-between mb-0">
-										<li></li>
-										<li class="pt-2"><span
-											class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-											<span
-											class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-										</li>
-									</ul>
-									<p class="text-left mb-0">${sp.gia}</p>
-									<ul class="list-unstyled d-flex justify-content-center mb-1">
-										<li><i class="text-warning fa fa-star"></i> <i
-											class="text-warning fa fa-star"></i> <i
-											class="text-warning fa fa-star"></i> <i
-											class="text-muted fa fa-star"></i> <i
-											class="text-muted fa fa-star"></i></li>
-									</ul>
-								</div>
 							</div>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="row">
-					<ul class="pagination pagination-lg justify-content-end">
-						<%-- <c:forEach begin="1" end="${page.totalPages}" step="1"
-							var="number">
-							<c:choose>
-								<c:when test="${not empty keywords}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/search-and-page/${keywords}?p=${number-1}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:when test="${not empty min and not empty max}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
-										href="/product/view?p=${number-1}" tabindex="-1">${number}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach> --%>
-						<c:forEach begin="1" end="${page.totalPages}" step="1"
-							var="number">
-							<c:choose>
-								<c:when test="${not empty keywords}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/search-and-page/${keywords}?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${param.max}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:when test="${not empty min and not empty max}">
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}&sortby=${sortby}&keywords=${keywords}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li
-										class="page-item ${page.number == number - 1 ? 'active' : ''}">
-										<a
-										class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
-										href="/product/sort?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${prram.max}&keywords=${keywords}"
-										tabindex="-1">${number}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
 						</c:forEach>
-					</ul>
+					</div>
+					<div class="row">
+						<ul class="pagination pagination-lg justify-content-end">
+							<%-- <c:forEach begin="1" end="${page.totalPages}" step="1"
+								var="number">
+								<c:choose>
+									<c:when test="${not empty keywords}">
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
+											href="/product/search-and-page/${keywords}?p=${number-1}"
+											tabindex="-1">${number}</a>
+										</li>
+									</c:when>
+									<c:when test="${not empty min and not empty max}">
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
+											href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}"
+											tabindex="-1">${number}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 "
+											href="/product/view?p=${number-1}" tabindex="-1">${number}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach> --%>
+							<c:forEach begin="1" end="${page.totalPages}" step="1"
+								var="number">
+								<c:choose>
+									<c:when test="${not empty keywords}">
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
+											href="/product/search-and-page/${keywords}?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${param.max}#product-category"
+											tabindex="-1">${number}</a>
+										</li>
+									</c:when>
+									<c:when test="${not empty min and not empty max}">
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
+											href="/product/filter-price?p=${number-1}&min=${param.min}&max=${param.max}&sortby=${sortby}&keywords=${keywords}#product-category"
+											tabindex="-1">${number}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li
+											class="page-item ${page.number == number - 1 ? 'active' : ''}">
+											<a
+											class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0"
+											href="/product/sort?p=${number-1}&sortby=${sortby}&min=${param.min}&max=${prram.max}&keywords=${keywords}#product-category"
+											tabindex="-1">${number}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
+	
 			</div>
-
 		</div>
-	</div>
+	</section>
+	
+	
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
 		<div class="container">
 			<div class="row">
