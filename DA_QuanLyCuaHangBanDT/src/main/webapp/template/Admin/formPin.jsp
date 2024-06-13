@@ -44,44 +44,53 @@
 							<h5 class="card-title">Form Pin</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/ps/index" modelAttribute="item" enctype="multipart/form-data">
+							<form:form action="/admin/ps/index" modelAttribute="pinsac" enctype="multipart/form-data">
 								   <form:hidden path="idPin" />
 								  <div class="row mb-3">
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Loại Pin</label>
 									<div class="col-sm-9 ">
-										<form:select path="loaiPin.idlp" class="form-select">
+										<form:select path="loaiPin" class="form-select">
+										<form:option value="">--Chọn Loại Pin--</form:option>
 											<form:options items="${list_lp}" />
 										</form:select>
+										<form:errors path="loaiPin" cssClass="text-danger" />
 									</div>
 								</div>
 								  <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Pin</label>
                                     <div class="col-sm-9">
                                       <form:input path="tenPin" type="text" class="form-control"/>
+                                      <form:errors path="tenPin" cssClass="text-danger" />
                                   </div>
                                 </div>
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">Dung Lượng Pin</label>
 									<div class="col-sm-9">
-										<form:select path="DLPin.idDLP" class="form-select">
+										<form:select path="DLPin" class="form-select">
+										<form:option value="">--Chọn Dung Lượng Pin--</form:option>
 											<form:options items="${list_dlp}" />
 										</form:select>
+										 <form:errors path="DLPin" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Hỗ Trợ Sạc</label>
 									<div class="col-sm-9 ">
-										<form:select path="hoTroSac.idHTS" class="form-select">
+										<form:select path="hoTroSac" class="form-select">
+										<form:option value="">--Chọn Loại Hỗ Trợ Sạc--</form:option>
 											<form:options items="${list_hts}" />
 										</form:select>
+										<form:errors path="hoTroSac" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Công Nghệ Pin</label>
 									<div class="col-sm-9 ">
-										<form:select path="CNP.idcnp" class="form-select">
+										<form:select path="CNP" class="form-select">
+										<form:option value="">--Chọn Công Nghệ Pin--</form:option>
 											<form:options items="${list_cnp}" />
 										</form:select>
+										<form:errors path="CNP" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">

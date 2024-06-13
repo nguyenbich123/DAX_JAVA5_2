@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -22,21 +23,26 @@ public class PinSac {
     private Integer idPin;
     
     @Column(name="Tenpin")
+    @NotBlank(message = "{NotBlank.pinsac.tenPin}")
     private String tenPin;
     
     @ManyToOne
     @JoinColumn(name = "Iddlp")
+    @NotNull(message = "{NotNull.pinsac.DLPin}")
     private DLP DLPin;
     
     @ManyToOne
     @JoinColumn(name = "Idlp")
+    @NotNull(message = "{NotNull.pinsac.loaiPin}")
     private LP loaiPin;
     
     @ManyToOne
     @JoinColumn(name = "Idhts")
+    @NotNull(message = "{NotNull.pinsac.hoTroSac}")
     private HTS hoTroSac;
     
     @ManyToOne
     @JoinColumn(name = "Idcnp")
+    @NotNull(message = "{NotNull.pinsac.CNP}")
     private CNP CNP;
 }

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,14 +59,14 @@ public class CTSPController {
 	ServletContext app;
 
 	@RequestMapping("view")
-	public String getAccount(Model model,@ModelAttribute("item") ChiTietSP ctsp) {
+	public String getAccount(Model model,@ModelAttribute("ctsp") ChiTietSP ctsp) {
 		List<ChiTietSP> items = ctspDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formCTSP";
 	}
 
 	@RequestMapping("add")
-	public String add(Model model, @ModelAttribute("item") ChiTietSP ctsp,@RequestParam("maSP") Integer maSP) {
+	public String add(Model model, @ModelAttribute("ctsp") ChiTietSP ctsp,@RequestParam("maSP") Integer maSP) {
 		model.addAttribute("maSP", maSP);
 		ChiTietSP item = new ChiTietSP();	
 		model.addAttribute("item", item);
@@ -73,7 +75,7 @@ public class CTSPController {
 	}
 	
 	@RequestMapping("edit/{MaCTSP}")
-	public String edit(Model model, @ModelAttribute("item") ChiTietSP ctsp,
+	public String edit(Model model, @ModelAttribute("ctsp") ChiTietSP ctsp,
 			@PathVariable("MaCTSP") Integer MaCTSP,@RequestParam("maSP") Integer maSP) {
 		model.addAttribute("maSP", maSP);
 		ChiTietSP item = ctspDao.findById(MaCTSP).get();	
@@ -83,22 +85,31 @@ public class CTSPController {
 	}
 	
 	@RequestMapping("update")
-	public String update(ChiTietSP item,@RequestParam("maSP") Integer maSP,@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
+	public String update(ChiTietSP item,@Validated @ModelAttribute("ctsp") ChiTietSP ct,BindingResult result,
+			@RequestParam("maSP") Integer maSP,
+			@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
 		SanPham sp =spDao.findById(maSP).get();	
 		item.setMaSP(sp);
 		
-		if(!img.isEmpty()) {
-			String filename = img.getOriginalFilename();
-			File uploadFolder = new File(app.getRealPath("/images/"));
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdirs();
-			}
-			File destFile = new File(uploadFolder, filename);
-			img.transferTo(destFile);
-			item.setImg(filename);
-			System.out.println(uploadFolder);
-			System.out.println(destFile);
+		if(result.hasErrors()) {
+			return "/template/Admin/formCTSP";
 		}
+		
+			if(!img.isEmpty()) {
+				String filename = img.getOriginalFilename();
+				File uploadFolder = new File(app.getRealPath("/images/"));
+				if (!uploadFolder.exists()) {
+					uploadFolder.mkdirs();
+				}
+				File destFile = new File(uploadFolder, filename);
+				img.transferTo(destFile);
+				item.setImg(filename);
+				System.out.println(uploadFolder);
+				System.out.println(destFile);
+			
+		
+		}
+		
 		
 		ctspDao.save(item);
 		return "redirect:index/"+maSP;
@@ -111,7 +122,7 @@ public class CTSPController {
 	}
 	
 	@GetMapping("/index/{maSP}")
-	public String Ctsp(Model model,@ModelAttribute("item") ChiTietSP ctsp,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p,@PathVariable("maSP") Integer maSP) {
+	public String Ctsp(Model model,@ModelAttribute("ctsp") ChiTietSP ctsp,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p,@PathVariable("maSP") Integer maSP) {
 		SanPham sp = spDao.findById(maSP).get();		
 		
 		Sort sort =Sort.by(Direction.ASC,field.orElse("maCTSP"));	 		

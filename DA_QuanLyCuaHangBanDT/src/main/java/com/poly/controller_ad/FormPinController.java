@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,14 +52,14 @@ public class FormPinController {
 		DLPDAO dlpDao;
 		
 	@RequestMapping("view")
-	public String getform(Model model,@ModelAttribute("item") PinSac ps) {
+	public String getform(Model model,@ModelAttribute("pinsac") PinSac ps) {
 		List<PinSac> items = psDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formPin";
 	}
 
 	@RequestMapping("edit/{idPin}")
-	public String edit(Model model, @ModelAttribute("item") PinSac mh,@PathVariable("idPin") Integer idPin,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("pinsac") PinSac mh,@PathVariable("idPin") Integer idPin,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		PinSac item = psDao.findById(idPin).get();
 		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
@@ -69,7 +71,10 @@ public class FormPinController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @ModelAttribute("item") PinSac item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("pinsac") PinSac item,BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formPin";
+		}
 		psDao.save(item);
 		return "redirect:/admin/ps/index";
 	}
@@ -82,7 +87,7 @@ public class FormPinController {
 	}	
 	
 	@GetMapping("index")
-	public String bai5(Model model,@ModelAttribute("item")PinSac psac,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String bai5(Model model,@ModelAttribute("pinsac")PinSac psac,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idPin"));		
     	model.addAttribute("field", field.orElse("idPin"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);

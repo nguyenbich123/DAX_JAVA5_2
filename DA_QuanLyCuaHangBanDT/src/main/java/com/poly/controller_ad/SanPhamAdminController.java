@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,10 +85,13 @@ public class SanPhamAdminController {
 		List<SanPham> items = spDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formSanPham";
-	}
+	} 
 	
 	@RequestMapping("update")
-	public String update(SanPham item) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("item") SanPham item,BindingResult result) throws IllegalStateException, IOException {
+		if(result.hasErrors()) {
+			return "/template/Admin/formSanPham";
+		}
 		spDao.save(item);
 		return "redirect:index";
 	}

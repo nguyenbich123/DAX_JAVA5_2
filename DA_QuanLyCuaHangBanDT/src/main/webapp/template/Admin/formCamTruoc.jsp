@@ -44,7 +44,7 @@
 							<h5 class="card-title">Form Cam Trước</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/camtruoc/index" modelAttribute="item" enctype="multipart/form-data">
+							<form:form action="/admin/camtruoc/index" modelAttribute="ct" enctype="multipart/form-data">
 								   <form:hidden path="idCamTruoc" />
 								  <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Cam Trước</label>
@@ -57,23 +57,23 @@
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">Độ Phân Giải Cam Trước</label>
 									<div class="col-sm-9">
-										<form:select path="DPGCT.idDPGCT" class="form-select">
+										<form:select path="DPGCT"  class="form-select">
 										<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpgct}" />
 										</form:select>
 													<br>
-										<form:errors path="DPGCT.idDPGCT" cssClass="text-danger" />
+										<form:errors path="DPGCT" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Tính Năng Cam Trước</label>
 									<div class="col-sm-9 ">
-										<form:select path="TNCT.idTNCT" class="form-select">
+										<form:select path="TNCT" class="form-select">
 										<form:option value="">--Chọn Tính Năng--</form:option>
 											<form:options items="${list_tnct}" />
 										</form:select>
 													<br>
-										<form:errors path="TNCT.idTNCT" cssClass="text-danger" />
+										<form:errors path="TNCT" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">

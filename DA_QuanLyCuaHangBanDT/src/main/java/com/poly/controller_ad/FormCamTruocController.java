@@ -48,14 +48,14 @@ public class FormCamTruocController {
 		
 		
 	@RequestMapping("view")
-	public String getform(Model model,@ModelAttribute("item") CameraTruoc ct) {
+	public String getform(Model model,@ModelAttribute("ct") CameraTruoc ct) {
 		List<CameraTruoc> items = ctDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formCamTruoc";
 	}
 
 	@RequestMapping("edit/{idCamTruoc}")
-	public String edit(Model model, @ModelAttribute("item") CameraTruoc ct,@PathVariable("idCamTruoc") Integer idCamTruoc,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("ct") CameraTruoc ct,@PathVariable("idCamTruoc") Integer idCamTruoc,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		CameraTruoc item = ctDao.findById(idCamTruoc).get();
 		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
@@ -67,7 +67,7 @@ public class FormCamTruocController {
 	}
 	
 	@RequestMapping("update")
-	public String update(@Validated @ModelAttribute("item") CameraTruoc item, BindingResult result) throws IllegalStateException, IOException {
+	public String update(@Validated @ModelAttribute("ct") CameraTruoc item, BindingResult result) throws IllegalStateException, IOException {
 		if(result.hasErrors() ) {
 			return "/template/Admin/formCamTruoc";
 		}
@@ -83,7 +83,7 @@ public class FormCamTruocController {
 	}	
 	
 	@GetMapping("index")
-	public String index(Model model,@ModelAttribute("item") CameraTruoc ct,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String index(Model model,@ModelAttribute("ct") CameraTruoc ct,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idCamTruoc"));		
     	model.addAttribute("field", field.orElse("idCamTruoc"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);

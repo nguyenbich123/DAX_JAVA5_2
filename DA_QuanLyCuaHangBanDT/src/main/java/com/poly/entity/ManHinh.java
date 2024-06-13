@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -22,17 +23,21 @@ public class ManHinh {
     private Integer idManHinh;
     
     @Column(name="Tenmanhinh")
+    @NotBlank(message = "{NotBlank.mhc.tenManhHinh}")
     private String tenManhHinh;
     
     @ManyToOne
     @JoinColumn(name = "Idcnmh")
+    @NotNull(message = "{NotNull.mhc.CNMH}")
     private CNMH CNMH;
     
     @ManyToOne
     @JoinColumn(name = "Idmhr")
+    @NotNull(message = "{NotNull.mhc.MHR}")
     private MHR MHR;
     
     @ManyToOne
     @JoinColumn(name = "Iddpgmh")
+    @NotNull(message = "{NotNull.mhc.DPG}")
     private DPGMH DPG;
 }

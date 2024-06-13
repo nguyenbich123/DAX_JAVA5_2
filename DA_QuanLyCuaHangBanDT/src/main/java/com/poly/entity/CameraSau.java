@@ -28,13 +28,16 @@ public class CameraSau {
 
     @ManyToOne
     @JoinColumn(name = "Iddpgcs")
+    @NotNull(message = "{NotNull.cs.DPGCS}")
     private DPGCS DPGCS;
 
     @ManyToOne
     @JoinColumn(name = "Idtncs")
+    @NotNull(message = "{NotNull.cs.TNCS}")
     private TNCS TNCS;
 
     @Column(name="Denflash")
+    @NotNull(message = "{NotNull.cs.denFlash}")
     private Boolean denFlash;
 
 }

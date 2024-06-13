@@ -47,14 +47,14 @@ public class FormCamSauController {
 		
 		
 	@RequestMapping("view")
-	public String getform(Model model,@ModelAttribute("item") CameraSau cs) {
+	public String getform(Model model,@ModelAttribute("cs") CameraSau cs) {
 		List<CameraSau> items = csDao.findAll();
 		model.addAttribute("items", items);
 		return "/template/Admin/formCamSau";
 	}
 
 	@RequestMapping("edit/{idCamSau}")
-	public String edit(Model model, @ModelAttribute("item") CameraSau cs,@PathVariable("idCamSau") Integer idCamSau,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String edit(Model model, @ModelAttribute("cs") CameraSau cs,@PathVariable("idCamSau") Integer idCamSau,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		CameraSau item = csDao.findById(idCamSau).get();
 		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
@@ -66,7 +66,7 @@ public class FormCamSauController {
 	}
 	
 	@RequestMapping("update")
-	public String update( @Validated @ModelAttribute("item") CameraSau item, BindingResult result) throws IllegalStateException, IOException {
+	public String update( @Validated @ModelAttribute("cs") CameraSau item, BindingResult result) throws IllegalStateException, IOException {
 		if(result.hasErrors() ) {
 			return "/template/Admin/formCamSau";
 		}
@@ -82,7 +82,7 @@ public class FormCamSauController {
 	}	
 	
 	@GetMapping("index")
-	public String index(Model model,@ModelAttribute("item") CameraSau cs,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
+	public String index(Model model,@ModelAttribute("cs") CameraSau cs,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by(Direction.ASC, field.orElse("idCamSau"));		
     	model.addAttribute("field", field.orElse("idCamSau"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
