@@ -114,7 +114,7 @@
 								<hr>
 								<div class="row mb-3">
 									<label for="inputEmail3" class="col-sm-3 col-form-label">Sim</label>
-									<div class="col-sm-6">
+									<div class="col-sm-9">
 										<form:input path="sim" type="text" class="form-control"
 											placeholder="VD: 1 Nano SIM & 1 eSIM" />
 											<form:errors path="sim" cssClass="text-danger" />

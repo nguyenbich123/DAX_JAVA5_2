@@ -96,10 +96,10 @@ public class SanPhamAdminController {
 		return "redirect:index";
 	}
 
-	@RequestMapping("delete/{id}")
+	@RequestMapping("delete/{maSP}")
 	public String delete(@PathVariable("maSP") Integer maSP) {
 		spDao.deleteById(maSP);
-		return "redirect:/index";
+		return "redirect:/admin/sanpham/index";
 	}
 	@GetMapping("/index")
 	public String index(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {	
