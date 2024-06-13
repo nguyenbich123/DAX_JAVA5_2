@@ -152,7 +152,7 @@
         <div class="site-header  position-fixed text-black bg-light">
             <nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/0">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,16 +170,16 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>

@@ -102,7 +102,7 @@ public class InformationController {
 
 
 		accDao.save(item);
-		return "redirect:view/"+ item.getTenDN();
+		return "redirect:/user/view";
 	}
 	
 	@PostMapping("updatedc")

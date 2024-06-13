@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Danh mục sản phẩm</title>
+<title>Đơn hàng của tôi</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,122 +187,111 @@
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-          <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
-              <img src="/template/user/images/TheLiem(2).png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
+				<div class="container-fluid">
+					<a class="navbar-brand " href="/home/0"> <img
+						src="/template/user/images/TheLiem(2).png" class="logo">
+					</a>
+					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
+						type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <a class="navbar-brand" href="index.html">
-                  <img src="/template/user/images/2.png" class="logo">
-                </a>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                      <li>
-                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
-                      </li>
-                      <li>
-                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
-                      </li>
-                      <li>
-                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-items ps-5">
-                      <ul class="d-flex justify-content-end list-unstyled">
-                        <li class="search-item pe-3">
-                          <a href="#" class="search-button">
-                            <svg class="search">
+					</button>
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+						aria-labelledby="bdNavbarOffcanvasLabel">
+						<div class="offcanvas-header px-4 pb-0">
+							<a class="navbar-brand" href="index.html"> <img
+								src="/template/user/images/2.png" class="logo">
+							</a>
+							<button type="button" class="btn-close btn-close-black"
+								data-bs-dismiss="offcanvas" aria-label="Close"
+								data-bs-target="#bdNavbar"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul id="navbar"
+								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link me-4 active"
+									href="/home/0">Trang chủ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#company-services">Dịch vụ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/product/view">Sản phẩm</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#yearly-sale">Khuyến mãi</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link me-4 dropdown-toggle link-dark"
+									data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false">Trang</a>
+									<ul class="dropdown-menu">
+										<li><a href="/product/view" class="dropdown-item">Cửa
+												hàng</a></li>
+										<li>
+										<li><a href="/contact/view" class="dropdown-item">Liên
+												hệ</a></li>
+										<li><a href="/about/view" class="dropdown-item">Giới
+												Thiệu</a></li>
+										<li><a href="/feedback/view" class="dropdown-item">Góp
+												Ý</a></li>
+									</ul></li>
+								<li class="nav-item">
+									<div class="user-items ps-5">
+										<ul class="d-flex justify-content-end list-unstyled">
+											<li class="search-item pe-3"><a href="#"
+												class="search-button"> <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-                          </a>
-                        </li>
-                        <li class="pe-3 dropdown position-relative">
-                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
+											</a></li>
+											<li class="pe-3 dropdown position-relative"><a href="#"
+												class="" data-bs-toggle="dropdown" aria-expanded="false">
+													<c:if test="${account != null}">
 								    Xin chào, ${account.hoTen}
-							  </c:if>
-                            <svg class="user">
+							  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-                          </a>
-                          <ul class="dropdown-menu ">
-                          	
-	                          <c:choose>
-								    <c:when test="${account != null}">
-									    <li style="max-height: 100px" class="p-2">
-										    <div class="avatar">
-										        <img alt="" src="/template/user/images/meo.jpg">
-										    </div>
-										</li>
-								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
-                          </ul>
-                        </li>
-                        <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
-                            <svg class="cart">
+											</a>
+												<ul class="dropdown-menu ">
+
+													<c:choose>
+														<c:when test="${account != null}">
+															<li style="max-height: 100px" class="p-2">
+																<div class="avatar">
+																	<img alt="" src="/template/user/images/meo.jpg">
+																</div>
+															</li>
+															<li><a href="" class="dropdown-item">Chỉnh sửa
+																	thông tin</a></li>
+															<li><a href="/order/view" class="dropdown-item">Đơn
+																	hàng của tôi</a></li>
+															<li><a href="/account/logout" class="dropdown-item">Đăng
+																	xuất</a></li>
+															<li><a href="/account/resetpass"
+																class="dropdown-item">Đổi mật khẩu</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a href="/account/login" class="dropdown-item">Đăng
+																	nhập</a></li>
+															<li><a href="/account/signup" class="dropdown-item">Đăng
+																	ký</a></li>
+														</c:otherwise>
+													</c:choose>
+												</ul></li>
+											<li><a
+												class="nav-icon position-relative text-decoration-none"
+												href="/cart/view"> <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
+                            </svg> <span
+													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+											</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 		</div>
 
 	</header>
@@ -340,12 +330,12 @@
 							<!-- Tiêu đề bảng -->
 							<thead class="table-primary">
 								<tr>
-									<th>Mã đơn</th>
-									<th>Tổng phí dịch vụ</th>
-									<th>Ngày Đặt</th>
-									<th>Tùy chọn thanh toán</th>
-									<th>Trang thái</th>
-									<th>Chi tiết đơn hàng</th>
+									<th class="col-md-1">Mã đơn</th>
+									<th class="col-md-2">Tổng tiền</th>
+									<th class="col-md-3">Ngày Đặt</th>
+									<th class="col-md-2">Tùy chọn thanh toán</th>
+									<th class="col-md-2">Trang thái</th>
+									<th class="col-md-2">Chi tiết đơn hàng</th>
 								</tr>
 							</thead>
 							<!-- Nội dung bảng -->
@@ -353,14 +343,50 @@
 								<c:forEach var="dh" items="${pageDH.content}">
 									<tr>
 										<td>${dh.maDH}</td>
-										<td>${dh.tongTien}</td>
-										<td>${dh.ngayTT}</td>
+										<td>
+											<fmt:formatNumber value="${dh.tongTien}" pattern="#,###đ" />
+										</td>
+										<fmt:parseDate value="${dh.ngayTT}"
+											pattern="yyyy-MM-dd HH:mm:ss.S" var="parsedDate" />
+										<td><fmt:formatDate value="${parsedDate}"
+												pattern="dd/MM/yyyy HH:mm:ss" /></td>
 										<td>${dh.maPT.tenPT}</td>
-										<td style="color: yellow">${dh.ttdh.trangThai}</td>
+										<td style="color: rgb(94, 94, 61)">${dh.ttdh.trangThai}</td>
 										<!-- Button trigger modal -->
-										<td><a href="#" class="btn btn-primary"
-											data-bs-toggle="modal" data-bs-target="#exampleModal">Chi
-												tiết</a></td>
+										<td>
+											<div class="d-flex">
+												<a href="#" class="btn btn-primary" data-bs-toggle="modal"
+													data-bs-target="#exampleModal">Chi tiết</a>
+												<c:if test="${dh.ttdh.trangThai == 'Chờ xác nhận'}">
+													<button class="btn btn-danger mx-1" data-bs-toggle="modal"
+														data-bs-target="#confirmDeleteModal" data-id="${dh.maDH}">Hủy
+														đơn</button>
+												</c:if>
+											</div> <!-- Modal -->
+											<div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+												aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="confirmDeleteModalLabel">Xác
+																nhận hủy đơn hàng</h5>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">Bạn có chắc chắn muốn hủy
+															đơn hàng này không?</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Đóng</button>
+															<form id="deleteForm" method="post" action="">
+																<button formaction="/order/remove/${dh.maDH}"
+																	class="btn btn-danger">Hủy đơn</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
 										<!-- Modal -->
 										<!-- Modal content here -->
 										<!-- Modal -->
@@ -376,33 +402,87 @@
 													</div>
 													<div class="modal-body">
 														<p>Mã đơn: ${dh.maDH}</p>
-														<c:forEach var="ctdh"
-															items="${chiTietDonHangMap[dh.maDH]}">
-															<div class="d-flex row">
-																<div class="col-lg-3">
-																	<img src="/images/${ctdh.maCTSP.img}" alt="" width="50" />
+														<div class="row">
+															<c:forEach var="ctdh"
+																items="${chiTietDonHangMap[dh.maDH]}">
+																<div class="d-flex row align-items-center">
+																	<div class="col-md-3">
+																		<a
+																			href="/product/product-detail/${ctdh.maCTSP.maCTSP}">
+																			<img src="/images/${ctdh.maCTSP.img}" alt=""
+																			width="50" />
+																		</a>
+																	</div>
+																	<div class="col-md-4">
+																		<b>${ctdh.maCTSP.maSP.tenSP}</b> Màu:
+																		${ctdh.maCTSP.maMau.mauSac}
+																	</div>
+																	<div class="col-md-3">
+																		<b> <fmt:formatNumber value="${ctdh.maCTSP.gia}"
+																				pattern="#,###đ" />
+																		</b>
+																		<!-- <span class="color-circle"style="background-color: black;"></span> -->
+																	</div>
+																	<div class="col-md-2">x${ctdh.soLuong}</div>
 																</div>
-																<p class="col-lg-6">${ctdh.maCTSP.maSP.tenSP}</p>
-																<p class="col-lg-2">
-																	Màu: <span class="color-circle"
-																		style="background-color: black;"></span>
-																</p>
+																<div>
+																	<span>${ctdh.maCTSP.maSP.tenSP}</span>
+																	<c:choose>
+																		<c:when test="${danhGiaMap[ct.id_CTDH]}">
+																			<button>Đánh giá sản phẩm</button>
+																		</c:when>
+																		<c:otherwise>
+																			<span class="text-danger">Bạn chưa mua sản
+																				phẩm này nên không thể đánh giá</span>
+																		</c:otherwise>
+																	</c:choose>
+																</div>
+															</c:forEach>
+														</div>
+														<hr>
+														<div class="row">
+															<div class="col-md-6">
+																<h6>Tổng quan đơn hàng</h6>
+																<div>
+																	Tổng tiền:
+																	<fmt:formatNumber value="${dh.tongTien}"
+																		pattern="#,###đ" />
+																</div>
+																<div>
+																	Phí vận chuyển:
+																	<fmt:formatNumber value="${dh.tongTien}"
+																		pattern="#,###đ" />
+																</div>
+																<div>
+																	Giảm giá:
+																	<fmt:formatNumber value="${dh.tongTien}"
+																		pattern="#,###đ" />
+																</div>
+																<b>Thành tiền: <fmt:formatNumber
+																		value="${dh.tongTien}" pattern="#,###đ" />
+																</b>
 															</div>
-														</c:forEach>
-														<p>Tổng phí dịch vụ: ${dh.tongTien}</p>
-														<hr>
-														<p>Tên Khách hàng: ${dh.maKH.hoTen}</p>
-														<p>Số điện thoại: ${dh.maKH.sdt}</p>
-														<p style="color: green;">Ngày đặt hàng: ${dh.ngayTT}</p>
-														<hr>
-														<p style="color: rgb(129, 129, 22);">Ngày giao hàng dự
-															kiến: 26/05/2024</p>
-														<p style="color: green;">Phương thức thanh toán:
-															${dh.maPT.tenPT}</p>
-														<p style="color: lightgray;">Trạng thái thanh toán:
-															${dh.tttt.trangThai}</p>
+															<div class="col-md-6">
+																<h6>Chi tiết đơn hàng</h6>
+																<div>Tên khách hàng: ${dh.maKH.hoTen}</div>
+																<div>Số điện thoại: ${dh.maKH.sdt}</div>
+																<div>Địa chỉ: ${dh.diaChi}</div>
+																<div style="color: green;">
+																	Ngày đặt hàng:
+																	<fmt:parseDate value="${dh.ngayTT}"
+																		pattern="yyyy-MM-dd HH:mm:ss.S" var="parsedDate" />
+																	<fmt:formatDate value="${parsedDate}"
+																		pattern="dd/MM/yyyy HH:mm:ss.S" />
+																</div>
+																<div style="color: green;">Phương thức thanh toán:
+																	${dh.maPT.tenPT}</div>
+																<div style="color: rgb(61, 59, 59);">Trạng thái
+																	thanh toán: ${dh.tttt.trangThai}</div>
+															</div>
+														</div>
 													</div>
 													<div class="modal-footer">
+
 														<button type="button" class="btn btn-secondary"
 															data-bs-dismiss="modal">Đóng</button>
 													</div>
@@ -570,6 +650,19 @@
 			var selectedStatus = document.getElementById("statusFilter").value;
 			window.location.href = "/order/view?filterby=${selectedStatus}";
 		} */
+	</script>
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function() {
+			var deleteButtons = document
+					.querySelectorAll('button[data-bs-toggle="modal"]');
+			deleteButtons.forEach(function(button) {
+				button.addEventListener("click", function() {
+					var orderId = button.getAttribute("data-id");
+					var deleteForm = document.getElementById("deleteForm");
+					deleteForm.action = "/order/remove/" + orderId;
+				});
+			});
+		});
 	</script>
 
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>

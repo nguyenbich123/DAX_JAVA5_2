@@ -25,15 +25,16 @@ public class DiaChi {
     @JoinColumn(name = "Tendn")
     private Account tenDN;
     
-    @Column(name="Duongsonha")
-     @NotBlank(message = "{NotBlank.dc.duong_Sonha}")
-    private String duong_Sonha;
+    @Column(name="Tinhthanhpho")
+    private Integer tinh_ThanhPho;
     
     @Column(name="Quanhuyen")
-    @NotBlank(message = "{NotBlank.dc.quan_Huyen}")
-    private String quan_Huyen;
+    private Integer quan_Huyen;
     
-    @Column(name="Tinhthanhpho")
-      @NotBlank(message = "{NotBlank.dc.tinh_ThanhPho}")
-    private String tinh_ThanhPho;
+    @Column(name="Xaphuongthitran")
+    private Integer xa_Phuong_Thitran;
+    
+    @Column(name="Duongsonha")
+    private String duong_Sonha;  
+    
 }

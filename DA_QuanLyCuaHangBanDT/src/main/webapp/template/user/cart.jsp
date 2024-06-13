@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,19 @@
     ================================================== -->
 <script src="js/modernizr.js"></script>
 <link rel="stylesheet" href="/template/user/css/index.css">
+<style>
+	  .cart-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .cart-item img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -186,7 +200,7 @@
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/0">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -204,16 +218,16 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
@@ -305,87 +319,93 @@
 
 	</header>
 
-	<div class="m-4 py-3">
-		<div class="pt-green-txt d-flex bg-black text-white px-5 align-items-center" style="height: 50px">
-			<h4>
-				<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG |
-			</h4>
-			<h4>
-				<a class="text-white" href="/product/view">MUA SẮM</a>
-			</h4>
-		</div>
-		<div class="container">
+	<session id="shopping-cart">
+		<div class="m-4 py-3">
+			<div class="pt-green-txt d-flex bg-black text-white px-5 align-items-center" style="height: 50px">
+				<h4>
+					<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG |
+				</h4>
+				<h4>
+					<a class="text-white" href="/product/view">MUA SẮM</a>
+				</h4>
+			</div>
 
-			<div class="card my-3">
-				<div class="card-body">
-					<table class="table cart">
-						<thead>
-							<tr>
-								<th scope="col"><input type="checkbox" id="checkAll"></th>
-								<th scope="col">#</th>
-								<th scope="col">Tên sản phẩm</th>
-								<th scope="col">Giá</th>
-								<th scope="col">Số lượng</th>
-								<th scope="col">Tổng</th>
-								<th scope="col">Hành động</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="sp" items="${sp}">
-								<tr>
-									<td scope="col"><input type="checkbox" class="checkItem"
-										value="${sp.id_CTGH}"
-										data-total="${sp.soLuong * sp.maCTSP.gia}"></td>
-									<td scope="col">
-										<div class="img-cart">
-											<img src="/images/${sp.maCTSP.img}" alt="">
-										</div>
-									</td>
-									<td>${sp.maCTSP.maSP.tenSP}</td>
-									<td>${sp.maCTSP.gia}</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<form action="/cart/update/${sp.id_CTGH}" method="post"
-												class="d-inline">
-												<button type="submit" name="action" value="decrease"
-													class="btn btn-secondary me-2">-</button>
-												<span>${sp.soLuong}</span>
-												<button type="submit" name="action" value="increase"
-													class="btn btn-secondary ms-2">+</button>
-											</form>
-										</div>
-									</td>
-									<td>${sp.soLuong * sp.maCTSP.gia}</td>
-									<td><a href="/cart/remove/${sp.maCTSP.maCTSP}"
-										class="btn btn-danger btn-sm">Xóa</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="card-footer">
-					<div class="d-flex txt-bold justify-content-between">
-						<div>
-							Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+			
+				<div class="container">
+					<div class="card my-3 border-0" >
+						<div class="card-header">
+							<div class="row">
+								<div class="col-md-1 d-flex align-items-center">
+									<input type="checkbox" id="checkAll">
+								</div>
+								<div class="col-md-11">
+									<div class="row">
+										<div class="col-md-2"><strong></strong></div>
+										<div class="col-md-4"><strong>Sản phẩm</strong></div>
+										<div class="col-md-3"><strong>Số lượng</strong></div>
+										<div class="col-md-2"><strong>Tổng</strong></div>
+										<div class="col-md-1"></div>	
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="ml-auto">
-							<span id="totalAmount">0</span> Đ
+						<div class="card-body">
+							<c:forEach var="sp" items="${sp}">
+								<session id="${sp.id_CTGH}">
+									<div class="row">
+										<div class="col-md-1 d-flex align-items-center">
+											<input type="checkbox" class="checkItem" value="${sp.id_CTGH}" data-total="${sp.soLuong * sp.maCTSP.gia}">
+										</div>
+										<div class="col-md-11">
+											<div class="row cart-item">
+												<div class="col-md-2">
+													<div class="img-cart">
+														<img src="/images/${sp.maCTSP.img}" class="img-fluid" alt="Product">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<h5>${sp.maCTSP.maSP.tenSP}</h5>
+													<fmt:formatNumber value="${sp.maCTSP.gia}" pattern="#,###đ"/>
+												</div>
+												<div class="col-md-3">
+													<form action="/cart/update/${sp.id_CTGH}#${sp.id_CTGH}" method="post" class="d-inline">
+														<button type="submit" name="action" value="decrease" class="btn btn-secondary me-2">-</button>
+														<span>${sp.soLuong}</span>
+														<button type="submit" name="action" value="increase" class="btn btn-secondary ms-2">+</button>
+													</form>
+												</div>
+												<div class="col-md-2">
+													<fmt:formatNumber value="${sp.soLuong * sp.maCTSP.gia}" pattern="#,###đ"/>
+												</div>
+												<div class="col-md-1">
+													<a href="/cart/remove/${sp.maCTSP.maCTSP}#shopping-cart" class="btn btn-danger btn-sm btn-remove"><i class="fa-solid fa-trash-can"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</session>
+							</c:forEach>
+						</div>
+						<div class="card-footer">
+							<div class="d-flex txt-bold justify-content-between">
+								<div>
+									Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+								</div>
+								<div class="ml-auto">
+									<span id="totalAmount">0</span> Đ
+								</div>
+							</div>
 						</div>
 					</div>
+					<form action="/cart/checkout" method="post" id="checkoutForm">
+						<div class="d-flex justify-content-end py-2">
+							<input type="hidden" name="selectedItems" id="selectedItems">
+							<button type="submit" class="btn btn-warning" id="checkoutButton" disabled>Thanh toán</button>
+						</div>
+					</form>
 				</div>
-			</div>
-			<form action="/cart/checkout" method="post" id="checkoutForm">
-				<div class="d-flex justify-content-end py-2">
-					<input type="hidden" name="selectedItems" id="selectedItems">
-					<button type="submit" class="btn btn-warning" id="checkoutButton"
-						disabled>Thanh toán</button>
-				</div>
-			</form>
-
 		</div>
-
-
-	</div>
+	</session>
 
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
 		<div class="container">
@@ -568,6 +588,7 @@
 	}
 
 
+	//hiệu ứng xóa sp
 
 	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>

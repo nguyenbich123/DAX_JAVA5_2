@@ -11,4 +11,5 @@ import com.poly.entity.SanPham;
 public interface SanPhamDAO extends JpaRepository<SanPham,Integer>{
 	@Query("SELECT o FROM SanPham o WHERE o.tenSP LIKE ?1")
 	Page<SanPham> findAllBykeyword(String keywords, Pageable pageable);
+	
 }

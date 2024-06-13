@@ -25,8 +25,8 @@ public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
 	    Page<ChiTietSP> findByCriteria(@Param("min") Double min, @Param("max") Double max, 
 	                                   @Param("keywords") String keywords, Pageable pageable);
 
-	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP.tenSP LIKE ?1")
-	Page<ChiTietSP> findByKeywords(String keywords, Pageable pageable);
+	@Query("SELECT o FROM ChiTietSP o WHERE o.maSP.maHang.tenHang LIKE ?1")
+	Page<ChiTietSP> findByHangSP(String keywords, Pageable pageable);
 
 	List<ChiTietSP> findByMaCTSP(Integer maCTSP);
 
@@ -36,6 +36,8 @@ public interface ChiTietSanPhamDAO extends JpaRepository<ChiTietSP,Integer>{
 	@Query("SELECT o FROM ChiTietSP o WHERE o.maCTSP = ?1")
 	ChiTietSP findByMaCTSP3(Integer maCTSP);
 
+	@Query("SELECT ctsp.maSP FROM ChiTietSP ctsp WHERE ctsp.maCTSP = :maCTSP")
+    SanPham findSanPhamByMaCTSP(@Param("maCTSP") Integer maCTSP);
 
 
 

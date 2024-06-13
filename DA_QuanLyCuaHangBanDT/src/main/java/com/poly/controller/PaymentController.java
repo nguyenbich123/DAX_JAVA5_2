@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.poly.entity.Account;
 import com.poly.entity.CartItem;
 import com.poly.entity.ChiTietDonHang;
-import com.poly.entity.ChiTietGioHang;
 import com.poly.entity.ChiTietSP;
 import com.poly.entity.DonHang;
 import com.poly.entity.GiamGia;
@@ -30,7 +29,10 @@ import com.poly.repository.GioHangDAO;
 import com.poly.repository.PTTT_DAO;
 import com.poly.repository.TTDH_DAO;
 import com.poly.repository.TrangThaiTTDAO;
+import com.poly.service.VNPayService;
 import com.poly.utils.SessionService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("payment")
@@ -74,10 +76,11 @@ public class PaymentController {
 	
 	@Autowired
 	DonHangDAO dhDAO;
-
 	
+	@Autowired
+	VNPayService vnPayService;
 	
-	@PostMapping("/pay")
+	@RequestMapping("pay")
 	public String payment(@RequestParam("diachiHT") String diaChiHT,
 	                      @RequestParam("note") String note,
 	                      @RequestParam("discountCode") String discountCode,
@@ -94,7 +97,11 @@ public class PaymentController {
 	    // Tạo đơn hàng mới
 	    DonHang donHang = new DonHang();
 	    donHang.setMaKH(currentAccount);
-	    donHang.setDiaChi(diaChiHT);
+	    if(diaChiHT.isEmpty()) {
+	    	donHang.setDiaChi(null);
+	    }else {
+	    	donHang.setDiaChi(diaChiHT);
+	    }
 	    donHang.setGhiChu(note);
 	    donHang.setNgayTT(new Date());
 	    donHang.setMaPT(findPhuongThuc(phuongThuc)); // Hàm tìm phương thức thanh toán
@@ -105,34 +112,126 @@ public class PaymentController {
 
 	    // Lưu đơn hàng vào cơ sở dữ liệu
 	    donHangDAO.save(donHang);
-	    
-	    List<CartItem> selectedItems =  session.get("dssp");
-	    
+
+	    List<CartItem> selectedItems = session.get("dssp");
+
 	    ChiTietDonHang ctdh;
 	    ChiTietSP ctsp;
 	    for(CartItem item : selectedItems) {
-	    	ctdh = new ChiTietDonHang();
-	    	ctdh.setMaCTSP(getChiTietSP(item.getMactsp()));
-	    	ctdh.setSoLuong(item.getSl());
-	    	ctdh.setGia(item.getGia());
-	    	ctdh.setMaDH(getDonHang(donHang.getMaDH()));
-	    	ctdhDAO.save(ctdh);
-	    	
-	    	ctsp = ctspDAO.findByMaCTSP3(item.getMactsp());
-	    	ctsp.setSoluong(ctsp.getSoluong() -item.getSl());
-	    	ctspDAO.save(ctsp);
-	    	
-	    	chiTietGioHangDAO.deleteByMaCTSP(item.getMactsp());
-	    	
-	    }
-	    
-	    
+	        ctdh = new ChiTietDonHang();
+	        ctdh.setMaCTSP(getChiTietSP(item.getMactsp()));
+	        ctdh.setSoLuong(item.getSl());
+	        ctdh.setGia(item.getGia());
+	        ctdh.setMaDH(donHang);
+	        ctdhDAO.save(ctdh);
 
-	    
-	    // Trả về view xác nhận thanh toán
-	    model.addAttribute("donHang", donHang);
-	    return "/template/user/confirmation";
+	        ctsp = ctspDAO.findByMaCTSP3(item.getMactsp());
+	        ctsp.setSoluong(ctsp.getSoluong() - item.getSl());
+	        ctspDAO.save(ctsp);
+
+	        chiTietGioHangDAO.deleteByMaCTSP(item.getMactsp());
+	    }
+
+	    if(phuongThuc.equals("Thanh toán khi nhận hàng")) {
+	    	return "/template/user/confirmation";
+	    }
+	    // Lưu mã đơn hàng và tổng tiền vào session
+	    session.set("latestOrderId", donHang.getMaDH());
+	    session.set("latestOrderTotal", donHang.getTongTien());
+	    // Chuyển hướng tới phương thức submitOrder
+	    return "redirect:/payment/submitOrder";
 	}
+
+	@RequestMapping("/submitOrder")
+	public String submitOrder(HttpServletRequest request) {
+	    Integer latestOrderId = session.get("latestOrderId");
+	    Double latestOrderTotal = session.get("latestOrderTotal");
+
+	    if (latestOrderId == null || latestOrderTotal == null) {
+	        return "redirect:/payment"; // hoặc trang lỗi
+	    }
+
+	    String orderInfo = "Order ID: " + latestOrderId;
+	    String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+	    String vnpayUrl = vnPayService.createOrder(latestOrderTotal.intValue(), orderInfo, baseUrl);
+	    return "redirect:" + vnpayUrl;
+	}
+
+	@RequestMapping("/vnpay-payment")
+	public String vnpayPayment(HttpServletRequest request, Model model) {
+int paymentStatus = vnPayService.orderReturn(request);
+
+	    String orderInfo = request.getParameter("vnp_OrderInfo");
+	    String paymentTime = request.getParameter("vnp_PayDate");
+	    String transactionId = request.getParameter("vnp_TransactionNo");
+	    String totalPrice = request.getParameter("vnp_Amount");
+
+	    model.addAttribute("orderId", orderInfo);
+	    model.addAttribute("totalPrice", totalPrice);
+	    model.addAttribute("paymentTime", paymentTime);
+	    model.addAttribute("transactionId", transactionId);
+
+	    return paymentStatus == 1 ? "/template/user/confirmation" : "/template/user/orderFail";
+	}
+
+	
+	
+//	@PostMapping("/pay")
+//	public String payment(@RequestParam("diachiHT") String diaChiHT,
+//	                      @RequestParam("note") String note,
+//	                      @RequestParam("discountCode") String discountCode,
+//	                      @RequestParam("tongTien") String tongTien,
+//	                      @RequestParam("phuongThuc") String phuongThuc,
+//	                      Model model) {
+//
+//	    // Kiểm tra đăng nhập
+//	    Account currentAccount = (Account) session.get("account");
+//	    if (currentAccount == null) {
+//	        return "redirect:/account/login";
+//	    }
+//
+//	    // Tạo đơn hàng mới
+//	    DonHang donHang = new DonHang();
+//	    donHang.setMaKH(currentAccount);
+//	    donHang.setDiaChi(diaChiHT);
+//	    donHang.setGhiChu(note);
+//	    donHang.setNgayTT(new Date());
+//	    donHang.setMaPT(findPhuongThuc(phuongThuc)); // Hàm tìm phương thức thanh toán
+//	    donHang.setTongTien(calculateTotalAmount(discountCode, Double.valueOf(tongTien))); // Hàm tính tổng tiền
+//	    donHang.setMaGG(findDiscountCode(discountCode)); // Hàm tìm mã giảm giá
+//	    donHang.setTttt(findDefaultTrangThaiTT(phuongThuc)); // Hàm tìm trạng thái thanh toán mặc định
+//	    donHang.setTtdh(findDefaultTrangThaiDH()); // Hàm tìm trạng thái đơn hàng mặc định
+//
+//	    // Lưu đơn hàng vào cơ sở dữ liệu
+//	    donHangDAO.save(donHang);
+//	    
+//	    List<CartItem> selectedItems =  session.get("dssp");
+//	    
+//	    ChiTietDonHang ctdh;
+//	    ChiTietSP ctsp;
+//	    for(CartItem item : selectedItems) {
+//	    	ctdh = new ChiTietDonHang();
+//	    	ctdh.setMaCTSP(getChiTietSP(item.getMactsp()));
+//	    	ctdh.setSoLuong(item.getSl());
+//	    	ctdh.setGia(item.getGia());
+//	    	ctdh.setMaDH(getDonHang(donHang.getMaDH()));
+//	    	ctdhDAO.save(ctdh);
+//	    	
+//	    	ctsp = ctspDAO.findByMaCTSP3(item.getMactsp());
+//	    	ctsp.setSoluong(ctsp.getSoluong() -item.getSl());
+//	    	ctspDAO.save(ctsp);
+//	    	
+//	    	chiTietGioHangDAO.deleteByMaCTSP(item.getMactsp());
+//	    	
+//	    }
+//	    
+//	    
+//
+//	    
+//	    // Trả về view xác nhận thanh toán
+//	    model.addAttribute("donHang", donHang);
+//	    return "/template/user/confirmation";
+//	}
 	
 	
 	// Phương thức kiểm tra xem một chuỗi có phải là một số nguyên hay không

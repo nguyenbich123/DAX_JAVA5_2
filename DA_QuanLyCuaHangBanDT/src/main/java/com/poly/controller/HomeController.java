@@ -20,7 +20,7 @@ public class HomeController {
 	@Autowired
 	SessionService session;;
 
-	@GetMapping("index")
+	@GetMapping("0")
 	public String getIndex(Model model) {
 
         // Kiểm tra đăng nhập

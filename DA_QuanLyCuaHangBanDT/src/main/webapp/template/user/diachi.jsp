@@ -156,37 +156,26 @@
       </symbol>
     </svg>
 
+	<!-- Hiển thị popup của thanh tìm kiếm -->
 	<div class="search-popup">
 		<div class="search-popup-container">
-
-			<form role="search" method="get" class="search-form" action="">
+			<form role="search" method="get" class="search-form"
+				action="/product/search?p=0&sortby=${sortby}&min=${param.min}&max=${param.max}&keywords=${keywords}">
 				<input type="search" id="search-form" class="search-field"
-					placeholder="Tìm kiếm" value="" name="s" />
+					placeholder="Tìm kiếm" value="" name="keywords" />
 				<button type="submit" class="search-submit">
 					<svg class="search">
-						<use xlink:href="#search"></use></svg>
+                <use xlink:href="#search"></use>
+            </svg>
 				</button>
 			</form>
 
 			<h5 class="cat-list-title">Chọn danh mục</h5>
-
 			<ul class="cat-list">
-				<li class="cat-list-item"><a href="#" title="Mobile Phones">Iphone15</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Smart Watches">Samsung
+				<li class="cat-list-item"><a href="" title="Mobile Phones">Iphone15</a></li>
+				<li class="cat-list-item"><a href="" title="Smart Watches">Samsung
 						S23 Ultra</a></li>
-				<li class="cat-list-item"><a href="#" title="Headphones">Headphones</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Accessories">Accessories</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Monitors">Monitors</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Speakers">Speakers</a>
-				</li>
-				<li class="cat-list-item"><a href="#" title="Memory Cards">Memory
-						Cards</a></li>
 			</ul>
-
 		</div>
 	</div>
 
@@ -195,7 +184,7 @@
 		<div class="site-header  position-fixed text-black bg-light">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
           <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/index">
+            <a  class="navbar-brand " href="/home/0">
               <img src="/template/user/images/TheLiem(2).png" class="logo">
             </a>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -213,16 +202,16 @@
               <div class="offcanvas-body">
                 <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/index">Trang chủ</a>
+                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#company-services">Dịch vụ</a>
+                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/index#yearly-sale">Khuyến mãi</a>
+                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
@@ -267,7 +256,9 @@
 								    <c:when test="${account != null}">
 									    <li style="max-height: 100px" class="p-2">
 										    <div class="avatar">
-										        <img alt="" src="/template/user/images/meo.jpg">
+										        <a href="/user/view">
+										        	<img alt="..." src="${account.img}">
+										        </a>
 										    </div>
 										</li>
 								        <li>
