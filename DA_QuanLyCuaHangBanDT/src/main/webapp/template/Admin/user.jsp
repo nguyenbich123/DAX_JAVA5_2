@@ -319,40 +319,56 @@
         
        
        
-        	const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
-            const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
-            const wardId = ${diachi.xa_Phuong_Thitran};  // ID của phường/xã muốn lấy tên
+        	
             
-            document.addEventListener("DOMContentLoaded", function() {
-                fetchProvinces();		      	        	
+            document.addEventListener("DOMContentLoaded", function() {    
                 
-	
-                fetchProvinceNameById(provinceId)
-                .then(provinceName => {
-                    document.getElementById('provinceName').textContent = provinceName;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-            fetchDistrictNameById(districtId)
-                .then(districtName => {
-                    document.getElementById('districtName').textContent = districtName;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-            fetchWardNameById(wardId)
-                .then(wardName => {
-                    document.getElementById('wardName').textContent = wardName;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                
+                myFunction();
             });
         
+		//hàm selected
+		function myFunction() {
+			console.log(${diachi.tinh_ThanhPho});
+			 
+			/*   document.getElementById("province").value = ${diachi.tinh_ThanhPho};
+			  document.getElementById("district").value = ${diachi.quan_Huyen};
+			  document.getElementById("ward").value = ${diachi.xa_Phuong_Thitran}; */
+			 	
+			  const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
+	          const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
+	          const wardId = ${diachi.xa_Phuong_Thitran};  // ID của phường/xã muốn lấy tên 
+	            
+			  fetchProvinceNameById(provinceId)
+              .then(provinceName => {
+                  document.getElementById('province').textContent = provinceName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+					
+			  fetchProvinces();	
+			  
+          fetchDistrictNameById(districtId)
+              .then(districtName => {
+                  document.getElementById('district').textContent = districtName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+
+          fetchWardNameById(wardId)
+              .then(wardName => {
+                  document.getElementById('ward').textContent = wardName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+			 
+            
+			}
 		
+            
 		// Hàm lấy tên tỉnh/thành phố theo ID
         function fetchProvinceNameById(provinceId) {
             return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province', {

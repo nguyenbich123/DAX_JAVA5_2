@@ -370,7 +370,7 @@
 								<div class="col-md-12">
 									<label for="paymentMethod">Phương thức thanh toán:</label> <select
 										name="phuongThuc" class="form-select">
-										<option value="Ví Momo">Ví Momo</option>
+										<option value="Ví VNPAY">Ví VNPAY</option>
 										<option value="Thanh toán khi nhận hàng">Thanh toán
 											khi nhận hàng</option>
 									</select>

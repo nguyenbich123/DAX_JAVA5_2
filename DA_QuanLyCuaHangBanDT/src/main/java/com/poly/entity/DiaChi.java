@@ -36,5 +36,5 @@ public class DiaChi {
 
     @Column(name="Duongsonha")
     private String duong_Sonha;
-    
+
 }

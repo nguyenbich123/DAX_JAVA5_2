@@ -169,12 +169,14 @@
 																</div>
 															</div>
 														</div>
+														<form:form action="/admin/donhang/index" modelAttribute="">
 														<div class="modal-footer">
-															<button formaction="/admin/donhang/xn" class="btn btn-success">Xác Nhận</button>
+															<button formaction="/admin/donhang/xn?maDH=${dh.maDH}" class="btn btn-success">Xác Nhận</button>
 															<button formaction="/admin/donhang/remove" class="btn btn-warning">Hủy</button>
 															<button type="button" class="btn btn-secondary"
 																data-bs-dismiss="modal">Đóng</button>
 														</div>
+														</form:form>
 													</div>
 												</div>
 											</div>

@@ -74,10 +74,13 @@ public class DonHangController {
 	
 	@PostMapping("xn")
 	public String Xn(Model model, @ModelAttribute("dh") DonHang dh,@RequestParam("maDH") Integer maDH) {
-		
+		Optional<DonHang> dhh =dhDao.findById(maDH);
+		if(dhh.get().getMaDH()==maDH) {
+			dh=dhh.get();
+		}
 		List<TTDH> tt = ttdhDao.findAll();
 		for(TTDH x : tt) {
-			if(x.getTrangThai().equalsIgnoreCase("Xác nhận")){
+			if(x.getTrangThai().equalsIgnoreCase("Đang giao")){
 				dh.setTtdh(x);
 			}
 		}
@@ -85,7 +88,7 @@ public class DonHangController {
 		dhDao.save(dh);
         
 		
-		return "/template/Admin/DonHang";
+		return "redirect:/admin/donhang/index";
 	}
 
 //	@RequestMapping("edit/{maDH}")
