@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.poly.entity.ChiTietDonHang;
 import com.poly.entity.DonHang;
 import com.poly.entity.SanPham;
+import com.poly.entity.ChiTietSP;
 import com.poly.entity.TTDH;
 import com.poly.repository.ChiTietDonHangDAO;
+import com.poly.repository.ChiTietSanPhamDAO;
 import com.poly.repository.DonHangDAO;
 import com.poly.repository.TTDH_DAO;
 import com.poly.utils.SessionService;
@@ -36,8 +38,11 @@ public class DonHangController {
 	DonHangDAO dhDao;
 	@Autowired
 	TTDH_DAO ttdhDao;
+	@Autowired
+	ChiTietSanPhamDAO ctspDao;
 	 @Autowired
 	 ChiTietDonHangDAO ctdhDAO;
+	 
 	 
 	@Autowired
 	ServletContext app;
@@ -84,12 +89,26 @@ public class DonHangController {
 				dh.setTtdh(x);
 			}
 		}
+		List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dh);	
+		List<ChiTietSP> ctsp = ctspDao.findAll();
+	
+		int soluong =0;
+		for(ChiTietSP y: ctsp) {
+			for(ChiTietDonHang x : ctdh) {	
+				if(x.getMaCTSP().getMaCTSP()== y.getMaCTSP()){
+					soluong =y.getSoluong() -x.getSoLuong();
+					//System.out.println(soluong +"=======================================================================================");
+					y.setSoluong(soluong);
+					ctspDao.save(y);
+				}
+			}	
+		}
 		
-		dhDao.save(dh);
-        
-		
+		dhDao.save(dh);	
 		return "redirect:/admin/donhang/index";
 	}
+	
+	
 
 //	@RequestMapping("edit/{maDH}")
 //	public String edit(Model model, @ModelAttribute("item") CameraSau cs,@PathVariable("maDH") Integer maDH) {

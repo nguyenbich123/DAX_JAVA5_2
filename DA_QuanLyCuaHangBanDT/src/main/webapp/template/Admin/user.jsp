@@ -248,7 +248,7 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="province" class="form-control"
 													path="tinh_ThanhPho" onchange="fetchDistricts()">
-													<option value="${diachi.tinh_ThanhPho}"></option>
+													<option value="${diachi.tinh_ThanhPho}">-- Chọn Tỉnh Thành --</option>
 												</form:select>
 											</div>
 										</div>
@@ -259,7 +259,7 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="district" class="form-control"
 													path="quan_Huyen" onchange="fetchWards()">
-													<option value="${diachi.quan_Huyen}"></option>
+													<option value="${diachi.quan_Huyen}">-- Chọn Quận Huyện --</option>
 												</form:select>
 
 											</div>
@@ -272,7 +272,7 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="ward" class="form-control"
 													path="xa_Phuong_Thitran">
-													<option value="${diachi.xa_Phuong_Thitran}"></option>
+													<option value="${diachi.xa_Phuong_Thitran}">-- Chọn Xã Phường --</option>
 												</form:select>
 											</div>
 										</div>
@@ -321,21 +321,22 @@
        
         	
             
-            document.addEventListener("DOMContentLoaded", function() {    
-                
-                
-                myFunction();
+            document.addEventListener("DOMContentLoaded", function() {             
+            	fetchProvinces();	
+            	
+            	/* for (let fruit of fruits) {
+            		  console.log(fruit);
+            		} */
             });
         
 		//hàm selected
 		function myFunction() {
+			
 			console.log(${diachi.tinh_ThanhPho});
 			 
-			/*   document.getElementById("province").value = ${diachi.tinh_ThanhPho};
-			  document.getElementById("district").value = ${diachi.quan_Huyen};
-			  document.getElementById("ward").value = ${diachi.xa_Phuong_Thitran}; */
+			
 			 	
-			  const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
+			/*   const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
 	          const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
 	          const wardId = ${diachi.xa_Phuong_Thitran};  // ID của phường/xã muốn lấy tên 
 	            
@@ -347,7 +348,7 @@
                   console.error('Error:', error);
               });
 					
-			  fetchProvinces();	
+			  
 			  
           fetchDistrictNameById(districtId)
               .then(districtName => {
@@ -363,7 +364,7 @@
               })
               .catch(error => {
                   console.error('Error:', error);
-              });
+              }); */
 			 
             
 			}
@@ -456,12 +457,28 @@
             .then(data => {
                 const provinceSelect = document.getElementById('province');
                 const sortedProvinces = data.data.sort((a, b) => a.ProvinceName.localeCompare(b.ProvinceName));
+                
                 sortedProvinces.forEach(province => {
-                    const option = document.createElement('option');
-                    option.value = province.ProvinceID;
-                    option.textContent = province.ProvinceName;
+                	
+                   // option chứa ds 63 tỉnh thành 
+                	const option = document.createElement('option');
+                    option.value = province.ProvinceID; 
+                    option.textContent = province.ProvinceName;	
+                    
+                   /*  if(document.getElementById("province").value==option.value){
+                    	tôi muốn hiển thị option có id = với option value
+                    provinceSelect.innerHTML = '<option value="">'+province.ProvinceName+'</option>';
+                    } */
+                    
+                 // Kiểm tra nếu giá trị của option trùng với giá trị hiện tại của provinceSelect
+                    if (provinceSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
+                    
                     provinceSelect.appendChild(option);
-                });
+                                      			  
+                });     
+                fetchDistricts();			
             })
             .catch(error => console.error('Error fetching provinces:', error));
         }
@@ -480,16 +497,24 @@
             .then(response => response.json())
             .then(data => {
                 const districtSelect = document.getElementById('district');
-                districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+               // districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
                 const wardSelect = document.getElementById('ward');
-                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+               // wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
                 const sortedDistricts = data.data.sort((a, b) => a.DistrictName.localeCompare(b.DistrictName));
                 sortedDistricts.forEach(district => {
                     const option = document.createElement('option');
-                    option.value = district.DistrictID;
+                    option.value = district.DistrictID;                    
                     option.textContent = district.DistrictName;
+                    
+                    if (districtSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
                     districtSelect.appendChild(option);
+                   /*  if(${diachi.quan_Huyen}){
+                    document.getElementById("district").value = ${diachi.quan_Huyen};
+                    } */
                 });
+                fetchWards();
             })
             .catch(error => console.error('Error fetching districts:', error));
         }
@@ -508,22 +533,23 @@
             .then(response => response.json())
             .then(data => {
                 const wardSelect = document.getElementById('ward');
-                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+               // wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
                 const sortedWards = data.data.sort((a, b) => a.WardName.localeCompare(b.WardName));
                 sortedWards.forEach(ward => {
                     const option = document.createElement('option');
                     option.value = ward.WardCode;
                     option.textContent = ward.WardName;
+                    if (wardSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
                     wardSelect.appendChild(option);
+                   /*  document.getElementById("ward").value = ${diachi.xa_Phuong_Thitran};  */
                 });
             })
             .catch(error => console.error('Error fetching wards:', error));
         }
      
-     // hàm để fill lên form 
-      function fillform(diachi) {
-	 
-     }
+     
 		
     </script>
 </body>
