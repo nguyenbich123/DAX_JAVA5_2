@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -19,14 +20,14 @@ public class GiamGia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Idgiamgia")
-    private Integer id_giamGia;
+    private Integer idGiamGia;
     
     @Column(name="Magg")
     @NotBlank(message = "{NotBlank.gg.maGG}")
     private String maGG;
     
     @Column(name="Giamgia")
-     @NotBlank(message = "{NotBlank.gg.giamGia}")
+    @NotNull(message = "{@NotNull.gg.giamGia}")
     private Float giamGia;
     
     @Column(name="Dhtt")
@@ -43,4 +44,7 @@ public class GiamGia {
     
     @Column(name="Img")
     private String img;
+    
+    @Column(name="Soluong")
+    private Integer soLuong;
 }

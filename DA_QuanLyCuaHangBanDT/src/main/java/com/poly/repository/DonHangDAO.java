@@ -25,7 +25,7 @@ public interface DonHangDAO extends JpaRepository<DonHang,Integer>{
 
 		@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
 		List<Object> findDTByngayTT(Date ngaytt);
-
+		
 		@Query("SELECT count(*) FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
 		List<Object> findDHByngayTT(Date ngaytt);
 
@@ -39,7 +39,7 @@ public interface DonHangDAO extends JpaRepository<DonHang,Integer>{
 
 			@Query("SELECT COUNT(DISTINCT maKH) FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1)")
 			List<Integer> findKHBytmonth(Date ngaytt);
-
+			
 			@Query("SELECT COUNT(DISTINCT maKH) FROM DonHang o WHERE YEAR(o.ngayTT) = YEAR(?1)")
 			List<Integer> findKHBytyear(Date ngaytt);
 

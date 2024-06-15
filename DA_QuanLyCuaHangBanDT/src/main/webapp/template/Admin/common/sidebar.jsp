@@ -26,6 +26,11 @@
                             <i class="bi bi-circle"></i><span>Thêm Mới Sản Phẩm</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/admin/giamgia/index">
+                            <i class="bi bi-circle"></i><span>Giảm Giá</span>
+                        </a>
+                    </li>
                 </ul>
             </li><!-- End Tables Nav -->
 			

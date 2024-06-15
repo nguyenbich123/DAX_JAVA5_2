@@ -316,10 +316,6 @@
 	<script>
         const token = '3d21e6d4-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
         const shopId = '192569';  // Thay thế bằng shop ID thực
-        
-       
-       
-        	
             
             document.addEventListener("DOMContentLoaded", function() {             
             	fetchProvinces();	
@@ -333,9 +329,7 @@
 		function myFunction() {
 			
 			console.log(${diachi.tinh_ThanhPho});
-			 
-			
-			 	
+	 	
 			/*   const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
 	          const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
 	          const wardId = ${diachi.xa_Phuong_Thitran};  // ID của phường/xã muốn lấy tên 

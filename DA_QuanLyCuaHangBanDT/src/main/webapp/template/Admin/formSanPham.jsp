@@ -53,7 +53,7 @@
 									<div class="col-sm-9">
 										<form:select path="maHang" class="form-select">
 										  <form:option value="">--Chọn Hãng--</form:option>
-											<form:options items="${list_h}" />
+											<form:options  items="${list_h}" />
 										</form:select>
 										<form:errors path="maHang" cssClass="text-danger" />
 									</div>

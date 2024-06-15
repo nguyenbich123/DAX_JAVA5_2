@@ -97,7 +97,7 @@
 								</div>
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">
-										Thời Gian Áp Dụng</label>
+										Thời Gian Bắt Đầu</label>
 									<div class="col-sm-9">
 										<form:input path="tgAp" type="date" class="form-control" />
 										<br>
@@ -117,6 +117,14 @@
 									<div class="col-sm-9">
 										<input type="file" name="photo_file" class="form-control" />
 										<form:hidden path="img" />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputName" class="col-sm-3 col-form-label">
+										Số Lượng </label>
+									<div class="col-sm-9">
+										<form:input type="text" path="soLuong" class="form-control" />
+										
 									</div>
 								</div>
 								<div class="text-center">
@@ -150,6 +158,7 @@
 										<th><a href="/admin/giamgia/index?field=stgtd">Số Tiền Giảm Tối Đa</a></th>
 										<th><a href="/admin/giamgia/index?field=tgAp">Thời Gian Áp Dụng</a></th>
 										<th><a href="/admin/giamgia/index?field=tgKt">Thời Gian Kết Thúc</a></th>
+										<th><a href="/admin/giamgia/index?field=soLuong">Số Lượng</a></th>
 										<th><a href="/admin/giamgia/index?field=img">Hình</a></th>
 									</tr>
 								</thead>
@@ -163,6 +172,7 @@
 											<td>${item.stgtd}</td>
 											<td>${item.tgAp}</td>
 											<td>${item.tgKt}</td>
+											<td>${item.soLuong}</td>
 											<td><img src="/images/${item.img}" alt="" style="max-width: 100px;"></td>
 											<td>
 												<div class="icon">

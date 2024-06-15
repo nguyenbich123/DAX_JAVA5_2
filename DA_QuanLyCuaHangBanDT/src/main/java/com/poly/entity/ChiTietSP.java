@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
@@ -44,10 +46,12 @@ public class ChiTietSP {
 
     @Column(name="Soluong")
     @NotNull(message = "{NotNull.ctsp.soluong}")
+    @Min(value = 1, message = "{Min.ctsp.soluong}")
     private Integer soluong;
 
     @Column(name = "Gia")
     @NotNull(message = "{NotNull.ctsp.gia}")
+    @Min(value = 1, message = "{Min.ctsp.gia}")
     private Double gia;
 
     @Column(name="Img")

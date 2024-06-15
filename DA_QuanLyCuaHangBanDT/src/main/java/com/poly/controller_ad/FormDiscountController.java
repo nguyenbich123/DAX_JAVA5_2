@@ -89,6 +89,7 @@ public class FormDiscountController {
 	    ggDao.save(item);
 	    return "redirect:/admin/giamgia/index";
 	}
+	
 	@RequestMapping("delete/{idGiamGia}")
 	public String delete(GiamGia giamGia, @PathVariable("idGiamGia") Integer idGiamGia)
 			throws IllegalStateException, IOException {

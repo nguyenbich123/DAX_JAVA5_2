@@ -38,7 +38,7 @@
 			<div class="row">
 
 				<!-- Left side columns -->
-				<div class="col-lg-8">
+				<div class="col-lg-12">
 					<div class="row">
 
 						<!-- Sales Card -->
@@ -105,7 +105,7 @@
 									<div class="d-flex align-items-center">
 										<div
 											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-											<i class="bi bi-currency-dollar"></i>
+											<i class="fa-solid fa-dong-sign"></i>
 										</div>
 										<div class="ps-3">
 											<h6>${dttk} tr</h6>
@@ -162,7 +162,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">
-										Báo Cáo <span><a>/tháng này</a></span>
+										Báo Cáo <span></span>
 									</h5>
 
 									<!-- Line Chart -->
@@ -220,7 +220,7 @@
                         },
                         tooltip: {
                           x: {
-                            format: 'dd/MM/yyyy'
+                            format: 'dd/MM/yyyy HH:mm:ss'
                           },
                         }
                       }).render();
@@ -324,13 +324,8 @@
 					</div>
 				</div>
 				<!-- End Left side columns -->
-
-				<!-- Right side columns -->
-				<div class="col-lg-4">
-
-					
-
-				</div>
+				
+				
 				<!-- End Right side columns -->
 
 			</div>

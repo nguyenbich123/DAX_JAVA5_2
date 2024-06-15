@@ -58,6 +58,7 @@ public class DonHangController {
 	@RequestMapping("index")
 	public String getdh(Model model, @ModelAttribute("dh") DonHang dh, @RequestParam("field") Optional<String> field,
 			@RequestParam("p") Optional<Integer> p) {
+		
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maDH"));
 		model.addAttribute("field", field.orElse("maDH"));
 		Pageable pageable = PageRequest.of(p.orElse(0), 3, sort);
@@ -83,13 +84,16 @@ public class DonHangController {
 		if(dhh.get().getMaDH()==maDH) {
 			dh=dhh.get();
 		}
+		
 		List<TTDH> tt = ttdhDao.findAll();
 		for(TTDH x : tt) {
 			if(x.getTrangThai().equalsIgnoreCase("Đang giao")){
 				dh.setTtdh(x);
 			}
+			System.out.println("-----------------------------------------------------");
 		}
-		List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dh);	
+		
+		List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dhh.get());	
 		List<ChiTietSP> ctsp = ctspDao.findAll();
 	
 		int soluong =0;
@@ -108,7 +112,49 @@ public class DonHangController {
 		return "redirect:/admin/donhang/index";
 	}
 	
-	
+	@PostMapping("huy")
+	public String huy(Model model, @ModelAttribute("dh") DonHang dh,@RequestParam("maDH") Integer maDH) {
+		// gắn đơn hàng = đơn hàng đã chuyền từ madh
+		Optional<DonHang> dhh =dhDao.findById(maDH);
+		if(dhh.get().getMaDH()==maDH) {
+			dh=dhh.get();
+		}
+		
+//		if(dh.getTtdh().equals("Chờ xác nhận")) {
+//			
+//		}
+		//System.out.println(dh.getTtdh().getTrangThai().toString() +" in trạng thái đơn hàng ");
+		// nếu đang giao thì thu hồi sp (tăng lại số lượng sp trong đơn hàng vào kho  )
+		if(dh.getTtdh().getTrangThai().toString().equals("Đang giao")) {
+			
+			List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dhh.get());	
+			List<ChiTietSP> ctsp = ctspDao.findAll();		
+			// sét số lượng 
+			int soluong =0;
+			for(ChiTietSP y: ctsp) {
+				for(ChiTietDonHang x : ctdh) {	
+					if(x.getMaCTSP().getMaCTSP()== y.getMaCTSP()){
+						soluong =y.getSoluong() +x.getSoLuong();
+						System.out.println(soluong +"=======================================================================================");
+						y.setSoluong(soluong);
+						ctspDao.save(y);
+					}
+				}	
+			}
+		}
+		
+		// sét trạng thái đơn hàng 
+		List<TTDH> tt = ttdhDao.findAll();
+		for(TTDH x : tt) {
+			if(x.getTrangThai().equalsIgnoreCase("Đã hủy")){
+				dh.setTtdh(x);
+			}
+			System.out.println("-----------------------------------------------------");
+		}
+		
+		dhDao.save(dh);	
+		return "redirect:/admin/donhang/index";
+	}
 
 //	@RequestMapping("edit/{maDH}")
 //	public String edit(Model model, @ModelAttribute("item") CameraSau cs,@PathVariable("maDH") Integer maDH) {

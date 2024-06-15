@@ -76,7 +76,7 @@
 												<div class="icon">
 													<a href="/admin/ctsp/edit/${item.maCTSP}?maSP=${maSP}"><i
 														class="bi bi-pencil-fill"></i></a> <a
-														href="/admin/ctsp/delete/${item.maCTSP}"><i
+														href="/admin/ctsp/delete/${item.maCTSP}?maSP=${maSP}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>
