@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.GiamGia;
 import com.poly.repository.GiamGiaDAO;
+import com.poly.service.GiamGiaService;
 
 import jakarta.servlet.ServletContext;
 
@@ -32,10 +33,14 @@ import jakarta.servlet.ServletContext;
 @RequestMapping("admin/giamgia")
 public class FormDiscountController {
 
+
+    @Autowired
+    GiamGiaService giamGiaService;
 	@Autowired
 	GiamGiaDAO ggDao;
 	@Autowired
 	ServletContext app;
+
 
 	@RequestMapping("view")
 	public String getAccount(Model model, @ModelAttribute("item") GiamGia giamgia) {
@@ -71,9 +76,16 @@ public class FormDiscountController {
 	        // Thực hiện chuyển đổi chuỗi thành số
 	        item.setGiamGia(Float.parseFloat(giamGia));
 	    }
+	   
 	    if (result.hasErrors()) {
 	        return "/template/Admin/formDiscount";
 	    }
+	 // Kiểm tra và xử lý ngày tháng tgAp
+	    if (item.getTgAp() == null || item.getTgAp().toString().isEmpty()) {
+	        // Nếu tgAp không có giá trị từ form, có thể đặt mặc định là null hoặc ngày hiện tại
+	        item.setTgAp(null); // hoặc set thành ngày hiện tại: item.setTgAp(new Date());
+	    }
+	    giamGiaService.checkAndUpdateGiamGia();
 	    if (!img.isEmpty()) {
 	        String filename = img.getOriginalFilename();
 	        File uploadFolder = new File(app.getRealPath("/images/"));

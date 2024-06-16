@@ -45,7 +45,7 @@
 						<div class="card-body">
 							<h5 class="card-title">Thêm</h5>
 							<!-- Horizontal Form -->
-							<form:form action="/admin/giamgia/index" modelAttribute="item"
+						<form:form action="/admin/giamgia/index" modelAttribute="item"
 								enctype="multipart/form-data">
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">
@@ -101,6 +101,7 @@
 									<div class="col-sm-9">
 										<form:input path="tgAp" type="date" class="form-control" />
 										<br>
+										<form:errors path="tgAp" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -109,6 +110,7 @@
 									<div class="col-sm-9">
 										<form:input path="tgKt" type="date" class="form-control" />
 										<br>
+										<form:errors path="tgKt" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -116,6 +118,7 @@
 										Hình</label>
 									<div class="col-sm-9">
 										<input type="file" name="photo_file" class="form-control" />
+										<br>
 										<form:hidden path="img" />
 									</div>
 								</div>
@@ -124,7 +127,8 @@
 										Số Lượng </label>
 									<div class="col-sm-9">
 										<form:input type="text" path="soLuong" class="form-control" />
-										
+										<br>
+										<form:errors path="soLuong" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">
@@ -151,7 +155,7 @@
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<th><a href="/admin/giamgia/index?field=idGiamGia">ID</a></th>
+										<!-- <th><a href="/admin/giamgia/index?field=idGiamGia">ID</a></th>
 										<th><a href="/admin/giamgia/index?field=maGG">Mã Giảm Giá</a></th>
 										<th><a href="/admin/giamgia/index?field=giamGia">Giảm Giá</a></th>
 										<th><a href="/admin/giamgia/index?field=dhtt">Đơn Hàng Tối Thiểu</a></th>
@@ -160,7 +164,7 @@
 										<th><a href="/admin/giamgia/index?field=tgKt">Thời Gian Kết Thúc</a></th>
 										<th><a href="/admin/giamgia/index?field=soLuong">Số Lượng</a></th>
 										<th><a href="/admin/giamgia/index?field=img">Hình</a></th>
-									</tr>
+									</tr> -->
 								</thead>
 								<tbody>
 									<c:forEach var="item" items="${page.content}">
