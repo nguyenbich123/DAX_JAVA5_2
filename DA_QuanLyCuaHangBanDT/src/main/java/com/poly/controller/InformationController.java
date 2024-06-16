@@ -49,7 +49,7 @@ public class InformationController {
 		return "/template/user/information";
 	}
 	
-	@PostMapping("viewdc")
+	@RequestMapping("viewdc")
 	public String getuser1(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc) {
 		Account account = session.get("account");
 		if(account == null) {

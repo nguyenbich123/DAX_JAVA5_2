@@ -30,9 +30,10 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap"
 	rel="stylesheet">
-	<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="/template/user/css/table.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- script
     ================================================== -->
@@ -183,193 +184,196 @@
 	<header id="header">
 		<div class="site-header  position-fixed text-black bg-light">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-          <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/0">
-              <img src="/template/user/images/TheLiem(2).png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
+				<div class="container-fluid">
+					<a class="navbar-brand " href="/home/0"> <img
+						src="/template/user/images/TheLiem(2).png" class="logo">
+					</a>
+					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
+						type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <a class="navbar-brand" href="index.html">
-                  <img src="/template/user/images/2.png" class="logo">
-                </a>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                      <li>
-                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
-                      </li>
-                      <li>
-                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
-                      </li>
-                      <li>
-                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-items ps-5">
-                      <ul class="d-flex justify-content-end list-unstyled">
-                        <li class="search-item pe-3">
-                          <a href="#" class="search-button">
-                            <svg class="search">
+					</button>
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+						aria-labelledby="bdNavbarOffcanvasLabel">
+						<div class="offcanvas-header px-4 pb-0">
+							<a class="navbar-brand" href="index.html"> <img
+								src="/template/user/images/2.png" class="logo">
+							</a>
+							<button type="button" class="btn-close btn-close-black"
+								data-bs-dismiss="offcanvas" aria-label="Close"
+								data-bs-target="#bdNavbar"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul id="navbar"
+								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link me-4 active"
+									href="/home/0">Trang chủ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#company-services">Dịch vụ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/product/view">Sản phẩm</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#yearly-sale">Khuyến mãi</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link me-4 dropdown-toggle link-dark"
+									data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false">Trang</a>
+									<ul class="dropdown-menu">
+										<li><a href="/product/view" class="dropdown-item">Cửa
+												hàng</a></li>
+										<li>
+										<li><a href="/contact/view" class="dropdown-item">Liên
+												hệ</a></li>
+										<li><a href="/about/view" class="dropdown-item">Giới
+												Thiệu</a></li>
+										<li><a href="/feedback/view" class="dropdown-item">Góp
+												Ý</a></li>
+									</ul></li>
+								<li class="nav-item">
+									<div class="user-items ps-5">
+										<ul class="d-flex justify-content-end list-unstyled">
+											<li class="search-item pe-3"><a href="#"
+												class="search-button"> <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-                          </a>
-                        </li>
-                        <li class="pe-3 dropdown position-relative">
-                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
+											</a></li>
+											<li class="pe-3 dropdown position-relative"><a href="#"
+												class="" data-bs-toggle="dropdown" aria-expanded="false">
+													<c:if test="${account != null}">
 								    ${account.hoTen}
-							  </c:if>
-                            <svg class="user">
+							  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-                          </a>
-                          <ul class="dropdown-menu ">
-                          	
-	                          <c:choose>
-								    <c:when test="${account != null}">
-									    <li style="max-height: 100px" class="p-2">
-										    <div class="avatar">
-										        <a href="/user/view">
-										        	<img alt="..." src="${account.img}">
-										        </a>
-										    </div>
-										</li>
-								        <li>
-			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
-                          </ul>
-                        </li>
-                        <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
-                            <svg class="cart">
+											</a>
+												<ul class="dropdown-menu ">
+
+													<c:choose>
+														<c:when test="${account != null}">
+															<li style="max-height: 100px" class="p-2">
+																<div class="avatar">
+																	<a href="/user/view"> <img alt="..."
+																		src="${account.img}">
+																	</a>
+																</div>
+															</li>
+															<li><a href="/user/view" class="dropdown-item">Chỉnh
+																	sửa thông tin</a></li>
+															<li><a href="/order/view" class="dropdown-item">Đơn
+																	hàng của tôi</a></li>
+															<li><a href="/account/logout" class="dropdown-item">Đăng
+																	xuất</a></li>
+															<li><a href="/account/resetpass"
+																class="dropdown-item">Đổi mật khẩu</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a href="/account/login" class="dropdown-item">Đăng
+																	nhập</a></li>
+															<li><a href="/account/signup" class="dropdown-item">Đăng
+																	ký</a></li>
+														</c:otherwise>
+													</c:choose>
+												</ul></li>
+											<li><a
+												class="nav-icon position-relative text-decoration-none"
+												href="/cart/view"> <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
+                            </svg> <span
+													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+											</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 		</div>
 	</header>
 
 	<section id="company-services" class="py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h5 class="mb-3">Địa Chỉ</h5>
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Đường, Số nhà</th>
-                            <th>Quận, Huyện</th>
-                            <th>Tỉnh, Thành Phố</th>
-                            <th>Hành Động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="diachi" items="${items}">
-                            <tr>
-                                <td>${diachi.duong_Sonha}</td>
-                                <td>${diachi.quan_Huyen}</td>
-                                <td>${diachi.tinh_ThanhPho}</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="/user/editdc?id_diaChi=${diachi.id_diaChi}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-pen"></i>
-                                        </a>
-                                        <a href="/user/deletedc?id_diaChi=${diachi.id_diaChi}" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-7">
-                <h5 class="mb-3">Form Địa Chỉ</h5>
-                <form:form action="/user/index" modelAttribute="diachi" enctype="multipart/form-data">
-                    <form:input type="hidden" path="id_diaChi"/>
-                    <div class="mb-3 row">
-                        <label for="Address" class="col-md-4 col-form-label">Đường Số Nhà</label>
-                        <div class="col-md-8">
-                            <form:input type="text" path="duong_Sonha" cssClass="form-control"/>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="Address2" class="col-md-4 col-form-label">Quận Huyện</label>
-                        <div class="col-md-8">
-                            <form:input type="text" path="quan_Huyen" cssClass="form-control"/>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="Address3" class="col-md-4 col-form-label">Tỉnh Thành Phố</label>
-                        <div class="col-md-8">
-                            <form:input type="text" path="tinh_ThanhPho" cssClass="form-control"/>
-                        </div>
-                    </div>
-                    <form:hidden path="tenDN.tenDN" />
-                    <div class="text-center">
-                        <button formaction="/user/updatedc" class="btn btn-primary">Save</button>
-                    </div>
-               </form:form>
-            </div>
-        </div>
-    </div>
-</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<h5 class="mb-3">Địa Chỉ</h5>
+					<table class="table table-striped table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th><b>Đ</b>ường, Số nhà</th>
+								<th>Xã , Phường , Thị Trấn</th>
+								<th>Quận , Huyện</th>
+								<th>Tỉnh , Thành Phố</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-7">
+					<h5 class="mb-3">Form Địa Chỉ</h5>
+					<form:form action="/user/index" modelAttribute="diachi"
+						enctype="multipart/form-data">
+						<form:hidden path="id_diaChi" />
+
+						<div class="row mb-3">
+							<label for="Address3" class="col-md-4 col-lg-3 col-form-label">Tỉnh
+								Thành Phố</label>
+							<div class="col-md-8 col-lg-9">
+								<form:select id="province" class="form-control"
+									path="tinh_ThanhPho" onchange="fetchDistricts()">
+									<option value="${diachi.tinh_ThanhPho}">-- Chọn Tỉnh
+										Thành --</option>
+								</form:select>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label for="Address2" class="col-md-4 col-lg-3 col-form-label">Quận
+								Huyện</label>
+							<div class="col-md-8 col-lg-9">
+								<form:select id="district" class="form-control"
+									path="quan_Huyen" onchange="fetchWards()">
+									<option value="${diachi.quan_Huyen}">-- Chọn Quận
+										Huyện --</option>
+								</form:select>
+
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label for="Address2" class="col-md-4 col-lg-3 col-form-label">Xã
+								Phường Thị Trấn</label>
+							<div class="col-md-8 col-lg-9">
+								<form:select id="ward" class="form-control"
+									path="xa_Phuong_Thitran">
+									<option value="${diachi.xa_Phuong_Thitran}">-- Chọn Xã
+										Phường --</option>
+								</form:select>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label for="Address" class="col-md-4 col-lg-3  col-form-label">Đường
+								Số Nhà</label>
+							<div class="col-md-8 col-lg-9">
+								<form:input path="duong_Sonha" type="text" class="form-control" />
+							</div>
+						</div>
+						<form:hidden path="tenDN.tenDN" />
+						<div class="text-center">
+							<button formaction="/user/updatedc" class="btn btn-primary">Save</button>
+						</div>
+					</form:form>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 
@@ -489,6 +493,307 @@
 			</div>
 		</div>
 	</div>
+	<script>
+        const token = '3d21e6d4-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
+        const shopId = '192569';  // Thay thế bằng shop ID thực
+            
+            document.addEventListener("DOMContentLoaded", function() {             
+            	fetchProvinces();	
+            	myFunction();
+            	/* for (let fruit of fruits) {
+            		  console.log(fruit);
+            		} */
+            });
+        
+		//hàm 
+			async function myFunction() {
+			
+		        <c:forEach var="diachi" items="${items}">
+		            var row = document.createElement('tr');
+		         
+		            var cellDuongSoNha = document.createElement('td');
+		            cellDuongSoNha.textContent = '${diachi.duong_Sonha}';
+		            row.appendChild(cellDuongSoNha);
+		            
+		            var cellXaPhuongThiTran = document.createElement('td');
+		            await fetchWardNameById('${diachi.xa_Phuong_Thitran}',${diachi.quan_Huyen})
+		              .then(wardName => {
+		            	  cellXaPhuongThiTran.textContent = wardName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              }); 
+		            //cellXaPhuongThiTran.textContent = '${diachi.xa_Phuong_Thitran}';
+		            row.appendChild(cellXaPhuongThiTran);
+		            
+		            var cellQuanHuyen = document.createElement('td');
+		            await fetchDistrictNameById(${diachi.quan_Huyen},${diachi.tinh_ThanhPho})
+		              .then(districtName => {
+		            	  cellQuanHuyen.textContent = districtName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              }); 
+		            //cellQuanHuyen.textContent = '${diachi.quan_Huyen}';
+		            row.appendChild(cellQuanHuyen);	
+		            
+		            var cellTinhThanhPho = document.createElement('td');
+		            await fetchProvinceNameById(${diachi.tinh_ThanhPho})
+		              .then(provinceName => {
+		            	  cellTinhThanhPho.textContent =  provinceName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              });
+		            //cellTinhThanhPho.textContent = '${diachi.tinh_ThanhPho}';
+		            row.appendChild(cellTinhThanhPho);
+					
+		           
+		            var cellActions = document.createElement('td');
+		            var actionDiv = document.createElement('div');
+		            actionDiv.className = 'd-flex gap-2';
+
+		            var viewLink = document.createElement('a');
+		            viewLink.href = '/user/editdc?id_diaChi=${diachi.id_diaChi}';
+		            var viewIcon = document.createElement('i');
+		            viewIcon.className = 'fas fa-pen';
+		            viewLink.appendChild(viewIcon);
+		            actionDiv.appendChild(viewLink);
+	
+		            var deleteLink = document.createElement('a');
+		            deleteLink.href = '/user/deletedc?id_diaChi=${diachi.id_diaChi}';
+		            var deleteIcon = document.createElement('i');
+		            deleteIcon.className = 'fas fa-trash';
+		            deleteLink.appendChild(deleteIcon);
+		            actionDiv.appendChild(deleteLink);
+
+		            cellActions.appendChild(actionDiv);
+		            row.appendChild(cellActions);
+
+		            document.querySelector('tbody').appendChild(row);
+		        </c:forEach>
+		    }
+
+	 	
+			/*   const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
+	          const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
+	          const wardId = ${diachi.xa_Phuong_Thitran};  // ID của phường/xã muốn lấy tên 
+	            
+			  fetchProvinceNameById(provinceId)
+              .then(provinceName => {
+                  document.getElementById('province').textContent = provinceName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+					
+			  
+			  
+          fetchDistrictNameById(districtId)
+              .then(districtName => {
+                  document.getElementById('district').textContent = districtName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+
+          fetchWardNameById(wardId)
+              .then(wardName => {
+                  document.getElementById('ward').textContent = wardName;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              }); */
+			 
+            
+			
+		
+            
+		// Hàm lấy tên tỉnh/thành phố theo ID
+        async function fetchProvinceNameById(provinceId) {
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const province = data.data.find(province => province.ProvinceID === provinceId);
+                if (province) {
+                	//provinceId = province.ProvinceID; // Lưu lại ID tỉnh/thành phố
+                	//document.getElementById('tinh_ThanhPho').value = provinceId;
+                    return province.ProvinceName;
+                } else {
+                    throw new Error('Province not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching province name:', error);
+                throw error;
+            });
+        }
+
+        // Hàm lấy tên quận/huyện theo ID
+        async function fetchDistrictNameById(districtId,provinced) {
+        	 const provinceId = provinced;
+             if (!provinceId) return;
+
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id='+provinceId+'&shop_id='+shopId, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const district = data.data.find(district => district.DistrictID === districtId);
+                if (district) {
+                	//districtId = district.DistrictID; // Lưu lại ID quận/huyện
+                	//document.getElementById('quan_Huyen').value = districtId;
+                    return district.DistrictName;
+                } else {
+                    throw new Error('District not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching district name:', error);
+                throw error;
+            });
+        }
+
+        // Hàm lấy tên phường/xã theo ID
+        async function fetchWardNameById(wardId,districtd) {
+        	 const districtId = districtd;
+             if (!districtId) return;
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id='+districtId+'&shop_id='+shopId, {
+            	headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const ward = data.data.find(ward => ward.WardCode === wardId);
+                if (ward) {
+                	//wardId = ward.wardId; // Lưu lại ID phường/xã
+                	//document.getElementById('xa_Phuong_Thitran').value = wardId;
+                    return ward.WardName;
+                } else {
+                    throw new Error('Ward not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching ward name:', error);
+                throw error;
+            });
+        }
+	
+        // hàm để fill select option province 
+        function fetchProvinces() {
+            fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const provinceSelect = document.getElementById('province');
+                const sortedProvinces = data.data.sort((a, b) => a.ProvinceName.localeCompare(b.ProvinceName));
+                
+                sortedProvinces.forEach(province => {
+                	
+                   // option chứa ds 63 tỉnh thành 
+                	const option = document.createElement('option');
+                    option.value = province.ProvinceID; 
+                    option.textContent = province.ProvinceName;	
+                    
+                   /*  if(document.getElementById("province").value==option.value){
+                    	tôi muốn hiển thị option có id = với option value
+                    provinceSelect.innerHTML = '<option value="">'+province.ProvinceName+'</option>';
+                    } */
+                    
+                 // Kiểm tra nếu giá trị của option trùng với giá trị hiện tại của provinceSelect
+                    if (provinceSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
+                    
+                    provinceSelect.appendChild(option);
+                                      			  
+                });     
+                fetchDistricts();			
+            })
+            .catch(error => console.error('Error fetching provinces:', error));
+        }
+
+        // hàm để fill select option district 
+        function fetchDistricts() {
+            const provinceId = document.getElementById('province').value;
+            if (!provinceId) return;
+
+            fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id='+provinceId+'&shop_id='+shopId, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const districtSelect = document.getElementById('district');
+               // districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+                const wardSelect = document.getElementById('ward');
+               // wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                const sortedDistricts = data.data.sort((a, b) => a.DistrictName.localeCompare(b.DistrictName));
+                sortedDistricts.forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district.DistrictID;                    
+                    option.textContent = district.DistrictName;
+                    
+                    if (districtSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
+                    districtSelect.appendChild(option);
+                   /*  if(${diachi.quan_Huyen}){
+                    document.getElementById("district").value = ${diachi.quan_Huyen};
+                    } */
+                });
+                fetchWards();
+            })
+            .catch(error => console.error('Error fetching districts:', error));
+        }
+		
+     // hàm để fill select option ward 
+        function fetchWards() {
+            const districtId = document.getElementById('district').value;
+            if (!districtId) return;
+
+            fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id='+districtId+'&shop_id='+shopId, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const wardSelect = document.getElementById('ward');
+               // wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                const sortedWards = data.data.sort((a, b) => a.WardName.localeCompare(b.WardName));
+                sortedWards.forEach(ward => {
+                    const option = document.createElement('option');
+                    option.value = ward.WardCode;
+                    option.textContent = ward.WardName;
+                    if (wardSelect.value ===  option.value) {
+                        option.selected = true;
+                    }
+                    wardSelect.appendChild(option);
+                   /*  document.getElementById("ward").value = ${diachi.xa_Phuong_Thitran};  */
+                });
+            })
+            .catch(error => console.error('Error fetching wards:', error));
+        }	
+    </script>
+    
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"

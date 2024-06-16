@@ -1,5 +1,6 @@
 package com.poly.controller;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.poly.entity.Account;
 import com.poly.entity.MailInfo;
+import com.poly.entity.Pass;
 import com.poly.entity.Role;
 import com.poly.entity.TrangThaiHD;
 import com.poly.repository.AccountDAO;
@@ -424,5 +426,41 @@ public class DangNhapController {
             return "redirect:/account/resetpass";
         }
     }
-
+	
+	// Đỗi mật khẩu
+		@GetMapping("changepass")
+		public String getchangepass(Model model,@ModelAttribute("pass") Pass pass) {
+			return "/template/login-form-02/changepass";
+		}
+		
+		@PostMapping("changepass")
+		public String changePass(Model model,@ModelAttribute("pass") Pass pass) throws IllegalStateException, IOException{
+			Account account = session.get("account");
+			if(account == null) {
+				return "/template/login-form-02/changepass";
+			}
+			Account item = accountDao.findById(account.getTenDN()).get();
+			System.out.println("mật khẩu củ trong db "+item.getMatKhau());
+			System.out.println("mật khẩu củ nhập vào "+ pass.getOpass());
+			
+			String mkc = item.getMatKhau();
+			String mkm = pass.getNpass();
+					
+			if(!pass.getOpass().equals(mkc)) {
+				System.out.println("sai mật khẩu");	
+				model.addAttribute("error", "Sai mật khẩu.");		
+				return "/template/login-form-02/changepass";
+			}
+			
+			
+			if(!pass.getNpass().equals(pass.getCfpass())) {
+				System.out.println("mật khẩu không khớp");
+				model.addAttribute("error", "Mật khẩu và xác nhận mật khẩu không khớp.");			
+				return "/template/login-form-02/changepass";
+			}
+			
+			item.setMatKhau(mkm);
+			accountDao.save(item);
+			return "redirect:/account/logout";
+		}
 }

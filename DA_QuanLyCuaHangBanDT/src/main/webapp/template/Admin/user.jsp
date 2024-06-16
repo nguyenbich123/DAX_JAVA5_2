@@ -196,9 +196,9 @@
 								</div>
 
 								<div class="tab-pane fade pt-3" id="profile-address">
-									Địa Chỉ
+									<h5 class="card-title"> Địa Chỉ</h5>
 
-									<table class="table datatable">
+									<table class="table" style="border: 1px; border-color: #bcc1c0 ">
 										<thead>
 											<tr>
 												<th><b>Đ</b>ường, Số nhà</th>
@@ -209,7 +209,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="diachi" items="${items}">
+											<%-- <c:forEach var="diachi" items="${items}">
 												<tr>
 													<td>${diachi.duong_Sonha}</td>
 													<td>${diachi.xa_Phuong_Thitran}
@@ -231,11 +231,11 @@
 														</div>
 													</td>
 												</tr>
-											</c:forEach>
+											</c:forEach> --%>
 										</tbody>
 									</table>
 									<br>
-									<h5 class="card-title">Thêm Địa Chỉ Mới</h5>
+									<h5 class="card-title">Form Địa Chỉ</h5>
 									<!-- Địa chỉ  Form -->
 									<form:form action="/admin/user/viewdc" modelAttribute="diachi">
 
@@ -248,7 +248,8 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="province" class="form-control"
 													path="tinh_ThanhPho" onchange="fetchDistricts()">
-													<option value="${diachi.tinh_ThanhPho}">-- Chọn Tỉnh Thành --</option>
+													<option value="${diachi.tinh_ThanhPho}">-- Chọn
+														Tỉnh Thành --</option>
 												</form:select>
 											</div>
 										</div>
@@ -259,7 +260,8 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="district" class="form-control"
 													path="quan_Huyen" onchange="fetchWards()">
-													<option value="${diachi.quan_Huyen}">-- Chọn Quận Huyện --</option>
+													<option value="${diachi.quan_Huyen}">-- Chọn Quận
+														Huyện --</option>
 												</form:select>
 
 											</div>
@@ -272,7 +274,8 @@
 											<div class="col-md-8 col-lg-9">
 												<form:select id="ward" class="form-control"
 													path="xa_Phuong_Thitran">
-													<option value="${diachi.xa_Phuong_Thitran}">-- Chọn Xã Phường --</option>
+													<option value="${diachi.xa_Phuong_Thitran}">--
+														Chọn Xã Phường --</option>
 												</form:select>
 											</div>
 										</div>
@@ -319,16 +322,80 @@
             
             document.addEventListener("DOMContentLoaded", function() {             
             	fetchProvinces();	
-            	
+            	myFunction();
             	/* for (let fruit of fruits) {
             		  console.log(fruit);
             		} */
             });
         
-		//hàm selected
-		function myFunction() {
+		//hàm 
+			async function myFunction() {
 			
-			console.log(${diachi.tinh_ThanhPho});
+		        <c:forEach var="diachi" items="${items}">
+		            var row = document.createElement('tr');
+		         
+		            var cellDuongSoNha = document.createElement('td');
+		            cellDuongSoNha.textContent = '${diachi.duong_Sonha}';
+		            row.appendChild(cellDuongSoNha);
+		            
+		            var cellXaPhuongThiTran = document.createElement('td');
+		            await fetchWardNameById('${diachi.xa_Phuong_Thitran}',${diachi.quan_Huyen})
+		              .then(wardName => {
+		            	  cellXaPhuongThiTran.textContent = wardName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              }); 
+		            //cellXaPhuongThiTran.textContent = '${diachi.xa_Phuong_Thitran}';
+		            row.appendChild(cellXaPhuongThiTran);
+		            
+		            var cellQuanHuyen = document.createElement('td');
+		            await fetchDistrictNameById(${diachi.quan_Huyen},${diachi.tinh_ThanhPho})
+		              .then(districtName => {
+		            	  cellQuanHuyen.textContent = districtName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              }); 
+		            //cellQuanHuyen.textContent = '${diachi.quan_Huyen}';
+		            row.appendChild(cellQuanHuyen);	
+		            
+		            var cellTinhThanhPho = document.createElement('td');
+		            await fetchProvinceNameById(${diachi.tinh_ThanhPho})
+		              .then(provinceName => {
+		            	  cellTinhThanhPho.textContent =  provinceName;
+		              })
+		              .catch(error => {
+		                  console.error('Error:', error);
+		              });
+		            //cellTinhThanhPho.textContent = '${diachi.tinh_ThanhPho}';
+		            row.appendChild(cellTinhThanhPho);
+				
+		            var cellActions = document.createElement('td');
+		            var actionDiv = document.createElement('div');
+		            actionDiv.className = 'icon';
+
+		            var viewLink = document.createElement('a');
+		            viewLink.href = '/admin/user/viewdc?id_diaChi=${diachi.id_diaChi}';
+		            var viewIcon = document.createElement('i');
+		            viewIcon.className = 'bi bi-pencil-fill';
+		            viewLink.appendChild(viewIcon);
+		            actionDiv.appendChild(viewLink);
+	
+		            var deleteLink = document.createElement('a');
+		            deleteLink.href = '/admin/user/deletedc?id_diaChi=${diachi.id_diaChi}';
+		            var deleteIcon = document.createElement('i');
+		            deleteIcon.className = 'ri-delete-bin-5-fill';
+		            deleteLink.appendChild(deleteIcon);
+		            actionDiv.appendChild(deleteLink);
+
+		            cellActions.appendChild(actionDiv);
+		            row.appendChild(cellActions);
+
+		            document.querySelector('tbody').appendChild(row);
+		        </c:forEach>
+		    }
+
 	 	
 			/*   const provinceId = ${diachi.tinh_ThanhPho};  // ID của tỉnh muốn lấy tên
 	          const districtId = ${diachi.quan_Huyen};  // ID của quận/huyện muốn lấy tên
@@ -361,11 +428,11 @@
               }); */
 			 
             
-			}
+			
 		
             
 		// Hàm lấy tên tỉnh/thành phố theo ID
-        function fetchProvinceNameById(provinceId) {
+        async function fetchProvinceNameById(provinceId) {
             return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province', {
                 headers: {
                     'Content-Type': 'application/json',
@@ -390,7 +457,10 @@
         }
 
         // Hàm lấy tên quận/huyện theo ID
-        function fetchDistrictNameById(districtId) {
+        async function fetchDistrictNameById(districtId,provinced) {
+        	 const provinceId = provinced;
+             if (!provinceId) return;
+
             return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id='+provinceId+'&shop_id='+shopId, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -415,7 +485,9 @@
         }
 
         // Hàm lấy tên phường/xã theo ID
-        function fetchWardNameById(wardId) {
+        async function fetchWardNameById(wardId,districtd) {
+        	 const districtId = districtd;
+             if (!districtId) return;
             return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id='+districtId+'&shop_id='+shopId, {
             	headers: {
                     'Content-Type': 'application/json',
