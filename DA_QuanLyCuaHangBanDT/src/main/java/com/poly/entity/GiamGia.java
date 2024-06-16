@@ -2,6 +2,8 @@ package com.poly.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,19 +45,17 @@ public class GiamGia {
     private Float stgtd;
     
     @Column(name="Tgap")
-    @NotNull(message = "{NotNull.gg.tgAp}")
-    @FutureOrPresent(message = "{FutureOrPresent.gg.tgAp}")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tgAp;
     
     @Column(name="Tgkt")
-    @NotNull(message = "{NotNull.gg.tgKt}")
-    @Future(message = "{Future.gg.tgKt}")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tgKt;
     
     @Column(name="Img")
     private String img;
     
     @Column(name="Soluong")
-    @NotNull(message = "{@NotNull.gg.soLuong}")
+    @NotNull(message = "{NotNull.gg.soLuong}")
     private Integer soLuong;
 }

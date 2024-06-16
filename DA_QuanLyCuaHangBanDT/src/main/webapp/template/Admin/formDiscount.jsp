@@ -120,6 +120,7 @@
 										<input type="file" name="photo_file" class="form-control" />
 										<br>
 										<form:hidden path="img" />
+										
 									</div>
 								</div>
 								<div class="row mb-3">
@@ -155,7 +156,7 @@
 							<table class="table datatable">
 								<thead>
 									<tr>
-										<!-- <th><a href="/admin/giamgia/index?field=idGiamGia">ID</a></th>
+									 <th><a href="/admin/giamgia/index?field=idGiamGia">ID</a></th>
 										<th><a href="/admin/giamgia/index?field=maGG">Mã Giảm Giá</a></th>
 										<th><a href="/admin/giamgia/index?field=giamGia">Giảm Giá</a></th>
 										<th><a href="/admin/giamgia/index?field=dhtt">Đơn Hàng Tối Thiểu</a></th>
@@ -164,7 +165,7 @@
 										<th><a href="/admin/giamgia/index?field=tgKt">Thời Gian Kết Thúc</a></th>
 										<th><a href="/admin/giamgia/index?field=soLuong">Số Lượng</a></th>
 										<th><a href="/admin/giamgia/index?field=img">Hình</a></th>
-									</tr> -->
+									</tr> 
 								</thead>
 								<tbody>
 									<c:forEach var="item" items="${page.content}">
