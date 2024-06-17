@@ -124,6 +124,7 @@ public class DonHangController {
 //			
 //		}
 		//System.out.println(dh.getTtdh().getTrangThai().toString() +" in trạng thái đơn hàng ");
+		
 		// nếu đang giao thì thu hồi sp (tăng lại số lượng sp trong đơn hàng vào kho  )
 		if(dh.getTtdh().getTrangThai().toString().equals("Đang giao")) {
 			

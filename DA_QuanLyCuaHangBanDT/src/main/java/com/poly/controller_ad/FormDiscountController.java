@@ -68,11 +68,13 @@ public class FormDiscountController {
     }
 
     @RequestMapping("update")
-    public String update(@Validated @ModelAttribute("item") GiamGia item, BindingResult result,
+    public String update(Model model,@Validated @ModelAttribute("item") GiamGia item, BindingResult result,
                          @RequestParam(value = "giamGia", required = false) String giamGia,
                          @RequestParam("photo_file") MultipartFile img,
                          @RequestParam("tgAp") String tgApString,
-                         @RequestParam("tgKt") String tgKtString)
+                         @RequestParam("tgKt") String tgKtString,
+                         @RequestParam("field") Optional<String> field,
+                         @RequestParam("p") Optional<Integer> p)
                          throws IllegalStateException, IOException {
 
         // Kiểm tra ngày kết thúc không được để trống
@@ -93,7 +95,7 @@ public class FormDiscountController {
 
                 // Kiểm tra ngày bắt đầu phải từ ngày hiện tại
                 Date currentDate = new Date();
-                if (tgAp.before(currentDate)) {
+                if (tgAp.getDate()!=(currentDate.getDate())) {
                     result.rejectValue("tgAp", "error.item", "Ngày bắt đầu phải từ ngày hiện tại");
                 }
 
@@ -115,6 +117,7 @@ public class FormDiscountController {
                 item.setTgKt(tgKt);
                 
                 // Kiểm tra nếu ngày kết thúc đã qua
+               
                 Date currentDate = new Date();
                 if (tgKt.before(currentDate)) {
                     // Cập nhật số lượng giảm giá về 0
@@ -136,6 +139,13 @@ public class FormDiscountController {
         }
 
         if (result.hasErrors()) {
+        	 Sort sort = Sort.by(Direction.ASC, field.orElse("idGiamGia"));
+             List<GiamGia> acc = ggDao.findAll(sort);
+             model.addAttribute("field", field.orElse("idGiamGia"));
+             Pageable pageable = PageRequest.of(p.orElse(0), 3, sort);
+             System.out.println(field);
+             Page<GiamGia> page = ggDao.findAll(pageable);
+             model.addAttribute("page", page);
             return "/template/Admin/formDiscount";
         }
 
