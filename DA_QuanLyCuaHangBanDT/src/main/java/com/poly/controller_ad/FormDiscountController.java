@@ -152,9 +152,10 @@ public class FormDiscountController {
             System.out.println(uploadFolder);
             System.out.println(destFile);
         } 
-        if (img.isEmpty()) {
-            result.rejectValue("photo_file", "error.item", "Vui lòng chọn file ảnh");
-        }
+		/*
+		 * if (img.isEmpty()) { result.rejectValue("photo_file", "error.item",
+		 * "Vui lòng chọn file ảnh"); }
+		 */
 
         ggDao.save(item);
         return "redirect:/admin/giamgia/index";

@@ -52,9 +52,6 @@ public class GiamGia {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tgKt;
     
-    @Column(name = "Soluong")
-    private Integer soLuong;
-    
     @Column(name="Img")
     private String img;
     

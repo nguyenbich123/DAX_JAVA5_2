@@ -72,17 +72,17 @@
 											<td>
 												<div class="icon">
 													<a href="#" data-bs-toggle="modal"
-														data-bs-target="#exampleModal"><i
+														data-bs-target="#exampleModal-${dh.maDH}"><i
 														class="bi bi-pencil-fill"></i>Chi Tiết</a>
 												</div>
 											</td>
 											<!-- Modal -->
-											<div class="modal fade" id="exampleModal" tabindex="-1"
-												aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="exampleModal-${dh.maDH}" tabindex="-1"
+												aria-labelledby="exampleModalLabel-${dh.maDH}" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLabel">Thông
+															<h5 class="modal-title" id="exampleModalLabel-${dh.maDH}">Thông
 																tin chi tiết đơn hàng</h5>
 															<button type="button" class="btn-close"
 																data-bs-dismiss="modal" aria-label="Close"></button>
