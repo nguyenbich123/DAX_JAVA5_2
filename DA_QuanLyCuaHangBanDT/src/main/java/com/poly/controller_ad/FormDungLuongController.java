@@ -57,6 +57,21 @@ public class FormDungLuongController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") DungLuong item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+
+		List<DungLuong> dl= dlDao.findAll();
+		
+		for(DungLuong x: dl) {
+			if(item.getDungLuong().equalsIgnoreCase(x.getDungLuong())) {
+				model.addAttribute("err", "Lỗi dung lượng này đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("maDL"));
+				model.addAttribute("field", field.orElse("maDL"));
+				Pageable pageable = PageRequest.of(p.orElse(0),3,sort);
+				Page<DungLuong> page = dlDao.findAll(pageable);
+		        model.addAttribute("page", page);
+				return "/template/Admin/formDungLuong";
+			}
+		}
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("maDL"));
 			model.addAttribute("field", field.orElse("maDL"));
@@ -65,6 +80,7 @@ public class FormDungLuongController {
 	        model.addAttribute("page", page);
 			return "/template/Admin/formDungLuong";
 		}
+		
 		dlDao.save(item);
 		return "redirect:/admin/dungluong/index";
 	}

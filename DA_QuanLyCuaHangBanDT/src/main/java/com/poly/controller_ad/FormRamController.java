@@ -55,6 +55,23 @@ public class FormRamController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") Ram item,BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		
+		List<Ram> r= rDao.findAll();
+		
+		for(Ram x: r) {
+			if(item.getRam().equalsIgnoreCase(x.getRam())) {
+				model.addAttribute("err", "Lỗi ram đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("maRam"));	
+		    	List<Ram> acc = rDao.findAll(sort);	
+		    	model.addAttribute("field", field.orElse("maRam"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<Ram> page = rDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formRAM";
+			}
+		}
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("maRam"));
 			model.addAttribute("field", field.orElse("maRam"));

@@ -13,6 +13,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.poly.entity.Account;
 import com.poly.entity.DonHang;
+import com.poly.entity.TTDH;
+
 import java.util.List;
 
 
@@ -20,14 +22,14 @@ public interface DonHangDAO extends JpaRepository<DonHang,Integer>{
 
 
 	// biểu đồ 2
-		@Query("SELECT COUNT(DISTINCT maKH) sokh FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
-		List<Object> findKHByngayTT(Date ngaytt);
+		@Query("SELECT COUNT(DISTINCT maKH) sokh FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) AND ttdh != (?2) group by ngayTT")
+		List<Object> findKHByngayTT(Date ngaytt,TTDH ttdh);
 
-		@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
-		List<Object> findDTByngayTT(Date ngaytt);
+		@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) AND ttdh != (?2) group by ngayTT")
+		List<Object> findDTByngayTT(Date ngaytt,TTDH ttdh);
 		
-		@Query("SELECT count(*) FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
-		List<Object> findDHByngayTT(Date ngaytt);
+		@Query("SELECT count(*) FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) AND ttdh != (?2) group by ngayTT")
+		List<Object> findDHByngayTT(Date ngaytt,TTDH ttdh);
 
 		@Query("SELECT ngayTT FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1) group by ngayTT")
 		List<Object> findByngayTT(Date ngaytt);

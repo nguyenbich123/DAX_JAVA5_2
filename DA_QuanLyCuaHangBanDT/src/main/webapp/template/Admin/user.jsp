@@ -187,13 +187,16 @@
 													class="form-control" />
 											</div>
 										</div>
+										
+										${err }
+										
 										<div class="text-center">
 											<button formaction="/admin/user/updatemk"
 												class="btn btn-primary">Save</button>
 										</div>
 									</form:form>
 									<!-- End Change Password Form -->
-
+									
 								</div>
 
 								<div class="tab-pane fade pt-3" id="profile-address">

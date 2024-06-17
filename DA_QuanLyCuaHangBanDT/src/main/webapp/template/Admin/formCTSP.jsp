@@ -98,8 +98,8 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button formaction="/admin/ctsp/update?maSP=${maSP}" class="btn btn-primary">Save</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <button formaction="/admin/ctsp/update?maSP=${maSP}" class="btn btn-primary">Lưu</button>
+                                    <button type="reset" class="btn btn-secondary">Làm Mới</button>
                                 </div>
                            </form:form><!-- End Horizontal Form -->
 

@@ -55,6 +55,23 @@ public class FormMauController {
 	
 	@RequestMapping("update")
 	public String update(Model model, @Validated @ModelAttribute("item") Mau item,BindingResult result, @RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+
+		List<Mau> y= mDao.findAll();
+		
+		for(Mau x: y) {
+			if(item.getMauSac().equalsIgnoreCase(x.getMauSac())) {
+				model.addAttribute("err", "Lỗi màu sắc đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("maMau"));	
+		    	List<Mau> acc = mDao.findAll(sort);	
+		    	model.addAttribute("field", field.orElse("maMau"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<Mau> page = mDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formMau";
+			}
+		}
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("maMau"));
 			model.addAttribute("field", field.orElse("maMau"));

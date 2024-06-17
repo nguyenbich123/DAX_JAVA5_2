@@ -56,6 +56,20 @@ public class FormHTSController {
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") HTS item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
 		
+		List<HTS> dl= hDao.findAll();
+		
+		for(HTS x: dl) {
+			if(item.getHoTroSac().equalsIgnoreCase(x.getHoTroSac())) {
+				model.addAttribute("err", "Lỗi hỗ trợ sạc này đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("idHTS"));	
+		    	model.addAttribute("field", field.orElse("idHTS"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<HTS> page = hDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formHTS";
+			}
+		}
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("idHTS"));
 			model.addAttribute("field", field.orElse("idHTS"));

@@ -72,13 +72,13 @@
 								<div class="text-center">
 									<button formaction="/admin/dungluong/update" class="btn btn-primary">Lưu</button>
 									<button type="reset" class="btn btn-secondary">Làm Mới</button>
-								</div>
+								</div>						
 							</form:form>
 							<!-- End Horizontal Form -->
-
+						${err}
 						</div>
 					</div>
-
+	
 
 				</div>
 			</div>

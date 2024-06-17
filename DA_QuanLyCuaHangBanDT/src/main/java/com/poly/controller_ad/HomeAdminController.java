@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.entity.TTDH;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DonHangDAO;
 import com.poly.repository.SanPhamDAO;
+import com.poly.repository.TTDH_DAO;
 
 import jakarta.servlet.ServletContext;
 
@@ -30,6 +32,8 @@ public class HomeAdminController {
 	SanPhamDAO spDao;
 	@Autowired
 	DonHangDAO dhDao;
+	@Autowired
+	TTDH_DAO ttDao;
 	@Autowired
 	AccountDAO acDao;
 	@Autowired
@@ -96,12 +100,20 @@ public class HomeAdminController {
 
 		model.addAttribute("BCTKKH", BCTKKH.orElse("today"));
 		model.addAttribute("khtk", fillKH(BCTKKH));
-
-		List<Object> khttData = dhDao.findKHByngayTT(new Date());
+		
+		TTDH ttdh = new TTDH();
+		List<TTDH> tt  = ttDao.findAll();
+		for(TTDH x: tt) {
+			if(x.getTrangThai().equals("Đã hủy")) {
+				ttdh=x;
+			}		
+		}
+		
+		List<Object> khttData = dhDao.findKHByngayTT(new Date(),ttdh);
 		model.addAttribute("datakh", khttData);
-		List<Object> dhttData = dhDao.findDHByngayTT(new Date());
+		List<Object> dhttData = dhDao.findDHByngayTT(new Date(),ttdh);
 		model.addAttribute("datadh", dhttData);
-		List<Object> dtttData = dhDao.findDTByngayTT(new Date());
+		List<Object> dtttData = dhDao.findDTByngayTT(new Date(),ttdh);
 		model.addAttribute("datadt", dtttData);
 		List<Object> timeData = dhDao.findByngayTT(new Date());
 

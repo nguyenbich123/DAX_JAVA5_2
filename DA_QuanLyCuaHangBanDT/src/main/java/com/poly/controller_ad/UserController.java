@@ -98,27 +98,32 @@ public class UserController {
 	}
 	
 	@PostMapping("updatemk")
-	public String submitForm(Model model,@ModelAttribute("pass") Pass pass) throws IllegalStateException, IOException{
+	public String submitForm(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@ModelAttribute("pass") Pass pass) throws IllegalStateException, IOException{
 		Account account = session.get("account");
 		if(account == null) {
 			return  "redirect:/account/login";
 		}
 		Account item = accDao.findById(account.getTenDN()).get();
+		model.addAttribute("item", item);
 		System.out.println("mật khẩu củ trong db "+item.getMatKhau());
 		System.out.println("mật khẩu củ nhập vào "+ pass.getOpass());
 		
 		String mkc = item.getMatKhau();
 		String mkm = pass.getNpass();
+		
+		List<DiaChi> diachi = item.getDiachi();
+		model.addAttribute("items", diachi);
 				
 		if(!pass.getOpass().equals(mkc)) {
-			System.out.println("sai mật khẩu");	
-			return "redirect:/admin/user/view";
+			model.addAttribute("err", "Sai mật khẩu !");		
+			return "/template/Admin/user";
 		}
 		
 		
 		if(!pass.getNpass().equals(pass.getCfpass())) {
-			System.out.println("mật khẩu không khớp");
-			return "redirect:/admin/user/view";
+			//System.out.println("mật khẩu không khớp");
+			model.addAttribute("err", "Mật khẩu không khớp !");
+			return "/template/Admin/user";
 		}
 		
 		item.setMatKhau(mkm);

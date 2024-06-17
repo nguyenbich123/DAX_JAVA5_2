@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.CNMH;
 import com.poly.entity.DPGMH;
+import com.poly.entity.DungLuong;
 import com.poly.entity.MHR;
 import com.poly.entity.ManHinh;
 import com.poly.entity.Mau;
@@ -69,6 +70,7 @@ public class ManHinhController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("mhc") ManHinh item,BindingResult result,@RequestParam("field") Optional<String> field,@RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("idManHinh"));
 			model.addAttribute("field", field.orElse("idManHinh"));

@@ -55,6 +55,21 @@ public class FormMHRController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") MHR item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		List<MHR> dl= rDao.findAll();
+		
+		for(MHR x: dl) {
+			if(item.getMhRong().equalsIgnoreCase(x.getMhRong())) {
+				model.addAttribute("err", "Lỗi màn hình rộng này đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("idMHR"));	
+		    	model.addAttribute("field", field.orElse("idMHR"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<MHR> page = rDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formMHR";
+			}
+		}
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("idMHR"));
 			model.addAttribute("field", field.orElse("idMHR"));

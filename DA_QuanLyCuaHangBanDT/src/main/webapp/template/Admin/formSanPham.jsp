@@ -148,8 +148,8 @@
 									<a href="/admin/ctsp/index/${maSP}">Đi tới chi tiết sản
 										phẩm</a>
 									<button formaction="/admin/sanpham/update"
-										class="btn btn-primary">Save</button>
-									<button type="reset" class="btn btn-secondary">Reset</button>
+										class="btn btn-primary">Lưu</button>
+									<button type="reset" class="btn btn-secondary">Làm Mới</button>
 								</div>
 							</form:form>
 							<!-- End Horizontal Form -->

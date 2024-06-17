@@ -55,7 +55,22 @@ public class FormDPGCSController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") DPGCS item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
-	
+		
+		List<DPGCS> dl= csDao.findAll();
+		
+		for(DPGCS x: dl) {
+			if(item.getDpg().equalsIgnoreCase(x.getDpg())) {
+				model.addAttribute("err", "Lỗi độ phân giải này đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGCS"));		
+		    	model.addAttribute("field", field.orElse("idDPGCS"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<DPGCS> page = csDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formDPGCS";
+			}
+		}
+		
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("idDPGCS"));
 			model.addAttribute("field", field.orElse("idDPGCS"));

@@ -55,6 +55,20 @@ public class FormDLPController {
 	
 	@RequestMapping("update")
 	public String update(Model model,@Validated @ModelAttribute("item") DLP item, BindingResult result,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) throws IllegalStateException, IOException {
+		List<DLP> dl= dDao.findAll();
+		
+		for(DLP x: dl) {
+			if(item.getDlPin().equalsIgnoreCase(x.getDlPin())) {
+				model.addAttribute("err", "Lỗi dung lượng này đã tồn tại !");
+				Sort sort = Sort.by(Direction.ASC, field.orElse("idDLP"));	
+		    	model.addAttribute("field", field.orElse("idDLP"));
+			    Pageable pageable = PageRequest.of(p.orElse(0), 3,sort);
+			    System.out.println(field);
+			    Page<DLP> page = dDao.findAll(pageable);
+		        model.addAttribute("page", page);
+			    return "/template/Admin/formDLP";
+			}
+		}
 		if(result.hasErrors()) {
 			Sort sort = Sort.by(Direction.ASC, field.orElse("idDLP"));
 			model.addAttribute("field", field.orElse("idDLP"));

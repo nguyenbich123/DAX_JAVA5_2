@@ -46,7 +46,7 @@
 						<div class="card-body">
 							<h5 class="card-title">Sản Phẩm</h5>
 
-							<form action="/admin/sanpham/search" method="post" class="row">
+							<%-- <form action="/admin/sanpham/search" method="post" class="row">
 								<div class="col-sm-9">
 									<input name="keywords" value="${keywords}" class="form-control">
 								</div>
@@ -55,7 +55,7 @@
 										<i class="bi bi-search"></i>
 									</button>
 								</div>
-							</form>
+							</form> --%>
 							<!-- Table with stripped rows -->
 							<table class="table datatable">
 								<thead>

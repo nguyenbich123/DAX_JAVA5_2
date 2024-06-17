@@ -75,7 +75,7 @@
 								</div>
 							</form:form>
 							<!-- End Horizontal Form -->
-
+							${err }
 						</div>
 					</div>
 
