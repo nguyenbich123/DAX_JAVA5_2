@@ -64,7 +64,7 @@ public class InformationController {
 	}
 	
 	@GetMapping("editdc")
-	public String getdc(Model model,@ModelAttribute("item") Account ac,@ModelAttribute("diachi") DiaChi dc,@RequestParam("id_diaChi") Integer id_diaChi ) {
+	public String getdc(Model model,@ModelAttribute("diachi") DiaChi dc,@RequestParam("id_diaChi") Integer id_diaChi ) {
 		Account account = session.get("account");
 		if(account == null) {
 			return  "redirect:/account/login";
@@ -98,11 +98,31 @@ public class InformationController {
 		return "redirect:view";
 	}
 	
+//	@PostMapping("updatedc")
+//	public String update(@ModelAttribute("diachi") DiaChi diachi) throws IllegalStateException, IOException{
+//		dcDao.save(diachi);	
+//		return "redirect:/user/view";
+//	}
+	
 	@PostMapping("updatedc")
-	public String update(@ModelAttribute("diachi") DiaChi diachi) throws IllegalStateException, IOException{
-		dcDao.save(diachi);	
-		return "redirect:/user/view";
+	public String update(@ModelAttribute("diachi") DiaChi diachi) throws IllegalStateException, IOException {
+	    // Lấy đối tượng Account từ cơ sở dữ liệu
+	    Account account = session.get("account");
+
+	    if (account == null) {
+	        // Xử lý khi không tìm thấy Account
+	        throw new RuntimeException("Không tìm thấy Account để cập nhật DiaChi.");
+	    }
+
+	    // Thiết lập lại Account cho DiaChi (nếu cần thiết)
+	    diachi.setTenDN(account);
+
+	    // Lưu DiaChi vào cơ sở dữ liệu
+	    dcDao.save(diachi);
+
+	    return "redirect:/user/view";
 	}
+	
 	@RequestMapping("deletedc")
 	public String delete(@RequestParam("id_diaChi") Integer id_diaChi ) throws IllegalStateException, IOException{
 		dcDao.deleteById(id_diaChi);	

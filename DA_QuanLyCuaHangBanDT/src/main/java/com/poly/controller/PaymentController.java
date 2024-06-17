@@ -109,10 +109,15 @@ public class PaymentController {
 	    donHang.setMaGG(findDiscountCode(discountCode)); // Hàm tìm mã giảm giá
 	    donHang.setTttt(findDefaultTrangThaiTT(phuongThuc)); // Hàm tìm trạng thái thanh toán mặc định
 	    donHang.setTtdh(findDefaultTrangThaiDH()); // Hàm tìm trạng thái đơn hàng mặc định
-
+	   
 	    
 	    // Lưu đơn hàng vào cơ sở dữ liệu
 	    donHangDAO.save(donHang);
+	    
+	    if(findDiscountCode(discountCode) != null) {
+	    	GiamGia gg = findDiscountCode(discountCode);
+	    	gg.setSoLuong(gg.getSoLuong()-1);
+	    }
 
 	    List<CartItem> selectedItems = session.get("dssp");
 
@@ -155,7 +160,7 @@ public class PaymentController {
 
 	@RequestMapping("/vnpay-payment")
 	public String vnpayPayment(HttpServletRequest request, Model model) {
-int paymentStatus = vnPayService.orderReturn(request);
+		int paymentStatus = vnPayService.orderReturn(request);
 
 	    String orderInfo = request.getParameter("vnp_OrderInfo");
 	    String paymentTime = request.getParameter("vnp_PayDate");

@@ -300,11 +300,13 @@
 								    <c:when test="${account != null}">
 									    <li style="max-height: 100px" class="p-2">
 										    <div class="avatar">
-										        <img alt="" src="/template/user/images/meo.jpg">
+										        <a href="/user/view">
+										        	<img alt="..." src="/images/${account.img}">
+										        </a>
 										    </div>
 										</li>
 								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
+			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
 			                            </li>
 			                            <li>
 			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
@@ -313,7 +315,7 @@
 			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
 			                            </li>
 			                            <li>
-			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
+			                              <a href="/account/changepass" class="dropdown-item">Đổi mật khẩu</a>
 			                            </li>
 								    </c:when>
 								    <c:otherwise>

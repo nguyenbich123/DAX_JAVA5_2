@@ -117,7 +117,7 @@ public class ProductController {
 			System.out.println(sanPham);
 			model.addAttribute("sanPham", sanPham);
 
-			Pageable pageable = PageRequest.of(p.orElse(0), 12);
+			Pageable pageable = PageRequest.of(p.orElse(0), 8);
 			Page<ChiTietSP> page = ctspDAO.findByHangSP("%" + sanPham.getMaSP().getMaHang().getTenHang() + "%", pageable);
 
 			model.addAttribute("page", page);
