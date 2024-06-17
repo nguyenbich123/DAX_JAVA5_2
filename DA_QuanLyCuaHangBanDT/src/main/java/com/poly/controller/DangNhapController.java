@@ -3,15 +3,8 @@ package com.poly.controller;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,17 +27,12 @@ import com.poly.entity.TrangThaiHD;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.RoleDAO;
 import com.poly.repository.TrangThaiHoatDongDAO;
+import com.poly.service.EmailVerifier;
 import com.poly.service.MailerService;
 import com.poly.utils.SessionService;
 
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
-
-import javax.naming.directory.InitialDirContext;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.Attributes;
-import javax.naming.NamingException;
-import java.util.Hashtable;
 
 @Controller
 @RequestMapping("account")
@@ -216,7 +204,7 @@ public class DangNhapController {
         }
 
         String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
-        if(!checkMXRecord(email)) {
+        if(!EmailVerifier.verifyEmail(tk.getEmail())) {
         	result.rejectValue("email", "error.tk", "Email không tồn tại!");
         	return "/template/login-form-02/forgot";
         }
@@ -283,58 +271,52 @@ public class DangNhapController {
 		return "/template/login-form-02/signup";
 	}
 	
-	//Kiểm tra mail có tồn tại hay không
-	public static boolean checkMXRecord(String domain) {
-        try {
-            Hashtable<String, String> env = new Hashtable<>();
-            env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
-            DirContext ictx = new InitialDirContext(env);
-            Attributes attrs = ictx.getAttributes(domain, new String[]{"MX"});
-            return attrs != null && attrs.size() > 0;
-        } catch (NamingException e) {
-            return false;
-        }
-    }
-	
 	@PostMapping("signup")
     public String signup(@Valid @ModelAttribute("tk") Account tk, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/template/login-form-02/signup";
         }
 
-        String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
+        Optional<Account> chkTendn = accountDao.findByTenDN(tk.getTenDN());
+        if (chkTendn.isPresent()) {
+            result.rejectValue("tenDN", "error.tk", "Tên đăng nhập đã tồn tại");
+            return "/template/login-form-02/signup";
+        }
+
         Optional<Account> chkEmail = accountDao.findByEmail(tk.getEmail());
-        
-        if(chkEmail.isPresent()) {
-        	result.rejectValue("email", "error.tk", "Email đã được đăng ký");
-        	return "/template/login-form-02/signup";
-        }else if(!checkMXRecord(email)) {
-        	result.rejectValue("email", "error.tk", "Email không tồn tại!");
-        	return "/template/login-form-02/signup";
+        if (chkEmail.isPresent()) {
+            result.rejectValue("email", "error.tk", "Email đã được đăng ký");
+            return "/template/login-form-02/signup";
+        }
+
+        if (!EmailVerifier.verifyEmail(tk.getEmail())) {
+            result.rejectValue("email", "error.tk", "Email không tồn tại!");
+            return "/template/login-form-02/signup";
         }
 
         try {
-        	Account account = new Account();
-        	Optional<Role> role = roleDAO.findByIdrole(2);
-        	if(role.isPresent()) {
-        		account.setHoTen(tk.getHoTen());
-            	account.setTenDN(tk.getTenDN());
-            	account.setMatKhau(tk.getMatKhau());
-            	account.setSdt(tk.getSdt());
-            	account.setEmail(tk.getEmail());
-            	account.setRole(role.get());
+            Account account = new Account();
+            Optional<Role> role = roleDAO.findByIdrole(2);
+            if (role.isPresent()) {
+                account.setHoTen(tk.getHoTen());
+                account.setTenDN(tk.getTenDN());
+                account.setMatKhau(tk.getMatKhau());
+                account.setSdt(tk.getSdt());
+                account.setEmail(tk.getEmail());
+                account.setRole(role.get());
                 accountDao.save(account);
-        	}
-        	
+            }
 
-            // Generate confirmation token (here we use email as token for simplicity)
-            String confirmationToken = tk.getEmail();
-            sessionService.set("confirmationToken" ,confirmationToken);
+            // Generate confirmation token
+            String confirmationToken = tk.getEmail(); // Đây chỉ là một ví dụ, bạn có thể tạo token bảo mật hơn
+            sessionService.set("confirmationToken", confirmationToken);
 
             // Send confirmation email
             String subject = "Xác nhận đăng ký tài khoản";
-            String body = "Chào " + tk.getHoTen() + ",\n\n" + "Cảm ơn bạn đã đăng ký tài khoản tại trang web của chúng tôi.\n"
-                    + "Vui lòng nhấn vào liên kết sau để xác nhận đăng ký của bạn:\n" + "http://localhost:8080/account/confirm/" + tk.getEmail();
+            String body = "Chào " + tk.getHoTen() + ",\n\n" +
+                    "Cảm ơn bạn đã đăng ký tài khoản tại trang web của chúng tôi.\n" +
+                    "Vui lòng nhấn vào liên kết sau để xác nhận đăng ký của bạn:\n" +
+                    "http://localhost:8080/account/confirm?token=" + confirmationToken;
             MailInfo mailInfo = new MailInfo();
             mailInfo.setFrom("THELIEM" + "<bichntnpc06726@fpt.edu.vn>");
             mailInfo.setTo(tk.getEmail());
@@ -346,45 +328,16 @@ public class DangNhapController {
             return "/template/confirm";
         } catch (Exception e) {
             e.printStackTrace();
-            result.rejectValue("tenDN", "error.tk", "Tên đăng nhập đã tồn tại.");
+            result.rejectValue("tenDN", "error.tk", "Có lỗi xảy ra. Vui lòng thử lại.");
             model.addAttribute("errorMessage", "Tên đăng nhập hoặc email đã tồn tại.");
         }
 
         return "/template/login-form-02/signup";
     }
 
-//	@GetMapping("/confirm")
-//	public String confirmRegistration(@RequestParam("email") String email, Model model, HttpSession httpSession) {
-//	    String confirmationToken = (String) httpSession.getAttribute("confirmationToken");
-//
-//	    if (confirmationToken != null) {
-//	        // Tìm tài khoản theo email (confirmation token)
-//	        Optional<Account> optionalAccount = accountDao.findByEmail(confirmationToken);
-//	        if (optionalAccount.isPresent()) {
-//	            Account tk = optionalAccount.get(); // Lấy đối tượng Account từ Optional
-//	            // Giả định rằng ID trạng thái hoạt động là 1
-//	            Optional<TrangThaiHD> optionalTrangThaiHD = tthdDAO.findById(1);
-//	            if (optionalTrangThaiHD.isPresent()) {
-//	                TrangThaiHD tt = optionalTrangThaiHD.get();
-//	                // Cập nhật trạng thái xác nhận tài khoản
-//	                tk.setTthd(tt);
-//	                accountDao.save(tk);
-//	                model.addAttribute("message", "Xác nhận đăng ký thành công!");
-//	                session.set("account", tk);
-//	                return "redirect:/home/index";
-//	            } else {
-//	                model.addAttribute("error", "Không tìm thấy trạng thái hoạt động.");
-//	            }
-//	        } else {
-//	            model.addAttribute("error", "Tài khoản không tồn tại hoặc đã được xác nhận.");
-//	        }
-//	    } else {
-//	        model.addAttribute("error", "Token xác nhận không hợp lệ.");
-//	    }
-//
-//	    return "/template/confirm";
-//	}
 	
+
+
 	@GetMapping("/confirm/{email}")
 	public String confirmRegistration(@PathVariable("email") String email, Model model) {
 	    String confirmationToken = (String) sessionService.get("confirmationToken");

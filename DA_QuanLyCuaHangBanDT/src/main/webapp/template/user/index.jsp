@@ -198,7 +198,7 @@
 									    <li style="max-height: 100px" class="p-2">
 										    <div class="avatar">
 										        <a href="/user/view">
-										        	<img alt="..." src="${account.img}">
+										        	<img alt="..." src="/images/${account.img}">
 										        </a>
 										    </div>
 										</li>
@@ -212,7 +212,7 @@
 			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
 			                            </li>
 			                            <li>
-			                              <a href="" class="dropdown-item">Đổi mật khẩu</a>
+			                              <a href="/account/changepass" class="dropdown-item">Đổi mật khẩu</a>
 			                            </li>
 								    </c:when>
 								    <c:otherwise>
