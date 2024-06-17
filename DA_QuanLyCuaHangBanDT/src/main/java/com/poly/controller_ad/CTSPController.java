@@ -88,14 +88,15 @@ public class CTSPController {
 	public String update(ChiTietSP item,@Validated @ModelAttribute("ctsp") ChiTietSP ct,BindingResult result,
 			@RequestParam("maSP") Integer maSP,
 			@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
-		SanPham sp =spDao.findById(maSP).get();	
-		item.setMaSP(sp);
+	
 		
 		if(result.hasErrors()) {
 			return "/template/Admin/formCTSP";
 		}
 		
 			if(!img.isEmpty()) {
+				SanPham sp =spDao.findById(maSP).get();	
+				item.setMaSP(sp);
 				String filename = img.getOriginalFilename();
 				File uploadFolder = new File(app.getRealPath("/images/"));
 				if (!uploadFolder.exists()) {
@@ -106,8 +107,6 @@ public class CTSPController {
 				item.setImg(filename);
 				System.out.println(uploadFolder);
 				System.out.println(destFile);
-			
-		
 		}
 		
 		
@@ -115,10 +114,11 @@ public class CTSPController {
 		return "redirect:index/"+maSP;
 	}
 
-	@RequestMapping("delete/{id}")
+	@RequestMapping("delete/{MaCTSP}")
 	public String delete(@PathVariable("MaCTSP") Integer MaCTSP) {
 		ctspDao.deleteById(MaCTSP);
-		return "redirect:/index";
+		return "redirect:/admin/sanpham/index"; //Nhớ đọc comment này nha Mến tại nó trả về cái "/index/{maSP}" không đượ
+												// Nên tui cho nó trả về cái sanpham luôn.				
 	}
 	
 	@GetMapping("/index/{maSP}")
