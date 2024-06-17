@@ -63,11 +63,11 @@ body {
 <body>
 	<div class="container">
 		<div class="form-container border p-4">
-			<h3>Đỗi Mật Khẩu</h3>
+			<h3>Đổi Mật Khẩu</h3>
 			<form:form action="/account/changepass" modelAttribute="pass" >
 				<div class="row mb-3">
 					<label for="currentPassword"
-						class="col-md-4 col-lg-3 col-form-label">Mật khẩu củ</label>
+						class="col-md-4 col-lg-3 col-form-label">Mật khẩu cũ</label>
 					<div class="col-md-8 col-lg-9">
 						<form:input path="opass" type="password" class="form-control" placeholder="Old Password"/>
 					</div>

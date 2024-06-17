@@ -44,13 +44,13 @@ public interface DonHangDAO extends JpaRepository<DonHang,Integer>{
 			List<Integer> findKHBytyear(Date ngaytt);
 
 		// doanh thu
-			@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE DAY(o.ngayTT)=DAY(?1) AND MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1)")
+			@Query("SELECT sum(tongTien) FROM DonHang o WHERE DAY(o.ngayTT)=DAY(?1) AND MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1)")
 			List<Integer> findDTBytday(Date ngaytt);
 
-			@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1)")
+			@Query("SELECT sum(tongTien) FROM DonHang o WHERE MONTH(o.ngayTT) = MONTH(?1) AND YEAR(o.ngayTT) = YEAR(?1)")
 			List<Integer> findDTBytmonth(Date ngaytt);
 
-			@Query("SELECT sum(tongTien)/1000000 FROM DonHang o WHERE YEAR(o.ngayTT) = YEAR(?1)")
+			@Query("SELECT sum(tongTien) FROM DonHang o WHERE YEAR(o.ngayTT) = YEAR(?1)")
 			List<Integer> findDTBytyear(Date ngaytt);
 
 		// đơn hàng

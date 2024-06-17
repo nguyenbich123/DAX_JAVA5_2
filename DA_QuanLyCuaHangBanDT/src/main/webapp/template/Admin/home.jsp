@@ -108,7 +108,7 @@
 											<i class="fa-solid fa-dong-sign"></i>
 										</div>
 										<div class="ps-3">
-											<h6>${dttk} tr</h6>
+											<h6> <fmt:formatNumber value="${dttk}" pattern="#,###đ" /></h6>
 										</div>
 									</div>
 								</div>

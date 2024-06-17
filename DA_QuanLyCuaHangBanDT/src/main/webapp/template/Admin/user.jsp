@@ -72,7 +72,7 @@
 
 								<li class="nav-item">
 									<button class="nav-link" data-bs-toggle="tab"
-										data-bs-target="#profile-change-password">Đỗi Mật
+										data-bs-target="#profile-change-password">Đổi Mật
 										Khẩu</button>
 								</li>
 
@@ -155,12 +155,13 @@
 								</div>
 
 								<div class="tab-pane fade pt-3" id="profile-change-password">
+								<h5 class="card-title"> Đổi Mật Khẩu</h5>
 									<!-- Change Password Form -->
 									<form:form action="/admin/user/index" modelAttribute="pass"
 										enctype="multipart/form-data">
 										<div class="row mb-3">
 											<label for="currentPassword"
-												class="col-md-4 col-lg-3 col-form-label">Mật khẩu củ</label>
+												class="col-md-4 col-lg-3 col-form-label">Mật khẩu cũ</label>
 											<div class="col-md-8 col-lg-9">
 												<form:input path="opass" type="password"
 													class="form-control" />
