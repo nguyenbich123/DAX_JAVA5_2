@@ -377,6 +377,8 @@
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="discountCode"
 												name="discountCode" placeholder="Nhập mã giảm giá">
+												<p id="maxQuantityMessage" class="text-danger d-none blink-animation">Mã giảm giá không hợp lệ hoặc đã hết hạn</p>
+												<p id="maxQuantityMessage2" class="text-danger d-none blink-animation">Vui lòng nhập mã</p>
 										</div>
 										<div class="col-md-6">
 											<button type="button" onclick="applyDiscount()"
@@ -630,12 +632,22 @@
 
         function applyDiscount() {
             if (isDiscountApplied) {
-                alert('Mã giảm giá đã được áp dụng!');
+                
                 return;
             }
+            
+            
 
             var discountCode = document.getElementById('discountCode').value.trim();
 
+            if(discountCode === ""){
+            	$("#maxQuantityMessage2").removeClass('d-none');
+            	return;
+            }else{
+            	$("#maxQuantityMessage2").addClass('d-none');
+            }
+           // $("#maxQuantityMessage2").addClass('d-none');
+            
             // Tìm mã giảm giá trong danh sách
             var matchedDiscount = listGG.find(function(gg) {
                 return gg.maGG === discountCode;
@@ -665,13 +677,16 @@
                     
                     // Đặt biến cờ là true để ghi nhận mã giảm giá đã được áp dụng
                     isDiscountApplied = true;
+                    $("#maxQuantityMessage").addClass("d-none");
                 }else{
-                	alert('Mã giảm giá đã hết lượt sử dụng!');
+                	$("#maxQuantityMessage").removeClass("d-none");
+                	//alert('Mã giảm giá đã hết lượt sử dụng!');
                 }
                 
             } else {
                 // Nếu mã giảm giá không hợp lệ
-                alert('Mã giảm giá không hợp lệ!');
+                $("#maxQuantityMessage").removeClass("d-none");
+                
             }
         }
 

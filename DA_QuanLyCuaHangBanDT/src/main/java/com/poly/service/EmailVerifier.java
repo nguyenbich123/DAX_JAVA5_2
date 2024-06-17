@@ -15,7 +15,7 @@ public class EmailVerifier {
 
 	    public static boolean verifyEmail(String email) {
 	        HttpClient client = HttpClient.newHttpClient();
-	        String url = API_URL + "?secret=" + API_KEY + "&email=" + email;
+	        String url = "https://api.emaillistverify.com/api/verifyEmail?secret=HEzzdkhVn2gX1RYyDlooY&email=" + email;
 	        System.out.println(url);
 	        HttpRequest request = HttpRequest.newBuilder()
 	                .uri(URI.create(url))
@@ -24,27 +24,14 @@ public class EmailVerifier {
 
 	        try {
 	            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-	            
-	            // Kiểm tra mã trạng thái của phản hồi
-	            int statusCode = response.statusCode();
-	            if (statusCode != 200) {
-	                System.out.println("Error: API returned status code " + statusCode);
-	                return false;
-	            }
-
-	            // Phân tích JSON để lấy trạng thái xác nhận
-	            ObjectMapper mapper = new ObjectMapper();
-	            JsonNode rootNode = mapper.readTree(response.body());
-	            String status = rootNode.path("status").asText();
-
-	            // Kiểm tra trạng thái xác nhận
-	            return "ok".equalsIgnoreCase(status);
-
+	            String responseBody = response.body();
+	            System.out.println("Response body: " + responseBody);
+	            // Assuming the API returns plain text 'ok' for valid email
+	            return "ok".equalsIgnoreCase(responseBody.trim());
 	        } catch (IOException | InterruptedException e) {
-	            System.out.println("Error sending request: " + e.getMessage());
 	            e.printStackTrace();
 	        }
-
+	        
 	        return false;
 	    }
 }

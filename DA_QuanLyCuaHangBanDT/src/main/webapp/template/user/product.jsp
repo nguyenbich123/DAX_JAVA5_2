@@ -449,12 +449,12 @@
 										<div
 											class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
 											<ul class="list-unstyled d-flex">
-												<li><a class="btn btn-success text-white m-1" href=""><i
+												<li><a class="btn btn-success text-white m-1" href="/product/product-detail/${sp.maCTSP}"><i
 														class="far fa-heart"></i></a></li>
 												<li><a class="btn btn-success text-white m-1"
 													href="/product/product-detail/${sp.maCTSP}"><i
 														class="far fa-eye"></i></a></li>
-												<li><a class="btn btn-success text-white m-1" href=""><i
+												<li><a class="btn btn-success text-white m-1" href="/product/product-detail/${sp.maCTSP}"><i
 														class="fas fa-cart-plus"></i></a></li>
 											</ul>
 										</div>
