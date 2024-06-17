@@ -212,7 +212,7 @@
 			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
 			                            </li>
 			                            <li>
-			                              <a href="/account/changepass" class="dropdown-item">Đổi mật khẩu</a>
+			                              <a href="" class="dropdown-item">Đổi mật khẩu</a>
 			                            </li>
 								    </c:when>
 								    <c:otherwise>

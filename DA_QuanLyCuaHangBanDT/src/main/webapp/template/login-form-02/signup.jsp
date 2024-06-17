@@ -120,6 +120,8 @@
                             Bạn đã có tài khoản? <a href="/account/login" class="text-dark">Đăng
                                 Nhập</a>
                         </div>
+                        
+                      
                     </form:form>
                 </div>
             </div>

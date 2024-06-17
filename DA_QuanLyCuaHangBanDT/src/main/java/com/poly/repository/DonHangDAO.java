@@ -68,6 +68,9 @@ public interface DonHangDAO extends JpaRepository<DonHang,Integer>{
     Page<DonHang> findByMaKHAndTtdhTrangThai(Account account, String trangThai, Pageable pageable);
 
     Optional<DonHang> findByMaDH(Integer maDH);
+    
+    @Query("SELECT o FROM DonHang o WHERE o.maDH = ?1")
+    DonHang findByMaDH2(Integer maDH);
 
     @Query("SELECT o FROM DonHang o WHERE o.maKH = :account ORDER BY o.ngayTT DESC")
     Optional<DonHang> findLatestOrder(@Param("account") Account account);

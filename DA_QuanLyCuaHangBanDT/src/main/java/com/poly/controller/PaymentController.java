@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -81,10 +81,10 @@ public class PaymentController {
 	VNPayService vnPayService;
 	
 	@RequestMapping("pay")
-	public String payment(@RequestParam("diachiHT") String diaChiHT,
+	public String payment(@RequestParam("diaChiChon") String diaChiHT,
 	                      @RequestParam("note") String note,
 	                      @RequestParam("discountCode") String discountCode,
-	                      @RequestParam("tongTien") String tongTien,
+	                      @RequestParam("thanhTien") String tongTien,
 	                      @RequestParam("phuongThuc") String phuongThuc,
 	                      Model model) {
 
@@ -105,29 +105,25 @@ public class PaymentController {
 	    donHang.setGhiChu(note);
 	    donHang.setNgayTT(new Date());
 	    donHang.setMaPT(findPhuongThuc(phuongThuc)); // Hàm tìm phương thức thanh toán
-	    donHang.setTongTien(calculateTotalAmount(discountCode, Double.valueOf(tongTien))); // Hàm tính tổng tiền
+	    donHang.setTongTien(Double.valueOf(tongTien)); // Hàm tính tổng tiền
 	    donHang.setMaGG(findDiscountCode(discountCode)); // Hàm tìm mã giảm giá
 	    donHang.setTttt(findDefaultTrangThaiTT(phuongThuc)); // Hàm tìm trạng thái thanh toán mặc định
 	    donHang.setTtdh(findDefaultTrangThaiDH()); // Hàm tìm trạng thái đơn hàng mặc định
 
+	    
 	    // Lưu đơn hàng vào cơ sở dữ liệu
 	    donHangDAO.save(donHang);
 
 	    List<CartItem> selectedItems = session.get("dssp");
 
 	    ChiTietDonHang ctdh;
-	    ChiTietSP ctsp;
 	    for(CartItem item : selectedItems) {
 	        ctdh = new ChiTietDonHang();
 	        ctdh.setMaCTSP(getChiTietSP(item.getMactsp()));
 	        ctdh.setSoLuong(item.getSl());
 	        ctdh.setGia(item.getGia());
-	        ctdh.setMaDH(donHang);
+	        ctdh.setMaDH(getDonHang(donHang.getMaDH()));
 	        ctdhDAO.save(ctdh);
-
-	        ctsp = ctspDAO.findByMaCTSP3(item.getMactsp());
-	        ctsp.setSoluong(ctsp.getSoluong() - item.getSl());
-	        ctspDAO.save(ctsp);
 
 	        chiTietGioHangDAO.deleteByMaCTSP(item.getMactsp());
 	    }
@@ -291,4 +287,9 @@ int paymentStatus = vnPayService.orderReturn(request);
 	    	Optional<DonHang> dh = dhDAO.findByMaDH(madh);
 	    	return dh.orElse(null);
 	    }
+	    
+		
+	    
+	    
+	    
 }

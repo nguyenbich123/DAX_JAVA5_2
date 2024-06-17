@@ -188,30 +188,12 @@
                             </svg>
                           </a>
                           <ul class="dropdown-menu ">
-	                          <c:choose>
-								    <c:when test="${account != null}">
-								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
+							<li>
+			                	<a href="/account/login" class="dropdown-item">Đăng nhập</a>
+							</li>
+			                <li>
+			                	<a href="/account/signup" class="dropdown-item">Đăng ký</a>
+			                </li>
                           </ul>
                         </li>
                         <li>
