@@ -77,37 +77,76 @@ public class DangNhapController {
 		return "/template/login-form-02/login";
 	}
 
+//	@PostMapping("login")
+//	public String login(Model model, @Validated @ModelAttribute("tk") Account tk, BindingResult result) {
+//		if (result.hasErrors()) {
+//			return "/template/login-form-02/login";
+//		}
+//
+//		try {
+//			Account account = accountDao.findById(tk.getTenDN()).orElseThrow(() -> new Exception("Account not found"));
+//			if (!account.getMatKhau().equals(tk.getMatKhau())) {
+//				result.rejectValue("matKhau", "error.tk", "Sai mật khẩu. Vui lòng nhập lại!");
+//				return "/template/login-form-02/login";
+//			} else {
+//				session.set("account", account);
+//				if (account.getRole().getRoles().equals("Admin")) {
+//					return "redirect:/admin/home/view";
+//				} else {
+//					return "redirect:/home/0";
+//				}
+//			}
+//		} catch (Exception e) {
+//			model.addAttribute("message", "Login failed!");
+//		}
+//
+//		return "/template/login-form-02/login";
+//	}
+	
 	@PostMapping("login")
 	public String login(Model model, @Validated @ModelAttribute("tk") Account tk, BindingResult result) {
-		if (!result.hasErrors()) {
-			return "redirect:/account/login";
-		}
-		
-//		Optional<Account> account = accountDao.findById(tk.getTenDN());
-//		if (account.get().getRole().equals("Admin")) {
-//			return "redirect:/admin/home/view";
-//		} else {
-//			return "redirect:/home/0";
-//		}
+	    if (result.hasErrors()) {
+	        System.out.println("Validation errors present.");
+	        return "/template/login-form-02/login";
+	    }
 
-		try {
-			Account account = accountDao.findById(tk.getTenDN()).orElseThrow(() -> new Exception("Account not found"));
-			if (!account.getMatKhau().equals(tk.getMatKhau())) {
-				result.rejectValue("matKhau", "error.tk", "Sai mật khẩu. Vui lòng nhập lại!");
-			} else {
-				session.set("account", account);
-				if (account.getRole().getRoles().equals("Admin")) {
-					return "redirect:/admin/home/view";
-				} else {
-					return "redirect:/home/0";
-				}
-			}
-		} catch (Exception e) {
-			model.addAttribute("message", "Login failed!");
-		}
+	    System.out.println("Username: " + tk.getTenDN());
+	    System.out.println("Password: " + tk.getMatKhau());
 
-		return "/template/login-form-02/login";
+	    try {
+	        Optional<Account> optionalAccount = accountDao.findById(tk.getTenDN());
+	        if (!optionalAccount.isPresent()) {
+	            System.out.println("Account not found.");
+	            result.rejectValue("tenDN", "error.tk", "Tên đăng nhập không tồn tại!!");
+	            return "/template/login-form-02/login";
+	        }
+
+	        Account account = optionalAccount.get();
+	        if (!account.getMatKhau().equals(tk.getMatKhau())) {
+	            System.out.println("Incorrect password.");
+	            result.rejectValue("matKhau", "error.tk", "Sai mật khẩu. Vui lòng nhập lại!");
+	            return "/template/login-form-02/login";
+	        } else {
+	            System.out.println("Login successful. Setting session attribute and redirecting...");
+	            session.set("account", account);
+	            if ("Admin".equals(account.getRole().getRoles())) {
+	                return "redirect:/admin/home/view";
+	            } else {
+	                return "redirect:/home/0";
+	            }
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Exception: " + e.getMessage());
+	        model.addAttribute("message", "Login failed! " + e.getMessage());
+	    }
+
+	    return "/template/login-form-02/login";
 	}
+
+
+
+
+
 	
 	
 	
@@ -175,7 +214,7 @@ public class DangNhapController {
         }
 
         String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
-        if(checkMXRecord(email)) {
+        if(!checkMXRecord(email)) {
         	result.rejectValue("email", "error.tk", "Email không tồn tại!");
         	return "/template/login-form-02/forgot";
         }
@@ -262,21 +301,29 @@ public class DangNhapController {
         }
 
         String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
-        if(!checkMXRecord(email)) {
+        Optional<Account> chkEmail = accountDao.findByEmail(tk.getEmail());
+        
+        if(chkEmail.isPresent()) {
+        	result.rejectValue("email", "error.tk", "Email đã được đăng ký");
+        	return "/template/login-form-02/signup";
+        }else if(!checkMXRecord(email)) {
         	result.rejectValue("email", "error.tk", "Email không tồn tại!");
         	return "/template/login-form-02/signup";
         }
 
         try {
         	Account account = new Account();
-        	Role role = roleDAO.getById(3);
-        	account.setHoTen(tk.getHoTen());
-        	account.setTenDN(tk.getTenDN());
-        	account.setMatKhau(tk.getTenDN());
-        	account.setSdt(tk.getSdt());
-        	account.setEmail(tk.getEmail());
-        	account.setRole(role);
-            accountDao.save(account);
+        	Optional<Role> role = roleDAO.findByIdrole(2);
+        	if(role.isPresent()) {
+        		account.setHoTen(tk.getHoTen());
+            	account.setTenDN(tk.getTenDN());
+            	account.setMatKhau(tk.getMatKhau());
+            	account.setSdt(tk.getSdt());
+            	account.setEmail(tk.getEmail());
+            	account.setRole(role.get());
+                accountDao.save(account);
+        	}
+        	
 
             // Generate confirmation token (here we use email as token for simplicity)
             String confirmationToken = tk.getEmail();
@@ -297,7 +344,7 @@ public class DangNhapController {
             return "/template/confirm";
         } catch (Exception e) {
             e.printStackTrace();
-            result.rejectValue("tenDN", "error.tk", "Tên đăng nhập hoặc email đã tồn tại.");
+            result.rejectValue("tenDN", "error.tk", "Tên đăng nhập đã tồn tại.");
             model.addAttribute("errorMessage", "Tên đăng nhập hoặc email đã tồn tại.");
         }
 
@@ -362,7 +409,7 @@ public class DangNhapController {
 	                if (tk.getRole().getRoles().equals("Admin")) {
 	                    return "redirect:/admin/home/view";
 	                } else {
-	                    return "redirect:/home/index";
+	                    return "redirect:/home/0";
 	                }
 	            } else {
 	                model.addAttribute("error", "Không tìm thấy trạng thái hoạt động.");

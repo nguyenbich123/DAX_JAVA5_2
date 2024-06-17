@@ -41,6 +41,9 @@ public class GiamGia {
     @Column(name="Tgkt")
     private Date tgKt;
     
+    @Column(name = "Soluong")
+    private Integer soLuong;
+    
     @Column(name="Img")
     private String img;
 }

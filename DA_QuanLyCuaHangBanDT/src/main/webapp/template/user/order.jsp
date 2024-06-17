@@ -340,7 +340,7 @@
 							</thead>
 							<!-- Nội dung bảng -->
 							<tbody>
-								<c:forEach var="dh" items="${pageDH.content}">
+								<%-- <c:forEach var="dh" items="${pageDH.content}">
 									<tr>
 										<td>${dh.maDH}</td>
 										<td>
@@ -368,8 +368,7 @@
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="confirmDeleteModalLabel">Xác
-																nhận hủy đơn hàng</h5>
+															<h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận hủy đơn hàng</h5>
 															<button type="button" class="btn-close"
 																data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
@@ -490,7 +489,153 @@
 											</div>
 										</div>
 									</tr>
+								</c:forEach> --%>
+								<c:forEach var="dh" items="${pageDH.content}">
+									<tr>
+										<td>${dh.maDH}</td>
+										<td><fmt:formatNumber value="${dh.tongTien}"
+												pattern="#,###đ" /></td>
+										<fmt:parseDate value="${dh.ngayTT}"
+											pattern="yyyy-MM-dd HH:mm:ss.S" var="parsedDate" />
+										<td><fmt:formatDate value="${parsedDate}"
+												pattern="dd/MM/yyyy HH:mm:ss" /></td>
+										<td>${dh.maPT.tenPT}</td>
+										<td style="color: rgb(94, 94, 61)">${dh.ttdh.trangThai}</td>
+										<!-- Button trigger modal -->
+										<td>
+											<div class="d-flex">
+												<a href="#" class="btn btn-primary" data-bs-toggle="modal"
+													data-bs-target="#exampleModal-${dh.maDH}">Chi tiết</a>
+												<c:if test="${dh.ttdh.trangThai == 'Chờ xác nhận'}">
+													<button class="btn btn-danger mx-1" data-bs-toggle="modal"
+														data-bs-target="#confirmDeleteModal-${dh.maDH}"
+														data-id="${dh.maDH}">Hủy đơn</button>
+												</c:if>
+											</div> <!-- Modal for deleting order -->
+											<div class="modal fade" id="confirmDeleteModal-${dh.maDH}"
+												tabindex="-1"
+												aria-labelledby="confirmDeleteModalLabel-${dh.maDH}"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title"
+																id="confirmDeleteModalLabel-${dh.maDH}">Xác nhận
+																hủy đơn hàng</h5>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">Bạn có chắc chắn muốn hủy
+															đơn hàng này không?</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Đóng</button>
+
+															<a href="/order/remove/${dh.maDH}" class="btn btn-danger">Hủy
+																đơn</a>
+
+														</div>
+													</div>
+												</div>
+											</div> <!-- Modal for order details -->
+											<div class="modal fade" id="exampleModal-${dh.maDH}"
+												tabindex="-1" aria-labelledby="exampleModalLabel-${dh.maDH}"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel-${dh.maDH}">Thông
+																tin chi tiết đơn hàng</h5>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<p>Mã đơn: ${dh.maDH}</p>
+															<div class="row">
+																<c:forEach var="ctdh"
+																	items="${chiTietDonHangMap[dh.maDH]}">
+																	<div class="d-flex row align-items-center">
+																		<div class="col-md-3">
+																			<a
+																				href="/product/product-detail/${ctdh.maCTSP.maCTSP}">
+																				<img src="/images/${ctdh.maCTSP.img}" alt=""
+																				width="50" />
+																			</a>
+																		</div>
+																		<div class="col-md-4">
+																			<b>${ctdh.maCTSP.maSP.tenSP}</b> Màu:
+																			${ctdh.maCTSP.maMau.mauSac}
+																		</div>
+																		<div class="col-md-3">
+																			<b> <fmt:formatNumber value="${ctdh.maCTSP.gia}"
+																					pattern="#,###đ" /></b>
+																		</div>
+																		<div class="col-md-2">x${ctdh.soLuong}</div>
+																	</div>
+																	<div>
+																		<span>${ctdh.maCTSP.maSP.tenSP}</span>
+																		<c:choose>
+																			<c:when test="${danhGiaMap[ctdh.id_CTDH]}">
+																				<button>Đánh giá sản phẩm</button>
+																			</c:when>
+																			<c:otherwise>
+																				<span class="text-danger">Bạn chưa mua sản
+																					phẩm này nên không thể đánh giá</span>
+																			</c:otherwise>
+																		</c:choose>
+																	</div>
+																</c:forEach>
+															</div>
+															<hr>
+															<div class="row">
+																<div class="col-md-6">
+																	<h6>Tổng quan đơn hàng</h6>
+																	<div>
+																		Tổng tiền:
+																		<fmt:formatNumber value="${dh.tongTien}"
+																			pattern="#,###đ" />
+																	</div>
+																	<div>
+																		Phí vận chuyển:
+																		<fmt:formatNumber value="${dh.tongTien}"
+																			pattern="#,###đ" />
+																	</div>
+																	<div>
+																		Giảm giá:
+																		<fmt:formatNumber value="${dh.maGG.giamGia}"
+																			pattern="#,###đ" />
+																	</div>
+																	<b>Thành tiền: <fmt:formatNumber
+																			value="${dh.tongTien}" pattern="#,###đ" /></b>
+																</div>
+																<div class="col-md-6">
+																	<h6>Chi tiết đơn hàng</h6>
+																	<div>Tên khách hàng: ${dh.maKH.hoTen}</div>
+																	<div>Số điện thoại: ${dh.maKH.sdt}</div>
+																	<div>Địa chỉ: ${dh.diaChi}</div>
+																	<div style="color: green;">
+																		Ngày đặt hàng:
+																		<fmt:formatDate value="${parsedDate}"
+																			pattern="dd/MM/yyyy HH:mm:ss.S" />
+																	</div>
+																	<div style="color: green;">Phương thức thanh
+																		toán: ${dh.maPT.tenPT}</div>
+																	<div style="color: rgb(61, 59, 59);">Trạng thái
+																		thanh toán: ${dh.tttt.trangThai}</div>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Đóng</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
 								</c:forEach>
+
 								<!-- Xử lý trường hợp không có đơn hàng -->
 								<c:if test="${empty pageDH.content}">
 									<tr>
@@ -651,7 +796,7 @@
 			window.location.href = "/order/view?filterby=${selectedStatus}";
 		} */
 	</script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function() {
 			var deleteButtons = document
 					.querySelectorAll('button[data-bs-toggle="modal"]');
@@ -663,7 +808,7 @@
 				});
 			});
 		});
-	</script>
+	</script> -->
 
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

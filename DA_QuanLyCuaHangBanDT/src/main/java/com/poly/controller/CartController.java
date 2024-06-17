@@ -16,18 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poly.entity.Account;
 import com.poly.entity.CartItem;
 import com.poly.entity.ChiTietGioHang;
 import com.poly.entity.DiaChi;
+import com.poly.entity.GiamGia;
 import com.poly.entity.GioHang;
+import com.poly.entity.PTTT;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.ChiTietGioHangDAO;
 import com.poly.repository.ChiTietSanPhamDAO;
 import com.poly.repository.DiaChiDAO;
+import com.poly.repository.GiamGiaDAO;
 import com.poly.repository.GioHangDAO;
+import com.poly.repository.PTTT_DAO;
 import com.poly.service.CartService;
 import com.poly.utils.SessionService;
 
@@ -55,6 +57,12 @@ public class CartController {
 
 	@Autowired
 	ChiTietSanPhamDAO ctspDAO;
+	
+	@Autowired
+	GiamGiaDAO giamGiaDAO;
+	
+	@Autowired
+	PTTT_DAO ptttDAO;
 
 	@GetMapping("/view")
 	public String getViewCart(Model model) {
@@ -154,6 +162,13 @@ public class CartController {
 			}
 
 		}
+		
+		List<PTTT> listPTTT = ptttDAO.findAll();
+        model.addAttribute("listPT", listPTTT);
+        
+        List<GiamGia> listGG = giamGiaDAO.findAll();
+        model.addAttribute("listGG", listGG);
+        System.out.println(listGG);
 
 		session.set("dssp", ctsp);
 		model.addAttribute("diachi", diachi);
@@ -161,5 +176,7 @@ public class CartController {
 		model.addAttribute("totalAmount", totalAmount);
 		return "/template/user/payment";
 	}
+	
+
 
 }

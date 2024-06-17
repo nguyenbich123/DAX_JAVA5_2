@@ -73,6 +73,13 @@
                     <form:errors path="email" cssClass="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-block btn-primary">Lấy mã</button>
+                <div class="text-danger">
+					<form:input type="hidden" path="sdt" value="a"/>
+					<form:input type="hidden" path="hoTen" value="a"/>
+					<form:input type="hidden" path="tenDN" value="a@gmail.com"/>
+					<form:input type="hidden" path="matKhau" value="a@gmail.com"/>
+					
+				</div>
             </form:form>
         </div>
     </div>

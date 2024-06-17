@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Xác nhận đăng ký</h1>
+        <h1 class="mb-4">Vui lòng kiểm tra mail để hoàn thành xác thực đăng ký</h1>
         <c:if test="${not empty message}">
             <div class="alert alert-success" role="alert">${message}</div>
         </c:if>

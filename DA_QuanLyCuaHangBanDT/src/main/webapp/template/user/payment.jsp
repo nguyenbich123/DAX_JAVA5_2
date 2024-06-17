@@ -186,122 +186,111 @@
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-          <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/0">
-              <img src="/template/user/images/TheLiem(2).png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
+				<div class="container-fluid">
+					<a class="navbar-brand " href="/home/0"> <img
+						src="/template/user/images/TheLiem(2).png" class="logo">
+					</a>
+					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
+						type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <a class="navbar-brand" href="index.html">
-                  <img src="/template/user/images/2.png" class="logo">
-                </a>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                      <li>
-                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
-                      </li>
-                      <li>
-                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
-                      </li>
-                      <li>
-                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-items ps-5">
-                      <ul class="d-flex justify-content-end list-unstyled">
-                        <li class="search-item pe-3">
-                          <a href="#" class="search-button">
-                            <svg class="search">
+					</button>
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+						aria-labelledby="bdNavbarOffcanvasLabel">
+						<div class="offcanvas-header px-4 pb-0">
+							<a class="navbar-brand" href="index.html"> <img
+								src="/template/user/images/2.png" class="logo">
+							</a>
+							<button type="button" class="btn-close btn-close-black"
+								data-bs-dismiss="offcanvas" aria-label="Close"
+								data-bs-target="#bdNavbar"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul id="navbar"
+								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link me-4 active"
+									href="/home/0">Trang chủ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#company-services">Dịch vụ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/product/view">Sản phẩm</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#yearly-sale">Khuyến mãi</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link me-4 dropdown-toggle link-dark"
+									data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false">Trang</a>
+									<ul class="dropdown-menu">
+										<li><a href="/product/view" class="dropdown-item">Cửa
+												hàng</a></li>
+										<li>
+										<li><a href="/contact/view" class="dropdown-item">Liên
+												hệ</a></li>
+										<li><a href="/about/view" class="dropdown-item">Giới
+												Thiệu</a></li>
+										<li><a href="/feedback/view" class="dropdown-item">Góp
+												Ý</a></li>
+									</ul></li>
+								<li class="nav-item">
+									<div class="user-items ps-5">
+										<ul class="d-flex justify-content-end list-unstyled">
+											<li class="search-item pe-3"><a href="#"
+												class="search-button"> <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-                          </a>
-                        </li>
-                        <li class="pe-3 dropdown position-relative">
-                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
+											</a></li>
+											<li class="pe-3 dropdown position-relative"><a href="#"
+												class="" data-bs-toggle="dropdown" aria-expanded="false">
+													<c:if test="${account != null}">
 								    Xin chào, ${account.hoTen}
-							  </c:if>
-                            <svg class="user">
+							  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-                          </a>
-                          <ul class="dropdown-menu ">
-                          	
-	                          <c:choose>
-								    <c:when test="${account != null}">
-									    <li style="max-height: 100px" class="p-2">
-										    <div class="avatar">
-										        <img alt="" src="/template/user/images/meo.jpg">
-										    </div>
-										</li>
-								        <li>
-			                              <a href="" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/resetpass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
-                          </ul>
-                        </li>
-                        <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
-                            <svg class="cart">
+											</a>
+												<ul class="dropdown-menu ">
+
+													<c:choose>
+														<c:when test="${account != null}">
+															<li style="max-height: 100px" class="p-2">
+																<div class="avatar">
+																	<img alt="" src="/template/user/images/meo.jpg">
+																</div>
+															</li>
+															<li><a href="" class="dropdown-item">Chỉnh sửa
+																	thông tin</a></li>
+															<li><a href="/order/view" class="dropdown-item">Đơn
+																	hàng của tôi</a></li>
+															<li><a href="/account/logout" class="dropdown-item">Đăng
+																	xuất</a></li>
+															<li><a href="/account/resetpass"
+																class="dropdown-item">Đổi mật khẩu</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a href="/account/login" class="dropdown-item">Đăng
+																	nhập</a></li>
+															<li><a href="/account/signup" class="dropdown-item">Đăng
+																	ký</a></li>
+														</c:otherwise>
+													</c:choose>
+												</ul></li>
+											<li><a
+												class="nav-icon position-relative text-decoration-none"
+												href="/cart/view"> <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
+                            </svg> <span
+													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+											</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 		</div>
 
 	</header>
@@ -321,8 +310,10 @@
 				
 				</div> --%>
 
+
 				<form action="/payment/pay" method="post">
 					<input type="hidden" id="selectedItemsMap" name="selectedItemsMap">
+					<input type="hidden" id="diaChiChon" name="diaChiChon">
 					<h2 style="font-weight: bold;">Thanh toán</h2>
 					<div class="card mb-3">
 						<div class="card-body">
@@ -339,25 +330,17 @@
 										readonly>
 								</div>
 							</div>
-							<div class="row mt-3">
-								<div class="col-md-12">
-									<label for="amount">Số tiền:</label> 
-									<fmt:formatNumber value="${totalAmount}"  pattern="#,###đ"/>
-									<input type="hidden"
-										class="form-control" id="amount" name="tongTien"
-										value="${totalAmount}" readonly>
-								</div>
-							</div>
+							
+							<!-- -------------------------- -->
 							<div class="row mt-3">
 								<div class="col-md-12">
 									<label for="diachi">Địa Chỉ</label> <select name="diachiHT"
-										class="form-select">
-										<c:forEach var="dc" items="${diachi}">
-											<option
-												value="${dc.duong_Sonha}, ${dc.quan_Huyen}, ${dc.tinh_ThanhPho}">
-												${dc.duong_Sonha}, ${dc.quan_Huyen}, ${dc.tinh_ThanhPho}</option>
-										</c:forEach>
-									</select>
+										id="diachiHT" class="form-select"
+										onchange=calculateShippingFee2()>
+
+
+									</select> Phí vận chuyển:
+									<div id="feeDisplay">0</div>
 								</div>
 							</div>
 							<div class="row mt-3">
@@ -370,23 +353,47 @@
 								<div class="col-md-12">
 									<label for="paymentMethod">Phương thức thanh toán:</label> <select
 										name="phuongThuc" class="form-select">
-										<option value="Ví VNPAY">Ví VNPAY</option>
-										<option value="Thanh toán khi nhận hàng">Thanh toán
-											khi nhận hàng</option>
+										<c:forEach var="item" items="${listPT}">
+											<option value="${item.tenPT}">${item.tenPT}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col-md-12">
-									<label for="discountCode">Nhập Mã Giảm Giá (Nếu Có):</label> <input
-										type="text" class="form-control" id="discountCode"
-										name="discountCode" placeholder="Nhập mã giảm giá">
+									<label for="discountCode">Nhập Mã Giảm Giá (Nếu Có):</label>
+									<div class="row">
+										<div class="col-md-6">
+											<input type="text" class="form-control" id="discountCode"
+												name="discountCode" placeholder="Nhập mã giảm giá">
+										</div>
+										<div class="col-md-6">
+											<button type="button" onclick="applyDiscount()"
+												class="btn btn-dark">Áp dụng</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<label for="amount">Số tiền:</label> <span id="totalAmount"
+										data-amount="${totalAmount}"> <fmt:formatNumber
+											value="${totalAmount}" pattern="#,###đ" />
+									</span>
+									<%-- <input type="hidden" class="form-control" id="amount" name="tongTien" value="${totalAmount}" readonly> --%>
 								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col-md-12">
 									<strong>
-										<h4>Thành tiền:</h4>
+										<h4>
+											Thành tiền: <span id="totalAmountDisplay"
+												class="totalAmountDisplay"> <fmt:formatNumber
+													value="${totalAmount}" pattern="#,###đ" />
+											</span> <input type="hidden" id="thanhTien"
+												class="totalAmountDisplay" name="thanhTien" value=""
+												readonly>
+										</h4>
 									</strong>
 								</div>
 							</div>
@@ -557,23 +564,325 @@
 			</div>
 		</div>
 	</div>
+
+
+
 	<script>
-	    // Dữ liệu ctsp là danh sách các CartItem từ backend
-	    var ctsp = ${dssp};
-	
-	    // Chuyển đổi thành JSON
-	    var selectedItemsJson = JSON.stringify(ctsp);
-	
-	    // Gán giá trị JSON vào input hidden
-    document.getElementById('selectedItemsMap').value = selectedItemsJson;
-</script>
+		// Dữ liệu ctsp là danh sách các CartItem từ backend
+		var ctsp = $
+		{
+			dssp
+		};
+
+		// Chuyển đổi thành JSON
+		var selectedItemsJson = JSON.stringify(ctsp);
+
+		// Gán giá trị JSON vào input hidden
+		document.getElementById('selectedItemsMap').value = selectedItemsJson;
+	</script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"
 		src="/template/user/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="/template/user/js/plugins.js"></script>
 	<script type="text/javascript" src="/template/user/js/script.js"></script>
-	<script src="/template/user/js/thanhToan.js"></script>
+	<!-- <script src="/template/user/js/thanhToan.js"></script> -->
+
+	<!-- Đoạn mã JavaScript để xử lý áp dụng mã giảm giá -->
+	<script>
+        // Khai báo một mảng JavaScript để lưu trữ các đối tượng GiamGia
+        var listGG = [];
+
+        // Duyệt qua danh sách listGG từ model và thêm từng đối tượng vào mảng JavaScript
+        <c:forEach var="gg" items="${listGG}">
+            listGG.push({
+                maGG: '${gg.maGG}',
+                giamGia: ${gg.giamGia},
+                dhtt: ${gg.dhtt},
+                stgtd: ${gg.stgtd},
+                tgap: '${gg.tgAp}',
+                tgKt: '${gg.tgKt}',
+                // Các trường dữ liệu khác tương tự
+            });
+        </c:forEach>
+
+        
+        var originalTotalAmount = parseFloat(document.getElementById('totalAmount').getAttribute('data-amount')); // Lưu trữ giá trị tổng tiền ban đầu
+        var isDiscountApplied = false; // Biến cờ để kiểm tra xem mã giảm giá đã được áp dụng hay chưa
+
+        function applyDiscount() {
+            if (isDiscountApplied) {
+                alert('Mã giảm giá đã được áp dụng!');
+                return;
+            }
+
+            var discountCode = document.getElementById('discountCode').value.trim();
+
+            // Tìm mã giảm giá trong danh sách
+            var matchedDiscount = listGG.find(function(gg) {
+                return gg.maGG === discountCode;
+            });
+
+            if (matchedDiscount) {
+                // Nếu mã giảm giá hợp lệ, cập nhật giá trị tổng tiền
+                var discountPercentage = matchedDiscount.giamGia; // Giả sử giảm giá được lưu dưới dạng phần trăm
+                var currentTotalAmount = parseFloat(document.getElementById('thanhTien').value); // Lấy tổng tiền hiện tại (bao gồm phí vận chuyển)
+                var discountedAmount = 0; // Áp dụng giảm giá
+                if (currentTotalAmount > matchedDiscount.dhtt) {
+                    if (currentTotalAmount * discountPercentage >= matchedDiscount.stgtd) {
+                        discountedAmount = currentTotalAmount - matchedDiscount.stgtd;
+                    }
+                } else {
+                    discountedAmount = currentTotalAmount;
+                }
+                console.log(matchedDiscount.dhtt);
+                
+                // Cập nhật lại tổng tiền hiển thị
+                var formattedAmount = discountedAmount.toLocaleString('vi-VN', {
+                    minimumFractionDigits: 0
+                });
+                document.getElementById('totalAmountDisplay').textContent = formattedAmount + "đ";
+                document.getElementById('thanhTien').value = discountedAmount;
+                
+                // Đặt biến cờ là true để ghi nhận mã giảm giá đã được áp dụng
+                isDiscountApplied = true;
+            } else {
+                // Nếu mã giảm giá không hợp lệ
+                alert('Mã giảm giá không hợp lệ!');
+            }
+        }
+
+     // Thêm sự kiện để khôi phục tổng tiền ban đầu khi mã giảm giá bị xóa
+        document.getElementById('discountCode').addEventListener('input', function() {
+            if (this.value.trim() === '') {
+                // Khôi phục lại tổng tiền ban đầu (bao gồm cả phí vận chuyển)
+                var currentTotalAmount = parseFloat(document.getElementById('thanhTien').value);
+                var formattedAmount = currentTotalAmount.toLocaleString('vi-VN', {
+                    minimumFractionDigits: 0
+                });
+                document.getElementById('totalAmountDisplay').textContent = formattedAmount + "đ ";
+                document.getElementById('thanhTien').value = currentTotalAmount;
+
+                // Đặt biến cờ là false để cho phép áp dụng mã giảm giá mới
+                isDiscountApplied = false;
+            }
+        });
+    </script>
+
+	<script>
+	    const token = '96d82524-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
+	    const shopId = '192566';  // Thay thế bằng shop ID thực
+		
+		const provinceId = 220;  // ID của tỉnh muốn lấy tên
+	    const districtId = 1574;  // ID của quận/huyện muốn lấy tên
+	    const wardId = "550307";  // ID của phường/xã muốn lấy tên
+	    
+	    
+	    
+	 // Khai báo mảng listdc để lưu trữ các đối tượng địa chỉ
+	    var listdc = [];
+
+	    // Duyệt qua danh sách diachi từ model và thêm từng đối tượng vào mảng JavaScript
+	    <c:forEach var="dc" items="${diachi}">
+	        listdc.push({
+	            tinh_ThanhPho: ${dc.tinh_ThanhPho},
+	            quan_Huyen: ${dc.quan_Huyen},
+	            xa_Phuong_Thitran: ${dc.xa_Phuong_Thitran},
+	            duong_Sonha: '${dc.duong_Sonha}'
+	        });
+	    </c:forEach>
+	    console.log(listdc);
+
+	    // Hàm lấy tên tỉnh/thành phố theo ID
+        function fetchProvinceNameById2(provinceId2) {
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const province = data.data.find(province => province.ProvinceID === provinceId2);
+                if (province) {
+                    return province.ProvinceName;
+                } else {
+                    throw new Error('Province not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching province name:', error);
+                throw error;
+            });
+        }
+
+        // Hàm lấy tên quận/huyện theo ID
+        function fetchDistrictNameById2(districtId2, provinceId2) {
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=' + provinceId2 + '&shop_id=' + shopId, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const district = data.data.find(district => district.DistrictID === districtId2);
+                if (district) {
+                    return district.DistrictName;
+                } else {
+                    throw new Error('District not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching district name:', error);
+                throw error;
+            });
+        }
+
+        // Hàm lấy tên phường/xã theo ID
+        function fetchWardNameById2(wardId2, districtId2) {
+            return fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=' + districtId2 + '&shop_id=' + shopId, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const ward = data.data.find(ward => ward.WardCode === "" + wardId2);
+                if (ward) {
+                    return ward.WardName;
+                } else {
+                    throw new Error('Ward not found');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching ward name:', error);
+                throw error;
+            });
+        }
+
+        // Hàm lấy tên các địa chỉ và hiển thị vào select
+        function populateAddresses() {
+            const diachiSelect = document.getElementById('diachiHT');
+            diachiSelect.innerHTML = '';
+
+            listdc.forEach(dc => {
+                let fullAddress = '';
+
+                fetchProvinceNameById2(dc.tinh_ThanhPho)
+                .then(provinceName => {
+                    fullAddress = provinceName;
+                    return fetchDistrictNameById2(dc.quan_Huyen, dc.tinh_ThanhPho);
+                })
+                .then(districtName => {
+                    fullAddress += ', ' + districtName;
+                    return fetchWardNameById2(dc.xa_Phuong_Thitran, dc.quan_Huyen);
+                })
+                .then(wardName => {
+                    fullAddress += ', ' + wardName + ', ' + dc.duong_Sonha;
+
+                    const option = document.createElement('option');
+                    option.value = dc.xa_Phuong_Thitran + '-' + dc.quan_Huyen;  // Định dạng "wardId-districtId"
+                    option.text = fullAddress;
+                    diachiSelect.add(option);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+
+        function formatCurrency(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function calculateShippingFee2() {
+            const addressSelect = document.getElementById('diachiHT');
+            const selectedValue = addressSelect.value;
+            console.log("Select diachiHT value:", selectedValue);
+            const [toWardCode, toDistrictId] = selectedValue.split('-');
+            console.log(addressSelect.selectedOptions[0].textContent.trim());
+            
+            document.getElementById('diaChiChon').value = addressSelect.selectedOptions[0].textContent.trim();
+            
+            const params = new URLSearchParams({
+                from_district_id: 1574,
+                from_ward_code: '550307',
+                service_id: 53320,
+                to_district_id: toDistrictId,
+                to_ward_code: toWardCode,
+                height: 10,
+                length: 10,
+                weight: 10,
+                width: 10,
+                insurance_value: 10000,
+                cod_failed_amount: 2000,
+                coupon: ''
+            });
+
+            fetch('https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee?' + params.toString(), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': token,
+                    'ShopId': shopId
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const shippingFeeElement = document.getElementById('feeDisplay');
+                if (data.code === 200 && data.data) {
+                    const shippingFee = data.data.total;
+                    const formattedShippingFee = formatCurrency(shippingFee);
+                    shippingFeeElement.textContent = formattedShippingFee;
+
+                    // Cập nhật lại thành tiền với phí vận chuyển
+                    updateTotalAmountWithShippingFee(shippingFee);
+                } else {
+                    shippingFeeElement.textContent = 'Không thể tính phí vận chuyển';
+                    updateTotalAmountWithShippingFee(0); // Nếu không thể tính phí vận chuyển, không thêm phí
+                }
+            })
+            .catch(error => {
+                console.error('Error calculating shipping fee:', error);
+                document.getElementById('feeDisplay').textContent = 'Lỗi khi tính phí vận chuyển';
+                updateTotalAmountWithShippingFee(0); // Nếu có lỗi, không thêm phí
+            });
+        }
+
+     // Hàm cập nhật thành tiền với phí vận chuyển
+        function updateTotalAmountWithShippingFee(shippingFee) {
+            const originalTotalAmount = parseFloat(document.getElementById('totalAmount').getAttribute('data-amount'));
+            const newTotalAmount = originalTotalAmount + shippingFee;
+
+            // Cập nhật lại hiển thị thành tiền
+            const formattedAmount = newTotalAmount.toLocaleString('vi-VN', {
+                minimumFractionDigits: 0
+            });
+            document.getElementById('totalAmountDisplay').textContent = formattedAmount + "đ";
+            document.getElementById('thanhTien').value = newTotalAmount;
+        }
+
+        // Đảm bảo mã chỉ chạy sau khi DOM đã tải
+        document.addEventListener("DOMContentLoaded", function() {
+            populateAddresses();
+        });
+        
+        
+    //--------------------------------------------------------------------   ----------------------------------------
+        
+        
+	
+		
+		// Hàm định dạng số thành tiền tệ
+		function formatCurrency(number) {
+			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
+       
+		
+    </script>
 </body>
 
 </html>

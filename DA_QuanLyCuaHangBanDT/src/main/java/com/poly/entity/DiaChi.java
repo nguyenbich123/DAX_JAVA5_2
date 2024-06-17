@@ -32,7 +32,7 @@ public class DiaChi {
     private Integer quan_Huyen;
 
     @Column(name="Xaphuongthitran")
-    private String xa_Phuong_Thitran;
+    private Integer xa_Phuong_Thitran;
 
     @Column(name="Duongsonha")
     private String duong_Sonha;
