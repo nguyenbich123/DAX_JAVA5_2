@@ -172,7 +172,12 @@ public class OrderController {
 	        redirectAttributes.addFlashAttribute("errorMessage", "Trạng thái 'Đã hủy' không tồn tại.");
 	        return "redirect:/order/view";
 	    }
-
+	    //xét điều kiện kiểm tra nó đã được xác nhận chưa
+	    if(dh.getTtdh().getTrangThai().equals("Đã xác nhận")) {
+	    	redirectAttributes.addFlashAttribute("errorMessage", "Không thể hủy, đơn hàng đã được xác nhận");
+	    	System.out.println("Đơn hàng đã được xác nhận");
+	        return "redirect:/order/view";
+	    }
 	    // Cập nhật trạng thái đơn hàng
 	    dh.setTtdh(ttdh.get());
 

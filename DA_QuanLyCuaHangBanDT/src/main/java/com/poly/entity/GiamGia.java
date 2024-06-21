@@ -58,4 +58,7 @@ public class GiamGia {
     @Column(name="Soluong")
     @NotNull(message = "{NotNull.gg.soLuong}")
     private Integer soLuong;
+    
+    @Column(name="Slsd")
+    private Integer slsd;
 }

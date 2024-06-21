@@ -186,124 +186,113 @@
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-          <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/0">
-              <img src="/template/user/images/TheLiem(2).png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
+				<div class="container-fluid">
+					<a class="navbar-brand " href="/home/0"> <img
+						src="/template/user/images/TheLiem(2).png" class="logo">
+					</a>
+					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
+						type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <a class="navbar-brand" href="index.html">
-                  <img src="/template/user/images/2.png" class="logo">
-                </a>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                      <li>
-                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
-                      </li>
-                      <li>
-                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
-                      </li>
-                      <li>
-                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-items ps-5">
-                      <ul class="d-flex justify-content-end list-unstyled">
-                        <li class="search-item pe-3">
-                          <a href="#" class="search-button">
-                            <svg class="search">
+					</button>
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+						aria-labelledby="bdNavbarOffcanvasLabel">
+						<div class="offcanvas-header px-4 pb-0">
+							<a class="navbar-brand" href="index.html"> <img
+								src="/template/user/images/2.png" class="logo">
+							</a>
+							<button type="button" class="btn-close btn-close-black"
+								data-bs-dismiss="offcanvas" aria-label="Close"
+								data-bs-target="#bdNavbar"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul id="navbar"
+								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link me-4 active"
+									href="/home/0">Trang chủ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#company-services">Dịch vụ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/product/view">Sản phẩm</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#yearly-sale">Khuyến mãi</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link me-4 dropdown-toggle link-dark"
+									data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false">Trang</a>
+									<ul class="dropdown-menu">
+										<li><a href="/product/view" class="dropdown-item">Cửa
+												hàng</a></li>
+										<li>
+										<li><a href="/contact/view" class="dropdown-item">Liên
+												hệ</a></li>
+										<li><a href="/about/view" class="dropdown-item">Giới
+												Thiệu</a></li>
+										<li><a href="/feedback/view" class="dropdown-item">Góp
+												Ý</a></li>
+									</ul></li>
+								<li class="nav-item">
+									<div class="user-items ps-5">
+										<ul class="d-flex justify-content-end list-unstyled">
+											<li class="search-item pe-3"><a href="#"
+												class="search-button"> <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-                          </a>
-                        </li>
-                        <li class="pe-3 dropdown position-relative">
-                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
+											</a></li>
+											<li class="pe-3 dropdown position-relative"><a href="#"
+												class="" data-bs-toggle="dropdown" aria-expanded="false">
+													<c:if test="${account != null}">
 								    Xin chào, ${account.hoTen}
-							  </c:if>
-                            <svg class="user">
+							  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-                          </a>
-                          <ul class="dropdown-menu ">
-                          	
-	                          <c:choose>
-								    <c:when test="${account != null}">
-									    <li style="max-height: 100px" class="p-2">
-										    <div class="avatar">
-										        <a href="/user/view">
-										        	<img alt="..." src="/images/${account.img}">
-										        </a>
-										    </div>
-										</li>
-								        <li>
-			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/changepass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
-                          </ul>
-                        </li>
-                        <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
-                            <svg class="cart">
+											</a>
+												<ul class="dropdown-menu ">
+
+													<c:choose>
+														<c:when test="${account != null}">
+															<li style="max-height: 100px" class="p-2">
+																<div class="avatar">
+																	<a href="/user/view"> <img alt="..."
+																		src="/images/${account.img}">
+																	</a>
+																</div>
+															</li>
+															<li><a href="/user/view" class="dropdown-item">Chỉnh
+																	sửa thông tin</a></li>
+															<li><a href="/order/view" class="dropdown-item">Đơn
+																	hàng của tôi</a></li>
+															<li><a href="/account/logout" class="dropdown-item">Đăng
+																	xuất</a></li>
+															<li><a href="/account/changepass"
+																class="dropdown-item">Đổi mật khẩu</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a href="/account/login" class="dropdown-item">Đăng
+																	nhập</a></li>
+															<li><a href="/account/signup" class="dropdown-item">Đăng
+																	ký</a></li>
+														</c:otherwise>
+													</c:choose>
+												</ul></li>
+											<li><a
+												class="nav-icon position-relative text-decoration-none"
+												href="/cart/view"> <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
+                            </svg> <span
+													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+											</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 		</div>
 
 	</header>
@@ -343,15 +332,15 @@
 										readonly>
 								</div>
 							</div>
-							
+
 							<!-- -------------------------- -->
 							<div class="row mt-3">
 								<div class="col-md-12">
 									<label for="diachi">Địa Chỉ</label> <select name="diachiHT"
 										id="diachiHT" class="form-select"
 										onchange=calculateShippingFee2() required="required">
-									</select> 
-									<a href="/user/viewdc" class="btn btn-dark mt-1">Thêm địa chỉ</a>
+									</select> <a href="/user/viewdc" class="btn btn-dark mt-1">Thêm địa
+										chỉ</a>
 								</div>
 							</div>
 							<div class="row mt-3">
@@ -377,8 +366,12 @@
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="discountCode"
 												name="discountCode" placeholder="Nhập mã giảm giá">
-												<p id="maxQuantityMessage" class="text-danger d-none blink-animation">Mã giảm giá không hợp lệ hoặc đã hết hạn</p>
-												<p id="maxQuantityMessage2" class="text-danger d-none blink-animation">Vui lòng nhập mã</p>
+											<p id="maxQuantityMessage"
+												class="text-danger d-none blink-animation">Mã giảm giá
+												không hợp lệ hoặc đã hết hạn</p>
+											<p id="maxQuantityMessage2"
+												class="text-danger d-none blink-animation">Vui lòng nhập
+												mã</p>
 										</div>
 										<div class="col-md-6">
 											<button type="button" onclick="applyDiscount()"
@@ -400,7 +393,7 @@
 								<div class="col-md-12">
 									Phí vận chuyển:
 									<div id="feeDisplay">0</div>
-								</div>		
+								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col-md-12">
@@ -608,7 +601,7 @@
 	<!-- <script src="/template/user/js/thanhToan.js"></script> -->
 
 	<!-- Đoạn mã JavaScript để xử lý áp dụng mã giảm giá -->
-	<script>
+	<!-- <script>
         // Khai báo một mảng JavaScript để lưu trữ các đối tượng GiamGia
         var listGG = [];
 
@@ -632,7 +625,6 @@
 
         function applyDiscount() {
             if (isDiscountApplied) {
-                
                 return;
             }
             
@@ -705,7 +697,111 @@
                 isDiscountApplied = false;
             }
         });
-    </script>
+    </script> -->
+
+	<script>
+	    // Khai báo một mảng JavaScript để lưu trữ các đối tượng GiamGia
+	    var listGG = [];
+	
+	    // Duyệt qua danh sách listGG từ model và thêm từng đối tượng vào mảng JavaScript
+	    <c:forEach var="gg" items="${listGG}">
+	        listGG.push({
+	            maGG: '${gg.maGG}',
+	            giamGia: ${gg.giamGia},
+	            dhtt: ${gg.dhtt},
+	            stgtd: ${gg.stgtd},
+	            tgap: '${gg.tgAp}',
+	            tgKt: '${gg.tgKt}',
+	            soLuong: ${gg.soLuong},
+	            slsd: ${gg.slsd}
+	            // Các trường dữ liệu khác tương tự
+	        });
+	    </c:forEach>
+	
+	    var originalTotalAmount = parseFloat(document.getElementById('totalAmount').getAttribute('data-amount')); // Lưu trữ giá trị tổng tiền ban đầu
+	    var isDiscountApplied = false; // Biến cờ để kiểm tra xem mã giảm giá đã được áp dụng hay chưa
+	
+	    function applyDiscount() {
+	        if (isDiscountApplied) {
+	            return;
+	        }
+	
+	        var discountCode = document.getElementById('discountCode').value.trim();
+	
+	        if (discountCode === "") {
+	            $("#maxQuantityMessage2").removeClass('d-none');
+	            return;
+	        } else {
+	            $("#maxQuantityMessage2").addClass('d-none');
+	        }
+	
+	        // Tìm mã giảm giá trong danh sách
+	        var matchedDiscount = listGG.find(function(gg) {
+	            return gg.maGG === discountCode;
+	        });
+	
+	        if (matchedDiscount) {
+	            var currentDate = new Date();
+	            var startDate = new Date(matchedDiscount.tgap);
+	            var endDate = new Date(matchedDiscount.tgKt);
+	
+	            // Kiểm tra thời gian áp dụng
+	            if (currentDate >= startDate && currentDate <= endDate) {
+	                if (matchedDiscount.slsd < matchedDiscount.soLuong) {
+	                	
+	                    var discountPercentage = matchedDiscount.giamGia; // Giả sử giảm giá được lưu dưới dạng phần trăm
+	                    var currentTotalAmount = parseFloat(document.getElementById('thanhTien').value); // Lấy tổng tiền hiện tại (bao gồm phí vận chuyển)
+	                    var discountedAmount = 0; // Áp dụng giảm giá
+	                    if (currentTotalAmount > matchedDiscount.dhtt) {
+	                        if (currentTotalAmount * discountPercentage >= matchedDiscount.stgtd) {
+	                            discountedAmount = currentTotalAmount - matchedDiscount.stgtd;
+	                        }
+	                    } else {
+	                        discountedAmount = currentTotalAmount;
+	                    }
+	
+	                    // Cập nhật lại tổng tiền hiển thị
+	                    var formattedAmount = discountedAmount.toLocaleString('vi-VN', {
+	                        minimumFractionDigits: 0
+	                    });
+	                    document.getElementById('totalAmountDisplay').textContent = formattedAmount + "đ";
+	                    document.getElementById('thanhTien').value = discountedAmount;
+	
+	                    // Đặt biến cờ là true để ghi nhận mã giảm giá đã được áp dụng
+	                    isDiscountApplied = true;
+	                    $("#maxQuantityMessage").addClass("d-none");
+	                } else {
+	                    $("#maxQuantityMessage").removeClass("d-none");
+	                    $("#maxQuantityMessage").text("Mã giảm giá đã hết lượt sử dụng!");
+	                }
+	            } else {
+	                $("#maxQuantityMessage").removeClass("d-none");
+	                $("#maxQuantityMessage").text("Mã giảm giá đã hết thời hạn sử dụng!");
+	            }
+	        } else {
+	            // Nếu mã giảm giá không hợp lệ
+	            $("#maxQuantityMessage").removeClass("d-none");
+	            $("#maxQuantityMessage").text("Mã giảm giá không hợp lệ.");
+	        }
+	    }
+	
+	    // Thêm sự kiện để khôi phục tổng tiền ban đầu khi mã giảm giá bị xóa
+	    document.getElementById('discountCode').addEventListener('input', function() {
+	        if (this.value.trim() === '') {
+	            // Khôi phục lại tổng tiền ban đầu (bao gồm cả phí vận chuyển)
+	            var currentTotalAmount = parseFloat(document.getElementById('thanhTien').value);
+	            var formattedAmount = currentTotalAmount.toLocaleString('vi-VN', {
+	                minimumFractionDigits: 0
+	            });
+	            document.getElementById('totalAmountDisplay').textContent = formattedAmount + "đ ";
+	            document.getElementById('thanhTien').value = currentTotalAmount;
+	
+	            // Đặt biến cờ là false để cho phép áp dụng mã giảm giá mới
+	            isDiscountApplied = false;
+	        }
+	    });
+	</script>
+
 
 	<script>
 	    const token = '96d82524-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
@@ -801,7 +897,7 @@
         }
 
         // Hàm lấy tên các địa chỉ và hiển thị vào select
-        function populateAddresses() {
+      /*   function populateAddresses() {
             const diachiSelect = document.getElementById('diachiHT');
             diachiSelect.innerHTML = '<option value="">----Chọn địa chỉ----</option>';
             listdc.forEach(dc => {
@@ -829,7 +925,39 @@
                 });
             });
         }
+ */
+ 
+ function populateAddresses() {
+	    const diachiSelect = document.getElementById('diachiHT');
+	    diachiSelect.innerHTML = '<option value="">----Chọn địa chỉ----</option>';
 
+	    listdc.forEach(dc => {
+	        let fullAddress = '';
+
+	        fetchWardNameById2(dc.xa_Phuong_Thitran, dc.quan_Huyen)
+	        .then(wardName => {
+	            fullAddress = dc.duong_Sonha + ', ' +  wardName + ', ';
+	            return fetchDistrictNameById2(dc.quan_Huyen, dc.tinh_ThanhPho);
+	        })
+	        .then(districtName => {
+	            fullAddress += districtName + ', ';
+	            return fetchProvinceNameById2(dc.tinh_ThanhPho);
+	        })
+	        .then(provinceName => {
+	            fullAddress += provinceName;
+
+	            const option = document.createElement('option');
+	            option.value = dc.xa_Phuong_Thitran + '-' + dc.quan_Huyen;  // Định dạng "wardId-districtId"
+	            option.text = fullAddress;
+	            diachiSelect.add(option);
+	        })
+	        .catch(error => {
+	            console.error('Error:', error);
+	        });
+	    });
+	}
+
+ 		
         function formatCurrency(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -847,6 +975,7 @@
                 from_district_id: 1574,
                 from_ward_code: '550307',
                 service_id: 53320,
+                service_type_id: '',
                 to_district_id: toDistrictId,
                 to_ward_code: toWardCode,
                 height: 10,
@@ -878,6 +1007,7 @@
                     updateTotalAmountWithShippingFee(shippingFee);
                 } else {
                     shippingFeeElement.textContent = 'Không thể tính phí vận chuyển';
+                    console.log(data);
                     updateTotalAmountWithShippingFee(0); // Nếu không thể tính phí vận chuyển, không thêm phí
                 }
             })

@@ -67,7 +67,7 @@
 											<td>${dh.ngayTT}</td>
 											<td>${dh.maPT.tenPT}</td>
 											<td><fmt:formatNumber value="${dh.tongTien}"
-													pattern="#,## ₫" /></td>
+													pattern="#,### ₫" /></td>
 											<td style="">${dh.ttdh.trangThai}</td>
 											<td>
 												<div class="icon">
