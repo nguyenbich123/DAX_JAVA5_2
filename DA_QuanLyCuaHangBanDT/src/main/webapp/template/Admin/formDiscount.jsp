@@ -171,8 +171,10 @@
 											<td>${item.idGiamGia}</td>
 											<td>${item.maGG}</td>
 											<td>${item.giamGia}</td>
-											<td>${item.dhtt}</td>
-											<td>${item.stgtd}</td>
+											<fmt:formatNumber value="${dh.tongTien}"
+																			pattern="#,###đ" />
+											<td><fmt:formatNumber value="${item.dhtt}" pattern="#,###đ" /></td>
+											<td><fmt:formatNumber value="${item.stgtd}" pattern="#,###đ" /></td>
 											<td>${item.tgAp}</td>
 											<td>${item.tgKt}</td>
 											<td>${item.soLuong}</td>

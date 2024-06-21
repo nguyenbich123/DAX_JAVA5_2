@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-
+				${err}
                 </div>
             </div>
         </section>

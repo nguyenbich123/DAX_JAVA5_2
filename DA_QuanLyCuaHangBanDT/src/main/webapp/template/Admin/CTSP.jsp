@@ -70,7 +70,7 @@
 											<td>${item.maDL.dungLuong}</td>
 											<td>${item.maRam.ram}</td>
 											<td>${item.soluong}</td>
-											<td>${item.gia}</td>
+											<td><fmt:formatNumber value="${item.gia}" pattern="#,###đ" /></td>
 											<td><img src="/images/${item.img}" width="90%" height="100px"></td>
 											<td>
 												<div class="icon">

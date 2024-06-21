@@ -85,10 +85,20 @@ public class CTSPController {
 	}
 	
 	@RequestMapping("update")
-	public String update(ChiTietSP ctsp,@Validated @ModelAttribute("ctsp") ChiTietSP ct,BindingResult result,
+	public String update(Model model,ChiTietSP ctsp,@Validated @ModelAttribute("ctsp") ChiTietSP ct,BindingResult result,
 			@RequestParam("maSP") Integer maSP,
 			@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
 		
+		model.addAttribute("maSP", maSP);
+		List<ChiTietSP> ctsps = ctspDao.findAll();
+		for(ChiTietSP x : ctsps) {
+			if(ct.getMaDL()==x.getMaDL()&&ct.getMaMau()==x.getMaMau()&&ct.getMaRam()==x.getMaRam()&&ct.getMaSP()==x.getMaSP()) {
+				model.addAttribute("err"," Chi Tiết Sản Phẩm Này Đã Tồn Tại");
+				return "/template/Admin/formCTSP";
+			}
+		}
+		
+			
 		if(result.hasErrors()) {
 			return "/template/Admin/formCTSP";
 		}

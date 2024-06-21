@@ -59,7 +59,7 @@ public class DonHangController {
 	public String getdh(Model model, @ModelAttribute("dh") DonHang dh, @RequestParam("field") Optional<String> field,
 			@RequestParam("p") Optional<Integer> p) {
 		
-		Sort sort = Sort.by(Direction.ASC, field.orElse("maDH"));
+		Sort sort = Sort.by(Direction.DESC, field.orElse("maDH"));
 		model.addAttribute("field", field.orElse("maDH"));
 		Pageable pageable = PageRequest.of(p.orElse(0), 3, sort);
 		Page<DonHang> page = dhDao.findAll(pageable);

@@ -35,7 +35,6 @@ import com.poly.utils.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("payment")
 public class PaymentController {
 	
 	@Autowired
@@ -80,7 +79,7 @@ public class PaymentController {
 	@Autowired
 	VNPayService vnPayService;
 	
-	@RequestMapping("pay")
+	@RequestMapping("payment/pay")
 	public String payment(@RequestParam("diaChiChon") String diaChiHT,
 	                      @RequestParam("note") String note,
 	                      @RequestParam("discountCode") String discountCode,
@@ -143,7 +142,7 @@ public class PaymentController {
 	    return "redirect:/payment/submitOrder";
 	}
 
-	@RequestMapping("/submitOrder")
+	@RequestMapping("payment/submitOrder")
 	public String submitOrder(HttpServletRequest request) {
 	    Integer latestOrderId = session.get("latestOrderId");
 	    Double latestOrderTotal = session.get("latestOrderTotal");
@@ -172,7 +171,7 @@ public class PaymentController {
 	    model.addAttribute("paymentTime", paymentTime);
 	    model.addAttribute("transactionId", transactionId);
 
-	    return paymentStatus == 1 ? "/template/user/confirmation" : "/template/user/orderFail";
+	    return paymentStatus == 1 ? "/template/user/orderSuccess" : "/template/user/orderFail";
 	}
 
 	

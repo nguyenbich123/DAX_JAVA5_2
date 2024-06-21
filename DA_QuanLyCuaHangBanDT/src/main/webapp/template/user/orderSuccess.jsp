@@ -36,7 +36,7 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="/" class="btn btn-primary">Về trang chủ</a>
+            <a href="http://localhost:8080/home/0" class="btn btn-primary">Về trang chủ</a>
         </div>
     </div>
 </div>

@@ -114,6 +114,7 @@
 																	</div>
 																	<div>
 																		<span>${ct.maCTSP.maSP.tenSP}</span>
+																		
 																		<%-- <c:choose>
 																			<c:when test="${danhGiaMap[ct.id_CTDH]}">
 																				<button>Đánh giá sản phẩm</button>
@@ -135,14 +136,10 @@
 																		<fmt:formatNumber value="${dh.tongTien}"
 																			pattern="#,###đ" />
 																	</div>
-																	<div>
-																		Phí vận chuyển:
-																		<fmt:formatNumber value="${dh.tongTien}"
-																			pattern="#,###đ" />
-																	</div>
+																	
 																	<div>
 																		Giảm giá:
-																		<fmt:formatNumber value="${dh.tongTien}"
+																		<fmt:formatNumber value="${dh.maGG.giamGia * dh.tongTien}"
 																			pattern="#,###đ" />
 																	</div>
 																	<b>Thành tiền: <fmt:formatNumber
@@ -171,7 +168,10 @@
 														</div>
 														<form:form action="/admin/donhang/index" modelAttribute="">
 														<div class="modal-footer">
-															<button formaction="/admin/donhang/xn?maDH=${dh.maDH}" class="btn btn-success">Xác Nhận</button>
+														<c:if test="${dh.ttdh.trangThai == 'Chờ xác nhận'}">
+																<button formaction="/admin/donhang/xn?maDH=${dh.maDH}" class="btn btn-success">Xác Nhận</button>					
+														</c:if>
+															
 															<button formaction="/admin/donhang/huy?maDH=${dh.maDH}" class="btn btn-warning">Hủy</button>
 															<button type="button" class="btn btn-secondary"
 																data-bs-dismiss="modal">Đóng</button>

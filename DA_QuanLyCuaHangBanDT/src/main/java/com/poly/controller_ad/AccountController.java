@@ -1,6 +1,5 @@
 package com.poly.controller_ad;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.entity.Account;
 import com.poly.entity.Role;
@@ -106,17 +104,17 @@ public class AccountController {
 		if (account == null) {
 			return "redirect:/account/login";
 		}
-
+		
 //		if(!account.getRole().getRoles().equals("Admin")) {		
 //			System.out.println("Bạn không có quyền truy cập !");
 //			return  "redirect:/admin/home/view";
 //		}
+		Optional<Role> r = roleDao.findByRoles("Members");
 		
 		Sort sort = Sort.by(Direction.DESC, field.orElse("tenDN"));
-		//  List<Account> acc = accDao.findAll(sort);
 		model.addAttribute("field", field.orElse("tenDN"));
 		Pageable pageable = PageRequest.of(p.orElse(0), 10, sort);
-		Page<Account> page = accDao.findAll(pageable);
+		Page<Account> page = accDao.findByRole(pageable,r);
 		model.addAttribute("page", page);
 		return "/template/Admin/account";
 	}

@@ -3,24 +3,26 @@ package com.poly.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import com.poly.entity.*;
+import com.poly.entity.Account;
+import com.poly.entity.DiaChi;
+import com.poly.entity.Role;
+import com.poly.entity.TrangThaiHD;
 import com.poly.repository.AccountDAO;
 import com.poly.repository.DiaChiDAO;
+import com.poly.repository.RoleDAO;
+import com.poly.repository.TrangThaiHoatDongDAO;
 import com.poly.utils.SessionService;
 
 import jakarta.servlet.ServletContext;
@@ -34,6 +36,15 @@ public class InformationController {
 	DiaChiDAO dcDao;
 	@Autowired
 	ServletContext app;
+	
+	@Autowired
+	TrangThaiHoatDongDAO tthdDAO;
+	
+	@Autowired
+	RoleDAO roleDAO;
+	
+	
+	
 	
 	@Autowired
 	SessionService session;
@@ -82,20 +93,62 @@ public class InformationController {
 	}
 
 	
+//	@RequestMapping("update")
+//	public String update(Account item,@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
+//		if(!img.isEmpty()) {
+//			String filename = img.getOriginalFilename();
+//			File uploadFolder = new File(app.getRealPath("/images/"));
+//			if (!uploadFolder.exists()) {
+//				uploadFolder.mkdirs();
+//			}
+//			File destFile = new File(uploadFolder, filename);
+//			img.transferTo(destFile);
+//			item.setImg(filename);
+//		}
+//		accDao.save(item);
+//		return "redirect:/user/view";
+//	}
+	
 	@RequestMapping("update")
-	public String update(Account item,@RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
-		if(!img.isEmpty()) {
-			String filename = img.getOriginalFilename();
-			File uploadFolder = new File(app.getRealPath("/images/"));
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdirs();
-			}
-			File destFile = new File(uploadFolder, filename);
-			img.transferTo(destFile);
-			item.setImg(filename);
-		}
-		accDao.save(item);
-		return "redirect:view";
+	public String update(@ModelAttribute("item") Account item, @RequestParam("photo_file") MultipartFile img) throws IllegalStateException, IOException {
+	    // Xử lý file ảnh nếu không rỗng
+	    if (!img.isEmpty()) {
+	        String filename = img.getOriginalFilename();
+	        File uploadFolder = new File(app.getRealPath("/images/"));
+	        if (!uploadFolder.exists()) {
+	            uploadFolder.mkdirs();
+	        }
+	        File destFile = new File(uploadFolder, filename);
+	        img.transferTo(destFile);
+	        item.setImg(filename);
+	    }
+
+	    // Kiểm tra và lưu đối tượng TrangThaiHD
+	    if (item.getTthd() != null) {
+	        TrangThaiHD trangThaiHD = item.getTthd();
+	        Optional<TrangThaiHD> existingTrangThaiHD = tthdDAO.findById(trangThaiHD.getIdtthd());
+
+	        if (existingTrangThaiHD.isEmpty()) {
+	            tthdDAO.save(trangThaiHD);
+	        } else {
+	            item.setTthd(existingTrangThaiHD.get());
+	        }
+	    }
+
+	    // Kiểm tra và lưu đối tượng Role
+	    if (item.getRole() != null) {
+	        Role role = item.getRole();
+	        Optional<Role> existingRole = roleDAO.findById(role.getIdrole());
+
+	        if (existingRole.isEmpty()) {
+	            roleDAO.save(role);
+	        } else {
+	            item.setRole(existingRole.get());
+	        }
+	    }
+
+	    accDao.save(item);
+	    return "redirect:/user/view";
 	}
 	
 //	@PostMapping("updatedc")

@@ -608,14 +608,10 @@
 																		<fmt:formatNumber value="${dh.tongTien}"
 																			pattern="#,###đ" />
 																	</div>
-																	<div>
-																		Phí vận chuyển:
-																		<fmt:formatNumber value="${dh.tongTien}"
-																			pattern="#,###đ" />
-																	</div>
+																	
 																	<div>
 																		Giảm giá:
-																		<fmt:formatNumber value="${dh.maGG.giamGia}"
+																		<fmt:formatNumber value="${dh.maGG.giamGia * dh.tongTien}"
 																			pattern="#,###đ" />
 																	</div>
 																	<b>Thành tiền: <fmt:formatNumber
