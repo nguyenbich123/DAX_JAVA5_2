@@ -38,10 +38,12 @@ public class GiamGia {
     
     @Column(name="Dhtt")
     @NotNull(message = "{NotNull.gg.dhtt}")
+    @Positive(message = "Đơn hàng tối thiểu phải là số dương.")	
     private Float dhtt;
     
     @Column(name="Stgtd")
     @NotNull(message = "{NotNull.gg.stgtd}")
+    @Positive(message = "Số tiền giảm tối đa phải là số dương.")	
     private Float stgtd;
     
     @Column(name="Tgap")
@@ -58,4 +60,7 @@ public class GiamGia {
     @Column(name="Soluong")
     @NotNull(message = "{NotNull.gg.soLuong}")
     private Integer soLuong;
+    
+    @Column(name="Slsd")
+    private Integer slsd;
 }

@@ -57,7 +57,7 @@ public class FormCamSauController {
 	@RequestMapping("edit/{idCamSau}")
 	public String edit(Model model, @ModelAttribute("cs") CameraSau cs,@PathVariable("idCamSau") Integer idCamSau,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		CameraSau item = csDao.findById(idCamSau).get();
-		model.addAttribute("item", item);
+		model.addAttribute("cs", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
 	    System.out.println(field);
 		Page<CameraSau> page = csDao.findAll(pageable);

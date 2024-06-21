@@ -104,7 +104,6 @@ public class SanPhamAdminController {
 	@GetMapping("/index")
 	public String index(Model model,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {	
 		Sort sort = Sort.by(Direction.ASC, field.orElse("maSP"));	
-    	List<SanPham> sp = spDao.findAll(sort);	
     	model.addAttribute("field", field.orElse("maSP"));
 	    Pageable pageable = PageRequest.of(p.orElse(0), 10,sort);
 	    Page<SanPham> page = spDao.findAll(pageable);

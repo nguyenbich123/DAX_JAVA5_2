@@ -87,7 +87,6 @@ public class FormRamController {
 	
 	@RequestMapping("delete/{maRam}")
 	public String delete(Ram ram,@PathVariable("maRam") Integer maRam) throws IllegalStateException, IOException{
-		
 		rDao.deleteById(maRam);
 		return "redirect:/admin/ram/index";
 	}

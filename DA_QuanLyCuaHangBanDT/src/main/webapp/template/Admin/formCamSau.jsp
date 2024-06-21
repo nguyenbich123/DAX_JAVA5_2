@@ -62,8 +62,15 @@
 										Phân Giải Cam Sau</label>
 									<div class="col-sm-9">
 										<form:select path="DPGCS" cssClass="form-select" id="DPGCS">
-										<form:option value="">--Chọn Độ Phân Giải--</form:option>
+										<c:if test="${!not empty cs.DPGCS}">
+											<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpgcs}" />
+											</c:if>
+											<c:if test="${not empty cs.DPGCS}">
+											<form:option value="${cs.DPGCS.idDPGCS}">${cs.DPGCS.dpg}</form:option>
+											<form:options items="${list_dpgcs}" />
+											</c:if>
+										
 										</form:select>
 										<br>
 										<form:errors path="DPGCS" cssClass="text-danger" />
@@ -75,8 +82,16 @@
 										Năng Cam Sau</label>
 									<div class="col-sm-9 ">
 										<form:select path="TNCS" cssClass="form-select" id="TNCS">
-										<form:option value="">--Chọn Tính Năng--</form:option>
+										<c:if test="${!not empty cs.TNCS}">
+											<form:option value="">--Chọn Tính Năng--</form:option>
 											<form:options items="${list_tncs}" />
+											</c:if>
+											<c:if test="${not empty cs.TNCS}">
+											<form:option value="${cs.TNCS.idTNCS}">${cs.TNCS.tinhNang}</form:option>
+											<form:options items="${list_tncs}" />
+											</c:if>
+										
+											
 										</form:select>
 										<br>
 										<form:errors path="TNCS" cssClass="text-danger" />

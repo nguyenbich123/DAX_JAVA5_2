@@ -50,8 +50,16 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Loại Pin</label>
 									<div class="col-sm-9 ">
 										<form:select path="loaiPin" class="form-select">
-										<form:option value="">--Chọn Loại Pin--</form:option>
+											<c:if test="${!not empty pinsac.loaiPin}">
+											<form:option value="">--Chọn Loại Pin--</form:option>
 											<form:options items="${list_lp}" />
+											</c:if>
+											<c:if test="${not empty pinsac.loaiPin}">
+											<form:option value="${pinsac.loaiPin.idlp}">${pinsac.loaiPin.loaiPin}</form:option>
+											<form:options items="${list_lp}" />
+											</c:if>
+										
+											
 										</form:select>
 										<form:errors path="loaiPin" cssClass="text-danger" />
 									</div>
@@ -67,8 +75,14 @@
 									<label for="inputName" class="col-sm-3 col-form-label">Dung Lượng Pin</label>
 									<div class="col-sm-9">
 										<form:select path="DLPin" class="form-select">
-										<form:option value="">--Chọn Dung Lượng Pin--</form:option>
+											<c:if test="${!not empty pinsac.DLPin}">
+											<form:option value="">--Chọn Dung Lượng Pin--</form:option>
 											<form:options items="${list_dlp}" />
+											</c:if>
+											<c:if test="${not empty pinsac.DLPin}">
+											<form:option value="${pinsac.DLPin.idDLP}">${pinsac.DLPin.dlPin}</form:option>
+											<form:options items="${list_dlp}" />
+											</c:if>	
 										</form:select>
 										 <form:errors path="DLPin" cssClass="text-danger" />
 									</div>
@@ -77,8 +91,16 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Hỗ Trợ Sạc</label>
 									<div class="col-sm-9 ">
 										<form:select path="hoTroSac" class="form-select">
-										<form:option value="">--Chọn Loại Hỗ Trợ Sạc--</form:option>
+										<c:if test="${!not empty pinsac.hoTroSac}">
+											<form:option value="">--Chọn Loại Hỗ Trợ Sạc--</form:option>
 											<form:options items="${list_hts}" />
+											</c:if>
+											<c:if test="${not empty pinsac.hoTroSac}">
+											<form:option value="${pinsac.hoTroSac.idHTS}">${pinsac.hoTroSac.hoTroSac}</form:option>
+											<form:options items="${list_hts}" />
+											</c:if>	
+										
+											
 										</form:select>
 										<form:errors path="hoTroSac" cssClass="text-danger" />
 									</div>
@@ -87,8 +109,15 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Công Nghệ Pin</label>
 									<div class="col-sm-9 ">
 										<form:select path="CNP" class="form-select">
-										<form:option value="">--Chọn Công Nghệ Pin--</form:option>
+										<c:if test="${!not empty pinsac.CNP}">
+											<form:option value="">--Chọn Công Nghệ Pin--</form:option>
 											<form:options items="${list_cnp}" />
+											</c:if>
+											<c:if test="${not empty pinsac.CNP}">
+											<form:option value="${pinsac.CNP.idcnp}">${pinsac.CNP.congNghePin}</form:option>
+											<form:options items="${list_cnp}" />
+											</c:if>	
+
 										</form:select>
 										<form:errors path="CNP" cssClass="text-danger" />
 									</div>

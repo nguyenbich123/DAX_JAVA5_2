@@ -72,8 +72,7 @@ public class DonHangController {
             for (ChiTietDonHang ct : chitiet) {
                 SanPham sanPham = ct.getMaCTSP().getMaSP();
             }
-        }
-        
+        }       
         model.addAttribute("chiTietDonHangMap", chiTietDonHangMap);
 		return "/template/Admin/DonHang";
 	}
@@ -85,12 +84,15 @@ public class DonHangController {
 			dh=dhh.get();
 		}
 		
+		if(dh.getTtdh().getTrangThai().equals("Đã hủy")) {
+			return "redirect:/admin/donhang/index";
+		}
+		
 		List<TTDH> tt = ttdhDao.findAll();
 		for(TTDH x : tt) {
-			if(x.getTrangThai().equalsIgnoreCase("Đang giao")){
+			if(x.getTrangThai().equalsIgnoreCase("Đã xác nhận")){
 				dh.setTtdh(x);
 			}
-			System.out.println("-----------------------------------------------------");
 		}
 		
 		List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dhh.get());	
@@ -126,7 +128,7 @@ public class DonHangController {
 		//System.out.println(dh.getTtdh().getTrangThai().toString() +" in trạng thái đơn hàng ");
 		
 		// nếu đang giao thì thu hồi sp (tăng lại số lượng sp trong đơn hàng vào kho  )
-		if(dh.getTtdh().getTrangThai().toString().equals("Đang giao")) {
+		if(dh.getTtdh().getTrangThai().toString().equals("Đã xác nhận")) {
 			
 			List<ChiTietDonHang> ctdh =ctdhDAO.findByMaDH(dhh.get());	
 			List<ChiTietSP> ctsp = ctspDao.findAll();		

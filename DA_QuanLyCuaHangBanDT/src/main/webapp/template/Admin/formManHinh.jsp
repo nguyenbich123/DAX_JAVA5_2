@@ -44,22 +44,31 @@
 							<h5 class="card-title">Form Màn Hình</h5>
 
 							<!-- Horizontal Form -->
-							<form:form action="/admin/mh/index" modelAttribute="mhc" enctype="multipart/form-data">
-								  <form:hidden path="idManHinh" />
-								  <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Màn Hình</label>
-                                    <div class="col-sm-9">
-                                      <form:input path="tenManhHinh" type="text" class="form-control"/>
-                                      <form:errors path="tenManhHinh" cssClass="text-danger" />
-                                  </div>
-                                </div>
+							<form:form action="/admin/mh/index" modelAttribute="mhc"
+								enctype="multipart/form-data">
+								<form:hidden path="idManHinh" />
+								<div class="row mb-3">
+									<label for="inputEmail3" class="col-sm-3 col-form-label">Tên
+										Màn Hình</label>
+									<div class="col-sm-9">
+										<form:input path="tenManhHinh" type="text"
+											class="form-control" />
+										<form:errors path="tenManhHinh" cssClass="text-danger" />
+									</div>
+								</div>
 								<div class="row mb-3">
 									<label for="inputName" class="col-sm-3 col-form-label">Công
 										Nghệ Màn Hình</label>
 									<div class="col-sm-9">
-										<form:select path="CNMH" class="form-select">
-										<form:option value="">--Chọn Công Nghệ Màn Hình--</form:option>
+										<form:select path="CNMH" class="form-select" >									
+											<c:if test="${!not empty mhc.CNMH }">
+											<form:option value="">--Chọn Công Nghệ Màn Hình--</form:option>
 											<form:options items="${list_cnmh}" />
+											</c:if>
+											<c:if test="${not empty mhc.CNMH}">
+											<form:option value="${mhc.CNMH.idCNMH}">${mhc.CNMH.cnmh}</form:option>
+											<form:options items="${list_cnmh}"/>
+											</c:if>
 										</form:select>
 										<form:errors path="CNMH" cssClass="text-danger" />
 									</div>
@@ -70,8 +79,14 @@
 										Hình Rộng</label>
 									<div class="col-sm-9 ">
 										<form:select path="MHR" class="form-select">
-										<form:option value="">--Chọn Kích Thước Màn--</form:option>
+											<c:if test="${!not empty mhc.MHR }">
+											<form:option value="">--Chọn Kích Thước Màn--</form:option>
 											<form:options items="${list_mhr}" />
+											</c:if>
+											<c:if test="${not empty mhc.MHR}">
+											<form:option value="${mhc.MHR.idMHR}">${mhc.MHR.mhRong}</form:option>
+											<form:options items="${list_mhr}" />
+											</c:if>									
 										</form:select>
 										<form:errors path="MHR" cssClass="text-danger" />
 									</div>
@@ -81,8 +96,15 @@
 										Phân Giải</label>
 									<div class="col-sm-9 ">
 										<form:select path="DPG" class="form-select">
-										<form:option value="">--Chọn Độ Phân Giải--</form:option>
+											<c:if test="${!not empty mhc.DPG }">
+											<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpg}" />
+											</c:if>
+											<c:if test="${not empty mhc.DPG}">
+											<form:option value="${mhc.DPG.idDPGMH}">${mhc.DPG.dpg}</form:option>
+											<form:options items="${list_dpg}" />
+											</c:if>			
+											
 										</form:select>
 										<form:errors path="DPG" cssClass="text-danger" />
 									</div>
@@ -114,8 +136,10 @@
 								<thead>
 									<tr>
 										<th><a href="/admin/mh/index?field=idManHinh">ID</a></th>
-										<th><a href="/admin/mh/index?field=tenManhHinh">Tên Màn Hình</a></th>
-										<th><a href="/admin/mh/index?field=CNMH">Công Nghệ Màn Hình</a></th>
+										<th><a href="/admin/mh/index?field=tenManhHinh">Tên
+												Màn Hình</a></th>
+										<th><a href="/admin/mh/index?field=CNMH">Công Nghệ
+												Màn Hình</a></th>
 										<th><a href="/admin/mh/index?field=MHR">Màn Hình Rộng</a></th>
 										<th><a href="/admin/mh/index?field=DPG">Độ Phân Giải</a></th>
 										<th></th>
@@ -132,8 +156,8 @@
 											<td>
 												<div class="icon">
 													<a href="/admin/mh/edit/${item.idManHinh}"><i
-														class="bi bi-pencil-fill"></i></a>
-													<a href="/admin/mh/delete/${item.idManHinh}"><i
+														class="bi bi-pencil-fill"></i></a> <a
+														href="/admin/mh/delete/${item.idManHinh}"><i
 														class="ri-delete-bin-5-fill"></i></a>
 												</div>
 											</td>
@@ -171,7 +195,7 @@
 
 						</ul>
 					</nav>
-					
+
 				</div>
 			</div>
 		</section>
@@ -184,7 +208,6 @@
 
 	<!-- JS Files -->
 	<%@ include file="/template/Admin/common/jsfile.jsp"%>
-
 </body>
 
 </html>

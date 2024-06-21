@@ -62,7 +62,7 @@ public class FormPinController {
 	@RequestMapping("edit/{idPin}")
 	public String edit(Model model, @ModelAttribute("pinsac") PinSac mh,@PathVariable("idPin") Integer idPin,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		PinSac item = psDao.findById(idPin).get();
-		model.addAttribute("item", item);
+		model.addAttribute("pinsac", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
 	    System.out.println(field);
 		Page<PinSac> page = psDao.findAll(pageable);

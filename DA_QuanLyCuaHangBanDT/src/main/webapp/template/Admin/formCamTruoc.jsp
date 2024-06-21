@@ -58,8 +58,14 @@
 									<label for="inputName" class="col-sm-3 col-form-label">Độ Phân Giải Cam Trước</label>
 									<div class="col-sm-9">
 										<form:select path="DPGCT"  class="form-select">
-										<form:option value="">--Chọn Độ Phân Giải--</form:option>
+										<c:if test="${!not empty ct.DPGCT}">
+											<form:option value="">--Chọn Độ Phân Giải--</form:option>
 											<form:options items="${list_dpgct}" />
+											</c:if>
+											<c:if test="${not empty ct.DPGCT}">
+											<form:option value="${ct.DPGCT.idDPGCT}">${ct.DPGCT.dpg}</form:option>
+											<form:options items="${list_dpgct}" />
+											</c:if>
 										</form:select>
 													<br>
 										<form:errors path="DPGCT" cssClass="text-danger" />
@@ -69,8 +75,14 @@
 									<label for="inputPassword3" class="col-sm-3 col-form-label">Tính Năng Cam Trước</label>
 									<div class="col-sm-9 ">
 										<form:select path="TNCT" class="form-select">
-										<form:option value="">--Chọn Tính Năng--</form:option>
-											<form:options items="${list_tnct}" />
+										<c:if test="${!not empty ct.TNCT}">
+											<form:option value="">--Chọn Tính Năng--</form:option>
+												<form:options items="${list_tnct}" />
+											</c:if>
+											<c:if test="${not empty ct.TNCT}">
+											<form:option value="${ct.TNCT.idTNCT}">${ct.TNCT.tinhNang}</form:option>
+												<form:options items="${list_tnct}" />
+											</c:if>
 										</form:select>
 													<br>
 										<form:errors path="TNCT" cssClass="text-danger" />

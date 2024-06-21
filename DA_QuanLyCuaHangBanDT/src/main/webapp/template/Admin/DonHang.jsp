@@ -49,13 +49,13 @@
 									<tr>
 										<th><a href="/admin/donhang/index?field=maDH">Mã Đơn
 												Hàng</a></th>
-										<th><a href="/admin/account/index?field=ngayTT">Ngày
+										<th><a href="/admin/donhang/index?field=ngayTT">Ngày
 												Đặt Hàng</a></th>
-										<th><a href="/admin/account/index?field=maPT">Phương
+										<th><a href="/admin/donhang/index?field=maPT">Phương
 												Thức Thanh Toán</a></th>
-										<th><a href="/admin/account/index?field=tongTien">Thành
+										<th><a href="/admin/donhang/index?field=tongTien">Thành
 												Tiền</a></th>
-										<th><a href="/admin/account/index?field=ttdh">Trạng
+										<th><a href="/admin/donhang/index?field=ttdh">Trạng
 												Thái Đơn</a></th>
 										<th></th>
 									</tr>
@@ -67,7 +67,7 @@
 											<td>${dh.ngayTT}</td>
 											<td>${dh.maPT.tenPT}</td>
 											<td><fmt:formatNumber value="${dh.tongTien}"
-													pattern="#,## ₫" /></td>
+													pattern="#,### ₫" /></td>
 											<td style="">${dh.ttdh.trangThai}</td>
 											<td>
 												<div class="icon">
@@ -211,7 +211,6 @@
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
 							</c:if>
-
 						</ul>
 					</nav>
 

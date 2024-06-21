@@ -60,7 +60,7 @@ public class ManHinhController {
 	@RequestMapping("edit/{idManHinh}")
 	public String edit(Model model, @ModelAttribute("mhc") ManHinh mh,@PathVariable("idManHinh") Integer idManHinh,@RequestParam("field") Optional<String> field, @RequestParam("p") Optional<Integer> p) {
 		ManHinh item = mhDao.findById(idManHinh).get();
-		model.addAttribute("item", item);
+		model.addAttribute("mhc", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 3);
 	    System.out.println(field);
 		Page<ManHinh> page = mhDao.findAll(pageable);
@@ -111,6 +111,7 @@ public class ManHinhController {
 		}
 		return map;
 	}
+	
 
 	@ModelAttribute("list_mhr")
 	public Map<Integer, String> getmh2() {

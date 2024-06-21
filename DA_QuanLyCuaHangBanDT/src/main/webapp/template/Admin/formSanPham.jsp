@@ -52,9 +52,16 @@
 										Điện Thoại</label>
 									<div class="col-sm-9">
 										<form:select path="maHang" class="form-select">
-										  <form:option value="">--Chọn Hãng--</form:option>
-											<form:options  items="${list_h}" />
+											<c:if test="${!not empty item.maHang }">
+												<form:option value="">--Chọn Hãng--</form:option>
+												<form:options items="${list_h}" />
+											</c:if>
+											<c:if test="${not empty item.maHang }">
+												<form:option value="${item.maHang.maHang}">${item.maHang.tenHang}</form:option>
+												<form:options items="${list_h}" />
+											</c:if>
 										</form:select>
+
 										<form:errors path="maHang" cssClass="text-danger" />
 									</div>
 								</div>
@@ -73,8 +80,14 @@
 										Điều Hành</label>
 									<div class="col-sm-9">
 										<form:select path="maHDH" class="form-select">
-										    <form:option value="">--Chọn Hệ Điều Hành--</form:option>
-											<form:options items="${list_hdh}" />
+											<c:if test="${!not empty item.maHDH }">
+												<form:option value="">--Chọn Hệ Điều Hành--</form:option>
+												<form:options items="${list_hdh}" />
+											</c:if>
+											<c:if test="${not empty item.maHDH }">
+												<form:option value="${item.maHDH.maHDH}">${item.maHDH.tenHDH}</form:option>
+												<form:options items="${list_hdh}" />
+											</c:if>
 										</form:select>
 										<form:errors path="maHDH" cssClass="text-danger" />
 									</div>
@@ -85,7 +98,7 @@
 									<div class="col-sm-9">
 										<form:input path="chip" type="text" class="form-control"
 											placeholder="VD: Apple A17 Pro 6 nhân" />
-											<form:errors path="chip" cssClass="text-danger" />
+										<form:errors path="chip" cssClass="text-danger" />
 									</div>
 								</div>
 								<hr>
@@ -94,21 +107,34 @@
 										Hình</label>
 									<div class="col-sm-9">
 										<form:select path="manHinh" class="form-select">
-										<form:option value="">--Chọn Màn Hình--</form:option>
-											<form:options items="${list_mh}" />
+											<c:if test="${!not empty item.manHinh }">
+												<form:option value="">--Chọn Màn Hình--</form:option>
+												<form:options items="${list_mh}" />
+											</c:if>
+											<c:if test="${not empty item.manHinh }">
+												<form:option value="${item.manHinh.idManHinh}">${item.manHinh.tenManhHinh}</form:option>
+												<form:options items="${list_mh}" />
+											</c:if>
 										</form:select>
 										<form:errors path="manHinh" cssClass="text-danger" />
 									</div>
 								</div>
 								<hr>
 								<div class="row mb-3">
-									<label for="inputPassword3" class="col-sm-3 col-form-label">PIN và Sạc</label>
+									<label for="inputPassword3" class="col-sm-3 col-form-label">PIN
+										và Sạc</label>
 									<div class="col-sm-9">
 										<form:select path="pinSac" class="form-select">
-										<form:option value="">--Chọn Pin Sạc--</form:option>
-													<form:options items="${list_ps}" />
-												</form:select>
-												<form:errors path="pinSac" cssClass="text-danger" />
+											<c:if test="${!not empty item.pinSac }">
+												<form:option value="">--Chọn Pin Sạc--</form:option>
+												<form:options items="${list_ps}" />
+											</c:if>
+											<c:if test="${not empty item.pinSac }">
+												<form:option value="${item.pinSac.idPin}">${item.pinSac.tenPin}</form:option>
+												<form:options items="${list_ps}" />
+											</c:if>
+										</form:select>
+										<form:errors path="pinSac" cssClass="text-danger" />
 									</div>
 								</div>
 								<hr>
@@ -117,7 +143,7 @@
 									<div class="col-sm-6">
 										<form:input path="sim" type="text" class="form-control"
 											placeholder="VD: 1 Nano SIM & 1 eSIM" />
-											<form:errors path="sim" cssClass="text-danger" />
+										<form:errors path="sim" cssClass="text-danger" />
 									</div>
 								</div>
 								<hr>
@@ -126,10 +152,16 @@
 										Trước</label>
 									<div class="col-sm-9">
 										<form:select path="camTruoc" class="form-select">
-										<form:option value="">--Chọn Cam Trước--</form:option>
-													<form:options items="${list_ct}" />
-												</form:select>
-												<form:errors path="camTruoc" cssClass="text-danger" />
+											<c:if test="${!not empty item.camTruoc }">
+												<form:option value="">--Chọn Cam Trước--</form:option>
+												<form:options items="${list_ct}" />
+											</c:if>
+											<c:if test="${not empty item.camTruoc }">
+												<form:option value="${item.camTruoc.idCamTruoc}">${item.camTruoc.tenCamTruoc}</form:option>
+												<form:options items="${list_ct}" />
+											</c:if>
+										</form:select>
+										<form:errors path="camTruoc" cssClass="text-danger" />
 									</div>
 								</div>
 								<hr>
@@ -138,10 +170,17 @@
 										Sau</label>
 									<div class="col-sm-9">
 										<form:select path="camSau" class="form-select">
-										<form:option value="">--Chọn Cam Sau--</form:option>
-													<form:options items="${list_cs}" />
-												</form:select>
-												<form:errors path="camSau" cssClass="text-danger" />
+											<c:if test="${!not empty item.camSau }">
+												<form:option value="">--Chọn Cam Sau--</form:option>
+												<form:options items="${list_cs}" />
+											</c:if>
+											<c:if test="${not empty item.camSau }">
+												<form:option value="${item.camSau.idCamSau}">${item.camSau.tenCamSau}</form:option>
+												<form:options items="${list_cs}" />
+											</c:if>
+											
+										</form:select>
+										<form:errors path="camSau" cssClass="text-danger" />
 									</div>
 								</div>
 								<div class="text-center">
