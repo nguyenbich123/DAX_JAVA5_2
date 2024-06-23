@@ -6,6 +6,7 @@
 <html>
   <head>
     <title>TheLiem Cửa hàng điện thoại</title>
+    <link rel="icon" href="/template/user/images/2.png" type="image/x-icon" sizes="128x128">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

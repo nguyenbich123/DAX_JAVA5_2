@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -115,7 +114,7 @@ public class PaymentController {
 	    
 	    if(findDiscountCode(discountCode) != null) {
 	    	GiamGia gg = findDiscountCode(discountCode);
-	    	gg.setSoLuong(gg.getSoLuong()-1);
+	    	gg.setSlsd(gg.getSlsd() + 1);
 	    }
 
 	    List<CartItem> selectedItems = session.get("dssp");

@@ -8,13 +8,15 @@ import java.util.Optional;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.poly.entity.Account;
 import com.poly.entity.CartItem;
@@ -100,30 +102,73 @@ public class CartController {
 		return "redirect:/cart/view";
 	}
 
-	@RequestMapping("update/{id_CTGH}")
-	public String update(@PathVariable("id_CTGH") Integer id, @RequestParam("action") String action,
-			RedirectAttributes redirectAttributes) {
-		Optional<ChiTietGioHang> spOptional = ctghDAO.findById(id);
-		if (spOptional.isPresent()) {
-			ChiTietGioHang sp = spOptional.get();
-			if ("increase".equals(action)) {
-				if (sp.getSoLuong() == sp.getMaCTSP().getSoluong()) {
-					sp.setSoLuong(sp.getMaCTSP().getSoluong());
-				} else {
-					sp.setSoLuong(sp.getSoLuong() + 1);
-				}
-			} else if ("decrease".equals(action)) {
-				if (sp.getSoLuong() > 1) {
-					sp.setSoLuong(sp.getSoLuong() - 1);
-				} else {
-					// Xử lý khi số lượng sản phẩm là 1
-					redirectAttributes.addFlashAttribute("error", "Số lượng không thể giảm thêm.");
-				}
-			}
-			// Lưu thay đổi vào cơ sở dữ liệu
-			ctghDAO.save(sp);
-		}
-		return "redirect:/cart/view";
+
+	
+	
+//	@PostMapping("update")
+//    @ResponseBody
+//    public Map<String, Object> update(@RequestParam("id_CTGH") Integer id, @RequestParam("action") String action) {
+//        Map<String, Object> response = new HashMap<>();
+//        Optional<ChiTietGioHang> spOptional = ctghDAO.findById(id);
+//        if (spOptional.isPresent()) {
+//            ChiTietGioHang sp = spOptional.get();
+//            if ("increase".equals(action)) {
+//                if (sp.getSoLuong() < sp.getMaCTSP().getSoluong()) {
+//                    sp.setSoLuong(sp.getSoLuong() + 1);
+//                }
+//            } else if ("decrease".equals(action)) {
+//                if (sp.getSoLuong() > 1) {
+//                    sp.setSoLuong(sp.getSoLuong() - 1);
+//                }
+//            }
+//            ctghDAO.save(sp);
+//            response.put("status", "success");
+//            response.put("newQuantity", sp.getSoLuong());
+//            response.put("totalPrice", sp.getSoLuong() * sp.getMaCTSP().getGia());
+//        } else {
+//            response.put("status", "error");
+//        }
+//        return response;
+//    }
+	
+	@PostMapping("/update")
+	public ResponseEntity<Map<String, Object>> update(@RequestParam("id_CTGH") Integer id,
+	                                                  @RequestParam("action") String action) {
+	    Map<String, Object> response = new HashMap<>();
+	    Optional<ChiTietGioHang> spOptional = ctghDAO.findById(id);
+	    if (spOptional.isPresent()) {
+	        ChiTietGioHang sp = spOptional.get();
+	        int maxQuantity = sp.getMaCTSP().getSoluong();
+	        if ("increase".equals(action)) {
+	            if (sp.getSoLuong() < maxQuantity) {
+	                sp.setSoLuong(sp.getSoLuong() + 1);
+	                ctghDAO.save(sp);
+	            } else {
+	                response.put("status", "error");
+	                //response.put("message", "Reached max quantity");
+	                response.put("maxQuantity", maxQuantity);
+	                return new ResponseEntity<>(response, HttpStatus.OK);
+	            }
+	        } else if ("decrease".equals(action)) {
+	            if (sp.getSoLuong() > 1) {
+	                sp.setSoLuong(sp.getSoLuong() - 1);
+	                ctghDAO.save(sp);
+	            } else {
+	                response.put("status", "error");
+	                //response.put("message", "Quantity cannot be decreased further");
+	                return new ResponseEntity<>(response, HttpStatus.OK);
+	            }
+	        }
+	        response.put("status", "success");
+	        response.put("newQuantity", sp.getSoLuong());
+	        response.put("totalPrice", sp.getSoLuong() * sp.getMaCTSP().getGia());
+	        response.put("maxQuantity", maxQuantity);
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } else {
+	        response.put("status", "error");
+	        response.put("message", "Item not found");
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
 	}
 
 	@RequestMapping("checkout")

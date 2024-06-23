@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,17 +41,18 @@
 <script src="js/modernizr.js"></script>
 <link rel="stylesheet" href="/template/user/css/index.css">
 <style>
-	  .cart-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .cart-item img {
-            width: 100px;
-            height: auto;
-        }
-    </style>
+.cart-item {
+	padding: 20px;
+	margin-bottom: 15px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.cart-item img {
+	width: 100px;
+	height: auto;
+}
+</style>
 </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar"
@@ -199,214 +200,218 @@
 	<header id="header mb-2">
 		<div class="site-header_product text-black">
 			<nav id="header-nav" class="navbar navbar-expand-lg px-4 py-4">
-          <div class="container-fluid">
-            <a  class="navbar-brand " href="/home/0">
-              <img src="/template/user/images/TheLiem(2).png" class="logo">
-            </a>
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <svg class="navbar-icon">
+				<div class="container-fluid">
+					<a class="navbar-brand " href="/home/0"> <img
+						src="/template/user/images/TheLiem(2).png" class="logo">
+					</a>
+					<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
+						type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<svg class="navbar-icon">
                 <use xlink:href="#navbar-icon"></use>
               </svg>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-              <div class="offcanvas-header px-4 pb-0">
-                <a class="navbar-brand" href="index.html">
-                  <img src="/template/user/images/2.png" class="logo">
-                </a>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link me-4 active" href="/home/0">Trang chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#company-services">Dịch vụ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/product/view">Sản phẩm</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="/home/0#yearly-sale">Khuyến mãi</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Trang</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="/product/view" class="dropdown-item">Cửa hàng</a>
-                      </li>
-                      <li>
-                      <li>
-                        <a href="/contact/view" class="dropdown-item">Liên hệ</a>
-                      </li>
-                      <li>
-                        <a href="/about/view" class="dropdown-item">Giới Thiệu</a>
-                      </li>
-                      <li>
-                        <a href="/feedback/view" class="dropdown-item">Góp Ý</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-items ps-5">
-                      <ul class="d-flex justify-content-end list-unstyled">
-                        <li class="search-item pe-3">
-                          <a href="#" class="search-button">
-                            <svg class="search">
+					</button>
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+						aria-labelledby="bdNavbarOffcanvasLabel">
+						<div class="offcanvas-header px-4 pb-0">
+							<a class="navbar-brand" href="index.html"> <img
+								src="/template/user/images/2.png" class="logo">
+							</a>
+							<button type="button" class="btn-close btn-close-black"
+								data-bs-dismiss="offcanvas" aria-label="Close"
+								data-bs-target="#bdNavbar"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul id="navbar"
+								class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link me-4 active"
+									href="/home/0">Trang chủ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#company-services">Dịch vụ</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/product/view">Sản phẩm</a></li>
+								<li class="nav-item"><a class="nav-link me-4"
+									href="/home/0#yearly-sale">Khuyến mãi</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link me-4 dropdown-toggle link-dark"
+									data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false">Trang</a>
+									<ul class="dropdown-menu">
+										<li><a href="/product/view" class="dropdown-item">Cửa
+												hàng</a></li>
+										<li>
+										<li><a href="/contact/view" class="dropdown-item">Liên
+												hệ</a></li>
+										<li><a href="/about/view" class="dropdown-item">Giới
+												Thiệu</a></li>
+										<li><a href="/feedback/view" class="dropdown-item">Góp
+												Ý</a></li>
+									</ul></li>
+								<li class="nav-item">
+									<div class="user-items ps-5">
+										<ul class="d-flex justify-content-end list-unstyled">
+											<li class="search-item pe-3"><a href="#"
+												class="search-button"> <svg class="search">
                               <use xlink:href="#search"></use>
                             </svg>
-                          </a>
-                        </li>
-                        <li class="pe-3 dropdown position-relative">
-                          <a href="#" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                          	  <c:if test="${account != null}">
+											</a></li>
+											<li class="pe-3 dropdown position-relative"><a href="#"
+												class="" data-bs-toggle="dropdown" aria-expanded="false">
+													<c:if test="${account != null}">
 								    Xin chào, ${account.hoTen}
-							  </c:if>
-                            <svg class="user">
+							  </c:if> <svg class="user">
                               <use xlink:href="#user"></use>
                             </svg>
-                          </a>
-                          <ul class="dropdown-menu ">
-                          	
-	                          <c:choose>
-								    <c:when test="${account != null}">
-									    <li style="max-height: 100px" class="p-2">
-										    <div class="avatar">
-										        <a href="/user/view">
-										        	<img alt="..." src="/images/${account.img}">
-										        </a>
-										    </div>
-										</li>
-								        <li>
-			                              <a href="/user/view" class="dropdown-item">Chỉnh sửa thông tin</a>
-			                            </li>
-			                            <li>
-			                              <a href="/order/view" class="dropdown-item">Đơn hàng của tôi</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/logout" class="dropdown-item">Đăng xuất</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/changepass" class="dropdown-item">Đổi mật khẩu</a>
-			                            </li>
-								    </c:when>
-								    <c:otherwise>
-								         <li>
-			                              <a href="/account/login" class="dropdown-item">Đăng nhập</a>
-			                            </li>
-			                            <li>
-			                              <a href="/account/signup" class="dropdown-item">Đăng ký</a>
-			                            </li>
-								    </c:otherwise>
-							  </c:choose>  
-                          </ul>
-                        </li>
-                        <li>
-                          <a class="nav-icon position-relative text-decoration-none"  href="/cart/view">
-                            <svg class="cart">
+											</a>
+												<ul class="dropdown-menu ">
+
+													<c:choose>
+														<c:when test="${account != null}">
+															<li style="max-height: 100px" class="p-2">
+																<div class="avatar">
+																	<a href="/user/view"> <img alt="..."
+																		src="/images/${account.img}">
+																	</a>
+																</div>
+															</li>
+															<li><a href="/user/view" class="dropdown-item">Chỉnh
+																	sửa thông tin</a></li>
+															<li><a href="/order/view" class="dropdown-item">Đơn
+																	hàng của tôi</a></li>
+															<li><a href="/account/logout" class="dropdown-item">Đăng
+																	xuất</a></li>
+															<li><a href="/account/changepass"
+																class="dropdown-item">Đổi mật khẩu</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a href="/account/login" class="dropdown-item">Đăng
+																	nhập</a></li>
+															<li><a href="/account/signup" class="dropdown-item">Đăng
+																	ký</a></li>
+														</c:otherwise>
+													</c:choose>
+												</ul></li>
+											<li><a
+												class="nav-icon position-relative text-decoration-none"
+												href="/cart/view"> <svg class="cart">
                               <use xlink:href="#cart"></use>
-                            </svg>
-                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
+                            </svg> <span
+													class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-red text-light">${sl}</span>
+											</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 		</div>
 
 	</header>
 
 	<session id="shopping-cart">
-		<div class="m-4 py-3">
-			<div class="pt-green-txt d-flex bg-black text-white px-5 align-items-center" style="height: 50px">
-				<h4>
-					<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG |
-				</h4>
-				<h4>
-					<a class="text-white" href="/product/view">MUA SẮM</a>
-				</h4>
-			</div>
-
-			
-				<div class="container">
-					<div class="card my-3 border-0" >
-						<div class="card-header">
+	<div class="m-4 py-3">
+		<div
+			class="pt-green-txt d-flex bg-black text-white px-5 align-items-center"
+			style="height: 50px">
+			<h4>
+				<i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG |
+			</h4>
+			<h4>
+				<a class="text-white" href="/product/view">MUA SẮM</a>
+			</h4>
+		</div>
+		<div class="container">
+			<div class="card my-3 border-0">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-md-1 d-flex align-items-center">
+							<input type="checkbox" id="checkAll">
+						</div>
+						<div class="col-md-11">
 							<div class="row">
-								<div class="col-md-1 d-flex align-items-center">
-									<input type="checkbox" id="checkAll">
+								<div class="col-md-2">
+									<strong></strong>
 								</div>
-								<div class="col-md-11">
-									<div class="row">
-										<div class="col-md-2"><strong></strong></div>
-										<div class="col-md-4"><strong>Sản phẩm</strong></div>
-										<div class="col-md-3"><strong>Số lượng</strong></div>
-										<div class="col-md-2"><strong>Tổng</strong></div>
-										<div class="col-md-1"></div>	
-									</div>
+								<div class="col-md-4">
+									<strong>Sản phẩm</strong>
 								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<c:forEach var="sp" items="${sp}">
-								<session id="${sp.id_CTGH}">
-									<div class="row">
-										<div class="col-md-1 d-flex align-items-center">
-											<input type="checkbox" class="checkItem" value="${sp.id_CTGH}" data-total="${sp.soLuong * sp.maCTSP.gia}">
-										</div>
-										<div class="col-md-11">
-											<div class="row cart-item">
-												<div class="col-md-2">
-													<div class="img-cart">
-														<img src="/images/${sp.maCTSP.img}" class="img-fluid" alt="Product">
-													</div>
-												</div>
-												<div class="col-md-4">
-													<h5>${sp.maCTSP.maSP.tenSP}</h5>
-													<fmt:formatNumber value="${sp.maCTSP.gia}" pattern="#,###đ"/>
-												</div>
-												<div class="col-md-3">
-													<form action="/cart/update/${sp.id_CTGH}#${sp.id_CTGH}" method="post" class="d-inline">
-														<button type="submit" name="action" value="decrease" class="btn btn-secondary me-2">-</button>
-														<span>${sp.soLuong}</span>
-														<button type="submit" name="action" value="increase" class="btn btn-secondary ms-2">+</button>
-													</form>
-												</div>
-												<div class="col-md-2">
-													<fmt:formatNumber value="${sp.soLuong * sp.maCTSP.gia}" pattern="#,###đ"/>
-												</div>
-												<div class="col-md-1">
-													<a href="/cart/remove/${sp.maCTSP.maCTSP}#shopping-cart" class="btn btn-danger btn-sm btn-remove"><i class="fa-solid fa-trash-can"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</session>
-							</c:forEach>
-						</div>
-						<div class="card-footer">
-							<div class="d-flex txt-bold justify-content-between">
-								<div>
-									Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+								<div class="col-md-3">
+									<strong>Số lượng</strong>
 								</div>
-								<div class="ml-auto">
-									<span id="totalAmount">0</span> Đ
+								<div class="col-md-2">
+									<strong>Tổng</strong>
 								</div>
+								<div class="col-md-1"></div>
 							</div>
 						</div>
 					</div>
-					<form action="/cart/checkout" method="post" id="checkoutForm">
-						<div class="d-flex justify-content-end py-2">
-							<input type="hidden" name="selectedItems" id="selectedItems">
-							<button type="submit" class="btn btn-warning" id="checkoutButton" disabled>Thanh toán</button>
-						</div>
-					</form>
 				</div>
+				<div class="card-body">
+					<c:forEach var="sp" items="${sp}">
+						<div class="row">
+							<div class="col-md-1 d-flex align-items-center">
+								<input type="checkbox" class="checkItem" value="${sp.id_CTGH}"
+									data-total="${sp.soLuong * sp.maCTSP.gia}">
+							</div>
+							<div class="col-md-11">
+								<div class="row cart-item">
+									<div class="col-md-2">
+										<div class="img-cart">
+											<img src="/images/${sp.maCTSP.img}" class="img-fluid"
+												alt="Product">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<h5>${sp.maCTSP.maSP.tenSP}</h5>
+										<fmt:formatNumber value="${sp.maCTSP.gia}" pattern="#,###đ" />
+									</div>
+									<div class="col-md-3">
+										<button class="btn btn-secondary btn-decrease"
+											data-id="${sp.id_CTGH}">-</button>
+										<span id="quantity-${sp.id_CTGH}">${sp.soLuong}</span>
+										<button class="btn btn-secondary btn-increase"
+											data-id="${sp.id_CTGH}">+</button>
+										<div id="maxQuantityMessage-${sp.id_CTGH}"
+											class="text-danger d-none">Số lượng sản phẩm đã đạt mức
+											tối đa.</div>
+									</div>
+									<div class="col-md-2">
+										<span id="total-${sp.id_CTGH}"><fmt:formatNumber
+												value="${sp.soLuong * sp.maCTSP.gia}" pattern="#,###đ" /></span>
+									</div>
+									<div class="col-md-1">
+										<a href="/cart/remove/${sp.maCTSP.maCTSP}#shopping-cart"
+											class="btn btn-danger btn-sm btn-remove"><i
+											class="fa-solid fa-trash-can"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex txt-bold justify-content-between">
+						<div>
+							Tổng thanh toán(<span id="itemCount">0</span> sản phẩm):
+						</div>
+						<div class="ml-auto">
+							<span id="totalAmount">0</span> Đ
+						</div>
+					</div>
+				</div>
+			</div>
+			<form action="/cart/checkout" method="post" id="checkoutForm">
+				<div class="d-flex justify-content-end py-2">
+					<input type="hidden" name="selectedItems" id="selectedItems">
+					<button type="submit" class="btn btn-warning" id="checkoutButton"
+						disabled>Thanh toán</button>
+				</div>
+			</form>
 		</div>
+	</div>
 	</session>
 
 	<footer id="footer" class="overflow-hidden mt-3 border-top pt-3">
@@ -593,6 +598,117 @@
 	//hiệu ứng xóa sp
 
 	</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+        /* $(document).ready(function(){
+            // Tăng số lượng
+            $(".btn-increase").click(function(event){
+                event.preventDefault();
+                var itemId = $(this).data("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/cart/update",
+                    type: "POST",
+                    data: { id_CTGH: itemId, action: "increase" },
+                    success: function(response){
+                        if (response.status === "success") {
+                            $("#quantity-" + itemId).text(response.newQuantity);
+                            $("#total-" + itemId).text(response.totalPrice.toLocaleString() + "đ");
+                            console.log(response.data);
+                            if (response.newQuantity < response.maxQuantity) {
+                            	$("#maxQuantityMessage").removeClass("d-none");
+                            }
+                        } else {
+                            alert("Error updating quantity.");
+                        }
+                    }
+                });
+            });
+
+            // Giảm số lượng
+            $(".btn-decrease").click(function(event){
+                event.preventDefault();
+                var itemId = $(this).data("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/cart/update",
+                    type: "POST",
+                    data: { id_CTGH: itemId, action: "decrease" },
+                    success: function(response){
+                        if (response.status === "success") {
+                            $("#quantity-" + itemId).text(response.newQuantity);
+                            $("#total-" + itemId).text(response.totalPrice.toLocaleString() + "đ");
+                        } else {
+                            alert("Error updating quantity.");
+                        }
+                    }
+                });
+            });
+        }); */
+        
+        $(document).ready(function(){
+            // Tăng số lượng
+            $(".btn-increase").click(function(event){
+                event.preventDefault();
+                var itemId = $(this).data("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/cart/update",
+                    type: "POST",
+                    data: { id_CTGH: itemId, action: "increase" },
+                    success: function(response){
+                    	if (response.newQuantity >= response.maxQuantity) {
+                            $("#maxQuantityMessage-" + itemId).removeClass("d-none");
+                        }
+                        if (response.status === "success") {
+                            $("#quantity-" + itemId).text(response.newQuantity);
+                            $("#total-" + itemId).text(response.totalPrice.toLocaleString() + "đ");
+                            
+                        } else {
+                        	//$("#maxQuantityMessage-" + itemId).addClass("d-none");
+                            //alert("Error updating quantity: " + response.message);
+                        }
+                    },
+                    error: function(xhr){
+                        if (xhr.status === 404) {
+                            console.log("Error: Item not found.");
+                        } else {
+                        
+                        	console.log("An unexpected error occurred.");
+                        }
+                    }
+                });
+            });
+
+            // Giảm số lượng
+            $(".btn-decrease").click(function(event){
+                event.preventDefault();
+                var itemId = $(this).data("id");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/cart/update",
+                    type: "POST",
+                    data: { id_CTGH: itemId, action: "decrease" },
+                    success: function(response){
+                        if (response.status === "success") {
+                            $("#quantity-" + itemId).text(response.newQuantity);
+                            $("#total-" + itemId).text(response.totalPrice.toLocaleString() + "đ");
+                            if (response.newQuantity < response.maxQuantity) {
+                                $("#maxQuantityMessage-" + itemId).addClass("d-none");
+                            }
+                        } else {
+                        	$("#maxQuantityMessage-" + itemId).addClass("d-none");
+                           // alert("Error updating quantity: " + response.message);
+                        }
+                    },
+                    error: function(xhr){
+                        if (xhr.status === 404) {
+                            alert("Error: Item not found.");
+                        } else {
+                            alert("An unexpected error occurred.");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 	<script src="/template/user/js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript"
