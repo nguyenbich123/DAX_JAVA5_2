@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poly.serviceimpl.MailerServiceImpl;
+import com.poly.serviceImpl.*;
 
 @Controller
 @RequestMapping("feedback")
