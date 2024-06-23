@@ -804,8 +804,8 @@
 
 
 	<script>
-	    const token = '96d82524-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
-	    const shopId = '192566';  // Thay thế bằng shop ID thực
+	  const token = '3d21e6d4-2862-11ef-8e53-0a00184fe694';  // Thay thế bằng token thực
+      const shopId = '192569';  // Thay thế bằng shop ID thực
 		
 		const provinceId = 220;  // ID của tỉnh muốn lấy tên
 	    const districtId = 1574;  // ID của quận/huyện muốn lấy tên

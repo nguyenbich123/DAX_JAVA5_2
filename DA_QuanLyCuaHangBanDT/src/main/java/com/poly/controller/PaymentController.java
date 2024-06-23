@@ -170,7 +170,7 @@ public class PaymentController {
 	    model.addAttribute("paymentTime", paymentTime);
 	    model.addAttribute("transactionId", transactionId);
 
-	    return paymentStatus == 1 ? "/template/user/orderSuccess" : "/template/user/orderFail";
+	    return paymentStatus == 1 ? "/template/user/confirmation" : "/template/user/orderFail";
 	}
 
 	

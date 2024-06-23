@@ -278,7 +278,7 @@ public class DangNhapController {
         }
 
         String email = tk.getEmail().substring(tk.getEmail().indexOf("@") +1);
-        if(!EmailVerifier.verifyEmail(tk.getEmail())) {
+        if(!verifyEmail(tk.getEmail())) {
         	result.rejectValue("email", "error.tk", "Email không tồn tại!");
         	return "/template/login-form-02/forgot";
         }
